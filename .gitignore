@@ -1,8 +1,13 @@
-*.fls
+# macOS
+.DS_Store
+
+# LaTeX build artifacts
+*.aux
 *.fdb_latexmk
+*.fls
 *.log
 *.out
-*.aux
+*.synctex.gz
 *.toc
 *.lof
 *.lot
@@ -14,3 +19,4 @@
 *.idx
 *.ilg
 *.gz
+indent.log
