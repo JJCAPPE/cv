@@ -259,7 +259,12 @@ export const projects: Project[] = [
     year: "2026",
     type: "Applied AI / Product",
     role: "Full-stack developer",
-    links: [{ label: "Live site", href: "https://noteworthyy.xyz" }],
+    links: [
+      {
+        label: "Live site",
+        href: "https://noteworthy-git-main-giacomo-cappellettos-projects.vercel.app/",
+      },
+    ],
     diagram: [
       "Note upload",
       "OCR / vision model",

@@ -1,5 +1,6 @@
 import { ExperienceItem } from "@/components/ExperienceItem";
 import { LinkPill } from "@/components/LinkPill";
+import { MotionSignal } from "@/components/MotionSignal";
 import { NotePreview } from "@/components/NotePreview";
 import { ProjectItem } from "@/components/ProjectItem";
 import { Section } from "@/components/Section";
@@ -45,6 +46,7 @@ export default function Home() {
             ))}
           </div>
           <WorkVector />
+          <MotionSignal />
         </Section>
 
         <Section number="02" title="Current Focus" id="current">

@@ -208,6 +208,276 @@ a {
   color: var(--fg);
 }
 
+.motion-signal {
+  margin: 34px 0 0;
+  padding: 16px 0 12px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  cursor: default;
+}
+
+.motion-signal__caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 2px 12px;
+  color: var(--subtle);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.motion-signal__caption span:first-child {
+  color: var(--muted);
+}
+
+.motion-signal__graphic {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.motion-signal__field {
+  fill-opacity: 0.18;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.motion-signal__grid {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 0.7;
+}
+
+.motion-signal__label,
+.motion-signal__footer-label,
+.motion-signal__pipeline text,
+.motion-signal__chart text {
+  fill: var(--subtle);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.motion-signal__footer-label {
+  font-size: 7px;
+}
+
+.motion-signal__frame,
+.motion-signal__pipeline,
+.motion-signal__chart {
+  fill: none;
+  stroke: var(--subtle);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1;
+}
+
+.motion-signal__frame rect {
+  fill: var(--panel);
+}
+
+.motion-signal__pose {
+  fill: none;
+  stroke: var(--fg);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
+}
+
+.motion-signal__pose > circle {
+  fill: var(--bg);
+}
+
+.motion-signal__keypoints circle,
+.motion-signal__node,
+.motion-signal__peak {
+  fill: var(--fg);
+  stroke: none;
+}
+
+.motion-signal__pose--catch {
+  animation: signal-pose-catch 6s linear infinite;
+}
+
+.motion-signal__pose--drive {
+  animation: signal-pose-drive 6s linear infinite;
+}
+
+.motion-signal__pose--finish {
+  animation: signal-pose-finish 6s linear infinite;
+}
+
+.motion-signal__scan {
+  stroke: var(--fg);
+  stroke-opacity: 0;
+  stroke-width: 1;
+  animation: signal-scan 6s linear infinite;
+}
+
+.motion-signal__node {
+  opacity: 0.25;
+  animation: signal-node 6s ease-in-out infinite;
+}
+
+.motion-signal__node--two {
+  animation-delay: 0.35s;
+}
+
+.motion-signal__node--three {
+  animation-delay: 0.7s;
+}
+
+.motion-signal__curve {
+  stroke: var(--fg);
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  stroke-width: 1.5;
+  animation: signal-curve 6s ease-in-out infinite;
+}
+
+.motion-signal__cursor {
+  stroke: var(--fg);
+  stroke-opacity: 0;
+  stroke-width: 0.8;
+  animation: signal-cursor 6s ease-in-out infinite;
+}
+
+.motion-signal__peak {
+  opacity: 0;
+  animation: signal-peak 6s ease-in-out infinite;
+}
+
+.motion-signal:hover .motion-signal__animated,
+.motion-signal:focus-visible .motion-signal__animated {
+  animation-play-state: paused;
+}
+
+@keyframes signal-pose-catch {
+  0%,
+  28% {
+    opacity: 0.95;
+  }
+  34%,
+  100% {
+    opacity: 0.12;
+  }
+}
+
+@keyframes signal-pose-drive {
+  0%,
+  29% {
+    opacity: 0.12;
+  }
+  35%,
+  62% {
+    opacity: 0.95;
+  }
+  68%,
+  100% {
+    opacity: 0.12;
+  }
+}
+
+@keyframes signal-pose-finish {
+  0%,
+  63% {
+    opacity: 0.12;
+  }
+  69%,
+  94% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0.12;
+  }
+}
+
+@keyframes signal-scan {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  8%,
+  86% {
+    opacity: 0.45;
+  }
+  94% {
+    opacity: 0;
+    transform: translateX(230px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(230px);
+  }
+}
+
+@keyframes signal-node {
+  0%,
+  25%,
+  100% {
+    opacity: 0.25;
+    r: 3px;
+  }
+  43%,
+  58% {
+    opacity: 1;
+    r: 4.5px;
+  }
+}
+
+@keyframes signal-curve {
+  0%,
+  42% {
+    stroke-dashoffset: 360;
+  }
+  76%,
+  92% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -360;
+  }
+}
+
+@keyframes signal-cursor {
+  0%,
+  42% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  47% {
+    opacity: 0.4;
+  }
+  91% {
+    opacity: 0.4;
+    transform: translateX(212px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(212px);
+  }
+}
+
+@keyframes signal-peak {
+  0%,
+  62% {
+    opacity: 0;
+  }
+  70%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .status-block {
   padding: 24px 26px;
   border: 1px solid var(--line);
@@ -998,6 +1268,23 @@ a {
 
   .work-vector {
     margin-top: 36px;
+  }
+
+  .motion-signal {
+    margin-top: 24px;
+    padding-top: 14px;
+  }
+
+  .motion-signal__caption {
+    font-size: 0.61rem;
+  }
+
+  .motion-signal__caption span:last-child {
+    display: none;
+  }
+
+  .motion-signal__graphic {
+    min-height: 210px;
   }
 
   .project-item {
