@@ -1,0 +1,24 @@
+---
+title: "What Makes a Good Applied ML Project"
+description: "A short test for whether a model is attached to a real system and measurable outcome."
+category: "Machine Learning"
+date: "2026-03-14"
+---
+
+A good applied ML project has a difficult model problem, but it also has a clear path from input to decision.
+
+## A concrete unit of work
+
+Define what the system receives, what it returns, and who uses the result. “Analyze technique” is vague. “Estimate stroke phases and compare peak trunk timing across sessions” is testable.
+
+## A baseline that can lose
+
+Start with a rule, linear model, or simple temporal baseline. A complex model should earn its place through a measured improvement, not through architectural novelty.
+
+## Failure analysis
+
+Aggregate accuracy hides where the system breaks. Split results by capture condition, athlete, motion phase, and input quality. The useful outcome is often a map of limitations rather than one score.
+
+## An operational boundary
+
+The model is one stage in a system. Data capture, preprocessing, latency, correction workflows, and output presentation determine whether the work can be used.

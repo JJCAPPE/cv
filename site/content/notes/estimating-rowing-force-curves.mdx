@@ -1,0 +1,28 @@
+---
+title: "Estimating Rowing Force Curves from Video"
+description: "A working outline for mapping pose sequences to stroke-level force estimates."
+category: "Rowing Biomechanics"
+date: "2026-05-18"
+---
+
+The useful question is not whether video can recover an exact force curve in every condition. It is whether motion contains enough stable signal to estimate the shape and timing of force production within a stroke.
+
+## Representation
+
+A raw skeleton sequence is not yet a rowing representation. The model needs features that remain meaningful across camera distance and athlete size:
+
+- normalized joint positions
+- trunk, hip, knee, and elbow angles
+- angular velocity and acceleration
+- handle-relative timing when the handle is visible
+- stroke phase and normalized time within the stroke
+
+## Alignment
+
+The target force curve comes from instrumented telemetry. Video and force data must share a reliable event, such as the catch, before a sequence model can learn anything beyond timing noise.
+
+## Evaluation
+
+Pointwise error is useful, but it is not sufficient. Peak timing, impulse, curve shape, and phase-specific error describe whether the prediction is biomechanically useful.
+
+The immediate goal is a measured baseline: a simple temporal model, a controlled capture setup, and an evaluation protocol that makes failure visible.

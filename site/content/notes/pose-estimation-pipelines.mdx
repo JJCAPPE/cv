@@ -1,0 +1,24 @@
+---
+title: "Notes on Human Pose Estimation Pipelines"
+description: "Practical failure points between video capture, 2D keypoints, and 3D motion."
+category: "Computer Vision"
+date: "2026-04-27"
+---
+
+Pose estimation quality is often discussed as a model-selection problem. In practice, the surrounding pipeline can dominate the result.
+
+## Capture first
+
+Motion blur, rolling shutter, occlusion, and a moving camera create errors that downstream models cannot fully repair. A stable viewpoint and short exposure can matter more than replacing one strong pose model with another.
+
+## Track one subject well
+
+For rowing analysis, a clean single-athlete crop is more valuable than unstable multi-person detections. Tracking errors become discontinuities in joint trajectories and then appear again as false velocities and accelerations.
+
+## Lift with context
+
+Monocular 3D lifting is ambiguous frame by frame. Temporal context helps the model preserve plausible motion, but camera geometry and unusual rowing positions can still produce systematic depth errors.
+
+## Treat smoothing as a modeling choice
+
+Smoothing should remove detector noise without erasing the rapid changes that define catch and finish timing. The filter belongs inside the evaluation, not as an invisible preprocessing detail.

@@ -1,0 +1,24 @@
+---
+title: "Building Small Tools That Actually Get Used"
+description: "Notes from inventory, scheduling, and athlete workflow projects."
+category: "Systems"
+date: "2026-02-08"
+---
+
+Small internal tools fail when they ask users to adopt the developer’s model of the process. The better approach is to study the repeated decision already being made and remove steps around it.
+
+## Match the working vocabulary
+
+Use the identifiers people already rely on: SKU, location, athlete, session, week. Renaming the process to fit a generic data model adds friction without improving the work.
+
+## Optimize the repeated path
+
+An inventory search performed hundreds of times matters more than a rarely opened settings screen. Measure startup, search, and update latency before adding secondary features.
+
+## Keep history visible
+
+When software changes operational data, users need to know what changed, when, and by whom. A simple modification history can be more valuable than a sophisticated dashboard.
+
+## Ship the narrow loop
+
+The first version should complete one real workflow end to end. Usage will reveal the next constraint more reliably than speculative flexibility.
