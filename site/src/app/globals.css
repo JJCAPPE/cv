@@ -241,6 +241,10 @@ a {
   overflow: visible;
 }
 
+.motion-signal__graphic--mobile {
+  display: none;
+}
+
 .motion-signal__field {
   fill-opacity: 0.18;
   stroke: var(--line);
@@ -320,6 +324,10 @@ a {
   animation: signal-scan 6s linear infinite;
 }
 
+.motion-signal__scan--mobile {
+  animation-name: signal-scan-mobile;
+}
+
 .motion-signal__node {
   opacity: 0.25;
   animation: signal-node 6s ease-in-out infinite;
@@ -346,6 +354,10 @@ a {
   stroke-opacity: 0;
   stroke-width: 0.8;
   animation: signal-cursor 6s ease-in-out infinite;
+}
+
+.motion-signal__cursor--mobile {
+  animation-name: signal-cursor-mobile;
 }
 
 .motion-signal__peak {
@@ -431,6 +443,25 @@ a {
   }
 }
 
+@keyframes signal-scan-mobile {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  8%,
+  86% {
+    opacity: 0.45;
+  }
+  94% {
+    opacity: 0;
+    transform: translateX(128px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(128px);
+  }
+}
+
 @keyframes signal-curve {
   0%,
   42% {
@@ -461,6 +492,25 @@ a {
   100% {
     opacity: 0;
     transform: translateX(212px);
+  }
+}
+
+@keyframes signal-cursor-mobile {
+  0%,
+  42% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  47% {
+    opacity: 0.4;
+  }
+  91% {
+    opacity: 0.4;
+    transform: translateX(302px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(302px);
   }
 }
 
@@ -1284,7 +1334,11 @@ a {
   }
 
   .motion-signal__graphic {
-    min-height: 210px;
+    display: none;
+  }
+
+  .motion-signal__graphic--mobile {
+    display: block;
   }
 
   .project-item {
