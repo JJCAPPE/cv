@@ -372,10 +372,10 @@ a {
 
 @keyframes signal-pose-catch {
   0%,
-  28% {
+  16% {
     opacity: 0.95;
   }
-  34%,
+  23%,
   100% {
     opacity: 0.12;
   }
@@ -383,14 +383,14 @@ a {
 
 @keyframes signal-pose-drive {
   0%,
-  29% {
+  15% {
     opacity: 0.12;
   }
-  35%,
-  62% {
+  22%,
+  78% {
     opacity: 0.95;
   }
-  68%,
+  85%,
   100% {
     opacity: 0.12;
   }
@@ -398,11 +398,11 @@ a {
 
 @keyframes signal-pose-finish {
   0%,
-  63% {
+  77% {
     opacity: 0.12;
   }
-  69%,
-  94% {
+  84%,
+  96% {
     opacity: 0.95;
   }
   100% {
@@ -415,8 +415,8 @@ a {
     opacity: 0;
     transform: translateX(0);
   }
-  8%,
-  86% {
+  6%,
+  88% {
     opacity: 0.45;
   }
   94% {
@@ -464,11 +464,11 @@ a {
 
 @keyframes signal-curve {
   0%,
-  42% {
+  7% {
     stroke-dashoffset: 360;
   }
-  76%,
-  92% {
+  88%,
+  96% {
     stroke-dashoffset: 0;
   }
   100% {
@@ -478,14 +478,15 @@ a {
 
 @keyframes signal-cursor {
   0%,
-  42% {
+  7% {
     opacity: 0;
     transform: translateX(0);
   }
-  47% {
+  10% {
     opacity: 0.4;
   }
-  91% {
+  88%,
+  96% {
     opacity: 0.4;
     transform: translateX(212px);
   }
@@ -516,13 +517,14 @@ a {
 
 @keyframes signal-peak {
   0%,
-  62% {
+  49% {
     opacity: 0;
   }
-  70%,
-  88% {
+  54%,
+  64% {
     opacity: 1;
   }
+  69%,
   100% {
     opacity: 0;
   }
@@ -1487,6 +1489,32 @@ a {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .motion-signal__pose--catch {
+    opacity: 0.95;
+  }
+
+  .motion-signal__pose--drive,
+  .motion-signal__pose--finish {
+    opacity: 0.12;
+  }
+
+  .motion-signal__scan,
+  .motion-signal__cursor {
+    display: none;
+  }
+
+  .motion-signal__node {
+    opacity: 0.7;
+  }
+
+  .motion-signal__curve {
+    stroke-dashoffset: 0;
+  }
+
+  .motion-signal__peak {
+    opacity: 1;
   }
 
   *,
