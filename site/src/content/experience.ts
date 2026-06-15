@@ -9,22 +9,31 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    role: "Software / Data Intern",
-    organization: "Banca Mediolanum",
-    dates: "Jun 2026 — Present",
-    location: "Milan, Italy",
-    summary: [
-      "Analyze large customer datasets with SQL and build predictive models for customer behavior and churn.",
-      "Build LLM-agent workflows supporting internal marketing analytics and customer insight operations.",
-    ],
-    stack: [
-      "SQL",
-      "Python",
-      "Data Analysis",
-      "Predictive Modeling",
-      "LLM Agents",
-    ],
-  },
+role: "Software & AI Engineering Intern",
+organization: "Banca Mediolanum",
+dates: "Jun 2026 — Present",
+location: "Milan, Italy",
+summary: [
+"Develop internal AI tooling and LLM-agent workflows supporting customer analytics, knowledge management, and business operations.",
+"Design and implement a Databricks-based platform for versioning, semantic retrieval, evaluation, and governance of enterprise LLM prompts.",
+"Build Python applications integrated with Unity Catalog, Delta Lake, Databricks AI Search, and SQL Warehouses to support prompt management and testing.",
+"Analyze large-scale customer datasets using SQL and Python, contributing to predictive modeling and customer behavior analysis initiatives."
+],
+stack: [
+"Python",
+"SQL",
+"Azure Databricks",
+"Unity Catalog",
+"Delta Lake",
+"Databricks AI Search",
+"Vector Search",
+"Dash",
+"LLM Agents",
+"Prompt Engineering",
+"Predictive Modeling",
+"Data Analytics"
+]
+},
   {
     role: "Undergraduate Researcher",
     organization: "Boston University College of Engineering",
