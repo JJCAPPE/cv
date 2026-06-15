@@ -147,9 +147,12 @@ a {
 }
 
 .section:first-of-type {
-  min-height: 84vh;
   padding-top: 64px;
   border-top: 0;
+}
+
+.intro-section {
+  padding-bottom: 0;
 }
 
 .section__header {
@@ -210,9 +213,8 @@ a {
 
 .motion-signal {
   margin: 34px 0 0;
-  padding: 16px 0 12px;
+  padding: 16px 0 0;
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
   color: var(--muted);
   cursor: default;
 }
@@ -1303,6 +1305,10 @@ a {
 
   .section:first-of-type {
     border-top: 0;
+  }
+
+  .intro-section {
+    padding-bottom: 0;
   }
 
   .section__header {

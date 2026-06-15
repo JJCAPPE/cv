@@ -53,7 +53,18 @@ export default function Home() {
           <StatusBlock />
         </Section>
 
-        <Section number="03" title="Selected Work" id="work">
+        <Section number="03" title="Experience" id="experience">
+          <div className="ruled-list">
+            {experience.map((item) => (
+              <ExperienceItem
+                key={`${item.organization}-${item.role}`}
+                experience={item}
+              />
+            ))}
+          </div>
+        </Section>
+
+        <Section number="04" title="Selected Work" id="work">
           <div className="ruled-list">
             {projects.map((project, index) => (
               <ProjectItem
@@ -65,17 +76,6 @@ export default function Home() {
           </div>
           <div className="section-link">
             <LinkPill href="/projects">View all project details →</LinkPill>
-          </div>
-        </Section>
-
-        <Section number="04" title="Experience" id="experience">
-          <div className="ruled-list">
-            {experience.map((item) => (
-              <ExperienceItem
-                key={`${item.organization}-${item.role}`}
-                experience={item}
-              />
-            ))}
           </div>
         </Section>
 
