@@ -1,0 +1,217 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.55in}
+\addtolength{\textheight}{1.1in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+\pdfgentounicode=1
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in, itemsep=0pt, topsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Large Giacomo Cappelletto} & \href{mailto:giacomo.cappelletto@icloud.com}{giacomo.cappelletto@icloud.com} \\
+  Boston, MA \textbar{} Treviso, Italy & \href{tel:+393246814985}{+39 324 681 4985} \textbar{} \href{tel:+18577530133}{+1 (857) 753-0133}\\
+  \href{https://www.linkedin.com/in/giacomo-cappelletto/}{linkedin.com/in/giacomo-cappelletto} & \href{https://github.com/JJCAPPE}{github.com/JJCAPPE} \\
+  \href{https://cv-nu-sage.vercel.app/}{giacomo-cappelletto.app} &
+\end{tabular*}
+
+\vspace{0.05in}
+
+%----------SUMMARY-----------
+\section*{Technical Profile}
+Computer Engineering student at Boston University with a 3.97 GPA, building production software, LLM-agent workflows, data systems, and applied ML pipelines. Strongest in Python, TypeScript, React/Next.js, SQL/PostgreSQL, Rust, Databricks, Flask/Dash, and cloud-deployed AI applications.
+
+%-----------EDUCATION-----------------
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Boston University, Boston, MA}{2024 -- 2028}
+{B.Sc. in Computer Engineering; GPA: 3.97}{}
+\resumeSubheading
+{H-Farm International School, Venice, Italy}{2022 -- 2024}
+{International Baccalaureate (IB) Diploma}{HL: Mathematics, Physics, Computer Science}
+\resumeSubHeadingListEnd
+
+%-----------TECHNICAL EXPERIENCE-----------------
+\section{Technical Experience}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Banca Mediolanum, Milan, Italy}{Jun 2026 -- Present}
+{Software / AI Intern, Customer Knowledge}{}
+\resumeItemListStart
+\resumeItem{AI Product Ownership}
+{Independently owning end-to-end development of an internal LLM prompt-governance and evaluation product for the Customer Knowledge team, ramping on the Databricks-based framework in one week while coordinating requirements with business stakeholders.}
+\resumeItem{LLM Agent Platform}
+{Building a Flask/Dash application with custom CSS, deployed through Databricks Apps, for versioned prompt storage, retrieval-augmented search, side-by-side answer comparison, and automated evaluation workflows.}
+\resumeItem{Enterprise Scale}
+{Designing the system to support 1,000+ internal prompts and eventual access across a 3,500+ employee organization, with prompt lifecycle controls, benchmark views, and safer iteration workflows for enterprise AI agents.}
+\resumeItem{Data + Evaluation Systems}
+{Developed semantic search and benchmarking workflows using Python, SQL, Databricks Unity Catalog, Delta tables, Vector Search, and MLflow GenAI Evaluation over enterprise prompt and customer-analytics data.}
+\resumeItemListEnd
+
+\resumeSubheading
+{Boston University College of Engineering, Boston, MA}{Jan 2026 -- May 2026}
+{Undergraduate Machine Learning Researcher}{}
+\resumeItemListStart
+\resumeItem{Computer Vision Pipeline}
+{Built a Python biomechanics pipeline to stabilize rowing video, run single-athlete 2D keypoint inference with MMPose, lift poses to 3D skeletons with MotionBERT, and output per-frame joint positions and angles.}
+\resumeItem{Kinematic Analysis}
+{Computed stroke-averaged 3D kinematics to quantify coordination, range of motion, technical consistency, and timing differences across rowing strokes.}
+\resumeItem{Sequence Modeling}
+{Trained sequence-to-sequence regression models mapping time-aligned 3D kinematics to rowing force curves, validated against instrumented on-water and erg telemetry.}
+\resumeItemListEnd
+
+\resumeSubheading
+{Boston University Men's Rowing, Boston, MA}{Jan 2026 -- May 2026}
+{Software Engineer}{}
+\resumeItemListStart
+\resumeItem{Team Training Platform}
+{Built a mobile-first training tracker for 50 BU Men's Rowing athletes and coaches, unifying athlete logging, coach review, proof-validated entries, leaderboards, configurable weekly cutoffs, and team-specific requirements.}
+\resumeItem{Product Iteration}
+{Iterated directly with athletes and coaches to add requested features and improve team workflows, with expansion planned to two additional teams for a projected 150 total users.}
+\resumeItem{Backend + Automation}
+{Implemented Supabase and Prisma-backed data models with role-based access, proof retention, scalable reporting, and automated weekly recap emails for athlete and coach workflows.}
+\resumeItemListEnd
+
+\resumeSubheading
+{SOCIETA CAPPELLETTO S.R.L., Treviso, Italy}{May 2025 -- Oct 2025}
+{Software Engineer, Tauri Inventory Management System Rebuild}{}
+\resumeItemListStart
+\resumeItem{Migration + Performance}
+{Rebuilt an Electron inventory app using Tauri, React, and Rust, reducing app size by 70\%, memory usage by 80\%, and startup time by 60\%; improved Shopify inventory search by 43\% through parallel API processing and GraphQL-optimized queries.}
+\resumeItem{Production Features}
+{Built SKU-based instant search, Firebase-backed audit history, real-time inventory reconciliation, multi-location update workflows, GitHub Releases distribution, and auto-update deployment.}
+\resumeItemListEnd
+
+\resumeSubheading
+{TickIT GmbH, Remote}{Nov 2024 -- Feb 2025}
+{Frontend \& Backend Engineer}{}
+\resumeItemListStart
+\resumeItem{Collaborative Platform Development}
+{Contributed roughly 30,000 lines of code across a 150,000-line online event-ticketing platform as part of a four-developer remote team, working across Ruby backend services and Next.js/TypeScript frontend interfaces.}
+\resumeItem{Ticketing + Access Control}
+{Developed QR-code ticket generation and validation infrastructure, ticket purchasing flows, event pages, ticket validation interfaces, and friend-sharing features for attendee access management.}
+\resumeItem{Analytics + Forecasting}
+{Built internal customer spending tracking systems, analytics pipelines, and organizer dashboards for spending predictions, inventory forecasting, operational metrics, and event cost planning; platform payments were processed through Stripe.}
+\resumeItem{Engineering Collaboration}
+{Participated in remote feature planning, cross-stack implementation, and code reviews, contributing central functionality for event access control and organizer analytics.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------------
+\section{Selected Projects}
+\resumeSubHeadingListStart
+
+\resumeSubItem{NoteWorthy -- Automated Note Conversion Platform}
+{Built \href{https://noteworthy-git-main-giacomo-cappellettos-projects.vercel.app/}{noteworthy.vercel.app}, a Next.js/TypeScript application that converts handwritten notes into styled PDFs and LaTeX. Integrated Google AI Studio, GitHub/Google OAuth, and a Dockerized LaTeX compiler; deployed through Google Cloud Run and Vercel.}
+
+\resumeSubItem{CIFAR-10 Image Recognition with Neural Architecture Search}
+{Built a TensorFlow/Keras CIFAR-10 classifier and neural architecture search pipeline to generate, train, evaluate, and select CNN candidates with automated metric logging and best-model selection.}
+
+\resumeSubItem{Local LLM Scheduling Tool}
+{Built a Python/Streamlit application using school timetable data to identify student availability and generate professor-ready meeting request emails through local LLM workflows with Ollama.}
+
+\resumeSubHeadingListEnd
+
+%-----------LEADERSHIP-----------------
+\section{Leadership \& Athletics}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Boston University Men's Rowing, Boston, MA}{Sep 2024 -- Present}
+{NCAA Division I Student-Athlete}{}
+\resumeItemListStart
+\resumeItem{Performance + Time Management}
+{Compete at the Division I and national level while balancing 20+ hours per week of training, competition, travel, and team commitments with a full Computer Engineering course load.}
+\resumeItem{Awards}
+{Freshman Student-Athlete of the Year (2025); Most Improved Oarsman (2026).}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------SKILLS-----------------
+\section{Skills}
+\resumeSubHeadingListStart
+\item{
+  \textbf{Languages}{: Python, TypeScript/JavaScript, SQL, Rust, Ruby, C/C++, Swift, Java} \\
+  \textbf{AI/ML}{: LLM agents, RAG, embeddings, semantic search, MLflow GenAI Evaluation, TensorFlow/Keras, MMPose, MotionBERT, Ollama} \\
+  \textbf{Frameworks}{: Next.js, React, Node.js, Flask/Dash, Ruby on Rails, Streamlit, Tauri, SwiftUI, Tailwind CSS, shadcn/ui} \\
+  \textbf{Data/Cloud}{: Databricks Apps, Unity Catalog, Delta tables, Vector Search, PostgreSQL, Supabase, Prisma, Firebase, Docker, Google Cloud Run, Vercel} \\
+  \textbf{Tools}{: Git/GitHub, Shopify GraphQL API, Stripe, GitHub Releases, AI-assisted development workflows}
+}
+\resumeSubHeadingListEnd
+
+% Uncomment only once confirmed:
+% \section{Upcoming Research}
+% \resumeSubHeadingListStart
+% \resumeSubheading
+% {Boston University, Machine Learning Research}{Expected Fall 2026}
+% {Undergraduate Researcher, Prof. Brian Kulis}{}
+% \resumeItemListStart
+% \resumeItem{Machine Learning Research}
+% {Planned research continuation in machine learning; add specific project scope, methods, and outcomes once confirmed.}
+% \resumeItemListEnd
+% \resumeSubHeadingListEnd
+
+\end{document}
+```
