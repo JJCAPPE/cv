@@ -12,6 +12,20 @@ You will be given a **job description** and, optionally, the company name, role 
 
 The final answer must return only a complete LaTeX document in the exact format specified below. Do not return analysis, commentary, bullet points, markdown fences, or explanations.
 
+### CRITICAL: LaTeX line breaks use `\\`, never `\`
+
+In LaTeX, a **single backslash** starts a command (e.g. `\begin`, `\href`). It does **not** end a line.
+
+To end a line inside a `tabular*` row or a `flushleft` block, you **must** write **two backslashes**: `\\`
+
+| Wrong (will not break the line / may fail to compile) | Correct (matches `coverletter.tex`) |
+|---|---|
+| `Gemini \` | `Gemini \\` |
+| `& Email: ... \` | `& Email: ... \\` |
+| `New York, New York \` | `New York, New York \\` |
+
+**Every** header table row and **every** recipient address line must end with **`\\`**. Copy that pattern from the working reference file `coverletter.tex` — do not substitute a single `\`.
+
 ---
 
 ## Core Objective
@@ -517,7 +531,26 @@ Follow these rules:
       - `_` as `\_`
       - `#` as `\#`
     - **Never use markdown syntax in LaTeX output.** Links must be `\href{url}{text}`, not `[text](url)`. Email, phone, GitHub, and LinkedIn in the header must stay as `\href{...}{...}` exactly as in the template.
-    - **Row and line breaks must use `\\` (double backslash), never `\` alone.** A single trailing `\` does not end a table row or a `flushleft` line and will cause compile errors such as `Extra alignment tab has been changed to \cr`.
+    - **Line breaks: always `\\`, never `\` (most common agent mistake).**
+      - `\` alone is **never** a line break in LaTeX. It starts a command or leaves a dangling escape and breaks compilation.
+      - **`\\` is the only correct row/line terminator** in the header `tabular*` and the recipient `flushleft` block.
+      - When writing the output, literally type backslash-backslash at the end of each of those lines — the same way they appear in the working reference `coverletter.tex`:
+        ```latex
+        Gemini \\
+        New York, New York \\
+        June 22, 2026
+        ```
+        ```latex
+        \textbf{...} & Email: \href{mailto:bujack@bu.edu}{bujack@bu.edu} \\
+        \href{...}{Software Engineer and D1 Crew Athlete} & Mobile: \href{tel:+18577530133}{+1-857-753-0133} \\
+        & \href{https://github.com/JJCAPPE}{github.com/JJCAPPE}\\
+        & \href{https://www.linkedin.com/in/giacomo-cappelletto/}{linkedin.com/in/giacomo-cappelletto/}\\
+        ```
+      - Wrong output that agents often produce (do **not** do this):
+        ```latex
+        Gemini \
+        & Email: ... \
+        ```
     - **Header `tabular*` rules (do not change column count or row structure):**
       - The environment is `{l@{\extracolsep{\fill}}r}` — exactly **two columns**.
       - Each row must contain exactly **one** unescaped `&` (column separator) and end with **`\\`**.
@@ -527,7 +560,7 @@ Follow these rules:
         3. empty left cell & GitHub
         4. empty left cell & LinkedIn
       - Do not split a single logical row across multiple physical lines without `\\` at the end of the previous row.
-    - **Recipient block:** each line in `\begin{flushleft}...\end{flushleft}` must end with `\\`, not `\`.
+    - **Recipient block:** each line in `\begin{flushleft}...\end{flushleft}` must end with `\\`, not `\`. Follow `coverletter.tex` exactly for this block.
     - Keep hyperlinks intact.
     - Do not include markdown fences in the output document.
     - Return a full compile-ready LaTeX document.
@@ -600,6 +633,8 @@ Replace:
 - role title/company references.
 
 Keep the header format unchanged. Copy the header block verbatim — do not reformat row breaks or convert links to markdown.
+
+**Reference:** The repo file `coverletter.tex` is the canonical working example. Every header row and every recipient line there ends with `\\`. Your output must use the same `\\` line-ending pattern; never shorten it to a single `\`.
 
 ```latex
 \documentclass[letterpaper,11pt]{article}
@@ -696,9 +731,16 @@ Giacomo Cappelletto
 \end{document}
 ```
 
-**Header anti-patterns (will break compilation):**
+**Line-break anti-patterns (will break compilation or merge lines):**
 
 ```latex
+% WRONG — single \ is NOT a line break (common LLM mistake)
+\begin{flushleft}
+Gemini \
+New York, New York \
+June 22, 2026
+\end{flushleft}
+
 % WRONG — single \ does not end the row; next line's & becomes an extra column
 & Email: ... \
 & Mobile: ... \
@@ -706,8 +748,15 @@ Giacomo Cappelletto
 % WRONG — markdown link syntax
 & Email: \href{mailto:bujack@bu.edu}{[bujack@bu.edu](mailto:bujack@bu.edu)} \\
 
-% CORRECT
+% CORRECT — from coverletter.tex: every row/address line ends with \\
+\begin{flushleft}
+Gemini \\
+New York, New York \\
+June 22, 2026
+\end{flushleft}
+
 & Email: \href{mailto:bujack@bu.edu}{bujack@bu.edu} \\
+& \href{https://github.com/JJCAPPE}{github.com/JJCAPPE}\\
 ```
 
 ---
@@ -762,10 +811,10 @@ Before returning the LaTeX, verify:
 - The letter does not sound like a resume summary.
 - No unsupported claims are made.
 - LaTeX special characters are escaped.
-- Every `tabular*` and `flushleft` row ends with `\\`, not `\`.
-- The header table has exactly four rows, each with one `&` and one `\\`.
+- **Line breaks:** scan the header `tabular*` and recipient `flushleft` blocks — every line ends with **`\\`**, never a lone `\`. If any line ends with only one backslash, fix it before returning.
+- The header table has exactly four rows, each with one `&` and one trailing `\\`.
+- The recipient block matches the `coverletter.tex` pattern (`Company \\`, `Location \\`, `Date` with no trailing `\\` on the last line is OK; address lines above the date each need `\\`).
 - No markdown link syntax (`[text](url)`) appears anywhere in the output.
 - The output is a complete LaTeX document.
 - The output contains no markdown fences or explanatory text.
-- always use \\ for new line
-- make conciseness your main goal, the reader should be hooked and never bored
+- Conciseness is the main goal — hook the reader and avoid filler.
