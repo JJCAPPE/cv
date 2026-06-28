@@ -9,31 +9,33 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-role: "Software & AI Engineering Intern",
-organization: "Banca Mediolanum",
-dates: "Jun 2026 — Present",
-location: "Milan, Italy",
-summary: [
-"Develop internal AI tooling and LLM-agent workflows supporting customer analytics, knowledge management, and business operations.",
-"Design and implement a Databricks-based platform for versioning, semantic retrieval, evaluation, and governance of enterprise LLM prompts.",
-"Build Python applications integrated with Unity Catalog, Delta Lake, Databricks AI Search, and SQL Warehouses to support prompt management and testing.",
-"Analyze large-scale customer datasets using SQL and Python, contributing to predictive modeling and customer behavior analysis initiatives."
-],
-stack: [
-"Python",
-"SQL",
-"Azure Databricks",
-"Unity Catalog",
-"Delta Lake",
-"Databricks AI Search",
-"Vector Search",
-"Dash",
-"LLM Agents",
-"Prompt Engineering",
-"Predictive Modeling",
-"Data Analytics"
-]
-},
+    role: "Software & AI Engineering Intern",
+    organization: "Banca Mediolanum",
+    dates: "Jun 2026 — Present",
+    location: "Milan, Italy",
+    summary: [
+      "Lead developer, as an intern, for internal AI agent and prompt-governance platforms; own backend, frontend, data workflows, evaluation, deployment, and stakeholder requirements.",
+      "Built Databricks-served LLM agent infrastructure using MLflow, LangGraph ReAct, tool calling, Vector Search, SQL Warehouse, Genie, Unity Catalog, Delta tables, and structured response contracts.",
+      "Developed React/Express and Dash/Flask applications for agent chat, prompt, versioning, RAG search, lifecycle controls, side-by-side testing, benchmark logging, and review workflows.",
+      "Implemented semantic retrieval, append-only versioning, permission-aware workflows, MLflow GenAI evaluation, and Delta/Vector Search pipelines supporting scalable enterprise AI governance.",
+    ],
+    stack: [
+      "Python",
+      "SQL",
+      "Azure Databricks",
+      "Unity Catalog",
+      "Delta Lake",
+      "Databricks AI Search",
+      "Vector Search",
+      "Dash",
+      "MLflow",
+      "LangChain",
+      "LLM Agents",
+      "Prompt Engineering",
+      "Predictive Modeling",
+      "Data Analytics",
+    ],
+  },
   {
     role: "Undergraduate Researcher",
     organization: "Boston University College of Engineering",
@@ -80,13 +82,6 @@ stack: [
       "Built responsive product interfaces in Next.js and backend features in Rails and PostgreSQL for a ticketing platform.",
       "Contributed to ticket authentication architecture and shipped API integrations across a new stack.",
     ],
-    stack: [
-      "Next.js",
-      "React",
-      "Rails",
-      "PostgreSQL",
-      "Tailwind",
-      "shadcn/ui",
-    ],
+    stack: ["Next.js", "React", "Rails", "PostgreSQL", "Tailwind", "shadcn/ui"],
   },
 ];
