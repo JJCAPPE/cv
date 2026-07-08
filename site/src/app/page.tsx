@@ -35,8 +35,8 @@ export default function Home() {
             I’m Giacomo Cappelletto, a Computer Engineering student at Boston
             University building software, data systems, and applied ML tools.
             My work sits between full-stack engineering, backend infrastructure,
-            and computer vision for human motion analysis. I also compete in
-            Division I rowing at BU.
+            robotics autonomy, and computer vision for human motion analysis. I
+            also compete in Division I rowing at BU.
           </p>
           <div className="mobile-links" aria-label="Profile links">
             {primaryLinks.map((link) => (

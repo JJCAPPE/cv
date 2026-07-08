@@ -21,11 +21,13 @@ export const metadata: Metadata = {
     template: "%s / Giacomo Cappelletto",
   },
   description:
-    "Computer Engineering student at Boston University building software systems, applied ML tools, and computer vision pipelines for biomechanics.",
+    "Computer Engineering student at Boston University building software systems, applied ML tools, robotics autonomy projects, and computer vision pipelines for biomechanics.",
   keywords: [
     "software engineering",
     "machine learning",
     "computer vision",
+    "robotics",
+    "autonomy",
     "Boston University",
     "rowing biomechanics",
     "full-stack",
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Giacomo Cappelletto",
     description:
-      "Software systems, applied ML, and computer vision for biomechanics.",
+      "Software systems, applied ML, robotics autonomy, and computer vision for biomechanics.",
     type: "website",
     url: siteUrl,
     siteName: "Giacomo Cappelletto",
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Giacomo Cappelletto",
     description:
-      "Software systems, applied ML, and computer vision for biomechanics.",
+      "Software systems, applied ML, robotics autonomy, and computer vision for biomechanics.",
   },
 };
 

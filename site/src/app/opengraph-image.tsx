@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Giacomo Cappelletto — software systems, applied ML, computer vision, rowing biomechanics";
+  "Giacomo Cappelletto — software systems, applied ML, robotics autonomy, computer vision";
 export const size = {
   width: 1200,
   height: 630,
@@ -46,7 +46,7 @@ export default function OpenGraphImage() {
           <span>/</span>
           <span>Applied ML</span>
           <span>/</span>
-          <span>Biomechanics</span>
+          <span>Robotics</span>
         </div>
         <div
           style={{
@@ -57,7 +57,7 @@ export default function OpenGraphImage() {
           <div
             style={{
               fontSize: 72,
-              letterSpacing: "-0.045em",
+              letterSpacing: 0,
               lineHeight: 1,
               marginBottom: 30,
             }}
@@ -73,7 +73,7 @@ export default function OpenGraphImage() {
             }}
           >
             Computer Engineering at Boston University. Building software,
-            data systems, and computer vision pipelines for human motion.
+            robotics autonomy, data systems, and computer vision pipelines.
           </div>
         </div>
         <div

@@ -106,6 +106,74 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "Deskinator",
+    slug: "deskinator",
+    summary:
+      "An autonomous tabletop-cleaning robot that maps desk boundaries from proximity sensors and executes coverage paths with Python planning, control, and telemetry.",
+    stack: [
+      "Python",
+      "NumPy",
+      "Raspberry Pi",
+      "APDS9960",
+      "MPU-6050",
+      "RANSAC",
+      "Coverage planning",
+    ],
+    year: "2026",
+    type: "Robotics / Autonomy",
+    role: "Robotics software developer",
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/JJCAPPE/deskinator/tree/new-alg",
+      },
+    ],
+    diagram: [
+      "Proximity sensors",
+      "Edge events",
+      "Rectangle fitting",
+      "Coverage lanes",
+      "Motor control",
+      "Telemetry",
+    ],
+    sections: [
+      {
+        title: "Problem",
+        paragraphs: [
+          "A small tabletop robot has to clean without falling, which makes boundary inference, coverage, and recovery more important than a polished interface. Deskinator turns short-range sensor readings into a conservative map and executable cleaning path.",
+        ],
+      },
+      {
+        title: "Architecture",
+        paragraphs: [
+          "The Python control stack runs on a Raspberry Pi, reads APDS9960 proximity sensors, stepper odometry, and optional IMU data, and coordinates boundary discovery, rectangle fitting, coverage planning, actuator control, logging, and visualization.",
+        ],
+      },
+      {
+        title: "Implementation",
+        bullets: [
+          "Filtered raw proximity readings with debounce and hysteresis for edge detection.",
+          "Collected edge points in robot/world coordinates and fit rectangular table boundaries with RANSAC line detection and orthogonality checks.",
+          "Generated inset boustrophedon lanes and tracked swept vacuum footprint on a raster map.",
+          "Built simulation, telemetry, and Excel/plot analysis scripts for repeated cleaning trials.",
+        ],
+      },
+      {
+        title: "Strategic Relevance",
+        paragraphs: [
+          "The project is strongest evidence for robotics perception and autonomy roles: it connects embedded sensing, geometric inference, planning, control, and test instrumentation in a physical system. It is adjacent to ML/AI because it works with noisy real-world data and algorithmic perception, not because it trains a neural model.",
+        ],
+      },
+      {
+        title: "Limitations",
+        bullets: [
+          "The active branch includes IMU/EKF scaffolding, but the strongest supported claims are boundary detection, geometric inference, coverage planning, and testing.",
+          "Current algorithms are engineered for rectangular tabletop environments rather than arbitrary room-scale navigation.",
+        ],
+      },
+    ],
+  },
+  {
     title: "Inventory System Rebuild",
     slug: "inventory-system",
     summary:
