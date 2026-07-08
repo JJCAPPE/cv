@@ -52,7 +52,7 @@ const skillGroups = [
   {
     label: "Tools",
     value:
-      "Git, Supabase, Prisma, PostgreSQL, Docker, Firebase, Shopify GraphQL, Streamlit, Ollama, Google Cloud Run, Vercel",
+      "Git, Supabase, Prisma, PostgreSQL, Docker, Firebase, Shopify GraphQL, Raspberry Pi, Streamlit, Ollama, Google Cloud Run, Vercel",
   },
 ];
 
@@ -151,6 +151,18 @@ export default function ResumePage() {
               </p>
             </div>
             <p>2025</p>
+          </div>
+          <div className="resume-entry">
+            <div>
+              <h3>Deskinator</h3>
+              <p>
+                Python robotics stack for a Raspberry Pi desk-cleaning robot,
+                with proximity edge sensing, RANSAC rectangle fitting,
+                boustrophedon coverage planning, telemetry, and simulation
+                analysis.
+              </p>
+            </div>
+            <p>2026</p>
           </div>
         </section>
 

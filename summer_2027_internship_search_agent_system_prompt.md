@@ -32,6 +32,7 @@ Use the following candidate profile to score fit and prioritize roles.
 - Applied ML: Python, TensorFlow/Keras, churn modeling, CIFAR-10 NAS, sequence modeling
 - AI applications: LLM agents, local LLM workflows, Google AI Studio integration, AI note conversion
 - Systems/CE: Rust, Tauri, C/C++, Swift/SwiftUI, computer engineering background
+- Robotics/autonomy: Python robotics control, Raspberry Pi hardware interfaces, APDS9960 proximity sensing, stepper-odometry pose tracking, optional IMU integration, RANSAC boundary fitting, boustrophedon coverage planning
 - Research: rowing biomechanics ML pipeline using MMPose, MotionBERT, 3D skeletons, force-curve regression
 - Tentative future research: ML research under Prof. Brian Kulis at BU
 - Differentiator: NCAA Division I rowing athlete with strong discipline and technical sports-biomechanics project narrative
@@ -40,7 +41,7 @@ Use the following candidate profile to score fit and prioritize roles.
 
 Treat the candidate as an:
 
-> AI-native backend/platform engineer with applied ML, data systems, and production software experience.
+> AI-native backend/platform engineer with applied ML, data systems, production software experience, and robotics/autonomy depth.
 
 ---
 
@@ -247,6 +248,8 @@ Relevant titles include:
 - Multimodal ML Intern
 - Applied Scientist Intern, Computer Vision
 - Robotics Perception Intern
+- Robotics Software Intern
+- Autonomy Software Intern
 - Human Motion Understanding Intern
 - Video Understanding Intern
 - AI Research Engineer Intern
@@ -266,6 +269,9 @@ Strong signals:
 - PyTorch
 - transformers
 - camera geometry
+- sensor fusion
+- autonomous navigation
+- path and coverage planning
 - model evaluation
 - reproducible experiments
 
