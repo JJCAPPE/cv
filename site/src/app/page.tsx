@@ -1,130 +1,197 @@
-import { ExperienceItem } from "@/components/ExperienceItem";
-import { LinkPill } from "@/components/LinkPill";
-import { MotionSignal } from "@/components/MotionSignal";
-import { NotePreview } from "@/components/NotePreview";
-import { ProjectItem } from "@/components/ProjectItem";
-import { Section } from "@/components/Section";
-import { Sidebar } from "@/components/Sidebar";
-import { StatusBlock } from "@/components/StatusBlock";
-import { WorkVector } from "@/components/WorkVector";
+import Image from "next/image";
+import Link from "next/link";
+import { HorizontalProjectRail } from "@/components/HorizontalProjectRail";
 import { experience } from "@/content/experience";
-import { primaryLinks } from "@/content/links";
 import { projects } from "@/content/projects";
 import { getNotes } from "@/lib/notes";
 
 export default function Home() {
-  const notes = getNotes().slice(0, 4);
+  const notes = getNotes().slice(0, 3);
+  const featuredProjects = projects
+    .filter((project) => project.featured)
+    .map((project) => {
+      const selectedCover =
+        project.slug === "rowing-biomechanics"
+          ? (project.gallery?.[0] ?? project.cover)
+          : project.cover;
+
+      return {
+        slug: project.slug,
+        title: project.title,
+        summary: project.summary,
+        year: project.year,
+        type: project.type,
+        cover: {
+          src: selectedCover.src,
+          alt: selectedCover.alt,
+          width: selectedCover.width,
+          height: selectedCover.height,
+          fit: selectedCover.fit,
+        },
+      };
+    });
+  const rowingProject = projects.find(
+    (project) => project.slug === "rowing-biomechanics",
+  );
+  const deskinatorProject = projects.find(
+    (project) => project.slug === "deskinator",
+  );
+
+  if (!rowingProject || !deskinatorProject) {
+    throw new Error("Featured portfolio media is missing.");
+  }
+
+  const researchMedia = rowingProject.gallery?.[0] ?? rowingProject.cover;
 
   return (
-    <main className="home-shell">
-      <Sidebar />
+    <main id="main-content" className="home-page">
+      <section id="intro" className="home-hero">
+        <div className="home-hero__media" aria-hidden="true">
+          <div className="home-hero__media-primary">
+            <Image
+              src={rowingProject.cover.src}
+              alt=""
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(max-width: 767px) 100vw, 72vw"
+            />
+          </div>
+          <div className="home-hero__media-secondary">
+            <Image
+              src={deskinatorProject.cover.src}
+              alt=""
+              fill
+              loading="eager"
+              sizes="(max-width: 767px) 44vw, 25vw"
+            />
+          </div>
+        </div>
 
-      <div className="home-content">
-        <header className="mobile-identity">
-          <h1>Giacomo Cappelletto</h1>
-          <p>Computer Engineering @ Boston University</p>
-          <p>D1 Varsity Rowing</p>
-          <p>Software · ML · Systems</p>
+        <div className="home-hero__content">
+          <h1 className="home-hero__title">
+            <span>Giacomo</span>
+            <span>Cappelletto</span>
+          </h1>
+          <div className="home-hero__footer">
+            <p>
+              I build software, ML systems, and robotics around messy real-world
+              data.
+            </p>
+            <div className="home-hero__actions">
+              <a href="#work" className="action-link action-link--accent">
+                View work
+              </a>
+              <Link href="/resume" className="action-link">
+                Resume
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="current" className="current-panel">
+        <div className="current-panel__inner">
+          <h2 className="current-panel__statement">
+            Software is most useful when it survives contact with the real
+            world.
+          </h2>
+          <div className="current-panel__details">
+            <p>AI engineering in Milan</p>
+            <p>Biomechanics research at Boston University</p>
+            <p>Seeking Summer 2027 software and AI roles</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" className="experience-story">
+        <header className="experience-story__intro">
+          <h2>Experience</h2>
+          <p>
+            Four environments, from enterprise AI systems to physical sensing
+            and product delivery.
+          </p>
         </header>
 
-        <Section number="01" title="Intro" id="intro" className="intro-section">
-          <h1 className="hero-title">
-            I build software systems and applied ML tools around real data.
-          </h1>
-          <p className="hero-copy">
-            I’m Giacomo Cappelletto, a Computer Engineering student at Boston
-            University building software, data systems, and applied ML tools.
-            My work sits between full-stack engineering, backend infrastructure,
-            robotics autonomy, and computer vision for human motion analysis. I
-            also compete in Division I rowing at BU.
+        <div className="experience-stack">
+          {experience.map((item) => (
+            <article
+              className="experience-panel"
+              key={`${item.organization}-${item.role}`}
+            >
+              <div className="experience-panel__meta">
+                <p>{item.dates}</p>
+                <p>{item.location}</p>
+              </div>
+              <div className="experience-panel__body">
+                <p className="experience-panel__organization">
+                  {item.organization}
+                </p>
+                <h3>{item.role}</h3>
+                <p className="experience-panel__summary">{item.summary[0]}</p>
+                <p className="experience-panel__stack">
+                  {item.stack.slice(0, 6).join(" / ")}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <HorizontalProjectRail projects={featuredProjects} />
+
+      <section id="research" className="research-feature" tabIndex={-1}>
+        <div className="research-feature__media">
+          <Image
+            src={researchMedia.src}
+            alt={researchMedia.alt}
+            fill
+            sizes="(max-width: 767px) 100vw, 64vw"
+          />
+        </div>
+        <div className="research-feature__content">
+          <h2>Motion becomes signal.</h2>
+          <p>
+            My current research turns single-camera rowing video into 3D
+            kinematics and stroke-level force estimates.
           </p>
-          <div className="mobile-links" aria-label="Profile links">
-            {primaryLinks.map((link) => (
-              <LinkPill key={link.label} href={link.href}>
-                {link.label}
-              </LinkPill>
-            ))}
-          </div>
-          <WorkVector />
-          <MotionSignal />
-        </Section>
+          <Link href="/research" className="action-link action-link--accent">
+            Research
+          </Link>
+        </div>
+      </section>
 
-        <Section number="02" title="Current Focus" id="current">
-          <StatusBlock />
-        </Section>
+      <section id="notes" className="notes-feature">
+        <header className="notes-feature__header">
+          <h2>Notes</h2>
+          <Link href="/notes" className="action-link">
+            All notes
+          </Link>
+        </header>
+        <div className="notes-feature__list">
+          {notes.map((note) => (
+            <article className="notes-feature__item" key={note.slug}>
+              <p>
+                {note.category} / {note.date}
+              </p>
+              <h3>
+                <Link href={`/notes/${note.slug}`}>{note.title}</Link>
+              </h3>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <Section number="03" title="Experience" id="experience">
-          <div className="ruled-list">
-            {experience.map((item) => (
-              <ExperienceItem
-                key={`${item.organization}-${item.role}`}
-                experience={item}
-              />
-            ))}
-          </div>
-        </Section>
-
-        <Section number="04" title="Selected Work" id="work">
-          <div className="ruled-list">
-            {projects.map((project, index) => (
-              <ProjectItem
-                key={project.slug}
-                project={project}
-                index={index}
-              />
-            ))}
-          </div>
-          <div className="section-link">
-            <LinkPill href="/projects">View all project details →</LinkPill>
-          </div>
-        </Section>
-
-        <Section number="05" title="Research" id="research">
-          <p className="section-lead">
-            I’m interested in systems that turn noisy human motion into
-            measurable, useful representations.
-          </p>
-          <ul className="interest-list">
-            <li>Human motion understanding</li>
-            <li>Computer vision for biomechanics</li>
-            <li>Sequence modeling from kinematics</li>
-            <li>Applied ML for athletic performance</li>
-            <li>Data systems for high-signal decision workflows</li>
-          </ul>
-          <div className="section-link">
-            <LinkPill href="/research">Research overview →</LinkPill>
-          </div>
-        </Section>
-
-        <Section number="06" title="Notes" id="notes">
-          <div className="ruled-list">
-            {notes.map((note) => (
-              <NotePreview key={note.slug} note={note} />
-            ))}
-          </div>
-          <div className="section-link">
-            <LinkPill href="/notes">All notes →</LinkPill>
-          </div>
-        </Section>
-
-        <Section number="07" title="Contact" id="contact">
-          <p className="contact-copy">
-            I’m looking for software and AI internship opportunities for Summer
-            2027. The most direct way to reach me is{" "}
-            <LinkPill href="mailto:giacomo.cappelletto@icloud.com">
-              email
-            </LinkPill>
-            .
-          </p>
-          <div className="contact-links">
-            {primaryLinks.map((link) => (
-              <LinkPill key={link.label} href={link.href}>
-                {link.label}
-              </LinkPill>
-            ))}
-          </div>
-        </Section>
-      </div>
+      <section id="contact" className="contact-poster">
+        <p>Summer 2027 software and AI opportunities</p>
+        <h2>Let&apos;s build something that has to work.</h2>
+        <a
+          href="mailto:giacomo.cappelletto@icloud.com"
+          className="contact-poster__link"
+        >
+          Email
+        </a>
+      </section>
     </main>
   );
 }

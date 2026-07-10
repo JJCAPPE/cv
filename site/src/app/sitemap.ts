@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...projectRoutes, ...noteRoutes].map((route) => ({
     url: `${siteUrl}${route}`,
-    lastModified: new Date("2026-06-11"),
+    lastModified: new Date("2026-07-10"),
     changeFrequency: route === "" ? "monthly" : "yearly",
     priority: route === "" ? 1 : 0.7,
   }));

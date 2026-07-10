@@ -9,6 +9,8 @@ type NoteRouteProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getNoteSlugs().map((slug) => ({ slug }));
 }
@@ -45,7 +47,7 @@ export default async function NoteRoute({ params }: NoteRouteProps) {
     <Layout>
       <article className="note-page">
         <Link href="/notes" className="back-link">
-          ← All notes
+          All notes
         </Link>
         <header className="note-page__header">
           <p>

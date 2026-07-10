@@ -1,11 +1,8 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Giacomo Cappelletto — software systems, applied ML, robotics autonomy, computer vision";
-export const size = {
-  width: 1200,
-  height: 630,
-};
+  "Giacomo Cappelletto, software systems, applied ML, robotics, and computer vision";
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
@@ -13,81 +10,61 @@ export default function OpenGraphImage() {
     <div
       style={{
         alignItems: "stretch",
-        background: "#050505",
-        color: "#f5f5f5",
+        background: "#0b0b0a",
+        color: "#f1efe8",
         display: "flex",
-        fontFamily: "sans-serif",
         height: "100%",
-        padding: "72px",
         width: "100%",
       }}
     >
       <div
         style={{
-          borderLeft: "1px solid #262626",
+          background: "#e6d12a",
+          color: "#11110f",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          paddingLeft: "52px",
-          width: "100%",
+          padding: "58px 56px",
+          width: 370,
         }}
       >
-        <div
-          style={{
-            color: "#9ca3af",
-            display: "flex",
-            fontFamily: "monospace",
-            fontSize: 22,
-            gap: 28,
-            textTransform: "uppercase",
-          }}
-        >
-          <span>Software Systems</span>
-          <span>/</span>
-          <span>Applied ML</span>
-          <span>/</span>
-          <span>Robotics</span>
-        </div>
+        <span style={{ fontSize: 22 }}>COMPUTER ENGINEERING</span>
+        <span style={{ fontSize: 26, lineHeight: 1.1 }}>
+          Software
+          <br />
+          Machine learning
+          <br />
+          Robotics
+        </span>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "58px 62px",
+        }}
+      >
+        <span style={{ fontSize: 21 }}>GIACOMO CAPPELLETTO</span>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
+            fontFamily: "sans-serif",
+            fontSize: 88,
+            fontWeight: 600,
+            letterSpacing: -5,
+            lineHeight: 0.88,
+            textTransform: "uppercase",
           }}
         >
-          <div
-            style={{
-              fontSize: 72,
-              letterSpacing: 0,
-              lineHeight: 1,
-              marginBottom: 30,
-            }}
-          >
-            Giacomo Cappelletto
-          </div>
-          <div
-            style={{
-              color: "#9ca3af",
-              fontSize: 29,
-              lineHeight: 1.35,
-              maxWidth: 820,
-            }}
-          >
-            Computer Engineering at Boston University. Building software,
-            robotics autonomy, data systems, and computer vision pipelines.
-          </div>
+          <span>REAL DATA.</span>
+          <span>WORKING SYSTEMS.</span>
         </div>
-        <div
-          style={{
-            color: "#525252",
-            display: "flex",
-            fontFamily: "monospace",
-            fontSize: 20,
-            justifyContent: "space-between",
-          }}
-        >
-          <span>Boston / Treviso</span>
-          <span>github.com/JJCAPPE</span>
-        </div>
+        <span style={{ color: "#9e9b93", fontSize: 22 }}>
+          Boston University / Summer 2027
+        </span>
       </div>
     </div>,
     size,

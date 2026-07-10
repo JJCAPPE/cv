@@ -11,7 +11,7 @@ export const experience: Experience[] = [
   {
     role: "Software & AI Engineering Intern",
     organization: "Banca Mediolanum",
-    dates: "Jun 2026 — Present",
+    dates: "Jun 2026 - Present",
     location: "Milan, Italy",
     summary: [
       "Lead developer, as an intern, for internal AI agent and prompt-governance platforms; own backend, frontend, data workflows, evaluation, deployment, and stakeholder requirements.",
@@ -39,7 +39,7 @@ export const experience: Experience[] = [
   {
     role: "Undergraduate Researcher",
     organization: "Boston University College of Engineering",
-    dates: "Jan 2026 — May 2026",
+    dates: "Jan 2026 - May 2026",
     location: "Boston, MA",
     summary: [
       "Built a single-camera rowing biomechanics pipeline spanning stabilization, MMPose 2D keypoints, and MotionBERT 3D lifting.",
@@ -58,7 +58,7 @@ export const experience: Experience[] = [
   {
     role: "Full-Stack / Systems Developer",
     organization: "Società Cappelletto S.R.L.",
-    dates: "May 2025 — Oct 2025",
+    dates: "May 2025 - Oct 2025",
     location: "Treviso, Italy",
     summary: [
       "Rebuilt an Electron inventory application with Tauri, React, and Rust, reducing app size by 70%, memory use by 80%, and startup time by 60%.",
@@ -76,7 +76,7 @@ export const experience: Experience[] = [
   {
     role: "Full-Stack Engineer",
     organization: "TickIT",
-    dates: "Nov 2024 — Feb 2025",
+    dates: "Nov 2024 - Feb 2025",
     location: "Remote",
     summary: [
       "Built responsive product interfaces in Next.js and backend features in Rails and PostgreSQL for a ticketing platform.",
