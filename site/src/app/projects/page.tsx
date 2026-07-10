@@ -11,15 +11,15 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <Layout>
-      <header className="page-intro">
+    <Layout className="projects-index">
+      <header className="page-intro projects-intro">
         <h1>Projects</h1>
         <p>
-          Software, ML, robotics, and product work selected for technical depth
-          and measurable constraints.
+          Software, ML, robotics, and product work shaped by measurable
+          constraints.
         </p>
       </header>
-      <div className="ruled-list">
+      <div className="project-gallery">
         {projects.map((project, index) => (
           <ProjectItem key={project.slug} project={project} index={index} />
         ))}

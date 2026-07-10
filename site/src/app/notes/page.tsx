@@ -13,15 +13,15 @@ export default function NotesPage() {
   const notes = getNotes();
 
   return (
-    <Layout>
-      <header className="page-intro">
+    <Layout className="notes-index">
+      <header className="page-intro notes-intro">
         <h1>Notes</h1>
         <p>
-          Short writeups on machine learning, computer vision, systems, and
+          Working notes on machine learning, computer vision, systems, and
           rowing biomechanics.
         </p>
       </header>
-      <div className="ruled-list">
+      <div className="notes-index__list">
         {notes.map((note) => (
           <NotePreview key={note.slug} note={note} />
         ))}

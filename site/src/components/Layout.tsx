@@ -1,16 +1,12 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-
 type LayoutProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, className = "" }: LayoutProps) {
   return (
-    <>
-      <Header />
-      <main className="page-shell">{children}</main>
-      <Footer />
-    </>
+    <main id="main-content" className={`page-shell ${className}`}>
+      {children}
+    </main>
   );
 }

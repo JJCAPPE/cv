@@ -1,52 +1,80 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/content/projects";
+import { projects } from "@/content/projects";
 import { Layout } from "@/components/Layout";
-import { LinkPill } from "@/components/LinkPill";
 
 export function ProjectPage({ project }: { project: Project }) {
-  return (
-    <Layout>
-      <article className="project-page">
-        <Link href="/projects" className="back-link">
-          ← All projects
-        </Link>
+  const projectIndex = projects.findIndex((item) => item.slug === project.slug);
+  const nextProject = projects[(projectIndex + 1) % projects.length];
 
+  return (
+    <Layout className="project-page-shell">
+      <article className="project-page">
         <header className="project-page__hero">
+          <Link href="/projects" className="back-link">
+            All projects
+          </Link>
+          <p className="project-page__type">
+            {project.year} / {project.type}
+          </p>
           <h1>{project.title}</h1>
           <p className="project-page__summary">{project.summary}</p>
-          <div className="project-page__metadata" aria-label="Project metadata">
-            <span>{project.year}</span>
-            <span>{project.role}</span>
-            <span>{project.stack.join(", ")}</span>
+          <div className="project-page__actions">
+            {project.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="action-link action-link--accent"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
-          {project.links.length ? (
-            <div className="project-page__links">
-              {project.links.map((link) => (
-                <LinkPill key={link.href} href={link.href}>
-                  {link.label}
-                </LinkPill>
-              ))}
-            </div>
-          ) : null}
         </header>
 
-        <div className="project-page__content">
+        <figure className="project-page__cover">
+          <div className="project-page__cover-image">
+            <Image
+              className={
+                project.cover.fit === "contain" ? "media-contain" : undefined
+              }
+              src={project.cover.src}
+              alt={project.cover.alt}
+              fill
+              sizes="100vw"
+            />
+          </div>
+          {project.cover.caption ? (
+            <figcaption>{project.cover.caption}</figcaption>
+          ) : null}
+        </figure>
+
+        <dl className="project-page__facts">
+          <div>
+            <dt>Role</dt>
+            <dd>{project.role}</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>{project.stack.join(" / ")}</dd>
+          </div>
+        </dl>
+
+        <div className="project-page__chapters">
           {project.sections.map((section, index) => {
-            const sectionNumber = index < 3 ? index + 1 : index + 2;
+            const media = project.gallery?.[index];
 
             return (
-              <div key={section.title}>
-                <section className="case-section">
-                  <header className="case-section__header">
-                    <span>{String(sectionNumber).padStart(2, "0")}</span>
-                    <h2>{section.title}</h2>
-                  </header>
-                  <div className="case-section__body">
+              <div className="project-chapter-group" key={section.title}>
+                <section className="project-chapter">
+                  <h2>{section.title}</h2>
+                  <div className="project-chapter__body">
                     {section.paragraphs?.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
                     {section.bullets ? (
-                      <ul className="plain-list">
+                      <ul className="plain-list" role="list">
                         {section.bullets.map((bullet) => (
                           <li key={bullet}>{bullet}</li>
                         ))}
@@ -55,29 +83,46 @@ export function ProjectPage({ project }: { project: Project }) {
                   </div>
                 </section>
 
-                {index === 2 && project.diagram ? (
-                  <section className="case-section">
-                    <header className="case-section__header">
-                      <span>04</span>
-                      <h2>System Diagram</h2>
-                    </header>
-                    <ol
-                      className="system-diagram"
-                      aria-label={`${project.title} system`}
-                    >
-                      {project.diagram.map((node, nodeIndex) => (
-                        <li key={node}>
-                          <span>{String(nodeIndex + 1).padStart(2, "0")}</span>
-                          <strong>{node}</strong>
-                        </li>
-                      ))}
-                    </ol>
-                  </section>
+                {media ? (
+                  <figure className="project-inline-media">
+                    <div className="project-inline-media__image">
+                      <Image
+                        className={
+                          media.fit === "contain" ? "media-contain" : undefined
+                        }
+                        src={media.src}
+                        alt={media.alt}
+                        fill
+                        sizes="(max-width: 767px) 100vw, 82vw"
+                      />
+                    </div>
+                    {media.caption ? (
+                      <figcaption>{media.caption}</figcaption>
+                    ) : null}
+                  </figure>
                 ) : null}
               </div>
             );
           })}
         </div>
+
+        {project.diagram ? (
+          <section className="project-system">
+            <h2>System</h2>
+            <ol aria-label={`${project.title} system flow`} role="list">
+              {project.diagram.map((node) => (
+                <li key={node}>{node}</li>
+              ))}
+            </ol>
+          </section>
+        ) : null}
+
+        <nav className="next-project" aria-label="Next project">
+          <p>Next project</p>
+          <Link href={`/projects/${nextProject.slug}`}>
+            {nextProject.title}
+          </Link>
+        </nav>
       </article>
     </Layout>
   );

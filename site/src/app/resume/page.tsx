@@ -12,28 +12,28 @@ const additionalExperience = [
   {
     role: "Software Engineer",
     organization: "Boston University Men’s Rowing",
-    dates: "Jan 2026 — May 2026",
+    dates: "Jan 2026 - May 2026",
     detail:
       "Built a mobile-first team training tracker with proof-validated entries, configurable requirements, leaderboards, weekly summaries, role-based access, and recap emails using Supabase and Prisma.",
   },
   {
     role: "Full-Stack Developer",
     organization: "Società Cappelletto S.R.L.",
-    dates: "Jun 2024 — Present",
+    dates: "Jun 2024 - Present",
     detail:
       "Develop and maintain the original Electron, React, Node.js, Shopify, and Firebase inventory system; distribute releases through GitHub and an auto-updater.",
   },
   {
     role: "Python Developer",
     organization: "H-Farm International School",
-    dates: "Apr 2024 — Present",
+    dates: "Apr 2024 - Present",
     detail:
       "Built a Streamlit scheduling tool that reads ManageBac timetables, finds free periods, and drafts meeting requests with local Ollama models.",
   },
   {
     role: "iOS Developer",
     organization: "ASD DLF Treviso",
-    dates: "Oct 2023 — Present",
+    dates: "Oct 2023 - Present",
     detail:
       "Built a SwiftUI rowing logbook for training records and progression analysis using Swift Charts.",
   },
@@ -68,13 +68,11 @@ export default function ResumePage() {
         <div className="resume-actions">
           <a
             href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="text-link"
+            className="action-link action-link--accent"
           >
             View Resume
           </a>
-          <a href="/resume.pdf" download className="text-link">
+          <a href="/resume.pdf" download className="action-link">
             Download PDF
           </a>
         </div>
@@ -86,19 +84,19 @@ export default function ResumePage() {
           <div className="resume-entry">
             <div>
               <h3>Boston University</h3>
-              <p>B.Sc. in Computer Engineering · GPA 3.97</p>
+              <p>B.Sc. in Computer Engineering / GPA 3.97</p>
             </div>
-            <p>2024 — 2028</p>
+            <p>2024 - 2028</p>
           </div>
           <div className="resume-entry">
             <div>
               <h3>H-Farm International School</h3>
               <p>
-                International Baccalaureate · HL Mathematics, Physics, Computer
+                International Baccalaureate / HL Mathematics, Physics, Computer
                 Science
               </p>
             </div>
-            <p>2022 — 2024</p>
+            <p>2022 - 2024</p>
           </div>
         </section>
 
@@ -108,10 +106,10 @@ export default function ResumePage() {
             <div className="resume-entry" key={`${item.organization}-${item.role}`}>
               <div>
                 <h3>
-                  {item.role} · {item.organization}
+                  {item.role} / {item.organization}
                 </h3>
                 <p>{item.summary.join(" ")}</p>
-                <span>{item.stack.join(" · ")}</span>
+                <span>{item.stack.join(" / ")}</span>
               </div>
               <p>{item.dates}</p>
             </div>
@@ -120,7 +118,7 @@ export default function ResumePage() {
             <div className="resume-entry" key={`${item.organization}-${item.role}`}>
               <div>
                 <h3>
-                  {item.role} · {item.organization}
+                  {item.role} / {item.organization}
                 </h3>
                 <p>{item.detail}</p>
               </div>
@@ -172,15 +170,15 @@ export default function ResumePage() {
             <div>
               <h3>NCAA Division I Student-Athlete</h3>
               <p>
-                Boston University Men’s Rowing · 20+ hours each week across
+                Boston University Men’s Rowing / 20+ hours each week across
                 training, competition, travel, and team commitments.
               </p>
               <span>
-                Freshman Student-Athlete of the Year, 2025 · Most Improved
+                Freshman Student-Athlete of the Year, 2025 / Most Improved
                 Oarsman, 2026
               </span>
             </div>
-            <p>2024 — Present</p>
+            <p>2024 - Present</p>
           </div>
         </section>
 

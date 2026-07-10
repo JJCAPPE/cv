@@ -1,0 +1,319 @@
+"use client";
+
+import { useLayoutEffect, useRef, type MouseEvent } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
+import styles from "./HorizontalProjectRail.module.css";
+
+export type HorizontalProjectRailProject = {
+  slug: string;
+  title: string;
+  summary: string;
+  year: string;
+  type: string;
+  cover: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    fit?: "cover" | "contain";
+  };
+};
+
+type HorizontalProjectRailProps = {
+  projects: HorizontalProjectRailProject[];
+};
+
+const DESKTOP_MOTION_QUERY =
+  "(min-width: 768px) and (prefers-reduced-motion: no-preference)";
+
+function normalizeDashes(value: string) {
+  return value.replace(/[\u2013\u2014]/g, "-");
+}
+
+export function HorizontalProjectRail({
+  projects,
+}: HorizontalProjectRailProps) {
+  const railRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<ScrollTriggerInstance>(null);
+  const updateTriggerRef = useRef<(() => void) | null>(null);
+
+  useLayoutEffect(() => {
+    const rail = railRef.current;
+    const track = trackRef.current;
+
+    if (!rail || !track || projects.length < 2) {
+      return;
+    }
+
+    let cancelled = false;
+    let teardown: (() => void) | undefined;
+
+    void (async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+
+      if (cancelled) {
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const media = gsap.matchMedia();
+      const context = gsap.context(() => {
+        media.add(DESKTOP_MOTION_QUERY, () => {
+          rail.dataset.enhanced = "true";
+          const distance = () =>
+            Math.max(track.scrollWidth - rail.clientWidth, 0);
+
+          if (distance() === 0) {
+            delete rail.dataset.enhanced;
+            return;
+          }
+
+          const timeline = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: rail,
+              start: "top top",
+              end: () => `+=${distance()}`,
+              pin: rail,
+              scrub: 0.9,
+              invalidateOnRefresh: true,
+              anticipatePin: 1,
+            },
+          });
+
+          timeline.to(track, { x: () => -distance(), duration: 1 }, 0);
+          triggerRef.current = timeline.scrollTrigger ?? null;
+          updateTriggerRef.current = () => ScrollTrigger.update();
+
+          const panels = gsap.utils.toArray<HTMLElement>(
+            "[data-project-panel]",
+            rail,
+          );
+
+          const panelInterval = 1 / Math.max(panels.length - 1, 1);
+
+          panels.forEach((panel, index) => {
+            const copy = panel.querySelector<HTMLElement>(
+              "[data-project-copy]",
+            );
+            const image = panel.querySelector<HTMLElement>(
+              "[data-project-image]",
+            );
+
+            if (copy && index > 0) {
+              const revealStart = Math.max((index - 0.86) * panelInterval, 0);
+
+              timeline.fromTo(
+                copy,
+                { x: 72, opacity: 0.32 },
+                {
+                  x: 0,
+                  opacity: 1,
+                  duration: panelInterval * 0.3,
+                },
+                revealStart,
+              );
+            }
+
+            if (image) {
+              const imageStart = Math.max((index - 1) * panelInterval, 0);
+              const imageEnd = Math.min((index + 1) * panelInterval, 1);
+
+              timeline.fromTo(
+                image,
+                { xPercent: -2.5, scale: 1.055 },
+                {
+                  xPercent: 2.5,
+                  scale: 1.055,
+                  duration: Math.max(imageEnd - imageStart, 0.01),
+                },
+                imageStart,
+              );
+            }
+          });
+
+          const unloadedImages = Array.from(
+            rail.querySelectorAll("img"),
+          ).filter((image) => !image.complete);
+          const refresh = () => ScrollTrigger.refresh();
+          const hashFrame =
+            window.location.hash === "#work"
+              ? window.requestAnimationFrame(() => {
+                  refresh();
+                  document.getElementById("work")?.scrollIntoView({
+                    behavior: "auto",
+                    block: "start",
+                  });
+                })
+              : null;
+          let active = true;
+
+          unloadedImages.forEach((image) => {
+            image.addEventListener("load", refresh, { once: true });
+            image.addEventListener("error", refresh, { once: true });
+          });
+
+          void document.fonts?.ready.then(() => {
+            if (active) {
+              refresh();
+            }
+          });
+
+          return () => {
+            active = false;
+            delete rail.dataset.enhanced;
+            if (hashFrame !== null) {
+              window.cancelAnimationFrame(hashFrame);
+            }
+            unloadedImages.forEach((image) => {
+              image.removeEventListener("load", refresh);
+              image.removeEventListener("error", refresh);
+            });
+            triggerRef.current = null;
+            updateTriggerRef.current = null;
+          };
+        });
+      }, rail);
+
+      teardown = () => {
+        context.revert();
+        media.revert();
+        triggerRef.current = null;
+        updateTriggerRef.current = null;
+      };
+    })();
+
+    return () => {
+      cancelled = true;
+      teardown?.();
+    };
+  }, [projects.length]);
+
+  function scrollFocusedProjectIntoView(index: number) {
+    const rail = railRef.current;
+    const track = trackRef.current;
+    const trigger = triggerRef.current;
+
+    if (
+      !rail ||
+      !track ||
+      !trigger ||
+      !window.matchMedia(DESKTOP_MOTION_QUERY).matches
+    ) {
+      return;
+    }
+
+    const panels = rail.querySelectorAll<HTMLElement>("[data-project-panel]");
+    const panel = panels.item(index);
+    const distance = Math.max(track.scrollWidth - rail.clientWidth, 0);
+
+    if (!panel || distance === 0) {
+      return;
+    }
+
+    const panelProgress = Math.min(Math.max(panel.offsetLeft / distance, 0), 1);
+    const targetScroll =
+      trigger.start + (trigger.end - trigger.start) * panelProgress;
+
+    window.scrollTo({ top: targetScroll, behavior: "auto" });
+    updateTriggerRef.current?.();
+    trigger.animation?.progress(panelProgress);
+  }
+
+  function skipFeaturedWork(event: MouseEvent<HTMLAnchorElement>) {
+    const target = document.getElementById("research");
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "auto", block: "start" });
+    target.focus({ preventScroll: true });
+  }
+
+  if (projects.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <span id="work" className={styles.anchor} aria-hidden="true" />
+      <a
+        className={styles.skipLink}
+        href="#research"
+        onClick={skipFeaturedWork}
+      >
+        Skip featured work
+      </a>
+      <section
+        id="featured-work"
+        ref={railRef}
+        className={styles.rail}
+        aria-labelledby="selected-work-heading"
+      >
+        <h2 id="selected-work-heading" className={styles.srOnly}>
+          Selected work
+        </h2>
+        <div ref={trackRef} className={styles.track}>
+          {projects.map((project, index) => (
+            <article
+              key={project.slug}
+              className={styles.panel}
+              data-project-panel
+            >
+              <Link
+                href={`/projects/${project.slug}`}
+                className={styles.panelLink}
+                aria-label={`View ${normalizeDashes(project.title)}`}
+                onFocus={() => scrollFocusedProjectIntoView(index)}
+              >
+                <figure className={styles.media}>
+                  <Image
+                    className={`${styles.image} ${
+                      project.cover.fit === "contain" ? styles.imageContain : ""
+                    }`}
+                    data-project-image
+                    src={project.cover.src}
+                    alt={normalizeDashes(project.cover.alt)}
+                    width={project.cover.width}
+                    height={project.cover.height}
+                    sizes={
+                      index % 3 === 2
+                        ? "(max-width: 767px) 100vw, 92vw"
+                        : "(max-width: 767px) 100vw, 62vw"
+                    }
+                  />
+                </figure>
+
+                <div className={styles.copy} data-project-copy>
+                  <div className={styles.meta}>
+                    <span>{normalizeDashes(project.type)}</span>
+                    <span>{normalizeDashes(project.year)}</span>
+                  </div>
+                  <h3 className={styles.title}>
+                    {normalizeDashes(project.title)}
+                  </h3>
+                  <p className={styles.summary}>
+                    {normalizeDashes(project.summary)}
+                  </p>
+                  <span className={styles.action} aria-hidden="true">
+                    <span>View project</span>
+                    <span className={styles.arrow}>↗</span>
+                  </span>
+                </div>
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

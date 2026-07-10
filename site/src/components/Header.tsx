@@ -1,30 +1,21 @@
 import Link from "next/link";
-
-const navigation = [
-  { label: "Projects", href: "/projects" },
-  { label: "Research", href: "/research" },
-  { label: "Notes", href: "/notes" },
-  { label: "Resume", href: "/resume" },
-];
+import { NavLinks } from "@/components/NavLinks";
 
 export function Header() {
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <Link href="/" className="site-wordmark" aria-label="Giacomo Cappelletto home">
-          Giacomo Cappelletto
+        <Link
+          href="/"
+          className="site-wordmark"
+          aria-label="Giacomo Cappelletto home"
+        >
+          <span className="site-wordmark__full">Giacomo Cappelletto</span>
+          <span className="site-wordmark__short" aria-hidden="true">
+            GC
+          </span>
         </Link>
-        <nav aria-label="Primary navigation">
-          <ul className="site-nav">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="site-nav__link">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <NavLinks />
       </div>
     </header>
   );
