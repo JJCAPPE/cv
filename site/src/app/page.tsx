@@ -57,15 +57,6 @@ export default function Home() {
               sizes="(max-width: 767px) 100vw, 72vw"
             />
           </div>
-          <div className="home-hero__media-secondary">
-            <Image
-              src={deskinatorProject.cover.src}
-              alt=""
-              fill
-              loading="eager"
-              sizes="(max-width: 767px) 44vw, 25vw"
-            />
-          </div>
         </div>
 
         <div className="home-hero__content">
