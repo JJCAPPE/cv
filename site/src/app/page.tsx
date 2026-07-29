@@ -13,8 +13,13 @@ export default function Home() {
     .map((project) => {
       const selectedCover =
         project.slug === "rowing-biomechanics"
-          ? (project.gallery?.find((media) => media.kind !== "video") ??
-            project.cover)
+          ? {
+              src: "/media/projects/rowing-biomechanics/full-tracking.png",
+              alt: "Side-view rowing frame with full-body pose landmarks, face and hand tracking, ergometer detection, joint angles, and a 3D pose inset.",
+              width: 2726,
+              height: 1676,
+              fit: "cover" as const,
+            }
           : project.cover;
 
       return {

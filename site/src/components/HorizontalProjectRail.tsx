@@ -279,6 +279,10 @@ export function HorizontalProjectRail({
                   <Image
                     className={`${styles.image} ${
                       project.cover.fit === "contain" ? styles.imageContain : ""
+                    } ${
+                      project.slug === "rowing-biomechanics"
+                        ? styles.rowingImage
+                        : ""
                     }`}
                     data-project-image
                     src={project.cover.src}
