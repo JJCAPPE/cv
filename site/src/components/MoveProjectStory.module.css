@@ -1,0 +1,1088 @@
+.story {
+  --move-accent: var(--accent-ui, #e6d12a);
+  --move-bg: var(--bg, #0b0b0a);
+  --move-panel: var(--panel, #161614);
+  --move-fg: var(--fg, #f1efe8);
+  --move-muted: var(--muted, #aaa79f);
+  --move-line: var(--line, rgb(241 239 232 / 18%));
+
+  border-top: 1px solid var(--move-line);
+  color: var(--move-fg);
+}
+
+.section {
+  padding: clamp(5rem, 9vw, 9rem) clamp(1rem, 3vw, 3rem);
+}
+
+.section + .section {
+  border-top: 1px solid var(--move-line);
+}
+
+.sectionHeader {
+  display: grid;
+  max-width: 77rem;
+  gap: 1.5rem;
+}
+
+.sectionHeader .kicker {
+  margin-bottom: 1rem;
+}
+
+.kicker,
+.laneLabel,
+.architectureMap span,
+.architectureMap small,
+.sqlFlow,
+.auditSummary span,
+.auditSummary dd,
+.auditChart,
+.modelDecision span,
+.modelDecision em,
+.contractFlow span,
+.contractFlow li,
+.evidenceGrid dd {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--move-accent);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2,
+.requestHeader h2,
+.sqlHeader h2,
+.contractHeader h2,
+.evidenceHeader h2 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(4rem, 8vw, 8.5rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.84;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.sectionHeader > p:last-child,
+.requestHeader > p,
+.sqlHeader > p:last-child,
+.contractHeader > p {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--move-muted);
+  font-size: clamp(0.98rem, 1.25vw, 1.16rem);
+  line-height: 1.62;
+}
+
+.illustration {
+  margin: clamp(3rem, 7vw, 7rem) 0 0;
+}
+
+.illustrationImage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--move-line);
+  background: var(--move-panel);
+}
+
+.illustrationImage img {
+  object-fit: cover;
+}
+
+.illustration figcaption,
+.interfaceEvidence figcaption {
+  max-width: 60rem;
+  margin-top: 0.7rem;
+  color: var(--move-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.architectureMap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.25fr) minmax(0, 1.2fr);
+  margin-top: clamp(3rem, 6vw, 6rem);
+  border: 1px solid var(--move-line);
+  background: var(--move-bg);
+}
+
+.laneLabel {
+  display: block;
+  margin-bottom: 2rem;
+  color: var(--move-accent);
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.interfaceLane,
+.agentLane,
+.toolLane {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.8vw, 2.5rem);
+}
+
+.interfaceLane {
+  display: flex;
+  grid-row: 1 / 3;
+  flex-direction: column;
+  border-right: 1px solid var(--move-line);
+}
+
+.interfaceLane > i {
+  width: 1px;
+  height: 2rem;
+  margin-left: 1rem;
+  background: var(--move-line);
+}
+
+.archNode {
+  display: grid;
+  gap: 0.3rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--move-accent);
+}
+
+.archNode strong,
+.runtimeCore strong,
+.toolGroup strong,
+.platformRails strong {
+  font-size: clamp(0.86rem, 1.15vw, 1rem);
+  font-weight: 590;
+  line-height: 1.3;
+}
+
+.archNode span,
+.runtimeCore small,
+.toolGroup span,
+.platformRails span,
+.platformRails small {
+  color: var(--move-muted);
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+
+.servingBridge {
+  display: flex;
+  grid-row: 1 / 3;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 0.7rem;
+  border-right: 1px solid var(--move-line);
+  writing-mode: vertical-rl;
+}
+
+.servingBridge span {
+  color: var(--move-muted);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.servingBridge i {
+  width: 1px;
+  height: 2.5rem;
+  background: var(--move-accent);
+}
+
+.agentLane {
+  border-bottom: 1px solid var(--move-line);
+}
+
+.runtimeCore {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--move-line);
+}
+
+.runtimeCore > div {
+  display: grid;
+  min-height: 7.5rem;
+  align-content: space-between;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--move-panel);
+}
+
+.runtimeCore span {
+  color: var(--move-accent);
+  font-size: 0.6rem;
+}
+
+.runtimeCore small {
+  display: block;
+}
+
+.toolGroup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--move-line);
+}
+
+.toolGroup > div {
+  display: grid;
+  min-height: 6rem;
+  align-content: center;
+  gap: 0.45rem;
+  padding: 1rem;
+  background: var(--move-bg);
+}
+
+.responseLane {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.65rem, 2vw, 1.5rem);
+  padding: 1rem;
+  border-top: 1px solid var(--move-line);
+  background: var(--move-panel);
+}
+
+.responseLane span {
+  color: var(--move-muted);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+}
+
+.responseLane .responseContract {
+  color: var(--move-fg);
+  font-weight: 650;
+}
+
+.responseLane i {
+  width: clamp(1.5rem, 5vw, 5rem);
+  height: 1px;
+  background: var(--move-accent);
+}
+
+.platformRails {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 1fr 1fr minmax(18rem, 0.8fr);
+  border-top: 1px solid var(--move-line);
+}
+
+.platformRails > div {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.2rem;
+  border-right: 1px solid var(--move-line);
+}
+
+.platformRails p {
+  align-self: center;
+  margin: 0;
+  padding: 1.2rem;
+  color: var(--move-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.requestSection {
+  background: var(--move-panel);
+}
+
+.requestHeader,
+.contractHeader {
+  display: grid;
+  max-width: 76rem;
+  gap: 1.5rem;
+}
+
+.requestHeader h2,
+.contractHeader h2 {
+  max-width: 10ch;
+}
+
+.requestFlow {
+  display: grid;
+  margin: clamp(3.5rem, 7vw, 7rem) 0 0;
+  padding: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--move-line);
+  list-style: none;
+}
+
+.requestFlow li {
+  display: flex;
+  min-height: 18rem;
+  flex-direction: column;
+  padding: clamp(1.1rem, 2.2vw, 1.8rem);
+  background: var(--move-bg);
+}
+
+.requestFlow li > span {
+  color: var(--move-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+}
+
+.requestFlow h3 {
+  max-width: 10ch;
+  margin: auto 0 0.8rem;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 570;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.requestFlow p {
+  margin: 0;
+  color: var(--move-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.sqlHeader {
+  display: grid;
+  max-width: 76rem;
+  gap: 1.5rem;
+}
+
+.sqlHeader h2 {
+  max-width: 10ch;
+}
+
+.sqlFlow {
+  display: grid;
+  grid-template-columns:
+    minmax(7rem, 1fr) auto minmax(7rem, 1fr) auto minmax(7rem, 1fr) auto
+    minmax(7rem, 1fr) auto minmax(7rem, 1fr);
+  align-items: center;
+  gap: clamp(0.5rem, 1.2vw, 1rem);
+  margin-top: clamp(3.5rem, 7vw, 7rem);
+  padding: 1.2rem;
+  border: 1px solid var(--move-line);
+}
+
+.sqlFlow > div {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sqlFlow span {
+  font-size: 0.7rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.sqlFlow small {
+  color: var(--move-muted);
+  font-size: 0.56rem;
+  line-height: 1.4;
+}
+
+.sqlFlow i {
+  width: clamp(1rem, 3vw, 3rem);
+  height: 1px;
+  background: var(--move-accent);
+}
+
+.auditLayout {
+  display: grid;
+  grid-template-columns: minmax(19rem, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-top: clamp(3rem, 6vw, 6rem);
+  align-items: stretch;
+}
+
+.auditSummary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--move-line);
+}
+
+.auditBefore,
+.auditAfter {
+  display: flex;
+  min-height: 14rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.auditBefore {
+  background: var(--move-panel);
+}
+
+.auditAfter {
+  background: var(--move-accent);
+  color: #11110f;
+}
+
+.auditBefore > span,
+.auditAfter > span {
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auditBefore strong,
+.auditAfter strong {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 590;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+}
+
+.auditBefore p,
+.auditAfter p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.auditBefore p {
+  color: var(--move-muted);
+}
+
+.auditSummary dl {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border-top: 1px solid var(--move-line);
+}
+
+.auditSummary dl > div {
+  padding: 1rem;
+  border-left: 1px solid var(--move-line);
+}
+
+.auditSummary dl > div:first-child {
+  border-left: 0;
+}
+
+.auditSummary dt {
+  font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+  font-weight: 620;
+}
+
+.auditSummary dd {
+  margin: 0.35rem 0 0;
+  color: var(--move-muted);
+  font-size: 0.53rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.auditChart {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border: 1px solid var(--move-line);
+}
+
+.auditChart figcaption {
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.auditScale {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 0.6rem 7.5rem;
+  color: var(--move-muted);
+  font-size: 0.52rem;
+}
+
+.auditChart ol {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.auditChart li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(4rem, 1fr) 7rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auditLabel {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.auditLabel span {
+  color: var(--move-muted);
+  font-size: 0.55rem;
+}
+
+.auditLabel strong {
+  font-size: 0.76rem;
+  font-weight: 620;
+}
+
+.auditTrack {
+  height: 0.55rem;
+}
+
+.auditBar {
+  display: block;
+  height: 100%;
+  background: var(--move-accent);
+}
+
+.auditBar100 {
+  width: 100%;
+  background: var(--move-muted);
+}
+
+.auditBar64 {
+  width: 64.4%;
+}
+
+.auditBar38 {
+  width: 37.8%;
+}
+
+.auditBar27 {
+  width: 27.2%;
+}
+
+.auditBar21 {
+  width: 20.8%;
+}
+
+.auditChart small {
+  color: var(--move-muted);
+  font-size: 0.6rem;
+  line-height: 1.3;
+}
+
+.modelDecision {
+  display: grid;
+  grid-template-columns: 1fr minmax(17rem, 0.75fr) 1fr;
+  margin-top: clamp(2rem, 4vw, 4rem);
+  border: 1px solid var(--move-line);
+}
+
+.modelDecision > div,
+.modelDecision > p {
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.modelDecision > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem 1rem;
+}
+
+.modelDecision > div + p,
+.modelDecision > p + div {
+  border-left: 1px solid var(--move-line);
+}
+
+.modelDecision span {
+  align-self: center;
+  color: var(--move-muted);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+}
+
+.modelDecision strong {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  align-self: center;
+  font-size: clamp(2rem, 3.5vw, 3.6rem);
+  font-weight: 590;
+  letter-spacing: -0.05em;
+}
+
+.modelDecision p {
+  margin: 0;
+  color: var(--move-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.modelDecision em {
+  grid-column: 1 / -1;
+  color: var(--move-accent);
+  font-size: 0.56rem;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.modelDecision > p {
+  align-self: stretch;
+  color: var(--move-fg);
+  font-size: 0.86rem;
+}
+
+.auditNote {
+  max-width: 50rem;
+  margin: 1rem 0 0 auto;
+  color: var(--move-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.contractSection {
+  background: var(--move-panel);
+}
+
+.contractFlow {
+  display: grid;
+  grid-template-columns: 1fr auto 1.5fr auto 1fr auto 1.25fr;
+  align-items: center;
+  gap: clamp(0.7rem, 1.8vw, 1.5rem);
+  margin-top: clamp(3.5rem, 7vw, 7rem);
+}
+
+.contractFlow > div {
+  display: grid;
+  min-height: 10rem;
+  align-content: center;
+  gap: 0.5rem;
+  padding: 1.2rem;
+  border: 1px solid var(--move-line);
+  background: var(--move-bg);
+}
+
+.contractFlow > i {
+  width: clamp(1rem, 3vw, 3rem);
+  height: 1px;
+  background: var(--move-accent);
+}
+
+.contractFlow span {
+  color: var(--move-muted);
+  font-size: 0.56rem;
+  text-transform: uppercase;
+}
+
+.contractFlow strong {
+  font-size: clamp(0.88rem, 1.2vw, 1.1rem);
+  font-weight: 590;
+  overflow-wrap: anywhere;
+}
+
+.contractFlow .contractPacket {
+  min-height: 16rem;
+  border-color: var(--move-accent);
+}
+
+.contractPacket ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contractPacket li {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--move-line);
+  color: var(--move-muted);
+  font-size: 0.6rem;
+}
+
+.interfaceEvidence {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.6fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-top: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.interfaceEvidence figure {
+  margin: 0;
+}
+
+.interfaceEvidence figure > div {
+  position: relative;
+  aspect-ratio: 954 / 686;
+  overflow: hidden;
+  border: 1px solid var(--move-line);
+  background: #f6f6f5;
+}
+
+.interfaceEvidence img {
+  object-fit: contain;
+}
+
+.contractCopy h3,
+.boundaryStatement h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+  font-weight: 560;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.contractCopy p {
+  margin: 1.5rem 0 0;
+  color: var(--move-muted);
+  line-height: 1.62;
+}
+
+.contractCopy ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.5rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--move-line);
+  list-style: none;
+}
+
+.contractCopy li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: var(--move-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.contractCopy li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  background: var(--move-accent);
+  content: "";
+}
+
+.evidenceHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.evidenceHeader h2 {
+  max-width: 9ch;
+  text-align: right;
+}
+
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  margin: clamp(3.5rem, 7vw, 7rem) 0 0;
+  border-top: 1px solid var(--move-line);
+  border-left: 1px solid var(--move-line);
+}
+
+.evidenceGrid > div {
+  display: flex;
+  min-height: 15rem;
+  grid-column: span 4;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  border-right: 1px solid var(--move-line);
+  border-bottom: 1px solid var(--move-line);
+}
+
+.evidenceGrid > div:nth-child(4),
+.evidenceGrid > div:nth-child(5) {
+  grid-column: span 3;
+}
+
+.evidenceGrid > .testEvidence {
+  grid-column: span 6;
+  background: var(--move-accent);
+  color: #11110f;
+}
+
+.evidenceGrid dt {
+  margin: auto 0;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 570;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+}
+
+.evidenceGrid dd {
+  margin: 0;
+  font-size: 0.61rem;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.evidenceGrid dd + dd {
+  margin-top: 0.35rem;
+  color: var(--move-muted);
+  font-size: 0.6rem;
+  text-transform: none;
+}
+
+.evidenceGrid .testEvidence dd + dd {
+  color: rgb(17 17 15 / 65%);
+}
+
+.boundaryStatement {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(3rem, 10vw, 10rem);
+  margin-top: clamp(4rem, 8vw, 8rem);
+  padding-top: clamp(2rem, 4vw, 4rem);
+  border-top: 1px solid var(--move-line);
+}
+
+.boundaryStatement > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--move-line);
+}
+
+.boundaryStatement p {
+  margin: 0;
+  padding: 1.3rem;
+  background: var(--move-bg);
+  color: var(--move-muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1020px) {
+  .architectureMap {
+    grid-template-columns: minmax(0, 0.9fr) minmax(5rem, 0.2fr) minmax(
+        0,
+        1.25fr
+      );
+  }
+
+  .requestFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .requestFlow li {
+    min-height: 15rem;
+  }
+
+  .sqlFlow {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .sqlFlow i {
+    display: none;
+  }
+
+  .auditLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .contractFlow {
+    grid-template-columns: 1fr 1.35fr 1fr 1.25fr;
+  }
+
+  .contractFlow > i {
+    display: none;
+  }
+
+  .boundaryStatement {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: 5rem;
+  }
+
+  .sectionHeader,
+  .requestHeader,
+  .sqlHeader,
+  .contractHeader,
+  .interfaceEvidence {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .sectionHeader h2,
+  .requestHeader h2,
+  .sqlHeader h2,
+  .contractHeader h2,
+  .evidenceHeader h2 {
+    font-size: clamp(3.8rem, 19vw, 6rem);
+  }
+
+  .illustration {
+    margin-top: 3rem;
+  }
+
+  .illustrationImage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .architectureMap {
+    grid-template-columns: 1fr;
+  }
+
+  .interfaceLane,
+  .agentLane,
+  .toolLane {
+    grid-column: 1;
+    grid-row: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--move-line);
+  }
+
+  .servingBridge {
+    grid-column: 1;
+    grid-row: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--move-line);
+    writing-mode: horizontal-tb;
+  }
+
+  .servingBridge i {
+    width: 2.5rem;
+    height: 1px;
+  }
+
+  .runtimeCore,
+  .toolGroup {
+    grid-template-columns: 1fr;
+  }
+
+  .responseLane {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .platformRails {
+    grid-template-columns: 1fr;
+  }
+
+  .platformRails > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--move-line);
+  }
+
+  .requestFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .requestFlow li {
+    min-height: 14rem;
+  }
+
+  .sqlFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .sqlFlow > div {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--move-line);
+  }
+
+  .sqlFlow > div:last-child {
+    border-bottom: 0;
+  }
+
+  .auditSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .auditBefore,
+  .auditAfter {
+    min-height: 12rem;
+  }
+
+  .auditSummary dl,
+  .auditAfter {
+    grid-column: 1;
+  }
+
+  .auditSummary dl {
+    grid-template-columns: 1fr;
+  }
+
+  .auditSummary dl > div {
+    border-top: 1px solid var(--move-line);
+    border-left: 0;
+  }
+
+  .auditScale {
+    margin-left: 0;
+  }
+
+  .auditChart li {
+    grid-template-columns: 5rem minmax(3rem, 1fr);
+    gap: 0.8rem;
+  }
+
+  .auditChart li > small {
+    grid-column: 1 / -1;
+    padding-left: 5.8rem;
+  }
+
+  .modelDecision {
+    grid-template-columns: 1fr;
+  }
+
+  .modelDecision > div + p,
+  .modelDecision > p + div {
+    border-top: 1px solid var(--move-line);
+    border-left: 0;
+  }
+
+  .auditNote {
+    text-align: left;
+  }
+
+  .contractFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .contractFlow > div,
+  .contractFlow .contractPacket {
+    min-height: 9rem;
+  }
+
+  .interfaceEvidence {
+    margin-top: 3rem;
+  }
+
+  .evidenceHeader {
+    display: grid;
+    align-items: start;
+  }
+
+  .evidenceHeader h2 {
+    text-align: left;
+  }
+
+  .evidenceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .evidenceGrid > div,
+  .evidenceGrid > div:nth-child(4),
+  .evidenceGrid > div:nth-child(5),
+  .evidenceGrid > .testEvidence {
+    min-height: 13rem;
+    grid-column: 1;
+  }
+
+  .boundaryStatement {
+    grid-template-columns: 1fr;
+  }
+
+  .boundaryStatement > div {
+    grid-template-columns: 1fr;
+  }
+}

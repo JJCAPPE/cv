@@ -44,7 +44,7 @@ export default function Home() {
   const researchMedia = rowingProject.gallery?.[0] ?? rowingProject.cover;
 
   return (
-    <main id="main-content" className="home-page">
+    <main id="main-content" className="home-page" tabIndex={-1}>
       <section id="intro" className="home-hero">
         <div className="home-hero__media" aria-hidden="true">
           <div className="home-hero__media-primary">
