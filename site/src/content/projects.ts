@@ -18,6 +18,7 @@ export type ProjectMedia = {
   height: number;
   caption?: string;
   fit?: "cover" | "contain";
+  railFit?: "cover" | "contain";
 };
 
 export type ProjectMetric = {
@@ -522,6 +523,7 @@ export const projects: Project[] = [
       alt: "Exploded inventory execution stack connecting staff SKU input, React and Tauri, Rust orchestration, Shopify reads and adjustments, Firestore logging, and refresh.",
       width: 2400,
       height: 1350,
+      railFit: "contain",
       caption:
         "Generated from the current execution path at source commit 3b2169e6; solid paths are default and dashed paths are conditional.",
     },
