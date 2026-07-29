@@ -962,6 +962,48 @@ a {
     font-size: clamp(1rem, 1.35vw, 1.2rem);
 }
 
+.project-page__metrics {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 1px;
+    background: rgb(17 17 15 / 28%);
+    color: var(--accent-ink);
+}
+
+.project-page__metrics>div {
+    min-height: clamp(13rem, 23vw, 22rem);
+    padding: clamp(1.25rem, 3vw, 3rem);
+    background: var(--accent);
+}
+
+.project-page__metrics dt {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 8.5rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 0.82;
+    text-transform: uppercase;
+}
+
+.project-page__metrics dd {
+    margin: clamp(1.5rem, 4vw, 4rem) 0 0;
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: clamp(0.66rem, 0.82vw, 0.78rem);
+    font-weight: 620;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.project-page__metrics dd+dd {
+    margin-top: 0.35rem;
+    color: rgb(17 17 15 / 66%);
+    font-weight: 520;
+}
+
 .project-page__chapters {
     width: min(100%, 78rem);
     margin: 0 auto;
@@ -1732,6 +1774,15 @@ a {
     .research-outlook,
     .resume-section {
         grid-template-columns: 1fr;
+    }
+    .project-page__metrics {
+        grid-template-columns: 1fr;
+    }
+    .project-page__metrics>div {
+        min-height: 12rem;
+    }
+    .project-page__metrics dt {
+        font-size: clamp(4rem, 19vw, 6rem);
     }
     .project-inline-media__image {
         aspect-ratio: 4 / 3;
