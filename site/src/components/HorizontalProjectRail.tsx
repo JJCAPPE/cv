@@ -18,6 +18,7 @@ export type HorizontalProjectRailProject = {
     width: number;
     height: number;
     fit?: "cover" | "contain";
+    railFit?: "cover" | "contain";
   };
 };
 
@@ -123,19 +124,23 @@ export function HorizontalProjectRail({
             }
 
             if (image) {
-              const imageStart = Math.max((index - 1) * panelInterval, 0);
-              const imageEnd = Math.min((index + 1) * panelInterval, 1);
+              if (image.dataset.projectImageMotion === "static") {
+                gsap.set(image, { xPercent: 0, scale: 1 });
+              } else {
+                const imageStart = Math.max((index - 1) * panelInterval, 0);
+                const imageEnd = Math.min((index + 1) * panelInterval, 1);
 
-              timeline.fromTo(
-                image,
-                { xPercent: -2.5, scale: 1.055 },
-                {
-                  xPercent: 2.5,
-                  scale: 1.055,
-                  duration: Math.max(imageEnd - imageStart, 0.01),
-                },
-                imageStart,
-              );
+                timeline.fromTo(
+                  image,
+                  { xPercent: -2.5, scale: 1.055 },
+                  {
+                    xPercent: 2.5,
+                    scale: 1.055,
+                    duration: Math.max(imageEnd - imageStart, 0.01),
+                  },
+                  imageStart,
+                );
+              }
             }
           });
 
@@ -278,13 +283,22 @@ export function HorizontalProjectRail({
                 <figure className={styles.media}>
                   <Image
                     className={`${styles.image} ${
-                      project.cover.fit === "contain" ? styles.imageContain : ""
+                      project.cover.railFit === "contain"
+                        ? styles.imageRailContain
+                        : project.cover.fit === "contain"
+                          ? styles.imageContain
+                          : ""
                     } ${
                       project.slug === "rowing-biomechanics"
                         ? styles.rowingImage
                         : ""
                     }`}
                     data-project-image
+                    data-project-image-motion={
+                      project.cover.railFit === "contain"
+                        ? "static"
+                        : undefined
+                    }
                     src={project.cover.src}
                     alt={normalizeDashes(project.cover.alt)}
                     width={project.cover.width}

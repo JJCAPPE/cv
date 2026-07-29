@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "evidenceStatus": "workflow-only",
+  "approvedForPublication": false,
+  "task": {
+    "name": "Decrement one available unit for a known SKU at a chosen location",
+    "startCondition": "Each application is open and authenticated at its normal inventory entry screen.",
+    "inputCondition": "Use a known SKU at a chosen location with available quantity greater than one, so the conditional draft branch is not triggered.",
+    "endCondition": "A persisted success or confirmation state is visible."
+  },
+  "workflowSources": {
+    "customInventoryApp": {
+      "repository": "inventario-cappellettoshop",
+      "commit": "3b2169e6",
+      "paths": [
+        "src/components/SearchBar.tsx::searchProducts",
+        "src/components/HomePage.tsx::handleSearchSelect",
+        "src/components/HomePage.tsx::handleDecreaseInventory",
+        "src-tauri/src/inventory/mod.rs::decrease_inventory_with_logging"
+      ]
+    },
+    "shopifyAdmin": {
+      "url": "https://help.shopify.com/en/manual/products/inventory/adjusting-inventory/adjusting-inventory-quantities",
+      "section": "Remove inventory / Inventory page / Desktop",
+      "accessed": "2026-07-29"
+    }
+  },
+  "measurementProtocol": {
+    "mutationBoundary": "Only a disposable or explicitly authorized test product may be used.",
+    "warmUpTrialsPerWorkflow": 1,
+    "minimumRecordedTrialsPerWorkflow": 5,
+    "trialOrder": "Alternate workflows after warm-up.",
+    "reporting": "Median and observed range, labeled as a single-operator workflow sample.",
+    "stockRestoration": "Restore the test item between trials through an authorized workflow."
+  },
+  "environment": {
+    "operator": null,
+    "hardware": null,
+    "network": null,
+    "measurementDate": null
+  },
+  "rawSamplesSeconds": {
+    "customInventoryApp": [],
+    "shopifyAdmin": []
+  },
+  "notes": [
+    "No live Shopify inventory mutation was authorized for this artifact.",
+    "Empty or unapproved samples must not produce elapsed-time, percentage-reduction, or faster-than claims."
+  ]
+}

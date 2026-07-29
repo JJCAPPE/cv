@@ -1,0 +1,4 @@
+interface:
+  display_name: "Craft Technical Covers"
+  short_description: "Build truthful CAD-style technical project covers"
+  default_prompt: "Use $craft-technical-covers to create source-grounded exploded-system cover options and companion diagrams for this software, ML, robotics, or engineering project."

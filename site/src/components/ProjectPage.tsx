@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
+import { InventoryCaseStudy } from "@/components/InventoryCaseStudy";
 import { Layout } from "@/components/Layout";
 import { MoveProjectStory } from "@/components/MoveProjectStory";
 import { RowingCaseStudy } from "@/components/RowingCaseStudy";
@@ -11,6 +12,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const isDeskinator = project.slug === "deskinator";
+  const isInventory = project.slug === "inventory-system";
   const isMove = project.slug === "move";
   const isRowing = project.slug === "rowing-biomechanics";
 
@@ -104,7 +106,7 @@ export function ProjectPage({ project }: { project: Project }) {
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
             const media =
-              isDeskinator || isMove || isRowing
+              isDeskinator || isInventory || isMove || isRowing
                 ? undefined
                 : project.gallery?.[index];
 
@@ -155,6 +157,8 @@ export function ProjectPage({ project }: { project: Project }) {
           <MoveProjectStory />
         ) : isDeskinator ? (
           <DeskinatorCaseStudy />
+        ) : isInventory ? (
+          <InventoryCaseStudy />
         ) : project.diagram ? (
           <section className="project-system">
             <h2>System</h2>

@@ -52,6 +52,37 @@
   font-weight: 580;
 }
 
+.systemFigure {
+  margin: clamp(3rem, 7vw, 7rem) 0 0;
+}
+
+.systemFigureViewport {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0c100d;
+}
+
+.systemFigureViewport:focus-visible {
+  outline: 2px solid var(--accent-ui);
+  outline-offset: 3px;
+}
+
+.systemFigureViewport img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.systemFigure figcaption {
+  max-width: 64rem;
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
 .architecture {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -634,6 +665,22 @@
     width: 44rem;
     max-width: none;
     height: auto;
+  }
+
+  .systemFigureViewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-color: var(--accent-ui) var(--panel);
+    scrollbar-width: thin;
+  }
+
+  .systemFigureViewport img {
+    width: 64rem;
+    max-width: none;
+  }
+
+  .softwareSystemFigure .systemFigureViewport img {
+    margin-left: -14rem;
   }
 
   .mobileHint {
