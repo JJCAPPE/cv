@@ -374,12 +374,12 @@ export const projects: Project[] = [
     role: "Sole designer and developer",
     featured: true,
     cover: {
-      src: "/media/projects/deskinator/prototype.webp",
-      alt: "The assembled Deskinator robot on a tabletop beside its charging and test equipment.",
-      width: 1800,
-      height: 1013,
+      src: "/media/projects/deskinator/deskinator-software-exploded.svg",
+      alt: "Exploded Deskinator software stack showing sensing, signal stabilization, controller states, coverage planning, actuation, evidence, and the separate stepper pulse timing boundary.",
+      width: 2400,
+      height: 1350,
       caption:
-        "The assembled prototype used for sensing, control, and coverage testing.",
+        "The supported runtime as one inspectable stack: a synchronous 50 Hz supervisory loop above the StepperDrive hardware timing boundary.",
     },
     gallery: [
       {

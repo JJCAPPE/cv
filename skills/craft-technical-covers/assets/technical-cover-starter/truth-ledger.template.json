@@ -1,0 +1,32 @@
+{
+  "project": "REPLACE WITH PROJECT NAME",
+  "authority_order": [
+    "current executable code and configuration",
+    "tests and reproducible runtime artifacts",
+    "versioned data, model, and evaluation artifacts",
+    "current documentation",
+    "historical documentation"
+  ],
+  "facts": [
+    {
+      "id": "replace-with-stable-id",
+      "display": "REPLACE WITH DISPLAY LABEL",
+      "claim": "REPLACE WITH THE EXACT CLAIM MADE BY THE VISUAL",
+      "source": "path/to/source.ext: symbol, section, key, or artifact",
+      "scope": "default",
+      "surfaces": [
+        "master",
+        "cover"
+      ],
+      "confidence": "verified",
+      "notes": ""
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "replace-with-excluded-concept",
+      "reason": "Historical, proposed, unsupported, or no longer in the current path",
+      "source": "path/to/context.ext"
+    }
+  ]
+}

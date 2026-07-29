@@ -148,9 +148,35 @@ export function DeskinatorCaseStudy() {
             The final report captures several earlier design directions. This
             diagram follows the code that actually runs on the{" "}
             <strong>new-alg</strong> branch: a compact control loop with explicit
-            data ownership and no hidden concurrency.
+            data ownership, plus a separate StepperDrive pulse thread confined
+            to the hardware timing boundary.
           </p>
         </header>
+
+        <figure
+          className={`${styles.systemFigure} ${styles.softwareSystemFigure}`}
+        >
+          <div
+            className={styles.systemFigureViewport}
+            aria-label="Scrollable Deskinator software architecture diagram"
+            role="region"
+            tabIndex={0}
+          >
+            <Image
+              src="/media/projects/deskinator/deskinator-software-exploded.svg"
+              alt="Exploded software stack showing three APDS9960 inputs and wheel step counts feeding filtering, odometry, four controller states, rectangle fitting, coverage planning, StepperDrive, vacuum PWM, mapping, and telemetry."
+              width={2400}
+              height={1350}
+              sizes="(max-width: 560px) 64rem, (max-width: 767px) 100vw, 94vw"
+              unoptimized
+            />
+          </div>
+          <figcaption>
+            Solid paths show the supported runtime. Dashed paths isolate the
+            optional IMU branch and wheel-step feedback; the pulse thread sits
+            below the synchronous 50 Hz supervisory loop.
+          </figcaption>
+        </figure>
 
         <ol
           className={styles.architecture}
@@ -168,8 +194,9 @@ export function DeskinatorCaseStudy() {
 
         <p className={styles.diagramNote}>
           Sensor events and step counts meet in the same 20 ms cycle. That
-          makes the route from physical observation to motor command and log
-          row straightforward to replay.
+          makes the route from physical observation to command and log row
+          straightforward to replay, while low-level STEP pulse generation
+          remains behind the StepperDrive boundary.
         </p>
       </section>
 
@@ -232,6 +259,29 @@ export function DeskinatorCaseStudy() {
             constraint that a simulator could not reveal.
           </p>
         </header>
+
+        <figure className={styles.systemFigure}>
+          <div
+            className={styles.systemFigureViewport}
+            aria-label="Scrollable Deskinator hardware system diagram"
+            role="region"
+            tabIndex={0}
+          >
+            <Image
+              src="/media/projects/deskinator/deskinator-cover-a-exploded.svg"
+              alt="Exploded CAD-style Deskinator system showing battery packs, Raspberry Pi, A4988 drivers, gesture sensor, enclosure, removable tray, NEMA17 wheel axis, paired edge sensors, fan, and vacuum scoop."
+              width={2400}
+              height={1350}
+              sizes="(max-width: 560px) 64rem, (max-width: 767px) 100vw, 94vw"
+              unoptimized
+            />
+          </div>
+          <figcaption>
+            CAD-derived geometry is separated from schematic electronic
+            volumes. The view explains documented interfaces and service axes
+            without implying unknown internal mounts.
+          </figcaption>
+        </figure>
 
         <div className={styles.decisions}>
           <article className={styles.decision}>
