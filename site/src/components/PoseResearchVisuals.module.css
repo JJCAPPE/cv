@@ -1,0 +1,882 @@
+.visual {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--surface) 74%, transparent),
+      color-mix(in srgb, var(--panel) 90%, transparent)
+    ),
+    var(--panel);
+}
+
+.visualHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1rem, 2.4vw, 2rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.visualHeader h2,
+.visualHeader h3 {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 4.8rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.85;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.visualKicker,
+.demoFlag,
+.controlLabel,
+.playback,
+.frameTimeline,
+.rankingList,
+.edgeLegend,
+.stageSelector,
+.matrixColumnLabel,
+.matrixRowLabel,
+.matrixCorner,
+.matrixEquation,
+.cellReadout span,
+.cellReadout output,
+.cellReadout small,
+.matrixLegend,
+.keyboardHint,
+.visualNote {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.visualKicker,
+.demoFlag,
+.controlLabel {
+  margin: 0;
+  font-size: 0.64rem;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.visualKicker {
+  color: var(--accent-ui);
+}
+
+.demoFlag {
+  max-width: 13rem;
+  padding-top: 0.25rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+.poseCanvas,
+.embeddingCanvas {
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+.poseCanvas svg,
+.embeddingCanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.poseDivider,
+.floorLine,
+.embeddingAxis,
+.embeddingGrid {
+  fill: none;
+  stroke: var(--line);
+  vector-effect: non-scaling-stroke;
+}
+
+.poseDivider {
+  stroke-dasharray: 3 7;
+}
+
+.floorLine {
+  stroke-width: 1.2;
+}
+
+.svgLabel,
+.dropoutLabel {
+  fill: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+}
+
+.dropoutLabel {
+  fill: var(--accent-ui);
+  font-size: 10px;
+}
+
+.skeleton line,
+.skeleton circle {
+  fill: var(--bg);
+  stroke: var(--fg);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 2.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.skeleton[data-variant="observed"] line,
+.skeleton[data-variant="observed"] circle {
+  stroke: var(--accent-ui);
+}
+
+.skeleton[data-variant="trail"] line,
+.skeleton[data-variant="trail"] circle {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.skeleton[data-variant="dropped"] {
+  opacity: 0.14;
+}
+
+.skeleton[data-variant="dropped"] line,
+.skeleton[data-variant="dropped"] circle {
+  fill: none;
+  stroke: var(--accent-ui);
+  stroke-dasharray: 4 6;
+}
+
+.missingJoint line {
+  stroke: var(--accent-ui);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(11rem, 0.65fr);
+  gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1rem, 2.4vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+
+.controlGroup {
+  display: grid;
+  min-width: 0;
+  gap: 0.7rem;
+}
+
+.controlLabel {
+  color: var(--muted);
+}
+
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 1px;
+  background: var(--line);
+}
+
+.segmented button,
+.playback button,
+.frameTimeline button,
+.stageSelector button {
+  min-height: 2.75rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.segmented button {
+  flex: 1 1 auto;
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+}
+
+.segmented button[aria-pressed="true"],
+.stageSelector button[aria-pressed="true"],
+.frameTimeline button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.segmented button:hover,
+.segmented button:focus-visible,
+.playback button:hover,
+.playback button:focus-visible,
+.frameTimeline button:hover,
+.frameTimeline button:focus-visible,
+.stageSelector button:hover,
+.stageSelector button:focus-visible {
+  color: var(--fg);
+}
+
+.segmented button:active,
+.playback button:active,
+.frameTimeline button:active,
+.stageSelector button:active {
+  transform: translateY(1px);
+}
+
+.playback button:disabled {
+  color: var(--subtle);
+  cursor: default;
+}
+
+.rangeControl {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.rangeControl > span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rangeControl output {
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+}
+
+.rangeControl input {
+  width: 100%;
+  min-height: 2rem;
+  margin: 0;
+  accent-color: var(--accent-ui);
+  cursor: pointer;
+}
+
+.playback {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(7rem, auto) 2.75rem 1fr;
+  align-items: center;
+  gap: 1px;
+  background: var(--line);
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+
+.playback button {
+  padding: 0.55rem 0.75rem;
+}
+
+.playback span {
+  height: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--bg);
+  text-align: right;
+}
+
+.frameTimeline {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  font-size: 0.62rem;
+}
+
+.frameTimeline button {
+  position: relative;
+  padding: 0.4rem;
+}
+
+.frameTimeline button[data-dropped="true"]::after {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  left: 20%;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: rotate(-24deg);
+}
+
+.visualNote {
+  margin: 0;
+  padding: 0.95rem clamp(1rem, 2.4vw, 2rem);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.65rem;
+  line-height: 1.55;
+}
+
+.neighborhoodControls {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.75fr) minmax(13rem, 1fr) minmax(17rem, 1.25fr);
+  gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1rem, 2.4vw, 2rem);
+}
+
+.neighborhoodBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(15rem, 0.45fr);
+  border-top: 1px solid var(--line);
+}
+
+.embeddingCanvas {
+  min-width: 0;
+  border-right: 1px solid var(--line);
+}
+
+.embeddingGrid {
+  opacity: 0.34;
+  stroke-width: 0.8;
+  stroke-dasharray: 2 8;
+}
+
+.rankEdge,
+.contextEdge {
+  fill: none;
+  stroke: var(--accent-ui);
+  stroke-linecap: square;
+  vector-effect: non-scaling-stroke;
+}
+
+.rankEdge {
+  stroke-width: 2;
+  transition: opacity 220ms ease;
+}
+
+.rankEdge[data-rank="2"] {
+  opacity: 0.72;
+}
+
+.rankEdge[data-rank="3"] {
+  opacity: 0.48;
+}
+
+.rankEdge[data-rank="4"] {
+  opacity: 0.28;
+}
+
+.contextEdge {
+  opacity: 0.48;
+  stroke-width: 1.25;
+}
+
+.contextEdge[data-kind="reciprocal"] {
+  stroke-dasharray: 7 4;
+}
+
+.contextEdge[data-kind="shared"] {
+  opacity: 0.28;
+  stroke-dasharray: 2 5;
+}
+
+.embeddingPoint circle:not(.queryHalo),
+.embeddingPoint rect,
+.embeddingPoint polygon {
+  fill: var(--panel);
+  stroke: var(--fg);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.embeddingPoint[data-label="squat"] circle:not(.queryHalo),
+.embeddingPoint[data-label="squat"] rect,
+.embeddingPoint[data-label="squat"] polygon {
+  fill: var(--accent);
+  stroke: var(--accent-ink);
+}
+
+.embeddingPoint[data-label="turn"] circle:not(.queryHalo),
+.embeddingPoint[data-label="turn"] rect,
+.embeddingPoint[data-label="turn"] polygon {
+  fill: var(--muted);
+  stroke: var(--bg);
+}
+
+.embeddingPoint[data-ranked="true"] circle:not(.queryHalo),
+.embeddingPoint[data-ranked="true"] rect,
+.embeddingPoint[data-ranked="true"] polygon {
+  stroke-width: 3;
+}
+
+.embeddingPoint text {
+  fill: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.queryHalo {
+  fill: none;
+  stroke: var(--accent-ui);
+  stroke-dasharray: 2 4;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  animation: query-halo 2.6s ease-in-out infinite;
+}
+
+.rankingPanel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(1rem, 2.4vw, 2rem);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.1rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+}
+
+.legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.shapeMark {
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 1px solid var(--fg);
+}
+
+.shapeMark[data-shape="circle"] {
+  border-radius: 50%;
+}
+
+.shapeMark[data-shape="square"] {
+  background: var(--accent);
+  border-color: var(--accent-ui);
+}
+
+.shapeMark[data-shape="triangle"] {
+  width: 0;
+  height: 0;
+  border: 0;
+  border-right: 0.38rem solid transparent;
+  border-bottom: 0.7rem solid var(--muted);
+  border-left: 0.38rem solid transparent;
+}
+
+.rankingStatus {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.rankingStatus strong {
+  color: var(--fg);
+}
+
+.rankingList {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.rankingList li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 3.2rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.66rem;
+}
+
+.rankingList li > span:first-child {
+  color: var(--accent-ui);
+}
+
+.rankingList li > span:nth-child(2) {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.rankingList strong {
+  color: var(--fg);
+}
+
+.rankingList small {
+  overflow: hidden;
+  color: var(--muted);
+  font: inherit;
+  text-overflow: ellipsis;
+}
+
+.rankingList output {
+  color: var(--muted);
+}
+
+.edgeLegend {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 2rem;
+  color: var(--muted);
+  font-size: 0.6rem;
+}
+
+.edgeLegend span {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.edgeLegend i {
+  height: 1px;
+  background: var(--accent-ui);
+}
+
+.edgeLegend i[data-edge="reciprocal"] {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent-ui) 0 6px,
+    transparent 6px 10px
+  );
+}
+
+.edgeLegend i[data-edge="shared"] {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent-ui) 0 2px,
+    transparent 2px 6px
+  );
+  opacity: 0.5;
+}
+
+.stageSelector {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: var(--line);
+}
+
+.stageSelector button {
+  display: grid;
+  gap: 0.45rem;
+  min-height: 5rem;
+  align-content: center;
+  padding: 0.75rem;
+  font-size: 0.65rem;
+}
+
+.stageSelector button > span {
+  color: var(--subtle);
+  font-size: 0.56rem;
+}
+
+.stageSelector button[aria-pressed="true"] > span {
+  color: rgb(17 17 15 / 62%);
+}
+
+.matrixBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(17rem, 0.55fr);
+  min-width: 0;
+  border-top: 1px solid var(--line);
+}
+
+.matrixViewport {
+  min-width: 0;
+  overflow-x: auto;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--line);
+  overscroll-behavior-inline: contain;
+}
+
+.matrixGrid {
+  display: grid;
+  width: max(39rem, 100%);
+  grid-template-columns: 2rem repeat(12, minmax(1.8rem, 1fr));
+  gap: 1px;
+  background: var(--line);
+}
+
+.matrixCorner,
+.matrixColumnLabel,
+.matrixRowLabel {
+  display: grid;
+  place-items: center;
+  min-height: 2rem;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 0.56rem;
+}
+
+.matrixCell {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 2.2rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(
+      color-mix(
+        in srgb,
+        var(--accent) calc(var(--matrix-value) * 88%),
+        var(--panel)
+      ),
+      color-mix(
+        in srgb,
+        var(--accent) calc(var(--matrix-value) * 88%),
+        var(--panel)
+      )
+    );
+  color: var(--fg);
+  cursor: crosshair;
+}
+
+.matrixCell[data-high="true"] {
+  color: var(--accent-ink);
+}
+
+.matrixCell > span {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.48rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.68;
+}
+
+.matrixCell[data-same-class="true"] {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fg) 22%, transparent);
+}
+
+.matrixCell[data-selected="true"] {
+  z-index: 1;
+  outline: 2px solid var(--fg);
+  outline-offset: -2px;
+}
+
+.matrixRowBreak {
+  border-bottom: 2px solid var(--fg);
+}
+
+.matrixColumnBreak {
+  border-right: 2px solid var(--fg);
+}
+
+.matrixExplanation {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(1.5rem, 3.5vw, 3.5rem);
+}
+
+.matrixEquation {
+  margin: 0;
+  color: var(--accent-ui);
+  font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+  font-weight: 650;
+}
+
+.matrixExplanation > p:nth-child(2) {
+  max-width: 30rem;
+  margin: 1.2rem 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.cellReadout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem 1rem;
+  margin-top: clamp(2.5rem, 5vw, 5rem);
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.cellReadout span,
+.cellReadout output,
+.cellReadout small {
+  color: var(--muted);
+  font-size: 0.6rem;
+}
+
+.cellReadout strong {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.cellReadout output {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  color: var(--accent-ui);
+  font-size: 0.78rem;
+}
+
+.cellReadout small {
+  grid-column: 1 / -1;
+  line-height: 1.5;
+}
+
+.matrixLegend {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.56rem;
+}
+
+.matrixLegend i {
+  height: 0.6rem;
+  background: linear-gradient(90deg, var(--panel), var(--accent));
+}
+
+.keyboardHint {
+  margin: auto 0 0;
+  padding-top: 2rem;
+  color: var(--muted);
+  font-size: 0.58rem;
+  line-height: 1.5;
+}
+
+@keyframes query-halo {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 980px) {
+  .neighborhoodControls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .neighborhoodControls > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .neighborhoodBody,
+  .matrixBody {
+    grid-template-columns: 1fr;
+  }
+
+  .embeddingCanvas,
+  .matrixViewport {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .rankingPanel {
+    min-height: 28rem;
+  }
+
+  .stageSelector {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .visualHeader {
+    display: grid;
+  }
+
+  .demoFlag {
+    text-align: left;
+  }
+
+  .controls,
+  .neighborhoodControls {
+    grid-template-columns: 1fr;
+  }
+
+  .neighborhoodControls > :last-child {
+    grid-column: auto;
+  }
+
+  .playback {
+    grid-template-columns: 2.75rem minmax(6rem, 1fr) 2.75rem;
+  }
+
+  .playback span {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .stageSelector {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stageSelector button {
+    min-height: 4.4rem;
+  }
+
+  .matrixExplanation {
+    min-height: 28rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .poseCanvas {
+    margin-inline: -20%;
+  }
+
+  .segmented {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .frameTimeline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .matrixViewport {
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .queryHalo {
+    animation: none;
+  }
+
+  .segmented button,
+  .playback button,
+  .frameTimeline button,
+  .stageSelector button,
+  .rankEdge {
+    transition: none;
+  }
+}

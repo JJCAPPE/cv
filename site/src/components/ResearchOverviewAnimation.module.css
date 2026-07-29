@@ -1,0 +1,611 @@
+.overview {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: clamp(37rem, calc(100dvh - 7rem), 58rem);
+  grid-template-rows: auto 1fr auto;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px),
+    color-mix(in srgb, var(--panel) 88%, var(--bg));
+  background-size: 2.5rem 2.5rem;
+  color: var(--fg);
+  isolation: isolate;
+}
+
+.overview[data-variant="cover"] {
+  min-height: 100dvh;
+  border: 0;
+}
+
+.overview[data-paused="true"] *,
+.overview[data-paused="true"] *::before,
+.overview[data-paused="true"] *::after {
+  animation-play-state: paused !important;
+}
+
+.header,
+.overview figcaption {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(0.9rem, 1.5vw, 1.35rem);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.header {
+  border-bottom: 1px solid var(--line);
+}
+
+.header p,
+.header strong,
+.header button,
+.overview figcaption {
+  font-size: 0.62rem;
+  letter-spacing: 0.065em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.header strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--accent-ui);
+  font-weight: 650;
+}
+
+.header button {
+  min-height: 2.75rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.header button:hover,
+.header button:focus-visible {
+  border-color: var(--accent-ui);
+  color: var(--accent-ui);
+}
+
+.header button:active {
+  transform: translateY(1px);
+}
+
+.flow {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px 0;
+  background: var(--line);
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(1rem, 1.8vw, 1.65rem);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 96%, transparent);
+  animation: stage-focus 12s linear infinite;
+}
+
+.stage[data-stage="encoder"] {
+  animation-delay: 3s;
+}
+
+.stage[data-stage="context"] {
+  animation-delay: 6s;
+}
+
+.stage[data-stage="gallery"] {
+  animation-delay: 9s;
+}
+
+.stage:not(:last-child)::after {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: -0.45rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-top: 1px solid var(--accent-ui);
+  border-right: 1px solid var(--accent-ui);
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.stageLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.stageLabel span,
+.stageLabel p,
+.stageNote {
+  margin: 0;
+  font-size: 0.59rem;
+  letter-spacing: 0.065em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.stageLabel span {
+  color: var(--accent-ui);
+}
+
+.stageGraphic {
+  display: block;
+  width: 100%;
+  align-self: center;
+  overflow: visible;
+}
+
+.stageNote {
+  min-height: 2.8em;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.floor,
+.flowLine,
+.flowArrow,
+.contextEdges line {
+  fill: none;
+  stroke: var(--line);
+  vector-effect: non-scaling-stroke;
+}
+
+.floor {
+  stroke-dasharray: 3 7;
+}
+
+.poseTrail line,
+.poseTrail circle,
+.poseQuery line,
+.poseQuery circle {
+  fill: var(--panel);
+  stroke: var(--fg);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.poseTrail {
+  opacity: 0.17;
+}
+
+.poseQuery {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: corrupt-query 12s linear infinite;
+}
+
+.poseQuery line,
+.poseQuery circle {
+  stroke: var(--accent-ui);
+}
+
+.noiseMarks {
+  opacity: 0;
+  animation: reveal-noise 12s linear infinite;
+}
+
+.noiseMarks path,
+.noiseMarks circle {
+  fill: none;
+  stroke: var(--accent-ui);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.noiseMarks circle {
+  stroke-dasharray: 3 5;
+}
+
+.sequenceTokens rect {
+  fill: color-mix(in srgb, var(--fg) 32%, transparent);
+  animation: encode-token 12s linear infinite;
+}
+
+.sequenceTokens rect:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.sequenceTokens rect:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.sequenceTokens rect:nth-child(4) {
+  animation-delay: 300ms;
+}
+
+.sequenceTokens rect:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+.sequenceTokens rect:nth-child(6) {
+  animation-delay: 500ms;
+}
+
+.flowLine,
+.flowArrow {
+  stroke: var(--accent-ui);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+  animation: transmit 12s linear infinite;
+}
+
+.embeddingRing {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.embeddingPoint {
+  fill: var(--accent-ui);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: embedding-pulse 12s linear infinite;
+}
+
+.svgText,
+.queryLabel {
+  fill: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 7px;
+  letter-spacing: 0.03em;
+}
+
+.contextEdges line {
+  stroke: var(--accent-ui);
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: draw-context 12s linear infinite;
+}
+
+.contextEdges line:nth-child(2),
+.contextEdges line:nth-child(5) {
+  animation-delay: 120ms;
+}
+
+.contextEdges line:nth-child(3),
+.contextEdges line:nth-child(6) {
+  animation-delay: 240ms;
+}
+
+.contextNodes circle {
+  fill: var(--panel);
+  stroke: var(--fg);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.contextNodes .queryNode {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.queryLabel {
+  fill: var(--accent-ink);
+  font-size: 9px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.ranking {
+  display: grid;
+  align-self: center;
+  gap: 1px;
+  padding-block: 1.5rem;
+  background: var(--line);
+}
+
+.rank {
+  display: grid;
+  min-height: 3.45rem;
+  grid-template-columns: 1.5rem 1fr;
+  align-items: center;
+  gap: 0.15rem 0.8rem;
+  padding: 0.65rem 0.75rem;
+  background: var(--panel);
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.rank span {
+  grid-row: 1 / 3;
+  color: var(--muted);
+  font-size: 0.58rem;
+}
+
+.rank i {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0.45rem;
+  background:
+    linear-gradient(
+      90deg,
+      currentColor 0 13%,
+      transparent 13% 18%,
+      currentColor 18% 52%,
+      transparent 52% 59%,
+      currentColor 59% 82%,
+      transparent 82%
+    );
+  opacity: 0.45;
+}
+
+.rank p {
+  margin: 0;
+  font-size: 0.58rem;
+  letter-spacing: 0.045em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.rank[data-rank="match"] {
+  animation: reveal-match 12s linear infinite;
+}
+
+.overview figcaption {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.overview figcaption span:last-child {
+  color: var(--accent-ui);
+  text-align: right;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes stage-focus {
+  0%,
+  18% {
+    box-shadow: inset 0 0 0 1px var(--accent-ui);
+  }
+  24%,
+  100% {
+    box-shadow: inset 0 0 0 1px transparent;
+  }
+}
+
+@keyframes corrupt-query {
+  0%,
+  18% {
+    opacity: 1;
+    transform: translate(0);
+  }
+  4% {
+    transform: translate(-3px, 1px);
+  }
+  8% {
+    transform: translate(4px, -2px);
+  }
+  12% {
+    transform: translate(-2px, 3px);
+  }
+  24%,
+  100% {
+    opacity: 0.72;
+    transform: translate(0);
+  }
+}
+
+@keyframes reveal-noise {
+  0%,
+  18% {
+    opacity: 1;
+  }
+  24%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes encode-token {
+  0%,
+  22%,
+  52%,
+  100% {
+    fill: color-mix(in srgb, var(--fg) 32%, transparent);
+    transform: translateY(0);
+  }
+  30%,
+  44% {
+    fill: var(--accent-ui);
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes transmit {
+  0%,
+  24% {
+    stroke-dashoffset: 40;
+    opacity: 0.2;
+  }
+  32%,
+  48% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes embedding-pulse {
+  0%,
+  24%,
+  54%,
+  100% {
+    transform: scale(1);
+  }
+  34%,
+  46% {
+    transform: scale(2.2);
+  }
+}
+
+@keyframes draw-context {
+  0%,
+  46% {
+    stroke-dashoffset: 90;
+    opacity: 0.12;
+  }
+  58%,
+  72% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+  80%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.34;
+  }
+}
+
+@keyframes reveal-match {
+  0%,
+  70% {
+    background: var(--panel);
+    color: var(--muted);
+  }
+  80%,
+  96% {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  100% {
+    background: var(--panel);
+    color: var(--muted);
+  }
+}
+
+@media (max-width: 760px) {
+  .overview,
+  .overview[data-variant="cover"] {
+    min-height: 66dvh;
+  }
+
+  .flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stage:not(:last-child)::after {
+    display: none;
+  }
+
+  .stageGraphic {
+    max-height: 9rem;
+  }
+
+  .ranking {
+    padding-block: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview,
+  .overview[data-variant="cover"] {
+    min-height: 72dvh;
+  }
+
+  .header p,
+  .overview figcaption span:first-child {
+    display: none;
+  }
+
+  .header strong {
+    margin-top: 0;
+  }
+
+  .header button {
+    padding-inline: 0.65rem;
+    font-size: 0.56rem;
+  }
+
+  .stage {
+    padding: 0.8rem;
+  }
+
+  .stageGraphic {
+    max-height: 7.5rem;
+  }
+
+  .stageLabel p,
+  .stageNote,
+  .rank p {
+    font-size: 0.53rem;
+  }
+
+  .overview figcaption {
+    justify-content: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overview *,
+  .overview *::before,
+  .overview *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .header button {
+    display: none;
+  }
+
+  .contextEdges line {
+    stroke-dashoffset: 0;
+    opacity: 0.6;
+  }
+
+  .rank[data-rank="match"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+}
