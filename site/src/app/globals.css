@@ -319,6 +319,19 @@ a {
     animation: hero-media-in 1.4s var(--ease-out) both;
 }
 
+.home-hero__poster,
+.home-hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-hero__video {
+    z-index: 1;
+}
+
 .home-hero__media-primary img,
 .home-hero__media-secondary img,
 .research-feature__media img,
@@ -928,6 +941,20 @@ a {
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: var(--panel);
+}
+
+.project-page__cover-video-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #070706;
+}
+
+.project-page__cover-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .project-page__cover figcaption,
@@ -1900,6 +1927,9 @@ a {
     }
     .experience-panel__body {
         min-height: 60dvh;
+    }
+    .home-hero__video {
+        display: none;
     }
     *,
     *::before,

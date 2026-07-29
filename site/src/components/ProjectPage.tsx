@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
 import { Layout } from "@/components/Layout";
 import { MoveProjectStory } from "@/components/MoveProjectStory";
+import { RowingCaseStudy } from "@/components/RowingCaseStudy";
 import type { Project } from "@/content/projects";
 import { projects } from "@/content/projects";
 
@@ -11,6 +12,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const isDeskinator = project.slug === "deskinator";
   const isMove = project.slug === "move";
+  const isRowing = project.slug === "rowing-biomechanics";
 
   return (
     <Layout className="project-page-shell">
@@ -38,17 +40,36 @@ export function ProjectPage({ project }: { project: Project }) {
         </header>
 
         <figure className="project-page__cover">
-          <div className="project-page__cover-image">
-            <Image
-              className={
-                project.cover.fit === "contain" ? "media-contain" : undefined
-              }
-              src={project.cover.src}
-              alt={project.cover.alt}
-              fill
-              sizes="100vw"
-            />
-          </div>
+          {project.cover.kind === "video" ? (
+            <div className="project-page__cover-video-frame">
+              <video
+                className="project-page__cover-video"
+                autoPlay
+                controls
+                loop
+                muted
+                playsInline
+                poster={project.cover.poster}
+                preload="metadata"
+                aria-label={project.cover.alt}
+              >
+                <source src={project.cover.src} type="video/mp4" />
+                Your browser does not support embedded video.
+              </video>
+            </div>
+          ) : (
+            <div className="project-page__cover-image">
+              <Image
+                className={
+                  project.cover.fit === "contain" ? "media-contain" : undefined
+                }
+                src={project.cover.src}
+                alt={project.cover.alt}
+                fill
+                sizes="100vw"
+              />
+            </div>
+          )}
           {project.cover.caption ? (
             <figcaption>{project.cover.caption}</figcaption>
           ) : null}
@@ -83,7 +104,9 @@ export function ProjectPage({ project }: { project: Project }) {
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
             const media =
-              isDeskinator || isMove ? undefined : project.gallery?.[index];
+              isDeskinator || isMove || isRowing
+                ? undefined
+                : project.gallery?.[index];
 
             return (
               <div className="project-chapter-group" key={section.title}>
@@ -126,7 +149,9 @@ export function ProjectPage({ project }: { project: Project }) {
           })}
         </div>
 
-        {isMove ? (
+        {isRowing ? (
+          <RowingCaseStudy project={project} />
+        ) : isMove ? (
           <MoveProjectStory />
         ) : isDeskinator ? (
           <DeskinatorCaseStudy />
