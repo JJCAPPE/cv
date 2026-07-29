@@ -30,13 +30,6 @@ const additionalExperience = [
     detail:
       "Built a Streamlit scheduling tool that reads ManageBac timetables, finds free periods, and drafts meeting requests with local Ollama models.",
   },
-  {
-    role: "iOS Developer",
-    organization: "ASD DLF Treviso",
-    dates: "Oct 2023 - Present",
-    detail:
-      "Built a SwiftUI rowing logbook for training records and progression analysis using Swift Charts.",
-  },
 ];
 
 const skillGroups = [
