@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "visuals:move": "node scripts/generate-move-visuals.mjs public/media/projects/move"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

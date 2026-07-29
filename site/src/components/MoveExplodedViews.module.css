@@ -1,0 +1,310 @@
+.explorer {
+  margin: clamp(3.5rem, 7vw, 7rem) 0 0;
+  overflow: hidden;
+  border: 1px solid var(--move-line);
+  background: var(--move-bg);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  border-bottom: 1px solid var(--move-line);
+}
+
+.header > div {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.header p {
+  margin: 0;
+  color: var(--move-muted);
+  font-size: clamp(0.76rem, 1vw, 0.92rem);
+  line-height: 1.55;
+}
+
+.header > div > p {
+  color: var(--move-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.header h3 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: var(--move-line);
+}
+
+.controls button {
+  display: grid;
+  min-height: 4.4rem;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.8rem clamp(0.8rem, 1.8vw, 1.35rem);
+  border: 0;
+  border-radius: 0;
+  background: var(--move-bg);
+  color: var(--move-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  text-align: left;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.controls button > span {
+  color: var(--move-subtle, #76736b);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+}
+
+.controls button[aria-pressed="true"] {
+  background: var(--move-accent);
+  color: #11110f;
+}
+
+.controls button[aria-pressed="true"] > span {
+  color: rgb(17 17 15 / 60%);
+}
+
+.controls button:hover,
+.controls button:focus-visible {
+  color: var(--move-fg);
+}
+
+.controls button[aria-pressed="true"]:hover,
+.controls button[aria-pressed="true"]:focus-visible {
+  color: #11110f;
+  outline-color: #11110f;
+  outline-offset: -4px;
+}
+
+.controls button:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 2px solid var(--move-accent);
+  outline-offset: -3px;
+}
+
+.controls button:active {
+  transform: translateY(1px);
+}
+
+.viewport {
+  min-width: 0;
+  overflow: hidden;
+  background: #0b0b0a;
+  outline: none;
+}
+
+.viewport:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--move-accent);
+}
+
+.stack {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.master,
+.layer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.master {
+  position: relative;
+  object-fit: contain;
+  transition:
+    opacity 220ms ease,
+    filter 220ms ease;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0);
+  transition:
+    opacity 220ms ease,
+    transform 260ms var(--ease-out);
+}
+
+.explorer:not([data-active="overview"]) .master {
+  filter: saturate(0.35);
+  opacity: 0.18;
+}
+
+.explorer[data-active="request"] .layer[data-layer="request"],
+.explorer[data-active="runtime"] .layer[data-layer="runtime"],
+.explorer[data-active="response"] .layer[data-layer="response"],
+.explorer[data-active="resolve"] .layer[data-layer="resolve"],
+.explorer[data-active="context"] .layer[data-layer="context"],
+.explorer[data-active="authority"] .layer[data-layer="authority"] {
+  opacity: 1;
+  transform: translateY(-0.3rem);
+}
+
+.mobileHint {
+  display: none;
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--move-line);
+  color: var(--move-muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.42fr) minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  border-top: 1px solid var(--move-line);
+  background: var(--move-line);
+}
+
+.readout > div,
+.readout > p {
+  margin: 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: var(--move-panel);
+}
+
+.readout > div {
+  display: grid;
+  align-content: center;
+  gap: 0.45rem;
+}
+
+.readout span {
+  display: block;
+  color: var(--move-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.55rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.readout strong {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  font-weight: 570;
+  letter-spacing: -0.035em;
+}
+
+.readout > p {
+  color: var(--move-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.readout > p > span {
+  margin-bottom: 0.55rem;
+}
+
+@media (max-width: 1020px) {
+  .header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .readout {
+    grid-template-columns: minmax(8rem, 0.4fr) minmax(0, 1.6fr);
+  }
+
+  .readout > p:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1100px) {
+  .viewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-color: var(--move-accent) var(--move-panel);
+    scrollbar-width: thin;
+  }
+
+  .stack {
+    width: 90rem;
+    max-width: none;
+  }
+
+  .mobileHint {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .explorer {
+    margin-top: 3rem;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .controls button {
+    min-height: 4rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .stack {
+    width: 96rem;
+  }
+
+  .readout {
+    grid-template-columns: 1fr;
+  }
+
+  .readout > p:last-child {
+    grid-column: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .controls button,
+  .master,
+  .layer {
+    transition: none;
+  }
+
+  .explorer[data-active] .layer[data-layer] {
+    transform: none;
+  }
+}
