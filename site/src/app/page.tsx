@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HorizontalProjectRail } from "@/components/HorizontalProjectRail";
+import { ResearchOverviewAnimation } from "@/components/ResearchOverviewAnimation";
 import { experience } from "@/content/experience";
 import { projects } from "@/content/projects";
 import { getNotes } from "@/lib/notes";
@@ -41,10 +42,6 @@ export default function Home() {
   if (!rowingProject || !deskinatorProject) {
     throw new Error("Featured portfolio media is missing.");
   }
-
-  const researchMedia =
-    rowingProject.gallery?.find((media) => media.kind !== "video") ??
-    rowingProject.cover;
 
   return (
     <main id="main-content" className="home-page" tabIndex={-1}>
@@ -151,23 +148,28 @@ export default function Home() {
       <HorizontalProjectRail projects={featuredProjects} />
 
       <section id="research" className="research-feature" tabIndex={-1}>
-        <div className="research-feature__media">
-          <Image
-            src={researchMedia.src}
-            alt={researchMedia.alt}
-            fill
-            sizes="(max-width: 767px) 100vw, 64vw"
-          />
+        <div className="research-feature__media research-feature__media--overview">
+          <ResearchOverviewAnimation variant="cover" />
         </div>
         <div className="research-feature__content">
-          <h2>Motion becomes signal.</h2>
+          <h2>Can motion survive bad poses?</h2>
           <p>
-            My current research turns single-camera rowing video into 3D
-            kinematics and stroke-level force estimates.
+            My current proposal tests whether neighborhood-aware metric
+            learning can preserve motion retrieval when joints jitter,
+            disappear, or frames drop—an idea born from failures in the rowing
+            pipeline.
           </p>
-          <Link href="/research" className="action-link action-link--accent">
-            Research
-          </Link>
+          <div className="research-feature__actions">
+            <Link href="/research" className="action-link action-link--accent">
+              Research proposal
+            </Link>
+            <Link
+              href="/projects/rowing-biomechanics"
+              className="action-link"
+            >
+              Rowing origin
+            </Link>
+          </div>
         </div>
       </section>
 
