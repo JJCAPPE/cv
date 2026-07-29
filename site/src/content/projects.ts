@@ -71,6 +71,7 @@ export const projects: Project[] = [
       width: 2400,
       height: 1350,
       fit: "cover",
+      railFit: "contain",
       caption:
         "Source-led system master pinned to the inspected July 2026 repositories. Solid paths are tracked defaults; dashed paths are optional or configured.",
     },
