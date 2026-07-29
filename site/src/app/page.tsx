@@ -12,7 +12,8 @@ export default function Home() {
     .map((project) => {
       const selectedCover =
         project.slug === "rowing-biomechanics"
-          ? (project.gallery?.[0] ?? project.cover)
+          ? (project.gallery?.find((media) => media.kind !== "video") ??
+            project.cover)
           : project.cover;
 
       return {
@@ -41,21 +42,39 @@ export default function Home() {
     throw new Error("Featured portfolio media is missing.");
   }
 
-  const researchMedia = rowingProject.gallery?.[0] ?? rowingProject.cover;
+  const researchMedia =
+    rowingProject.gallery?.find((media) => media.kind !== "video") ??
+    rowingProject.cover;
 
   return (
     <main id="main-content" className="home-page" tabIndex={-1}>
       <section id="intro" className="home-hero">
         <div className="home-hero__media" aria-hidden="true">
           <div className="home-hero__media-primary">
-            <Image
-              src={rowingProject.cover.src}
-              alt=""
-              fill
-              loading="eager"
-              fetchPriority="high"
-              sizes="(max-width: 767px) 100vw, 72vw"
-            />
+            {rowingProject.cover.poster ? (
+              <Image
+                className="home-hero__poster"
+                src={rowingProject.cover.poster}
+                alt=""
+                fill
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 767px) 100vw, 72vw"
+              />
+            ) : null}
+            <video
+              className="home-hero__video"
+              autoPlay
+              disablePictureInPicture
+              loop
+              muted
+              playsInline
+              poster={rowingProject.cover.poster}
+              preload="metadata"
+            >
+              <source src={rowingProject.cover.src} type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
           </div>
         </div>
 

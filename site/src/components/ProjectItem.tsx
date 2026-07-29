@@ -19,7 +19,7 @@ export function ProjectItem({ project, index }: ProjectItemProps) {
             className={
               project.cover.fit === "contain" ? "media-contain" : undefined
             }
-            src={project.cover.src}
+            src={project.cover.poster ?? project.cover.src}
             alt=""
             fill
             loading={order === 0 ? "eager" : undefined}

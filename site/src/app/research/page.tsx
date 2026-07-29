@@ -25,14 +25,16 @@ export default function ResearchPage() {
     throw new Error("Rowing research project is missing.");
   }
 
-  const signalMedia = project.gallery?.[1] ?? project.cover;
+  const signalMedia =
+    project.gallery?.find((media) => media.kind !== "video") ?? project.cover;
+  const coverImage = project.cover.poster ?? project.cover.src;
 
   return (
     <Layout className="research-page">
       <header className="research-hero">
         <div className="research-hero__media">
           <Image
-            src={project.cover.src}
+            src={coverImage}
             alt={project.cover.alt}
             fill
             loading="eager"

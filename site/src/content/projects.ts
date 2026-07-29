@@ -10,7 +10,9 @@ export type ProjectSection = {
 };
 
 export type ProjectMedia = {
+  kind?: "image" | "video";
   src: string;
+  poster?: string;
   alt: string;
   width: number;
   height: number;
@@ -150,56 +152,93 @@ export const projects: Project[] = [
     title: "Rowing Biomechanics Pipeline",
     slug: "rowing-biomechanics",
     summary:
-      "A computer vision and biomechanics pipeline that extracts rowing kinematics from video and maps stroke motion toward power and force-curve prediction.",
+      "An inspectable research system that learns a stroke-level force representation from synchronized video and RP3 telemetry, then packages the same kinematic contract for video-only inference.",
     stack: [
       "Python",
-      "MMPose",
+      "Sports2D",
       "MotionBERT",
       "OpenCV",
       "NumPy",
       "Pandas",
+      "PyTorch",
     ],
     year: "2026",
-    type: "Research / ML",
-    role: "Undergraduate Researcher",
+    type: "Research / Applied ML",
+    role: "Undergraduate researcher",
     featured: true,
     cover: {
-      src: "/media/projects/rowing-biomechanics/erg-pose-overlay.webp",
-      alt: "Rowing athlete on an ergometer with a pose-estimation skeleton overlay.",
-      width: 1283,
-      height: 676,
-      caption: "Pose extraction during a controlled ergometer capture.",
+      kind: "video",
+      src: "/media/projects/rowing-biomechanics/rowing-biomechanics-showcase.mp4",
+      poster:
+        "/media/projects/rowing-biomechanics/rowing-biomechanics-showcase-poster.webp",
+      alt: "Rowing biomechanics pipeline showcase combining side-view video, two-dimensional pose tracking, a three-dimensional skeleton, joint-angle traces, stroke phase, and synchronized RP3 force telemetry.",
+      width: 1440,
+      height: 810,
+      caption:
+        "The complete pipeline on a synchronized ergometer capture: pose, phase, joint angles, 3D lift, and RP3 force in one inspectable view. RP3 supplies supervision during dataset construction; the intended inference path uses video alone.",
     },
     gallery: [
       {
-        src: "/media/projects/rowing-biomechanics/handle-tracking.webp",
-        alt: "Tracked ergometer handle highlighted in a rowing video frame.",
-        width: 1920,
-        height: 1080,
-        caption: "Handle tracking provides a stable reference for stroke timing.",
+        kind: "video",
+        src: "/media/projects/rowing-biomechanics/pose3d-tracking-example.mp4",
+        poster:
+          "/media/projects/rowing-biomechanics/pose3d-tracking-poster.webp",
+        alt: "Pose-tracking example showing whole-body landmarks, handle and ergometer geometry, joint angles, and a three-dimensional skeleton throughout a rowing stroke.",
+        width: 1440,
+        height: 810,
+        caption:
+          "Tracking diagnostic from a separate RP3 session. Whole-body landmarks, handle and machine geometry, joint angles, and the 3D lift stay visible so failures can be inspected frame by frame.",
       },
       {
-        src: "/media/projects/rowing-biomechanics/stroke-angle-diagnostics.webp",
-        alt: "Diagnostic plots aligning rowing joint angles with stroke phases.",
-        width: 2400,
-        height: 1342,
-        caption: "Stroke alignment checked against reconstructed joint angles.",
+        src: "/media/projects/rowing-biomechanics/calibrated-match.webp",
+        alt: "Five rowing strokes aligned against RP3 telemetry with interval, drive-duration, cumulative-error, and joint-angle diagnostics.",
+        width: 2000,
+        height: 1118,
+        caption:
+          "An actual calibrated-run diagnostic: local drive timing is close, while the cumulative-error trace makes residual clock drift visible.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/rowing-biomechanics/handle-tracking.webp",
+        alt: "Rowing frame with two-dimensional joints, a three-dimensional pose inset, and tracked handle and ergometer reference points.",
+        width: 1920,
+        height: 1080,
+        caption:
+          "The feature-extraction surface: 2D landmarks, MotionBERT 3D lift, and handle-relative geometry derived from one side-view camera.",
+      },
+      {
+        src: "/media/projects/rowing-biomechanics/force-reconstruction.webp",
+        alt: "An RP3 force export recreated from its distance-indexed samples with peak force and peak-position annotations.",
+        width: 1800,
+        height: 1068,
+        caption:
+          "Target interpretation, not a model prediction: recreating the RP3 export established that its force samples are spaced every 2.2 cm before normalization to stroke progress.",
+        fit: "contain",
       },
       {
         src: "/media/projects/rowing-biomechanics/force-curve-comparison.webp",
-        alt: "A set of rowing force curves plotted for comparison.",
+        alt: "Synthetic comparison of raw rowing force curves and the same curves after peak normalization.",
         width: 2064,
         height: 860,
-        caption: "Measured force curves used as temporal model targets.",
+        caption:
+          "Synthetic explanatory figure: peak normalization lets the shape model separate curve geometry from absolute force magnitude.",
+        fit: "contain",
       },
       {
         src: "/media/projects/rowing-biomechanics/kinematic-feature-heatmap.webp",
-        alt: "Heatmap showing relationships across rowing kinematic features.",
+        alt: "Synthetic heatmap illustrating a 64-by-14 rowing-stroke feature tensor.",
         width: 1980,
         height: 945,
+        caption:
+          "Synthetic explanatory figure: every stroke becomes 64 progress samples across 14 canonical kinematic channels.",
+        fit: "contain",
       },
     ],
     links: [
+      {
+        label: "Methods paper",
+        href: "/media/projects/rowing-biomechanics/rowing-video-force-prediction-paper.pdf",
+      },
       {
         label: "GitHub",
         href: "https://github.com/JJCAPPE/rowing-dynamics-analysis",
@@ -209,58 +248,108 @@ export const projects: Project[] = [
         href: "https://jjcappe.github.io/rowing-dynamics-analysis/pipeline-visualisation.html",
       },
     ],
+    metrics: [
+      {
+        value: "20",
+        label: "matched strokes",
+        note: "calibrated evaluation run",
+      },
+      {
+        value: "1,203",
+        label: "aligned segment rows",
+        note: "20-stroke calibrated run",
+      },
+      {
+        value: "11.43 ms",
+        label: "drive-duration MAE",
+        note: "two-pass calibrated run",
+      },
+      {
+        value: "64 × 14",
+        label: "stroke feature tensor",
+        note: "progress samples × channels",
+      },
+    ],
     diagram: [
-      "Single-camera video",
-      "Stabilization",
-      "MMPose 2D keypoints",
-      "MotionBERT 3D lift",
-      "Kinematic features",
-      "Stroke segmentation",
-      "Force-curve model",
+      "Side-view video",
+      "Shared feature contract",
+      "RP3-labeled strokes",
+      "Quality-gated dataset",
+      "Stage 0 / A / B",
+      "Video-only inference",
     ],
     sections: [
       {
-        title: "Abstract",
+        title: "Why this project exists",
         paragraphs: [
-          "This research explores whether a low-cost, single-camera setup can recover useful rowing biomechanics. The pipeline converts video into stabilized 2D and 3D joint trajectories, stroke-level kinematics, and inputs for sequence models that estimate force-curve behavior.",
+          "Force curves reveal when a rower produces power, not just how quickly the handle moves. The usual measurement path requires an instrumented ergometer or lab hardware; ordinary side-view video is far easier to collect.",
+          "The project asks a deliberately narrow question: can synchronized RP3 telemetry teach a video pipeline a useful stroke representation, then be removed at inference time? That boundary turns the work into a problem of data contracts, synchronization, leakage control, and honest evaluation—not simply pose estimation.",
         ],
       },
       {
-        title: "Method",
+        title: "Scope and evidence boundary",
         paragraphs: [
-          "The system isolates an athlete, estimates 2D keypoints with MMPose, lifts those sequences into 3D with MotionBERT, and computes joint angles, positions, velocities, and coordination features. Stroke phases then align the motion representation with instrumented telemetry.",
+          "The repository implements the end-to-end path: extraction, calibration, stroke matching, dataset construction, model training, model bundles, video-only prediction, and generated reports. The evidence on this page is strongest for feasibility and data construction.",
         ],
-      },
-      {
-        title: "Data",
         bullets: [
-          "Single-camera ergometer and on-water recordings.",
-          "Frame-level 2D and lifted 3D pose sequences.",
-          "Time-aligned force and power telemetry for model targets.",
-          "Stroke-level features for technique comparison and sequence modeling.",
+          "RP3 telemetry supplies labels during supervised dataset creation; it is not required by the intended prediction path.",
+          "The best calibrated evidence currently comes from one athlete in a controlled ergometer setup.",
+          "The repository supports athlete-held-out evaluation, but the current paper does not claim a compiled athlete-held-out force-prediction result.",
         ],
       },
       {
-        title: "Evaluation / Current Status",
+        title: "One stroke, one contract",
         paragraphs: [
-          "The pose, 3D lift, and feature extraction stages are implemented. Current work focuses on robust stroke alignment and sequence-to-sequence regression against measured force curves.",
+          "Every drive is resampled onto 64 normalized progress positions. Fourteen channels describe the active-chain knee, hip, elbow, trunk, spine, and head angles; their progress derivatives; and handle velocity and acceleration. Facing direction is canonicalized so left- and right-facing recordings do not teach contradictory signs.",
+          "Derivatives are computed in time and converted with dθ/ds = (dθ/dt) / (ds/dt + ε). A stall guard, masks, and explicit quality flags keep low-motion or sparse-tracking regions visible instead of silently turning them into clean-looking numbers.",
         ],
       },
       {
-        title: "Limitations",
-        bullets: [
-          "A single camera limits depth accuracy and can amplify occlusion errors.",
-          "Generalization across athletes, boats, viewpoints, and lighting remains untested.",
-          "Force prediction depends on high-quality time alignment with instrumented data.",
+        title: "Synchronizing imperfect clocks",
+        paragraphs: [
+          "Video events and RP3 strokes are not matched greedily. A coarse interval anchor starts the alignment, a first pass estimates velocity thresholds, and a second pass reruns event detection with calibrated drive durations. Dynamic programming then scores drive, recovery, interval, cumulative, and skip costs across the session.",
+          "The visual match editor records pins, exclusions, side, and facing overrides as reusable data. This matters because a good per-stroke duration can coexist with bad cumulative timing; the longer run made that failure mode impossible to ignore.",
         ],
       },
       {
-        title: "Future Work",
+        title: "Models earn their complexity",
         bullets: [
-          "Expand the dataset across athletes and capture conditions.",
-          "Compare elite and novice coordination patterns.",
-          "Evaluate temporal architectures for video-to-force-curve modeling.",
-          "Quantify uncertainty from pose estimation through final predictions.",
+          "Stage 0 is a reproducibility floor and metadata-only Ridge baseline using rate, length, and drive time.",
+          "Stage A predicts PCA or functional-PCA force-shape coefficients from scalar and coordination summaries with Ridge, Lasso, or gradient boosting.",
+          "Stage B consumes the full sequence with a TCN or Transformer, masked loss, derivative loss, AdamW, cosine scheduling, gradient clipping, and early stopping.",
+          "A model must beat the baseline on curve error and at least peak force or impulse before added complexity is treated as useful.",
+        ],
+      },
+      {
+        title: "Engineering for inspection",
+        paragraphs: [
+          "The package is organized around contracts rather than notebooks. Training and inference share the same side map and segment builder; model bundles carry the progress grid and preprocessing state; generated run and training reports expose provenance, leakage warnings, metrics, and plots.",
+        ],
+        bullets: [
+          "Native RP3 force bins and masks are preserved alongside the fixed-grid representation.",
+          "Per-stroke QC covers sparse tracking, implausible angular velocity, progress non-monotonicity, detection confidence, and timing plausibility.",
+          "The current suite contains 50 tests across eight modules, including feature-contract, matching-override, bundle, and report behavior.",
+        ],
+      },
+      {
+        title: "What the evidence says",
+        paragraphs: [
+          "On the controlled 120 fps run, the pipeline matched 20 strokes and exported 1,203 aligned segment rows. Mean absolute drive-duration error was 11.43 ms; interval error was 64 ms and cumulative catch error was 208 ms.",
+          "A separate 208-stroke run looked locally credible—32 ms drive-duration error and 22 ms interval error—while accumulating 2.36 seconds of catch drift. That contrast is the most useful result: local agreement alone cannot certify synchronization.",
+        ],
+        bullets: [
+          "The force reconstruction shown below validates RP3 target interpretation; it is not a learned prediction result.",
+          "Single-athlete evaluation is marked provisional by the reporting code.",
+          "Generalization across athletes, boats, viewpoints, lighting, and camera clocks remains unproven.",
+        ],
+      },
+      {
+        title: "What I learned",
+        bullets: [
+          "Normalize the physical domain before choosing the model: RP3 labels live in distance, while video begins in time.",
+          "Measure local error and accumulated drift separately; one can look excellent while the other invalidates a session.",
+          "A shared feature contract and self-describing model bundle are as important as the network architecture.",
+          "The next high-value work is direct shared timestamps and a multi-athlete dataset—not a larger neural network.",
         ],
       },
     ],
