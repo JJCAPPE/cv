@@ -18,6 +18,12 @@ export type ProjectMedia = {
   fit?: "cover" | "contain";
 };
 
+export type ProjectMetric = {
+  value: string;
+  label: string;
+  note?: string;
+};
+
 export type Project = {
   title: string;
   slug: string;
@@ -31,6 +37,7 @@ export type Project = {
   diagram?: string[];
   cover: ProjectMedia;
   gallery?: ProjectMedia[];
+  metrics?: ProjectMetric[];
   featured?: boolean;
 };
 
@@ -158,106 +165,144 @@ export const projects: Project[] = [
     title: "Deskinator",
     slug: "deskinator",
     summary:
-      "An autonomous tabletop-cleaning robot that maps desk boundaries from proximity sensors and executes coverage paths with Python planning, control, and telemetry.",
+      "An end-to-end tabletop-cleaning robot that turns touchless edge sensing into a fitted workspace, a safe coverage plan, and measurable motor commands.",
     stack: [
       "Python",
       "NumPy",
       "Raspberry Pi",
       "APDS9960",
-      "MPU-6050",
-      "RANSAC",
+      "A4988 + NEMA17",
+      "RANSAC + PCA",
       "Coverage planning",
+      "Matplotlib",
     ],
-    year: "2026",
+    year: "2025",
     type: "Robotics / Autonomy",
-    role: "Robotics software developer",
+    role: "Sole designer and developer",
     featured: true,
     cover: {
-      src: "/media/projects/deskinator/final-assembly-cad.webp",
-      alt: "CAD rendering of the assembled Deskinator tabletop robot.",
-      width: 3300,
-      height: 2550,
-      caption: "Final mechanical assembly used to coordinate sensing and coverage.",
+      src: "/media/projects/deskinator/prototype.webp",
+      alt: "The assembled Deskinator robot on a tabletop beside its charging and test equipment.",
+      width: 1800,
+      height: 1013,
+      caption:
+        "The assembled prototype used for sensing, control, and coverage testing.",
     },
     gallery: [
       {
         src: "/media/projects/deskinator/boundary-discovery.webp",
-        alt: "Boundary-discovery visualization for a rectangular tabletop.",
+        alt: "A boundary-discovery visualization showing detected points and a fitted tabletop.",
         width: 1499,
         height: 1507,
-      },
-      {
-        src: "/media/projects/deskinator/electronics-wiring.webp",
-        alt: "Electronics wiring diagram for the robot sensors and motors.",
-        width: 1600,
-        height: 1345,
+        caption:
+          "Noisy proximity events become a conservative rectangular workspace.",
       },
       {
         src: "/media/projects/deskinator/coverage-path.webp",
-        alt: "Planned wall-following and coverage path around a tabletop.",
+        alt: "A planned wall-following and boustrophedon coverage path around a tabletop.",
         width: 1061,
         height: 1121,
+        caption:
+          "Inset coverage lanes keep the cleaning footprint away from detected edges.",
       },
       {
-        src: "/media/projects/deskinator/coverage-distribution.webp",
-        alt: "Distribution plot comparing full-table cleaning coverage trials.",
+        src: "/media/projects/deskinator/coverage-inset-distribution.webp",
+        alt: "A distribution plot of safe-inset coverage across 48 retained tabletop-cleaning simulations.",
         width: 1600,
         height: 953,
+        caption:
+          "Safe-inset coverage averaged 99.40%; these are idealized simulation results.",
       },
       {
-        src: "/media/projects/deskinator/vacuum-scoop-cad.webp",
-        alt: "CAD detail of the robot vacuum scoop assembly.",
-        width: 3300,
-        height: 2550,
+        src: "/media/projects/deskinator/runtime-distribution.webp",
+        alt: "A distribution plot of completion times across 48 retained tabletop-cleaning simulations.",
+        width: 1600,
+        height: 461,
+        caption:
+          "Mean simulated completion was 137.22 seconds against a 120-second target.",
       },
     ],
     links: [
       {
+        label: "Final report · PDF",
+        href: "/media/projects/deskinator/deskinator-final-design-report.pdf",
+      },
+      {
         label: "GitHub",
         href: "https://github.com/JJCAPPE/deskinator/tree/new-alg",
       },
+      {
+        label: "Assembly CAD · PDF",
+        href: "/media/projects/deskinator/deskinator-final-assembly-cad.pdf",
+      },
+    ],
+    metrics: [
+      {
+        value: "48",
+        label: "retained simulations",
+        note: "from a reported 50-run campaign",
+      },
+      {
+        value: "99.40%",
+        label: "mean safe-inset coverage",
+        note: "σ 0.70% in idealized simulation",
+      },
+      {
+        value: "137.22 s",
+        label: "mean simulated cycle",
+        note: "σ 3.57 s; target was 120 s",
+      },
     ],
     diagram: [
-      "Proximity sensors",
-      "Edge events",
-      "Rectangle fitting",
-      "Coverage lanes",
-      "Motor control",
-      "Telemetry",
+      "Gesture, edge sensors, and step counts",
+      "EWMA, hysteresis, and debounce",
+      "50 Hz differential-drive odometry",
+      "World-frame boundary observations",
+      "RANSAC / PCA rectangle fit",
+      "Geometry-derived safe inset",
+      "Boustrophedon lanes and perimeter pass",
+      "Drive-then-turn motor control",
+      "Swept map, telemetry, and plots",
     ],
     sections: [
       {
-        title: "Problem",
+        title: "Scope and ownership",
         paragraphs: [
-          "A small tabletop robot has to clean without falling, which makes boundary inference, coverage, and recovery more important than a polished interface. Deskinator turns short-range sensor readings into a conservative map and executable cleaning path.",
+          "Deskinator was a self-directed robotics build around a deceptively strict brief: create a compact, touch-free vacuum robot that can start with a hand gesture, discover an unknown rectangular tabletop, clean it without crossing an edge, and aim for a two-minute cycle. I designed and implemented the complete system—from electronics and mechanical integration through the Raspberry Pi software, simulator, analysis, and final documentation.",
+          "Rather than assuming a known map, the robot earns one. It follows the boundary, records where its two front sensors lose the surface, fits a rectangle, contracts that rectangle using the physical sensor-to-vacuum geometry, and only then executes a coverage path. Safety is therefore a property of perception and planning, not a last-second motor stop.",
         ],
       },
       {
-        title: "Architecture",
+        title: "One inspectable control loop",
         paragraphs: [
-          "The Python control stack runs on a Raspberry Pi, reads APDS9960 proximity sensors, stepper odometry, and optional IMU data, and coordinates boundary discovery, rectangle fitting, coverage planning, actuator control, logging, and visualization.",
+          "The supported new-alg executable is deliberately organized around one synchronous 50 Hz loop in DeskinatorSimple.run(). Every cycle checks the gesture stop, reads edge sensors, advances differential-drive odometry from step counts, evaluates the state machine, commands the motors, rasterizes the vacuum footprint, and writes telemetry. A shared time base makes a failure traceable from sensor sample to actuator command.",
+          "The executable states are explicit: WAIT_START, BOUNDARY_DISCOVERY, COVERAGE, and DONE. A failed rectangle fit enters DONE; a stop gesture exits the active loop into the same safe-shutdown path. Optional IMU and EKF files remain experimental scaffolding; the supported default path uses stepper odometry.",
         ],
       },
       {
-        title: "Implementation",
+        title: "From proximity to geometry",
+        paragraphs: [
+          "Two front APDS9960 sensors report whether the surface is present. The filter combines a raw threshold, an exponentially weighted moving average, hysteresis, and 60 ms debounce before an observation can become an edge event. Each event is projected into world coordinates from the robot pose and measured sensor offsets, preserving which physical reading produced each boundary point.",
+          "After the robot closes a lap, SimpleRectangleFit extracts candidate lines with a 2 cm RANSAC inlier threshold, refines each direction with SVD/PCA, searches for orthogonal four-line combinations, and scores how well they explain the observations. A coarse 5° angle search provides a fallback when the line combination is weak.",
+        ],
+      },
+      {
+        title: "From geometry to motion",
+        paragraphs: [
+          "CoveragePlanner derives a safe inset from the sensor-to-vacuum offset, then lays lanes along the rectangle’s longer dimension. A 0.20 m cleaning width with 0.02 m overlap controls the lane spacing. The planner evaluates four traversal variants to reduce the distance from the current pose, alternates lane direction, adds explicit turn transitions, and finishes with a perimeter pass.",
+          "The drive-then-turn controller turns those oriented waypoints into linear and angular velocity commands. StepperDrive converts them to wheel rates, applies acceleration-aware updates, and emits 1/16-microstep pulses through A4988 drivers. In parallel, a 5 mm SweptMap raster and CSV telemetry expose where the modeled vacuum actually traveled.",
+        ],
+      },
+      {
+        title: "Evidence, with boundaries",
+        paragraphs: [
+          "The reported 50-run simulation campaign retained 48 completed trials. On an ideal 2 m × 2 m table with randomized starting poses, those runs averaged 99.40% coverage of the safe inset and 90.97% of the full modeled tabletop. Mean completion time was 137.22 seconds, so the planner missed the two-minute target even while producing strong simulated coverage.",
+        ],
         bullets: [
-          "Filtered raw proximity readings with debounce and hysteresis for edge detection.",
-          "Collected edge points in robot/world coordinates and fit rectangular table boundaries with RANSAC line detection and orthogonality checks.",
-          "Generated inset boustrophedon lanes and tracked swept vacuum footprint on a raster map.",
-          "Built simulation, telemetry, and Excel/plot analysis scripts for repeated cleaning trials.",
-        ],
-      },
-      {
-        title: "Strategic Relevance",
-        paragraphs: [
-          "The project is strongest evidence for robotics perception and autonomy roles: it connects embedded sensing, geometric inference, planning, control, and test instrumentation in a physical system. It is adjacent to ML/AI because it works with noisy real-world data and algorithmic perception, not because it trains a neural model.",
-        ],
-      },
-      {
-        title: "Limitations",
-        bullets: [
-          "The active branch includes IMU/EKF scaffolding, but the strongest supported claims are boundary detection, geometric inference, coverage planning, and testing.",
-          "Current algorithms are engineered for rectangular tabletop environments rather than arbitrary room-scale navigation.",
+          "The simulator uses deterministic unicycle dynamics and does not model sensor noise, wheel slip, battery sag, or surface variation; these are simulation results, not physical-cleaning claims.",
+          "Rectangle fitting and coverage planning assume a rectangular tabletop.",
+          "The source workbook’s stale summary and invalid rectangle-error field are excluded; the published statistics come from the 48 retained raw rows.",
+          "Physical performance remains sensitive to surface reflectivity, wheel traction, sensor placement, and battery state.",
         ],
       },
     ],

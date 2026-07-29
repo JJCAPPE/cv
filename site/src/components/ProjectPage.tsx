@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
+import { Layout } from "@/components/Layout";
 import type { Project } from "@/content/projects";
 import { projects } from "@/content/projects";
-import { Layout } from "@/components/Layout";
 
 export function ProjectPage({ project }: { project: Project }) {
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(projectIndex + 1) % projects.length];
+  const isDeskinator = project.slug === "deskinator";
 
   return (
     <Layout className="project-page-shell">
@@ -61,9 +63,24 @@ export function ProjectPage({ project }: { project: Project }) {
           </div>
         </dl>
 
+        {project.metrics?.length ? (
+          <dl
+            className="project-page__metrics"
+            aria-label={`${project.title} project facts`}
+          >
+            {project.metrics.map((metric) => (
+              <div key={metric.label}>
+                <dt>{metric.value}</dt>
+                <dd>{metric.label}</dd>
+                {metric.note ? <dd>{metric.note}</dd> : null}
+              </div>
+            ))}
+          </dl>
+        ) : null}
+
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
-            const media = project.gallery?.[index];
+            const media = isDeskinator ? undefined : project.gallery?.[index];
 
             return (
               <div className="project-chapter-group" key={section.title}>
@@ -106,7 +123,9 @@ export function ProjectPage({ project }: { project: Project }) {
           })}
         </div>
 
-        {project.diagram ? (
+        {isDeskinator ? (
+          <DeskinatorCaseStudy />
+        ) : project.diagram ? (
           <section className="project-system">
             <h2>System</h2>
             <ol aria-label={`${project.title} system flow`} role="list">
