@@ -3,6 +3,35 @@
 Project media under `public/media/projects/` comes from repositories owned by
 Giacomo Cappelletto, except for the TickIT cover below.
 
+## MOVE
+
+Source repositories: private `move-agent` and `move-interface` applications.
+
+- `move-interface-overview.webp` is a browser capture of the real React
+  interface running through its existing ResponsesAgent adapter and fake
+  backend. The payload is a repository fixture containing fictional,
+  anonymized portfolio values.
+- `move-interface-evidence.webp` combines two crops from the same rendered
+  response: the typed metric group and priority-segment chart. No customer,
+  employee, or production identifier is visible.
+- `move-orchestration-field.webp` was generated with OpenAI image generation in
+  built-in mode. The prompt was: “A wide 16:9 editorial technical illustration
+  for a senior software and AI engineer portfolio case study. Near-black
+  graphite field with subtle paper grain. A precise network of thin off-white
+  data paths enters from the left, passes through a sequence of guarded
+  mechanical gates and compact orchestration nodes in the center, and exits as
+  a few clean verified output paths on the right. One restrained sulfur-yellow
+  accent marks the approved route and verification checkpoints. Abstract,
+  architectural, intelligent, and sober. Swiss editorial composition,
+  asymmetric negative space, fine linework, high contrast, tactile print
+  texture. No text, no letters, no numbers, no logos, no people, no faces, no
+  literal computer screen, no readable data, no purple or blue neon, no
+  cyberpunk glow, no generic AI brain, no stock illustration look.” It is used
+  as an atmospheric illustration, not as technical evidence.
+- Architecture, request-flow, contract, and audit graphics on the case-study
+  page are semantic HTML and CSS derived from the inspected July 2026 source
+  snapshot and dynamic-SQL audit.
+
 ## Deskinator
 
 Source repository: `deskinator-code`

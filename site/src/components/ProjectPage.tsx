@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
 import { Layout } from "@/components/Layout";
+import { MoveProjectStory } from "@/components/MoveProjectStory";
 import type { Project } from "@/content/projects";
 import { projects } from "@/content/projects";
 
@@ -9,6 +10,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const isDeskinator = project.slug === "deskinator";
+  const isMove = project.slug === "move";
 
   return (
     <Layout className="project-page-shell">
@@ -80,7 +82,8 @@ export function ProjectPage({ project }: { project: Project }) {
 
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
-            const media = isDeskinator ? undefined : project.gallery?.[index];
+            const media =
+              isDeskinator || isMove ? undefined : project.gallery?.[index];
 
             return (
               <div className="project-chapter-group" key={section.title}>
@@ -123,7 +126,9 @@ export function ProjectPage({ project }: { project: Project }) {
           })}
         </div>
 
-        {isDeskinator ? (
+        {isMove ? (
+          <MoveProjectStory />
+        ) : isDeskinator ? (
           <DeskinatorCaseStudy />
         ) : project.diagram ? (
           <section className="project-system">

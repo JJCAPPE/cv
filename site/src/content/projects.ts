@@ -43,6 +43,110 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "MOVE",
+    slug: "move",
+    summary:
+      "A governed enterprise AI copilot that turns natural-language questions into scoped, traceable answers across approved CRM and document sources.",
+    stack: [
+      "Python",
+      "MLflow ResponsesAgent",
+      "LangGraph",
+      "Databricks",
+      "SQLGlot",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Lakebase",
+    ],
+    year: "2026",
+    type: "Enterprise AI / Platform",
+    role: "Lead developer, Software and AI Engineering Intern",
+    featured: true,
+    cover: {
+      src: "/media/projects/move/move-interface-overview.webp",
+      alt: "The MOVE interface rendering a synthetic portfolio analysis with structured metrics, a table, and a chart.",
+      width: 1600,
+      height: 1200,
+      fit: "contain",
+      caption:
+        "The production interface rendering a fictional, anonymized payload through the real ResponsesAgent adapter.",
+    },
+    gallery: [
+      {
+        src: "/media/projects/move/move-interface-evidence.webp",
+        alt: "Synthetic MOVE portfolio metrics and a priority-segment chart rendered from typed agent output.",
+        width: 954,
+        height: 686,
+        fit: "contain",
+        caption:
+          "Typed metric and chart renderables from a synthetic portfolio response. No customer or production data is shown.",
+      },
+    ],
+    links: [],
+    metrics: [
+      {
+        value: "79.2%",
+        label: "direct SQL latency reduction",
+        note: "dated audit, failure to correct result",
+      },
+      {
+        value: "14 → 3",
+        label: "tool calls",
+        note: "same request, corrected grain",
+      },
+      {
+        value: "1,200+",
+        label: "named tests",
+        note: "agent and interface source snapshot",
+      },
+    ],
+    sections: [
+      {
+        title: "Why MOVE exists",
+        paragraphs: [
+          "Enterprise questions are rarely just language tasks. They carry customer scope, business definitions, permission boundaries, freshness requirements, and presentation needs. MOVE was built so a useful answer must also be scoped, inspectable, and grounded in approved evidence.",
+          "Relationship managers can ask about a portfolio, a specific customer, or an approved document in natural language. The system returns structured answers, tables, metrics, charts, citations, and a trace of the work used to support them.",
+        ],
+      },
+      {
+        title: "The operating boundary",
+        bullets: [
+          "Read-only access through registered tools and governed data services.",
+          "Request-scoped identity and portfolio filters applied before execution.",
+          "No general-knowledge completion when the required evidence is missing.",
+          "No write authority, outbound action, or hidden customer-row persistence.",
+          "Conversation state remains disabled in tracked targets until identity and Lakebase prerequisites are ready.",
+        ],
+      },
+      {
+        title: "What I built",
+        bullets: [
+          "The MLflow ResponsesAgent and LangGraph orchestration path, including routing, context assembly, skill composition, tool selection, evidence checks, and final review.",
+          "A governed text-to-SQL path with scoped metadata retrieval, deterministic templates, bounded generation, SQLGlot validation, and execution telemetry.",
+          "A versioned Python response contract and the FastAPI adapter that converts it into resilient streaming UI events.",
+          "React renderers for answer blocks, metrics, tables, charts, citations, tool activity, feedback, and follow-up questions.",
+          "Databricks packaging, deployment configuration, MLflow tracing, evaluation harnesses, and broad backend and interface test coverage.",
+        ],
+      },
+      {
+        title: "Measured iteration",
+        paragraphs: [
+          "A dated dynamic-SQL audit isolated model generation as the dominant bottleneck. The original representative request failed after four attempts and 122.9 seconds. A smaller grain-aware schema pack, clearer metric ownership, semantic invariants, and bounded retry reduced the path to one successful attempt and 25.6 seconds.",
+          "A faster model candidate completed sooner but returned the wrong rows and metric mappings. I kept the slower model because execution correctness, scope preservation, and business semantics mattered more than an attractive latency number.",
+        ],
+      },
+      {
+        title: "Limits, stated plainly",
+        bullets: [
+          "The published timings are audit scenarios, not production service-level claims.",
+          "The interface screenshots use fictional, anonymized values passed through the real renderer.",
+          "Skill guidance can narrow behavior but cannot override the tool registry or execution policy.",
+          "Only successful normalized evidence can support an answer or a future state fact.",
+        ],
+      },
+    ],
+  },
+  {
     title: "Rowing Biomechanics Pipeline",
     slug: "rowing-biomechanics",
     summary:
@@ -325,10 +429,10 @@ export const projects: Project[] = [
     role: "Sole developer",
     featured: true,
     cover: {
-      src: "/media/projects/inventory-system/checkout-funnel.webp",
+      src: "/media/projects/inventory-system/checkout-funnel.png",
       alt: "Checkout funnel analysis generated by the inventory system project.",
-      width: 2369,
-      height: 1409,
+      width: 1920,
+      height: 1247,
       caption: "Operational data turned into a concrete decision path.",
     },
     gallery: [
