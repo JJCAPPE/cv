@@ -1,40 +1,9 @@
 import Image from "next/image";
+import {
+  MoveAgentInterfaceExplorer,
+  MoveSkillAdgExplorer,
+} from "./MoveExplodedViews";
 import styles from "./MoveProjectStory.module.css";
-
-const requestSteps = [
-  {
-    title: "Validate and bind",
-    body: "Reject malformed requests, resolve trusted identity, and bind the user to an allowed portfolio scope.",
-  },
-  {
-    title: "Classify the question",
-    body: "Infer the business domain, requested entity, analytical grain, and evidence sources before any tool is offered.",
-  },
-  {
-    title: "Resolve skills",
-    body: "Load at most four focused instruction packs. Skills can narrow behavior but cannot expand execution authority.",
-  },
-  {
-    title: "Select tools",
-    body: "Expose at most six route-compatible capabilities from the governed registry instead of giving the model the entire surface.",
-  },
-  {
-    title: "Assemble context",
-    body: "Prioritize policy, identity, route, and current-user facts. Lower-authority context is dropped first when budgets tighten.",
-  },
-  {
-    title: "Execute safely",
-    body: "Enforce read-only policy, timeouts, request budgets, output limits, redaction, and stable tool failures at one boundary.",
-  },
-  {
-    title: "Measure evidence",
-    body: "Normalize successful results, citations, scope, and coverage. Failed calls never become supporting evidence.",
-  },
-  {
-    title: "Review and stream",
-    body: "Permit one scoped repair, then stream typed answer blocks and renderables through the versioned response contract.",
-  },
-];
 
 const auditStages = [
   {
@@ -95,116 +64,7 @@ export function MoveProjectStory() {
           </p>
         </header>
 
-        <figure className={styles.illustration}>
-          <div className={styles.illustrationImage}>
-            <Image
-              src="/media/projects/move/move-orchestration-field.webp"
-              alt="Abstract editorial illustration of data paths passing through guarded orchestration gates toward verified outputs."
-              fill
-              sizes="(max-width: 767px) 100vw, 92vw"
-            />
-          </div>
-          <figcaption>
-            Editorial illustration of guarded data flow. This is not a product
-            screenshot or a literal topology.
-          </figcaption>
-        </figure>
-
-        <div
-          className={styles.architectureMap}
-          role="img"
-          aria-label="MOVE architecture from the authenticated React interface through FastAPI and Databricks Model Serving into the governed agent runtime, approved data tools, evidence review, and a typed response contract. Lakebase stores interface history and feedback, while MLflow records traces and evaluation."
-        >
-          <div className={styles.interfaceLane}>
-            <span className={styles.laneLabel}>Interface runtime</span>
-            <div className={styles.archNode}>
-              <strong>Authenticated user</strong>
-              <span>Natural-language request</span>
-            </div>
-            <i aria-hidden="true" />
-            <div className={styles.archNode}>
-              <strong>React + Vite</strong>
-              <span>Typed blocks and renderables</span>
-            </div>
-            <i aria-hidden="true" />
-            <div className={styles.archNode}>
-              <strong>FastAPI stream</strong>
-              <span>Ownership, history, feedback</span>
-            </div>
-          </div>
-
-          <div className={styles.servingBridge}>
-            <span>Databricks Model Serving</span>
-            <i aria-hidden="true" />
-            <span>MLflow ResponsesAgent</span>
-          </div>
-
-          <div className={styles.agentLane}>
-            <span className={styles.laneLabel}>Governed agent runtime</span>
-            <div className={styles.runtimeCore}>
-              <div>
-                <span>01</span>
-                <strong>Identity boundary</strong>
-                <small>Validate request and scope</small>
-              </div>
-              <div>
-                <span>02</span>
-                <strong>Route and context</strong>
-                <small>Resolve skills and tools</small>
-              </div>
-              <div>
-                <span>03</span>
-                <strong>Safe execution</strong>
-                <small>Budgets, policy, redaction</small>
-              </div>
-              <div>
-                <span>04</span>
-                <strong>Evidence review</strong>
-                <small>Coverage and one repair</small>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.toolLane}>
-            <span className={styles.laneLabel}>Approved evidence</span>
-            <div className={styles.toolGroup}>
-              <div>
-                <strong>Governed SQL</strong>
-                <span>Cards, templates, dynamic SQL</span>
-              </div>
-              <div>
-                <strong>Document retrieval</strong>
-                <span>Scoped passages and citations</span>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.responseLane}>
-            <span className={styles.responseContract}>
-              bmed.agent.contract.v1
-            </span>
-            <span>normalized answer</span>
-            <i aria-hidden="true" />
-            <span>streaming UI events</span>
-          </div>
-
-          <div className={styles.platformRails}>
-            <div>
-              <span>Interface state</span>
-              <strong>Lakebase / Postgres</strong>
-              <small>Conversations and votes</small>
-            </div>
-            <div>
-              <span>Observability</span>
-              <strong>MLflow</strong>
-              <small>Traces, evaluation, feedback</small>
-            </div>
-            <p>
-              Agent-side conversational state is prepared but disabled in
-              tracked targets.
-            </p>
-          </div>
-        </div>
+        <MoveAgentInterfaceExplorer />
       </section>
 
       <section
@@ -219,15 +79,7 @@ export function MoveProjectStory() {
           </p>
         </header>
 
-        <ol className={styles.requestFlow}>
-          {requestSteps.map((step, index) => (
-            <li key={step.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </li>
-          ))}
-        </ol>
+        <MoveSkillAdgExplorer />
       </section>
 
       <section
@@ -397,6 +249,22 @@ export function MoveProjectStory() {
             <strong>Paragraphs, metrics, tables, charts</strong>
           </div>
         </div>
+
+        <figure className={styles.interfaceOverview}>
+          <div>
+            <Image
+              src="/media/projects/move/move-interface-overview.webp"
+              alt="The real MOVE React interface rendering a synthetic portfolio answer with typed metrics, a table, a chart, citations, and follow-up actions."
+              fill
+              sizes="(max-width: 767px) 100vw, 92vw"
+            />
+          </div>
+          <figcaption>
+            Full interface capture using the real adapter and renderer with a
+            fictional repository fixture. No customer or production data is
+            shown.
+          </figcaption>
+        </figure>
 
         <div className={styles.interfaceEvidence}>
           <figure>

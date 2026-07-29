@@ -40,23 +40,28 @@ Source repositories: private `move-agent` and `move-interface` applications.
 - `move-interface-evidence.webp` combines two crops from the same rendered
   response: the typed metric group and priority-segment chart. No customer,
   employee, or production identifier is visible.
-- `move-orchestration-field.webp` was generated with OpenAI image generation in
-  built-in mode. The prompt was: “A wide 16:9 editorial technical illustration
-  for a senior software and AI engineer portfolio case study. Near-black
-  graphite field with subtle paper grain. A precise network of thin off-white
-  data paths enters from the left, passes through a sequence of guarded
-  mechanical gates and compact orchestration nodes in the center, and exits as
-  a few clean verified output paths on the right. One restrained sulfur-yellow
-  accent marks the approved route and verification checkpoints. Abstract,
-  architectural, intelligent, and sober. Swiss editorial composition,
-  asymmetric negative space, fine linework, high contrast, tactile print
-  texture. No text, no letters, no numbers, no logos, no people, no faces, no
-  literal computer screen, no readable data, no purple or blue neon, no
-  cyberpunk glow, no generic AI brain, no stock illustration look.” It is used
-  as an atmospheric illustration, not as technical evidence.
-- Architecture, request-flow, contract, and audit graphics on the case-study
-  page are semantic HTML and CSS derived from the inspected July 2026 source
-  snapshot and dynamic-SQL audit.
+- `move-agent-interface-exploded.svg` and its request, runtime, and response
+  layer companions are deterministic 2400 × 1350 exports from
+  `scripts/generate-move-visuals.mjs`. They trace the authenticated React and
+  FastAPI boundary, Databricks Model Serving and governed agent runtime, and
+  the versioned typed return path.
+- `move-skill-adg-exploded.svg` and its resolve, context, and authority layer
+  companions come from the same generator. They distinguish the tracked
+  file-backed skill path from optional Delta loading and the historical
+  instruction-RAG fallback.
+- The claim ledger is
+  `scripts/move-visuals/truth-ledger.json`. It pins `cv-site` at
+  `0e883ec6ed6dd46c1968de57321b8dbb81f195d0`, `move-agent` at
+  `3bedfdaa17a47354e2e77fc785d6a1610a70d464`, `move-interface` at
+  `4000c8cf12e9784fe320ad761ee81a1fc134ed84`, and `move-istruzioni` at
+  `e36d6e24117fc2fd4a6aac82f57ae4e3459d9511`.
+- Solid paths are tracked defaults, dashed paths are optional or configured,
+  and subdued disconnected treatment is historical. The SVGs contain no
+  customer, employee, private identifier, production payload, external asset,
+  or private chain-of-thought.
+- The remaining contract and audit graphics on the case-study page are
+  semantic HTML and CSS derived from the same inspected July 2026 source
+  snapshot and dated dynamic-SQL audit.
 
 ## Deskinator
 

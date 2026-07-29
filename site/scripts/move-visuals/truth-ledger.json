@@ -1,0 +1,1059 @@
+{
+  "schema_version": "move.visual_truth.v1",
+  "project": "MOVE",
+  "generated_at": "source-pinned; no runtime timestamp",
+  "snapshots": {
+    "cv-site": "0e883ec6ed6dd46c1968de57321b8dbb81f195d0",
+    "move-agent": "3bedfdaa17a47354e2e77fc785d6a1610a70d464",
+    "move-interface": "4000c8cf12e9784fe320ad761ee81a1fc134ed84",
+    "move-istruzioni": "e36d6e24117fc2fd4a6aac82f57ae4e3459d9511"
+  },
+  "sources": {
+    "site.project": {
+      "repo": "cv-site",
+      "path": "site/src/content/projects.ts",
+      "symbol": "projects[slug=move]",
+      "snapshot": "0e883ec6ed6dd46c1968de57321b8dbb81f195d0"
+    },
+    "interface.chat": {
+      "repo": "move-interface",
+      "path": "client/src/components/chat.tsx",
+      "symbol": "Chat / useChat / ChatTransport",
+      "snapshot": "4000c8cf12e9784fe320ad761ee81a1fc134ed84"
+    },
+    "interface.main": {
+      "repo": "move-interface",
+      "path": "server/app/main.py",
+      "symbol": "post_chat",
+      "snapshot": "4000c8cf12e9784fe320ad761ee81a1fc134ed84"
+    },
+    "interface.serving": {
+      "repo": "move-interface",
+      "path": "server/app/backends/serving_endpoint.py",
+      "symbol": "ServingEndpointBackend / _ResponsesAgentAdapter",
+      "snapshot": "4000c8cf12e9784fe320ad761ee81a1fc134ed84"
+    },
+    "interface.types": {
+      "repo": "move-interface",
+      "path": "packages/core/src/types.ts",
+      "symbol": "CustomUIDataTypes / StructuredAnswerData / AnswerBlock",
+      "snapshot": "4000c8cf12e9784fe320ad761ee81a1fc134ed84"
+    },
+    "interface.message": {
+      "repo": "move-interface",
+      "path": "client/src/components/message.tsx",
+      "symbol": "message renderers",
+      "snapshot": "4000c8cf12e9784fe320ad761ee81a1fc134ed84"
+    },
+    "agent.responses": {
+      "repo": "move-agent",
+      "path": "agent/responses_agent.py",
+      "symbol": "BmedResponsesAgent._predict_impl_budgeted",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.contract": {
+      "repo": "move-agent",
+      "path": "agent/contracts.py",
+      "symbol": "CONTRACT_SCHEMA_VERSION / AgentCustomOutputs",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.skills": {
+      "repo": "move-agent",
+      "path": "agent/skills/runtime.py",
+      "symbol": "SkillRuntime.resolve / _sectioned_context_payload",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.skill_config": {
+      "repo": "move-agent",
+      "path": "agent/config.py",
+      "symbol": "SKILLS_MAX_LOADED / SKILLS_MAX_CONTEXT_CHARS",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.manifest": {
+      "repo": "move-agent",
+      "path": "skills/manifest.yml",
+      "symbol": "load_groups",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.skill_pair": {
+      "repo": "move-agent",
+      "path": "skills/domains/tfr/move_domain_tfr.skill.yml + move_domain_tfr.md",
+      "symbol": "contract / content_file / content sections",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.tool_selection": {
+      "repo": "move-agent",
+      "path": "agent/tool_selection.py",
+      "symbol": "select_tools / MAX_SELECTED_TOOLS",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.executor": {
+      "repo": "move-agent",
+      "path": "agent/tools/executor.py",
+      "symbol": "SafeToolExecutor.execute / _blocking_error",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.registry": {
+      "repo": "move-agent",
+      "path": "agent/tools/registry.py",
+      "symbol": "ToolSpec registry / query_sql_dynamic / query_doc_rag",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "agent.target": {
+      "repo": "move-agent",
+      "path": "databricks.yml",
+      "symbol": "targets.prod.variables",
+      "snapshot": "3bedfdaa17a47354e2e77fc785d6a1610a70d464"
+    },
+    "instructions.system": {
+      "repo": "move-istruzioni",
+      "path": "README.md",
+      "symbol": "append-only prompt versions / benchmarks / Vector Search",
+      "snapshot": "e36d6e24117fc2fd4a6aac82f57ae4e3459d9511"
+    }
+  },
+  "claims": [
+    {
+      "id": "common-project",
+      "display": "MOVE / SOURCE-LED SYSTEM",
+      "claim": "The visual documents the MOVE project using source-pinned system claims.",
+      "source_refs": ["site.project"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "common-snapshot",
+      "display": "SOURCE SNAPSHOT / JUL 2026",
+      "claim": "The visual is pinned to the July 2026 repository snapshots recorded in this ledger.",
+      "source_refs": ["site.project", "agent.target", "interface.chat"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "common-default",
+      "display": "SOLID / TRACKED DEFAULT",
+      "claim": "Solid connectors identify the path active in the tracked target configuration.",
+      "source_refs": ["agent.target", "interface.main"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "common-optional",
+      "display": "DASHED / OPTIONAL OR CONFIGURED",
+      "claim": "Dashed connectors identify supported paths that depend on configuration or availability.",
+      "source_refs": ["agent.target", "interface.main"],
+      "scope": "optional",
+      "surfaces": ["move-agent-interface-exploded", "move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "common-historical",
+      "display": "SUBDUED / HISTORICAL FALLBACK",
+      "claim": "Subdued disconnected treatment identifies a legacy fallback outside the active skill route.",
+      "source_refs": ["agent.responses", "instructions.system"],
+      "scope": "historical",
+      "surfaces": ["move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-title",
+      "display": "AGENT ↔ INTERFACE",
+      "claim": "The plate traces the request and response boundary between the MOVE interface and agent.",
+      "source_refs": ["interface.chat", "interface.main", "agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-subtitle",
+      "display": "AUTHENTICATED REQUEST → GOVERNED EVIDENCE → TYPED UI",
+      "claim": "Authenticated requests are executed through governed evidence paths and returned as typed UI data.",
+      "source_refs": ["interface.main", "agent.responses", "interface.types"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-plane-request",
+      "display": "01 / REQUEST BOUNDARY",
+      "claim": "The first plane is the authenticated browser and FastAPI request boundary.",
+      "source_refs": ["interface.chat", "interface.main"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-user",
+      "display": "AUTHENTICATED USER",
+      "claim": "post_chat requires an authenticated session.",
+      "source_refs": ["interface.main"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-react",
+      "display": "REACT / VITE CHAT",
+      "claim": "The interface client is a React chat application.",
+      "source_refs": ["interface.chat"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-transport",
+      "display": "ChatTransport",
+      "claim": "The client uses ChatTransport with useChat.",
+      "source_refs": ["interface.chat"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-fastapi",
+      "display": "FastAPI / post_chat",
+      "claim": "The client posts to the FastAPI /api/chat route implemented by post_chat.",
+      "source_refs": ["interface.chat", "interface.main"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-serving-backend",
+      "display": "ServingEndpointBackend / ChatRequest",
+      "claim": "post_chat constructs ChatRequest and delegates to ServingEndpointBackend.stream_reply.",
+      "source_refs": ["interface.main", "interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-no-direct",
+      "display": "NO DIRECT BROWSER → DATABRICKS",
+      "claim": "The implemented browser path terminates at /api/chat; the server backend invokes Databricks.",
+      "source_refs": ["interface.chat", "interface.main", "interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-history",
+      "display": "LAKEBASE / POSTGRES HISTORY + VOTES",
+      "claim": "The interface repository can persist chat messages and votes when available.",
+      "source_refs": ["interface.main"],
+      "scope": "optional",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-history-status",
+      "display": "OPTIONAL / REPOSITORY AVAILABLE",
+      "claim": "History persistence is conditional on repo.available.",
+      "source_refs": ["interface.main"],
+      "scope": "optional",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-serving",
+      "display": "DATABRICKS MODEL SERVING",
+      "claim": "ServingEndpointBackend invokes a configured Databricks Serving Endpoint.",
+      "source_refs": ["interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-responses-task",
+      "display": "agent/v1/responses",
+      "claim": "The ResponsesAgent task is invoked through the agent/v1/responses request body.",
+      "source_refs": ["interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-plane-runtime",
+      "display": "02 / GOVERNED RUNTIME",
+      "claim": "The second plane represents BmedResponsesAgent request orchestration.",
+      "source_refs": ["agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-responses-agent",
+      "display": "MLFLOW ResponsesAgent",
+      "claim": "The deployed agent is implemented as an MLflow ResponsesAgent.",
+      "source_refs": ["agent.responses", "interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-validate",
+      "display": "REQUEST VALIDATION",
+      "claim": "_predict_impl_budgeted validates the request before orchestration.",
+      "source_refs": ["agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-identity",
+      "display": "TRUSTED IDENTITY",
+      "claim": "_predict_impl_budgeted resolves an effective trusted identity.",
+      "source_refs": ["agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-route",
+      "display": "ROUTE · SKILLS · TOOLS",
+      "claim": "The agent resolves a route, skills, and a bounded tool selection.",
+      "source_refs": ["agent.responses", "agent.tool_selection", "agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-context",
+      "display": "CONTEXT + GRAPH / DIRECT PATH",
+      "claim": "The runtime assembles context then executes either the graph or a supported direct retrieval path.",
+      "source_refs": ["agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-executor",
+      "display": "SafeToolExecutor",
+      "claim": "SafeToolExecutor is the final execution boundary for selected tools.",
+      "source_refs": ["agent.responses", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-evidence",
+      "display": "EVIDENCE COVERAGE",
+      "claim": "The runtime evaluates normalized evidence coverage before finalization.",
+      "source_refs": ["agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-repair",
+      "display": "≤1 SCOPED REPAIR",
+      "claim": "Final review may perform one bounded scoped repair rather than an open loop.",
+      "source_refs": ["agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-sql",
+      "display": "GOVERNED SQL",
+      "claim": "The registered evidence inventory includes governed dynamic SQL.",
+      "source_refs": ["agent.registry", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-docs",
+      "display": "SCOPED DOCUMENT RETRIEVAL",
+      "claim": "The registered evidence inventory includes scoped document retrieval.",
+      "source_refs": ["agent.registry", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-state-off",
+      "display": "AGENT CONVERSATION STATE / OFF",
+      "claim": "Agent-side conversation state is off in the tracked production target.",
+      "source_refs": ["agent.target"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-mlflow",
+      "display": "MLFLOW TRACE / OPTIONAL FEEDBACK",
+      "claim": "MLflow trace IDs are returned; interface feedback submission depends on configuration.",
+      "source_refs": ["interface.serving", "interface.main"],
+      "scope": "optional",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-plane-response",
+      "display": "03 / TYPED RETURN",
+      "claim": "The third plane represents the versioned response contract and typed UI return path.",
+      "source_refs": ["agent.contract", "interface.serving", "interface.types"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-contract",
+      "display": "bmed.agent.contract.v1",
+      "claim": "The agent boundary schema version is fixed to bmed.agent.contract.v1.",
+      "source_refs": ["agent.contract"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-contract-fields",
+      "display": "ANSWER · RENDERABLES · CITATIONS · TOOLS · SAFETY · USAGE",
+      "claim": "AgentCustomOutputs includes answer, renderables, citations, tool records, safety, and usage.",
+      "source_refs": ["agent.contract"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-adapter",
+      "display": "_ResponsesAgentAdapter",
+      "claim": "The interface adapter converts ResponsesAgent output and custom_outputs to UI events.",
+      "source_refs": ["interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-events",
+      "display": "VERCEL AI UI EVENTS",
+      "claim": "The FastAPI stream emits Vercel AI UI message stream events.",
+      "source_refs": ["interface.main", "interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-ondata",
+      "display": "useChat / onData",
+      "claim": "The client consumes custom UI data through useChat onData.",
+      "source_refs": ["interface.chat"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-renderers",
+      "display": "TYPED MESSAGE RENDERERS",
+      "claim": "The message component renders typed answer and tool data.",
+      "source_refs": ["interface.types", "interface.message"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-renderer-kinds",
+      "display": "BLOCKS · METRICS · TABLES · CHARTS · CITATIONS · TRACE · FOLLOW-UPS",
+      "claim": "The UI supports structured blocks, metrics, tables, charts, citations, context trace, and follow-up questions.",
+      "source_refs": ["interface.types", "interface.message"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-public-summary",
+      "display": "PUBLIC SUMMARIES / NOT PRIVATE CHAIN-OF-THOUGHT",
+      "claim": "Only public reasoning summaries are projected into UI reasoning events.",
+      "source_refs": ["interface.serving", "interface.message"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-request",
+      "display": "AUTHENTICATED USER → REACT → FASTAPI → SERVING ENDPOINT → MODEL SERVING",
+      "claim": "The default request path moves from the authenticated client through /api/chat and ServingEndpointBackend before the backend invokes Databricks Model Serving.",
+      "source_refs": ["interface.chat", "interface.main", "interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-no-direct",
+      "display": "BROWSER ↛ DATABRICKS",
+      "claim": "The browser-to-Databricks relationship is explicitly blocked because only the interface backend invokes Model Serving.",
+      "source_refs": ["interface.chat", "interface.main", "interface.serving"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-history",
+      "display": "FASTAPI ⇢ OPTIONAL INTERFACE HISTORY + VOTES",
+      "claim": "post_chat conditionally persists interface messages and feedback when the repository is available.",
+      "source_refs": ["interface.main"],
+      "scope": "optional",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-request-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-serving",
+      "display": "MODEL SERVING → agent/v1/responses → ResponsesAgent",
+      "claim": "ServingEndpointBackend invokes the configured endpoint with an agent/v1/responses payload handled by the MLflow ResponsesAgent.",
+      "source_refs": ["interface.serving", "agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-runtime",
+      "display": "VALIDATE → IDENTITY → ROUTE / SKILLS / TOOLS → CONTEXT → EXECUTE → EVIDENCE → REPAIR",
+      "claim": "_predict_impl_budgeted sequences the governed request, context, execution, evidence, and bounded repair stages.",
+      "source_refs": ["agent.responses", "agent.tool_selection", "agent.skills", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-evidence",
+      "display": "GOVERNED SQL + DOCUMENT RETRIEVAL → SafeToolExecutor",
+      "claim": "Registered SQL and document tools enter the request only through the SafeToolExecutor execution boundary.",
+      "source_refs": ["agent.registry", "agent.executor", "agent.responses"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-runtime-response",
+      "display": "GOVERNED RUNTIME → VERSIONED CONTRACT",
+      "claim": "The runtime finalizes its result into the bmed.agent.contract.v1 custom-output boundary.",
+      "source_refs": ["agent.responses", "agent.contract"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-runtime-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "agent-edge-response",
+      "display": "CONTRACT → ADAPTER → AI UI EVENTS → useChat → TYPED RENDERERS",
+      "claim": "The versioned contract is projected by the adapter into events consumed by useChat and the typed message renderers.",
+      "source_refs": ["agent.contract", "interface.serving", "interface.chat", "interface.types", "interface.message"],
+      "scope": "default",
+      "surfaces": ["move-agent-interface-exploded", "move-agent-interface-response-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-title",
+      "display": "SKILLS / ADG",
+      "claim": "The plate documents the MOVE skill runtime and ADG guidance path.",
+      "source_refs": ["agent.skills", "agent.manifest"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-subtitle",
+      "display": "RESOLVE PACKAGES → COMPOSE BOUNDED CONTEXT → PRESERVE CODE AUTHORITY",
+      "claim": "The runtime resolves packages and composes context while tool authority remains in code.",
+      "source_refs": ["agent.skills", "agent.tool_selection", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-target",
+      "display": "TRACKED TARGET / ADVISE + FILES",
+      "claim": "The tracked production target sets skills runtime mode to advise and source to files.",
+      "source_refs": ["agent.target"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-shadow",
+      "display": "VALIDATION · ROUTING · CONTEXT · TOOL SELECT / SHADOW",
+      "claim": "Request validation, routing, context enforcement, and tool selection are shadow in the tracked target.",
+      "source_refs": ["agent.target"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-state-off",
+      "display": "CONVERSATION STATE / OFF",
+      "claim": "Conversation state is off in the tracked target.",
+      "source_refs": ["agent.target"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-plane-resolve",
+      "display": "01 / RESOLVE",
+      "claim": "The first plane represents bounded skill package loading and resolution.",
+      "source_refs": ["agent.skills", "agent.manifest"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-manifest",
+      "display": "manifest.yml ALLOWLIST",
+      "claim": "The file loader accepts only reviewed contract paths declared by manifest load groups.",
+      "source_refs": ["agent.skills", "agent.manifest"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-pair",
+      "display": "PAIRED .skill.yml + .md",
+      "claim": "Each file-backed runtime skill requires an adjacent YAML contract and Markdown content file.",
+      "source_refs": ["agent.skills", "agent.skill_pair"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-yaml",
+      "display": "YAML / ADG + CONTRACTS",
+      "claim": "The YAML contract contains ADG, phase contracts, tool policy, and output policy.",
+      "source_refs": ["agent.skills", "agent.skill_pair"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-markdown",
+      "display": "MARKDOWN / CONTENT SECTIONS",
+      "claim": "The paired Markdown file supplies parsed content sections.",
+      "source_refs": ["agent.skills", "agent.skill_pair"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-history",
+      "display": "REQUEST HISTORY ≤8 MSG / 6,000 CHARS",
+      "claim": "Skill resolution bounds request history to eight messages and 6,000 characters.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-composition",
+      "display": "CORE + ≤1 DOMAIN + ACTION MATCHES",
+      "claim": "Resolution loads always-on core, at most one resolved domain, and matching action skills.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-loaded",
+      "display": "≤4 LOADED SKILLS",
+      "claim": "SkillRuntime caps the loaded skill set at four.",
+      "source_refs": ["agent.skills", "agent.skill_config"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-delta",
+      "display": "DELTA CATALOG / OPTIONAL SOURCE",
+      "claim": "SkillRuntime supports a Delta-backed source, but the tracked target uses files.",
+      "source_refs": ["agent.skills", "agent.target"],
+      "scope": "optional",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-draft",
+      "display": "DRAFT PACKAGE → EXPLICIT WARNING",
+      "claim": "Loading any draft skill adds the draft_skill_loaded warning.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-plane-context",
+      "display": "02 / COMPOSE",
+      "claim": "The second plane represents reconstructed state and bounded skill context composition.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-state",
+      "display": "SUCCESSFUL STRUCTURED HISTORY → STATE",
+      "claim": "Durable skill state is reconstructed only from successful structured tool history.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-adg",
+      "display": "ADG ALLOWED EDGES",
+      "claim": "Navigation resolves allowed ADG route targets from current phase edges.",
+      "source_refs": ["agent.skills", "agent.skill_pair"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-phase-contracts",
+      "display": "PHASE CONTRACTS",
+      "claim": "Current and prospective phase contracts are included in the sectioned context payload.",
+      "source_refs": ["agent.skills", "agent.skill_pair"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-current",
+      "display": "GENERAL + CURRENT INTENT SECTIONS",
+      "claim": "General and current-node intent sections are mandatory in sectioned context.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-successors",
+      "display": "BUDGET-PERMITTING SUCCESSOR SECTIONS",
+      "claim": "Successor content groups are added only while the context remains within budget.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-context-schema",
+      "display": "move.skill_context.v1",
+      "claim": "The resolved context payload schema version is move.skill_context.v1.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-context-cap",
+      "display": "DEFAULT ENVELOPE ≤12,000 CHARS",
+      "claim": "The configured default and enforced upper bound for skill context is 12,000 characters.",
+      "source_refs": ["agent.skill_config"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-context-payload",
+      "display": "RULES · GAPS · NEXT-STEP POLICY · CORE / ACTION PROJECTIONS",
+      "claim": "The bounded payload includes current rules, unresolved gaps, next-step policies, and compact non-domain projections.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-not-funnel",
+      "display": "ALLOWED EDGES ≠ MANDATORY FUNNEL",
+      "claim": "ADG edges bound allowed successor guidance; they do not execute a forced linear state transition.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "qualified",
+      "notes": "Interpretation is grounded in _resolve_navigation returning candidate target sets rather than mutating mandatory state."
+    },
+    {
+      "id": "skills-followup-only",
+      "display": "PROSPECTIVE CONTENT / FOLLOW-UP ONLY",
+      "claim": "Prospective successor sections and contracts are explicitly marked follow_up_only.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-plane-authority",
+      "display": "03 / AUTHORIZE",
+      "claim": "The third plane represents bounded tool selection and final code-owned execution authority.",
+      "source_refs": ["agent.tool_selection", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-hints",
+      "display": "primary_tools + documented_tools / RANKING HINTS",
+      "claim": "Resolved primary and documented tools are guidance and ranking inputs.",
+      "source_refs": ["agent.skills", "agent.tool_selection"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-selector",
+      "display": "ToolSelector",
+      "claim": "ToolSelector deterministically narrows the registered inventory.",
+      "source_refs": ["agent.tool_selection"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-intersection",
+      "display": "REGISTRY ∩ POLICY ∩ ROUTE ∩ IDENTITY",
+      "claim": "Selection intersects registry metadata with request policy, route compatibility, and trusted identifier availability.",
+      "source_refs": ["agent.tool_selection"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-schema-budget",
+      "display": "≤6 TOOL SCHEMAS",
+      "claim": "The selected tool schema budget is capped at six.",
+      "source_refs": ["agent.tool_selection"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-executor",
+      "display": "SafeToolExecutor",
+      "claim": "SafeToolExecutor remains the final authority for each invocation.",
+      "source_refs": ["agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-executor-rules",
+      "display": "READ-ONLY · BUDGETS · TIMEOUTS · LIMITS · REDACTION · STABLE FAILURES",
+      "claim": "The executor enforces read-only policy, call budgets, timeouts, output limits, redaction, and normalized failures.",
+      "source_refs": ["agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-no-authority",
+      "display": "SKILLS NARROW BEHAVIOR + RANKING; THEY NEVER GRANT TOOLS",
+      "claim": "Skill hints can rank eligible tools but cannot create execution authority.",
+      "source_refs": ["agent.tool_selection", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-resolve",
+      "display": "MANIFEST → FILE PAIR → BOUNDED HISTORY → MATCHES → ≤4 SKILLS",
+      "claim": "The tracked file-backed resolver loads manifest-approved packages, bounds request history, matches core/domain/action skills, and caps the resolved set.",
+      "source_refs": ["agent.manifest", "agent.skill_pair", "agent.skills", "agent.skill_config"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-delta",
+      "display": "OPTIONAL DELTA SOURCE ⇢ SHARED RESOLUTION",
+      "claim": "Delta-backed skill records are an optional source that enters the same bounded SkillRuntime resolution path instead of the tracked file loader.",
+      "source_refs": ["agent.skills", "agent.target"],
+      "scope": "optional",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-resolve-context",
+      "display": "RESOLVED SKILLS → CONTEXT COMPOSITION",
+      "claim": "The resolved skill set supplies navigation, policies, contracts, and selected content to bounded context composition.",
+      "source_refs": ["agent.skills"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-resolve-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-state-adg",
+      "display": "STRUCTURED HISTORY → ADG NAVIGATION → PHASE CONTRACTS",
+      "claim": "Successful structured history reconstructs state used to resolve ADG navigation and current or prospective phase contracts.",
+      "source_refs": ["agent.skills", "agent.skill_pair"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-context",
+      "display": "CURRENT SECTIONS → BUDGET-PERMITTING SUCCESSORS → move.skill_context.v1",
+      "claim": "Mandatory current sections and budget-permitting successor sections compose the versioned bounded context payload.",
+      "source_refs": ["agent.skills", "agent.skill_config"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-context-authority",
+      "display": "BOUNDED CONTEXT → CODE-OWNED TOOL AUTHORITY",
+      "claim": "Resolved skill context supplies guidance and ranking hints to tool selection without granting execution authority.",
+      "source_refs": ["agent.skills", "agent.tool_selection", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-context-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-edge-authority",
+      "display": "HINTS → ToolSelector → ≤6 SCHEMAS → SafeToolExecutor",
+      "claim": "Skill hints enter deterministic selection, which exposes at most six registered schemas before SafeToolExecutor enforces invocation policy.",
+      "source_refs": ["agent.skills", "agent.tool_selection", "agent.executor"],
+      "scope": "default",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    },
+    {
+      "id": "skills-instruction-rag",
+      "display": "query_istruzioni_rag / FALLBACK WHEN SKILLS INACTIVE",
+      "claim": "The instruction RAG preflight is a legacy fallback executed only when skills do not effectively apply.",
+      "source_refs": ["agent.responses", "instructions.system"],
+      "scope": "historical",
+      "surfaces": ["move-skill-adg-exploded", "move-skill-adg-authority-layer"],
+      "confidence": "verified",
+      "notes": "Source-pinned claim; the declared scope determines default, dashed optional, or subdued historical treatment."
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "exclude-direct-browser-databricks",
+      "reason": "The browser calls /api/chat; only the interface backend invokes Databricks.",
+      "source_refs": ["interface.chat", "interface.main", "interface.serving"]
+    },
+    {
+      "id": "exclude-genie-production-capability",
+      "reason": "Genie exists in compatibility code but is not represented as a production capability in these tracked paths.",
+      "source_refs": ["agent.target", "agent.registry"]
+    },
+    {
+      "id": "exclude-unrestricted-tool-authority",
+      "reason": "Selection and SafeToolExecutor retain policy authority; skills cannot grant tools.",
+      "source_refs": ["agent.tool_selection", "agent.executor"]
+    },
+    {
+      "id": "exclude-enabled-agent-memory",
+      "reason": "Agent conversation state is off in the tracked production target.",
+      "source_refs": ["agent.target"]
+    },
+    {
+      "id": "exclude-universal-domain-approval",
+      "reason": "Draft packages emit a warning, so the visual does not imply universal production approval.",
+      "source_refs": ["agent.skills"]
+    },
+    {
+      "id": "exclude-private-reasoning",
+      "reason": "Only public summaries are rendered; private chain-of-thought is not exposed.",
+      "source_refs": ["interface.serving", "interface.message"]
+    },
+    {
+      "id": "exclude-instructions-as-skill-publisher",
+      "reason": "move-istruzioni is a separate versioned prompt and document application, not the publisher of current file-backed ADG packages.",
+      "source_refs": ["instructions.system", "agent.manifest", "agent.target"]
+    },
+    {
+      "id": "exclude-customer-payload",
+      "reason": "The diagrams show system boundaries and contain no customer or production payload.",
+      "source_refs": ["site.project"]
+    }
+  ]
+}

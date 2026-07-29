@@ -65,13 +65,13 @@ export const projects: Project[] = [
     role: "Lead developer, Software and AI Engineering Intern",
     featured: true,
     cover: {
-      src: "/media/projects/move/move-interface-overview.webp",
-      alt: "The MOVE interface rendering a synthetic portfolio analysis with structured metrics, a table, and a chart.",
-      width: 1600,
-      height: 1200,
-      fit: "contain",
+      src: "/media/projects/move/move-agent-interface-exploded.svg",
+      alt: "Exploded MOVE system showing an authenticated web request entering the governed agent runtime and returning through a versioned typed UI contract.",
+      width: 2400,
+      height: 1350,
+      fit: "cover",
       caption:
-        "The production interface rendering a fictional, anonymized payload through the real ResponsesAgent adapter.",
+        "Source-led system master pinned to the inspected July 2026 repositories. Solid paths are tracked defaults; dashed paths are optional or configured.",
     },
     gallery: [
       {
