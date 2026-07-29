@@ -233,6 +233,10 @@
     aspect-ratio: auto;
   }
 
+  .rail[data-enhanced="true"] .rowingImage {
+    object-position: 100% 50%;
+  }
+
   .rail[data-enhanced="true"] .copy {
     grid-area: copy;
     align-self: stretch;
