@@ -1,0 +1,629 @@
+.caseStudy {
+  border-top: 1px solid var(--line);
+}
+
+.section {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  padding: clamp(6rem, 12vw, 12rem) clamp(1rem, 3vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.recoverySection,
+.analysisSection {
+  background: var(--surface);
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 7rem);
+}
+
+.kicker,
+.visualKicker {
+  margin: 0;
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  grid-column: 1 / -1;
+}
+
+.sectionHeader h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4.2rem, 8.5vw, 9rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.sectionHeader > p:last-child {
+  max-width: 40rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.2vw, 1.14rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.systemFigure {
+  margin: clamp(3rem, 7vw, 7rem) 0 0;
+}
+
+.systemFigureViewport {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0b0b0a;
+}
+
+.systemFigureViewport:focus-visible {
+  outline: 2px solid var(--accent-ui);
+  outline-offset: 3px;
+}
+
+.systemFigureViewport img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.systemFigure figcaption {
+  max-width: 68rem;
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.mobileHint {
+  display: none;
+}
+
+.comparison {
+  margin-top: clamp(3rem, 7vw, 7rem);
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.comparisonHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.comparisonHeader h3 {
+  max-width: 16ch;
+  margin: 1.1rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.evidenceFlag {
+  margin: 0;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.taskContract {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  background: var(--line);
+}
+
+.taskContract > div {
+  min-height: 10rem;
+  padding: 1.2rem;
+  background: var(--panel);
+}
+
+.taskContract dt,
+.measurementReadout dt {
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.taskContract dd {
+  margin: 2.3rem 0 0;
+  color: var(--fg);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.workflowControls {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.controlLabel {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.segmented,
+.stepButtons {
+  display: flex;
+  gap: 1px;
+  padding: 1px;
+  background: var(--line);
+}
+
+.segmented button,
+.stepButtons button,
+.stageRail button {
+  min-height: 2.75rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--panel);
+  color: var(--fg);
+  cursor: pointer;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+.segmented button {
+  padding: 0.65rem 1rem;
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.stepButtons button {
+  min-width: 7.2rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.segmented button:focus-visible,
+.stepButtons button:focus-visible,
+.stageRail button:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--accent-ui);
+  outline-offset: 2px;
+}
+
+.segmented button:disabled,
+.stepButtons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.stageRail {
+  display: flex;
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  overflow-x: auto;
+  background: var(--line);
+  list-style: none;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--accent-ui) var(--panel);
+  scrollbar-width: thin;
+}
+
+.stageRail li {
+  min-width: 10rem;
+  flex: 1 0 0;
+}
+
+.stageRail button {
+  display: grid;
+  width: 100%;
+  min-height: 5.5rem;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 0.8rem;
+  padding: 1rem;
+  text-align: left;
+}
+
+.stageRail button span {
+  color: var(--muted);
+}
+
+.stageRail button[aria-pressed="true"] {
+  background: var(--surface);
+  box-shadow: inset 0 3px 0 var(--accent-ui);
+}
+
+.stageRail button[aria-pressed="true"] span {
+  color: var(--accent-ui);
+}
+
+.workflowLanes {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 1px;
+  padding: 1px;
+  background: var(--line);
+}
+
+.workflowLane {
+  display: flex;
+  min-height: 30rem;
+  flex-direction: column;
+  padding: clamp(1.4rem, 3vw, 2.6rem);
+}
+
+.workflowLane[data-lane="operator"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.workflowLane[data-lane="system"] {
+  background: var(--panel);
+}
+
+.workflowLane header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid currentColor;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.workflowLane[data-lane="system"] header {
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.workflowLane header p {
+  margin: 0;
+}
+
+.workflowLane h4 {
+  max-width: 12ch;
+  margin: clamp(2.5rem, 6vw, 5rem) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.2vw, 5.8rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.workflowLane > p:not(.stageSource) {
+  max-width: 29rem;
+  margin: auto 0 0;
+  padding-top: 3rem;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.workflowLane[data-lane="system"] h4 {
+  color: var(--fg);
+}
+
+.workflowLane ul {
+  display: grid;
+  gap: 0.9rem;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: clamp(0.92rem, 1.1vw, 1.06rem);
+  line-height: 1.6;
+  list-style: none;
+}
+
+.workflowLane li {
+  position: relative;
+  padding-left: 1.3rem;
+}
+
+.workflowLane li::before {
+  position: absolute;
+  left: 0;
+  color: var(--accent-ui);
+  content: "/";
+}
+
+.stageSource {
+  margin: auto 0 0;
+  padding-top: 2.5rem;
+  color: var(--subtle);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+.unmeasuredNote {
+  margin: 0;
+  padding: 1.2rem clamp(1.25rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.measurementReadout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(18rem, 0.8fr);
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  border-top: 1px solid var(--line);
+  background: var(--line);
+}
+
+.measurementReadout > dl {
+  display: contents;
+  margin: 0;
+}
+
+.measurementReadout > dl > div,
+.measurementReadout > p {
+  margin: 0;
+  padding: 1.25rem;
+  background: var(--panel);
+}
+
+.measurementReadout > dl dd {
+  margin: 1.5rem 0 0;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4vw, 4.5rem);
+  line-height: 0.9;
+}
+
+.measurementReadout > dl dd + dd {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  line-height: 1.5;
+}
+
+.measurementReadout > p {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.analysisGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2.5rem, 5vw, 5rem) clamp(1rem, 2.5vw, 2.5rem);
+  margin-top: clamp(4rem, 8vw, 8rem);
+}
+
+.analysisGrid figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.analysisFigureFull {
+  grid-column: 1 / -1;
+}
+
+.analysisGrid figure > p {
+  margin: 0 0 0.85rem;
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.analysisImage {
+  display: grid;
+  min-height: 22rem;
+  place-items: center;
+  overflow: hidden;
+  background: #f4f3ef;
+}
+
+.analysisImage img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.analysisGrid figcaption {
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 980px) {
+  .sectionHeader {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(3.9rem, 14vw, 6rem);
+  }
+
+  .taskContract {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workflowControls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .workflowControls > div:first-child {
+    align-self: flex-start;
+  }
+
+  .stepButtons {
+    align-self: flex-end;
+  }
+
+  .workflowLanes {
+    grid-template-columns: 1fr;
+  }
+
+  .workflowLane {
+    min-height: 24rem;
+  }
+
+  .measurementReadout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .measurementReadout > p {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .comparisonHeader {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .evidenceFlag {
+    justify-self: start;
+  }
+
+  .taskContract,
+  .analysisGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .taskContract > div {
+    min-height: 8rem;
+  }
+
+  .taskContract dd {
+    margin-top: 1.5rem;
+  }
+
+  .workflowControls > div:first-child,
+  .segmented,
+  .stepButtons {
+    width: 100%;
+  }
+
+  .segmented button,
+  .stepButtons button {
+    flex: 1 1 0;
+  }
+
+  .stepButtons {
+    align-self: stretch;
+  }
+
+  .stepButtons button {
+    min-width: 0;
+  }
+
+  .stageRail li {
+    min-width: 11rem;
+  }
+
+  .workflowLane {
+    min-height: 27rem;
+  }
+
+  .measurementReadout {
+    grid-template-columns: 1fr;
+  }
+
+  .measurementReadout > p {
+    grid-column: 1;
+  }
+
+  .analysisFigureFull {
+    grid-column: 1;
+  }
+
+  .analysisImage {
+    min-height: 0;
+  }
+
+  .systemFigureViewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-color: var(--accent-ui) var(--panel);
+    scrollbar-width: thin;
+  }
+
+  .systemFigureViewport img {
+    width: 70rem;
+    max-width: none;
+  }
+
+  .mobileHint {
+    display: block;
+    margin: 0.7rem 0 0;
+    color: var(--subtle);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.62rem;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stageRail,
+  .systemFigureViewport {
+    scroll-behavior: auto;
+  }
+}
