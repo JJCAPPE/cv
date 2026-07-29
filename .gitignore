@@ -20,3 +20,7 @@
 *.ilg
 *.gz
 indent.log
+.next
+.research/20260728-prompt-agent-systems-a91f
+.vercel
+node_modules
