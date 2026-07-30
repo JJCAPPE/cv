@@ -20,6 +20,7 @@ export type ProjectMedia = {
   caption?: string;
   fit?: "cover" | "contain";
   railFit?: "cover" | "contain";
+  railLayout?: "split" | "background";
 };
 
 export type ProjectMetric = {
@@ -73,6 +74,7 @@ export const projects: Project[] = [
       height: 1350,
       fit: "cover",
       railFit: "contain",
+      railLayout: "background",
       caption:
         "Source-led system master pinned to the inspected July 2026 repositories. Solid paths are tracked defaults; dashed paths are optional or configured.",
     },
@@ -381,6 +383,7 @@ export const projects: Project[] = [
       alt: "Exploded Deskinator software stack showing sensing, signal stabilization, controller states, coverage planning, actuation, evidence, and the separate stepper pulse timing boundary.",
       width: 2400,
       height: 1350,
+      railLayout: "background",
       caption:
         "The supported runtime as one inspectable stack: a synchronous 50 Hz supervisory loop above the StepperDrive hardware timing boundary.",
     },
@@ -526,6 +529,7 @@ export const projects: Project[] = [
       width: 2400,
       height: 1350,
       railFit: "contain",
+      railLayout: "background",
       caption:
         "Generated from the current execution path at source commit 3b2169e6; solid paths are default and dashed paths are conditional.",
     },

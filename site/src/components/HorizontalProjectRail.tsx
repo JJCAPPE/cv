@@ -19,6 +19,7 @@ export type HorizontalProjectRailProject = {
     height: number;
     fit?: "cover" | "contain";
     railFit?: "cover" | "contain";
+    railLayout?: "split" | "background";
   };
 };
 
@@ -273,6 +274,7 @@ export function HorizontalProjectRail({
               key={project.slug}
               className={styles.panel}
               data-project-panel
+              data-project-layout={project.cover.railLayout ?? "split"}
             >
               <Link
                 href={`/projects/${project.slug}`}
@@ -295,7 +297,8 @@ export function HorizontalProjectRail({
                     }`}
                     data-project-image
                     data-project-image-motion={
-                      project.cover.railFit === "contain"
+                      project.cover.railFit === "contain" &&
+                      project.cover.railLayout !== "background"
                         ? "static"
                         : undefined
                     }
@@ -304,7 +307,7 @@ export function HorizontalProjectRail({
                     width={project.cover.width}
                     height={project.cover.height}
                     sizes={
-                      index % 3 === 2
+                      project.cover.railLayout === "background"
                         ? "(max-width: 767px) 100vw, 92vw"
                         : "(max-width: 767px) 100vw, 62vw"
                     }
