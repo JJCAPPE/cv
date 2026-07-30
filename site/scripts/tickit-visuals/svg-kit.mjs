@@ -135,7 +135,6 @@ function definitions(palette) {
     .mono{font-family:"SFMono-Regular",Menlo,Consolas,monospace}
     .current-line{fill:none;stroke:${palette.current};stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;vector-effect:non-scaling-stroke}
     .history-line{fill:none;stroke:${palette.history};stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;vector-effect:non-scaling-stroke}
-    .wip-line{fill:none;stroke:${palette.wip};stroke-width:2;stroke-dasharray:5 10;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
     .structure-line{fill:none;stroke:${palette.line};stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;vector-effect:non-scaling-stroke}
     .fine-line{fill:none;stroke:${palette.lineSoft};stroke-width:1.25;vector-effect:non-scaling-stroke}
   `.trim();
@@ -166,23 +165,8 @@ function definitions(palette) {
           })
         ].join("")
       ),
-      element(
-        "pattern",
-        {
-          id: "wip-hatch",
-          width: 14,
-          height: 14,
-          patternUnits: "userSpaceOnUse"
-        },
-        line(0, 14, 14, 0, {
-          stroke: palette.wip,
-          strokeWidth: 1,
-          strokeOpacity: 0.25
-        })
-      ),
       marker("arrow-current", palette.current),
-      marker("arrow-history", palette.history),
-      marker("arrow-wip", palette.wip)
+      marker("arrow-history", palette.history)
     ].join("")
   );
 }

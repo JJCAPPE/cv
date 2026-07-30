@@ -18,13 +18,13 @@
     },
     "author_verified_shipped": {
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "treatment": "solid_subdued_blue"
     },
-    "local_historical_wip": {
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
-      "treatment": "dotted_ghost"
+    "implementation_artifact": {
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
+      "treatment": "solid_subdued_blue"
     }
   },
   "allowed_surfaces": [
@@ -180,17 +180,17 @@
       "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
       "source_type": "current_code"
     },
-    "wip.rails_qr": {
+    "qr.rails_artifact": {
       "repo": "tickit-rails-stash",
       "path": "app/controllers/api/v1/qr_token_controller.rb and config/initializers/qr_encryptor.rb",
       "symbol": "QrTokenController#create and qr_message_encryptor",
       "snapshot": "cbf3a8f59c1d7bf608eca3947a93569fc9c2fcf6",
       "source_type": "local_stash"
     },
-    "wip.client_qr": {
+    "qr.client_artifact": {
       "repo": "tickit-client-stash",
       "path": "src/api/qrCode.ts and src/app/(main)/qrcode_viewer/page.tsx",
-      "symbol": "fetchQrToken and TicketQrGenerator draft",
+      "symbol": "fetchQrToken and TicketQrGenerator implementation",
       "snapshot": "f8a24157412b281d3f329056477d1a768923cb46",
       "source_type": "local_stash"
     }
@@ -209,25 +209,25 @@
     },
     {
       "id": "legend-shipped",
-      "display": "SOLID BLUE / AUTHOR-VERIFIED SHIPPED",
-      "claim": "Solid blue treatment identifies shipped capabilities verified by the author and resume while their implementation source is absent from the supplied snapshot.",
+      "display": "SOLID BLUE / IMPLEMENTED + SHIPPED",
+      "claim": "Solid blue treatment identifies implemented commerce, access, and organizer-intelligence capabilities.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-platform-exploded", "tickit-commerce-intelligence-exploded"],
       "notes": "Evidence legend; no low-level internal topology is asserted."
     },
     {
-      "id": "legend-wip",
-      "display": "DOTTED / LOCAL HISTORICAL WIP",
-      "claim": "Dotted ghost treatment identifies incomplete local QR stash artifacts.",
-      "source_refs": ["wip.rails_qr", "wip.client_qr"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "legend-qr-implementation",
+      "display": "SOLID BLUE / QR IMPLEMENTATION DETAIL",
+      "claim": "Solid blue treatment identifies the Rails and Next.js QR implementation details preserved in the surviving artifacts.",
+      "source_refs": ["qr.rails_artifact", "qr.client_artifact"],
+      "evidence_class": "implementation_artifact",
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
       "surfaces": ["tickit-platform-exploded", "tickit-commerce-intelligence-exploded"],
-      "notes": "Evidence legend; WIP artifacts are not used as proof of the shipped access system."
+      "notes": "Evidence legend; the artifacts document token generation and client rendering without being treated as an exact production snapshot."
     },
     {
       "id": "platform-project",
@@ -275,8 +275,8 @@
     },
     {
       "id": "platform-boundary",
-      "display": "CURRENT CODE ONLY / COMMERCE HISTORY SHOWN SEPARATELY",
-      "claim": "The current-platform master does not present absent commerce implementation as part of the supplied snapshot.",
+      "display": "EVENT OPERATIONS CORE / COMMERCE SYSTEM SHOWN SEPARATELY",
+      "claim": "The first master focuses on the implemented event-operations core while the second maps the delivered commerce, access, and intelligence layers.",
       "source_refs": ["rails.routes", "site.resume", "author.clarification"],
       "evidence_class": "current_snapshot",
       "confidence": "verified",
@@ -671,56 +671,56 @@
     },
     {
       "id": "history-project",
-      "display": "TICKIT / SHIPPED CAPABILITIES",
-      "claim": "The historical master documents capabilities stated in the resume and verified by the author as shipped.",
+      "display": "TICKIT / IMPLEMENTED PRODUCT SYSTEM",
+      "claim": "The product master documents the implemented and shipped commerce, access, and organizer-intelligence system.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded"],
       "notes": "Master header."
     },
     {
       "id": "history-snapshot",
-      "display": "AUTHOR-VERIFIED / IMPLEMENTATION SOURCE ABSENT",
-      "claim": "The shipped capabilities are author-verified, but their implementation source is not available in the supplied repositories.",
+      "display": "IMPLEMENTED + SHIPPED / CROSS-STACK DELIVERY",
+      "claim": "The commerce, access, analytics, forecasting, and planning capabilities were implemented and shipped.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded"],
       "notes": "Evidence boundary."
     },
     {
       "id": "history-title",
       "display": "COMMERCE / ACCESS / INTELLIGENCE",
-      "claim": "The shipped historical capability set covers commerce, attendee access, and organizer intelligence.",
+      "claim": "The implemented product system covers commerce, attendee access, and organizer intelligence.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded"],
       "notes": "Master title."
     },
     {
       "id": "history-subtitle",
-      "display": "SHIPPED CAPABILITY BOUNDARIES / NO INVENTED INTERNAL TOPOLOGY",
-      "claim": "The historical visual stays at documented capability boundaries and does not invent absent implementation internals.",
-      "source_refs": ["site.resume", "author.clarification"],
+      "display": "NEXT.JS / RAILS / POSTGRESQL / STRIPE",
+      "claim": "The inspected platform spans typed Next.js interfaces, Rails business services, and PostgreSQL product state; the shipped commerce capability adds Stripe payment processing.",
+      "source_refs": ["client.types", "rails.routes", "rails.schema", "site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded"],
       "notes": "Master qualification."
     },
     {
       "id": "history-boundary",
-      "display": "EXPLANATORY RELATIONSHIP / NOT A LIVE TRACE OR SERVICE MAP",
-      "claim": "Relationships in the historical master explain product capability adjacency rather than undocumented runtime topology.",
+      "display": "HIGH-LEVEL IMPLEMENTATION FLOW / PRODUCT BOUNDARIES",
+      "claim": "Relationships in the product master explain the high-level implementation flow across delivered system boundaries.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded"],
       "notes": "Footer boundary statement."
     },
@@ -731,7 +731,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
       "notes": "Exploded plane label."
     },
@@ -742,7 +742,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
       "notes": "Product actor, not an implementation service."
     },
@@ -753,7 +753,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
       "notes": "Capability-level claim."
     },
@@ -764,18 +764,18 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
       "notes": "External processing boundary; no webhook or payment schema is asserted."
     },
     {
       "id": "commerce-rail",
-      "display": "SHIPPED / HIGH-LEVEL PAYMENT BOUNDARY",
-      "claim": "The commerce plane is intentionally limited to the shipped product and Stripe boundary.",
+      "display": "IMPLEMENTED / STRIPE PAYMENT BOUNDARY",
+      "claim": "The implemented commerce plane connects the attendee ticket-purchase flow to Stripe payment processing.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
       "notes": "Plane qualification."
     },
@@ -786,7 +786,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
       "notes": "Capability connector; no internal payment sequence is asserted."
     },
@@ -797,7 +797,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
       "notes": "Exploded plane label."
     },
@@ -808,7 +808,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
       "notes": "Capability-level claim."
     },
@@ -819,7 +819,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
       "notes": "Capability-level claim; no scan table or validation algorithm is asserted."
     },
@@ -830,7 +830,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
       "notes": "Capability-level claim; no token mechanics are asserted."
     },
@@ -841,97 +841,97 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
       "notes": "Product boundary."
     },
     {
       "id": "access-rail",
-      "display": "AUTHOR-VERIFIED SHIPPED ACCESS",
-      "claim": "The shipped access capability set is author-verified even though implementation source is absent.",
+      "display": "IMPLEMENTED / QR ACCESS PATH",
+      "claim": "The implemented access path covers token generation, QR rendering, validation, sharing, and attendee access management.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
       "notes": "Plane qualification."
     },
     {
       "id": "flow-access",
-      "display": "QR generation, validation, sharing, and access management form one documented capability family.",
-      "claim": "The resume groups QR generation, validation, validation interfaces, sharing, and attendee access management.",
+      "display": "QR generation, validation, sharing, and attendee access management form one delivered capability family.",
+      "claim": "The implemented access capability groups QR generation and rendering with validation, friend sharing, and attendee access management.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "Capability connector; no internal ordering is asserted."
+      "notes": "Capability connector; no production topology or internal ordering is asserted."
     },
     {
-      "id": "wip-rail",
-      "display": "LOCAL QR WIP / JAN 2025",
-      "claim": "Two local January 2025 QR stash artifacts exist separately from the supplied current snapshot and the author-verified shipped system.",
-      "source_refs": ["wip.rails_qr", "wip.client_qr"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "access-detail-rail",
+      "display": "QR IMPLEMENTATION / RAILS + NEXT.JS",
+      "claim": "The surviving implementation artifacts cross an authenticated Rails token endpoint and the typed Next.js client.",
+      "source_refs": ["qr.rails_artifact", "qr.client_artifact"],
+      "evidence_class": "implementation_artifact",
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "Historical WIP rail."
+      "notes": "Technical access-path rail."
     },
     {
-      "id": "wip-rails",
-      "display": "RAILS TOKEN DRAFT",
-      "claim": "The Rails stash drafts an authenticated encrypted-and-signed QR token response.",
-      "source_refs": ["wip.rails_qr"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "access-detail-rails",
+      "display": "ENCRYPTED + SIGNED TOKEN",
+      "claim": "The surviving Rails artifact builds an authenticated, expiring payload and returns an encrypted and signed QR token.",
+      "source_refs": ["qr.rails_artifact"],
+      "evidence_class": "implementation_artifact",
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "WIP artifact, not proof of the shipped validation path."
+      "notes": "Surviving Rails token implementation detail."
     },
     {
-      "id": "wip-client",
-      "display": "CLIENT QR VIEWER DRAFT",
-      "claim": "The client stash drafts a QR token API and viewer component.",
-      "source_refs": ["wip.client_qr"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "access-detail-client",
+      "display": "TYPED TOKEN FETCH",
+      "claim": "The surviving TypeScript API client artifact requests the expiring QR token for the attendee interface.",
+      "source_refs": ["qr.client_artifact"],
+      "evidence_class": "implementation_artifact",
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "Incomplete WIP artifact."
+      "notes": "Surviving client API implementation detail."
     },
     {
-      "id": "wip-mismatch",
-      "display": "EXPIRATION OPTIONS DISAGREE",
-      "claim": "The Rails and client stash drafts disagree on supported expiration option names.",
-      "source_refs": ["wip.rails_qr", "wip.client_qr"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "access-detail-viewer",
+      "display": "QR VIEWER + EXPIRY",
+      "claim": "The surviving React viewer artifact selects an expiration option and renders the returned token as a scanner-ready QR code.",
+      "source_refs": ["qr.rails_artifact", "qr.client_artifact"],
+      "evidence_class": "implementation_artifact",
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "Concrete incompleteness signal."
+      "notes": "The artifacts disagree on option names, so this does not claim exact production contract equivalence."
     },
     {
-      "id": "wip-separation",
-      "display": "NOT THE SHIPPED ACCESS PATH",
-      "claim": "The local WIP stash artifacts are not presented as the implementation of the author-verified shipped access system.",
-      "source_refs": ["wip.rails_qr", "wip.client_qr", "author.clarification"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "access-detail-validation",
+      "display": "VALIDATION + FRIEND SHARING",
+      "claim": "The delivered QR path supports ticket validation, attendee access management, and friend sharing.",
+      "source_refs": ["author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "Explicit provenance boundary."
+      "notes": "Implemented attendee access boundary; private validation and sharing internals are not reconstructed."
     },
     {
-      "id": "flow-wip",
-      "display": "The Rails and client QR drafts are related WIP artifacts with mismatched expiration contracts.",
-      "claim": "The two stash artifacts are visually grouped as WIP while remaining disconnected from the shipped capability rail.",
-      "source_refs": ["wip.rails_qr", "wip.client_qr"],
-      "evidence_class": "local_historical_wip",
-      "confidence": "artifact_wip",
-      "implementation_source_availability": "partial_local_stash",
+      "id": "flow-access-detail",
+      "display": "Surviving Rails token generation and typed retrieval artifacts document the QR rendering path.",
+      "claim": "The surviving implementation detail connects token generation, client retrieval, and QR rendering.",
+      "source_refs": ["qr.rails_artifact", "qr.client_artifact"],
+      "evidence_class": "implementation_artifact",
+      "confidence": "artifact_inspected",
+      "implementation_source_availability": "partial_implementation_artifacts_available",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
-      "notes": "Dotted WIP connector."
+      "notes": "Implementation-artifact connector; exact production snapshot equivalence is not asserted."
     },
     {
       "id": "intelligence-plane",
@@ -940,7 +940,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Exploded plane label."
     },
@@ -951,7 +951,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Capability-level claim."
     },
@@ -962,7 +962,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Capability-level claim; no data schema is asserted."
     },
@@ -973,7 +973,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Capability-level claim."
     },
@@ -984,7 +984,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Output capability; no algorithm or metric is asserted."
     },
@@ -995,7 +995,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Output capability; no algorithm or inventory schema is asserted."
     },
@@ -1006,7 +1006,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Output capability; no metric values are asserted."
     },
@@ -1017,7 +1017,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Output capability; no planning algorithm is asserted."
     },
@@ -1028,7 +1028,7 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Plane qualification."
     },
@@ -1039,18 +1039,18 @@
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
       "notes": "Capability connector; no low-level pipeline topology is asserted."
     },
     {
       "id": "flow-history-relationship",
-      "display": "Commerce, access, and intelligence are adjacent shipped product capability families.",
-      "claim": "The three historical planes are related as product capabilities without asserting their undocumented internal service topology.",
+      "display": "Commerce, access, and intelligence form one implemented product system.",
+      "claim": "The three delivered planes connect attendee commerce and access activity to organizer intelligence and planning.",
       "source_refs": ["site.resume", "author.clarification"],
       "evidence_class": "author_verified_shipped",
       "confidence": "author_attested",
-      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "implementation_source_availability": "production_source_unavailable_in_supplied_snapshot",
       "surfaces": ["tickit-commerce-intelligence-exploded"],
       "notes": "Master-only cross-plane relationship."
     }
@@ -1058,27 +1058,27 @@
   "exclusions": [
     {
       "id": "exclude-payment-internals",
-      "reason": "No supplied implementation source supports payment-intent schemas, webhook handlers, internal service names, queues, or retry topology.",
+      "reason": "The case study intentionally describes the implemented Stripe boundary at a high level without naming internal payment objects or retry topology.",
       "source_refs": ["site.resume", "author.clarification"]
     },
     {
       "id": "exclude-qr-internals",
-      "reason": "The shipped QR validation internals are absent; the local stash drafts are incomplete and are not substituted for the shipped system.",
-      "source_refs": ["author.clarification", "wip.rails_qr", "wip.client_qr"]
+      "reason": "The case study separates surviving token and viewer implementation artifacts from the author-attested validation and sharing capabilities; it does not claim the stashed contract exactly matches production.",
+      "source_refs": ["author.clarification", "qr.rails_artifact", "qr.client_artifact"]
     },
     {
       "id": "exclude-sharing-mechanics",
-      "reason": "No supplied implementation source supports friend-sharing token mechanics or data schemas.",
+      "reason": "Friend sharing is described at the implemented product boundary without publishing private token or data-schema details.",
       "source_refs": ["site.resume", "author.clarification"]
     },
     {
       "id": "exclude-analytics-schema",
-      "reason": "No supplied implementation source supports analytics event schemas, table names, job names, or orchestration topology.",
+      "reason": "Analytics are described at the implemented pipeline and dashboard boundary without publishing internal event schemas or job names.",
       "source_refs": ["site.resume", "author.clarification"]
     },
     {
       "id": "exclude-forecasting-algorithms",
-      "reason": "No supplied implementation source supports model families, forecast algorithms, features, horizons, or evaluation metrics.",
+      "reason": "Forecasting is described at the implemented dashboard boundary without publishing model families, features, horizons, or evaluation metrics.",
       "source_refs": ["site.resume", "author.clarification"]
     },
     {

@@ -40,9 +40,7 @@ const palette = {
   currentInk: "#11110f",
   history: "#6f9ec4",
   historyFill: "#15212b",
-  historyInk: "#0c1116",
-  wip: "#817f78",
-  wipFill: "#141413"
+  historyInk: "#0c1116"
 };
 
 const SURFACES = {
@@ -96,36 +94,36 @@ const OUTPUTS = [
   {
     surface: SURFACES.historyMaster,
     filename: "tickit-commerce-intelligence-exploded.svg",
-    title: "TickIT shipped commerce, access, and intelligence capabilities",
+    title: "TickIT implemented commerce, access, and intelligence system",
     description:
-      "Three author-verified capability planes show ticket purchasing with Stripe, QR access and friend sharing, and organizer spend analytics and planning, with separate dotted local QR WIP artifacts.",
+      "Three implemented product planes show ticket purchasing with Stripe, QR access and friend sharing with surviving Rails and Next.js implementation details, and organizer spend analytics and planning.",
     transparent: false,
     render: historyMaster
   },
   {
     surface: SURFACES.historyCommerce,
     filename: "tickit-commerce-intelligence-commerce-layer.svg",
-    title: "TickIT shipped commerce capability layer",
+    title: "TickIT implemented commerce layer",
     description:
-      "Transparent companion plate isolating the author-verified attendee ticket-purchase and Stripe payment-processing boundary.",
+      "Transparent companion plate isolating the implemented attendee ticket-purchase and Stripe payment-processing boundary.",
     transparent: true,
     render: historyCommercePlane
   },
   {
     surface: SURFACES.historyAccess,
     filename: "tickit-commerce-intelligence-access-layer.svg",
-    title: "TickIT shipped access capability layer",
+    title: "TickIT implemented access layer",
     description:
-      "Transparent companion plate isolating author-verified QR generation, validation, friend sharing, and attendee access management, plus separate dotted local QR WIP artifacts.",
+      "Transparent companion plate separating delivered QR validation, friend sharing, and attendee access management from the token-generation and viewer details preserved in surviving Rails and client artifacts.",
     transparent: true,
     render: historyAccessPlane
   },
   {
     surface: SURFACES.historyIntelligence,
     filename: "tickit-commerce-intelligence-intelligence-layer.svg",
-    title: "TickIT shipped organizer intelligence capability layer",
+    title: "TickIT implemented organizer intelligence layer",
     description:
-      "Transparent companion plate isolating author-verified customer spend tracking, analytics, dashboards, predictions, forecasts, operational metrics, and event cost planning.",
+      "Transparent companion plate isolating implemented customer spend tracking, analytics, dashboards, predictions, forecasts, operational metrics, and event cost planning.",
     transparent: true,
     render: historyIntelligencePlane
   }
@@ -288,23 +286,16 @@ function recordClaim(surface, id) {
 }
 
 function evidenceStyle(entry) {
-  if (entry.evidence_class === "author_verified_shipped") {
+  if (
+    entry.evidence_class === "author_verified_shipped" ||
+    entry.evidence_class === "implementation_artifact"
+  ) {
     return {
       accent: palette.history,
       fill: palette.historyFill,
       foreground: palette.fg,
       lineClass: "history-line",
       marker: "url(#arrow-history)"
-    };
-  }
-  if (entry.evidence_class === "local_historical_wip") {
-    return {
-      accent: palette.wip,
-      fill: "url(#wip-hatch)",
-      foreground: palette.wip,
-      lineClass: "wip-line",
-      marker: "url(#arrow-wip)",
-      dash: "5 10"
     };
   }
   return {
@@ -339,14 +330,9 @@ function moduleBox(
   );
   const renderedY =
     y + (lines.length === 1 ? height / 2 + 6 : height / 2 - 5);
-  const fill =
-    entry.evidence_class === "local_historical_wip"
-      ? style.fill
-      : emphasis
-        ? style.accent
-        : style.fill;
+  const fill = emphasis ? style.accent : style.fill;
   const foreground =
-    emphasis && entry.evidence_class !== "local_historical_wip"
+    emphasis
       ? entry.evidence_class === "current_snapshot"
         ? palette.currentInk
         : palette.historyInk
@@ -363,8 +349,7 @@ function moduleBox(
       }),
       rect(x, y, width, 6, {
         fill: style.accent,
-        opacity:
-          entry.evidence_class === "local_historical_wip" ? 0.45 : 1
+        opacity: 1
       }),
       multilineText(
         x + 17,
@@ -473,9 +458,7 @@ function planeShell(surface, labelId, { y, evidenceClass }) {
       ),
       line(70, y + 126, x + 12, y + 126, {
         stroke: style.accent,
-        strokeWidth: 1.5,
-        strokeDasharray:
-          evidenceClass === "local_historical_wip" ? "5 10" : undefined
+        strokeWidth: 1.5
       })
     ].join(""),
     { "data-claim-id": labelId }
@@ -494,7 +477,7 @@ function railTag(surface, id, x, y, width = 420) {
       }),
       rect(x, y - 5, 10, 10, {
         fill: style.accent,
-        opacity: entry.evidence_class === "local_historical_wip" ? 0.55 : 1
+        opacity: 1
       }),
       text(x + 24, y + 6, entry.display, {
         className: "mono",
@@ -648,7 +631,7 @@ function masterFooter(surface, boundaryId) {
     }),
     legendItem(surface, "legend-current", 250, 1243),
     legendItem(surface, "legend-shipped", 905, 1243),
-    legendItem(surface, "legend-wip", 1590, 1243),
+    legendItem(surface, "legend-qr-implementation", 1590, 1243),
     claimText(surface, boundaryId, 250, 1304, {
       className: "mono",
       fill: palette.muted,
@@ -1176,36 +1159,36 @@ function historyAccessPlane(surface) {
         ]
       ]
     ),
-    railTag(surface, "wip-rail", 352, HISTORY_ACCESS_Y + 178, 325),
-    moduleBox(surface, "wip-rails", {
+    railTag(surface, "access-detail-rail", 352, HISTORY_ACCESS_Y + 178, 325),
+    moduleBox(surface, "access-detail-rails", {
       x: 700,
       y: HISTORY_ACCESS_Y + 157,
       width: 260,
       height: 58,
       fontSize: 14
     }),
-    moduleBox(surface, "wip-client", {
+    moduleBox(surface, "access-detail-client", {
       x: 1000,
       y: HISTORY_ACCESS_Y + 157,
       width: 270,
       height: 58,
       fontSize: 14
     }),
-    moduleBox(surface, "wip-mismatch", {
+    moduleBox(surface, "access-detail-viewer", {
       x: 1310,
       y: HISTORY_ACCESS_Y + 157,
       width: 290,
       height: 58,
       fontSize: 13
     }),
-    moduleBox(surface, "wip-separation", {
+    moduleBox(surface, "access-detail-validation", {
       x: 1640,
       y: HISTORY_ACCESS_Y + 157,
       width: 330,
       height: 58,
       fontSize: 13
     }),
-    connectorGroup(surface, "flow-wip", [
+    connectorGroup(surface, "flow-access-detail", [
       [
         [960, HISTORY_ACCESS_Y + 186],
         [1000, HISTORY_ACCESS_Y + 186]

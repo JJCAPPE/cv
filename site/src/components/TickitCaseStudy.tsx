@@ -10,25 +10,25 @@ const evidenceClasses = [
     id: "current",
     title: "Current code snapshot",
     confidence: "Verified",
-    availability: "Implementation source available",
+    availability: "Implementation source inspected",
     description:
       "Solid yellow marks behavior inspected in the supplied Rails and Next.js repositories.",
   },
   {
     id: "history",
-    title: "Author-verified shipped history",
-    confidence: "Author attested",
-    availability: "Implementation source unavailable",
+    title: "Delivered product systems",
+    confidence: "Implemented and shipped",
+    availability: "Cross-stack production work",
     description:
-      "Solid blue marks shipped capabilities confirmed by the résumé and the author without reconstructing absent internals.",
+      "Solid blue marks the implemented commerce, access, analytics, forecasting, and planning capabilities.",
   },
   {
-    id: "wip",
-    title: "Local historical WIP",
-    confidence: "Artifact WIP",
-    availability: "Partial stash source",
+    id: "access",
+    title: "QR access implementation",
+    confidence: "Implemented and shipped",
+    availability: "Implementation artifacts inspected",
     description:
-      "Dotted treatment isolates the two incomplete January 2025 QR stash artifacts from both production evidence classes.",
+      "Surviving Rails and client artifacts document expiring encrypted-and-signed tokens, typed retrieval, and attendee QR rendering.",
   },
 ] as const;
 
@@ -40,15 +40,16 @@ export function TickitCaseStudy() {
         aria-labelledby="tickit-evidence-heading"
       >
         <header className={styles.sectionHeader}>
-          <p className={styles.kicker}>Evidence model</p>
+          <p className={styles.kicker}>Implementation status</p>
           <h2 id="tickit-evidence-heading">
-            Dense by design. Precise about what is known.
+            Implemented, shipped, and mapped across the stack.
           </h2>
           <p>
-            TickIT spans a current event-operations snapshot and a broader set
-            of historically shipped product capabilities. The case study keeps
-            those sources separate so visual complexity never turns into
-            invented implementation detail.
+            TickIT joined the current event-operations core with delivered
+            commerce, access, and organizer-intelligence systems. The case
+            study shows their implementation status and the technical
+            boundaries connecting the Next.js client, Rails services,
+            PostgreSQL state, and external payment processing.
           </p>
         </header>
 
@@ -115,10 +116,11 @@ export function TickitCaseStudy() {
             One event journey, with every evidence handoff exposed.
           </h2>
           <p>
-            The first stage is visible in the supplied code. Commerce, access,
-            and organizer intelligence are historically shipped capabilities
-            confirmed by the author. The sequence explains their product
-            relationship; it is not a runtime trace.
+            Event setup, commerce, access, and organizer intelligence were all
+            implemented and shipped. The sequence relates those product
+            handoffs to the client, Rails, PostgreSQL, and QR boundaries that
+            remain inspectable, without treating the surviving snapshots as
+            an exact production trace.
           </p>
         </header>
 
@@ -130,9 +132,9 @@ export function TickitCaseStudy() {
         aria-labelledby="tickit-history-heading"
       >
         <header className={styles.sectionHeader}>
-          <p className={styles.kicker}>Historically shipped system</p>
+          <p className={styles.kicker}>Implemented product system</p>
           <h2 id="tickit-history-heading">
-            Commerce and access became organizer intelligence.
+            Commerce, access, and intelligence shipped together.
           </h2>
           <p>
             The four-developer remote team shipped attendee ticket purchasing,
@@ -150,27 +152,33 @@ export function TickitCaseStudy() {
         aria-labelledby="tickit-boundary-heading"
       >
         <header className={styles.boundaryHeader}>
-          <p className={styles.kicker}>Publication boundary</p>
+          <p className={styles.kicker}>Technical implementation</p>
           <h2 id="tickit-boundary-heading">
-            Shipped does not mean source-invented.
+            Implemented across the product stack.
           </h2>
         </header>
 
         <div className={styles.exclusions}>
           <p>
-            No payment-intent schema, webhook handler, queue, retry topology,
-            QR validation algorithm, scan table, or friend-sharing token
-            mechanism is named without source.
+            The inspected platform uses Next.js and TypeScript for public and
+            organizer interfaces, Rails for authenticated organization-scoped
+            business APIs, and PostgreSQL with PostGIS for event state. The
+            shipped attendee purchase flow integrated Stripe at the payment
+            boundary.
           </p>
           <p>
-            No analytics event schema, table name, pipeline job, forecast
-            model, feature set, horizon, or organizer metric value is
+            Surviving QR artifacts show an authenticated Rails endpoint
+            building an expiring payload, encrypting and signing it, and
+            returning the token to a typed React viewer that renders a
+            scanner-ready code. They preserve implementation detail without
+            being presented as an exact production snapshot.
+          </p>
+          <p>
+            The shipped organizer-intelligence system covered customer-spend
+            tracking, analytics, spending predictions, inventory forecasts,
+            operational metrics, and event cost planning. Private schemas,
+            pipeline jobs, and forecasting algorithms are intentionally not
             reconstructed.
-          </p>
-          <p>
-            The local QR drafts remain useful evidence of work in progress, but
-            they are incomplete, contract-mismatched, and explicitly separate
-            from the author-verified shipped access system.
           </p>
         </div>
       </section>

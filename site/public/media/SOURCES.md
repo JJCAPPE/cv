@@ -166,8 +166,12 @@ Current source repositories and historical evidence:
   and verified.
 - The local Rails QR stash
   `cbf3a8f59c1d7bf608eca3947a93569fc9c2fcf6` and client QR stash
-  `f8a24157412b281d3f329056477d1a768923cb46`, treated only as incomplete
-  January 2025 WIP artifacts.
+  `f8a24157412b281d3f329056477d1a768923cb46`, documenting the Rails token
+  endpoint and TypeScript QR viewer implementation details.
+- Those surviving QR artifacts support the published token-generation,
+  retrieval, expiry-selection, and rendering details. They are not treated as
+  an exact production snapshot; the author’s clarification separately
+  establishes that validation, sharing, and attendee access shipped.
 
 Generated visual set:
 
@@ -179,19 +183,19 @@ Generated visual set:
   PostgreSQL/PostGIS state, event membership and invitations, ticket-checker
   routines, and the event-created checker job in the supplied snapshot.
 - `tickit-commerce-intelligence-exploded.svg` and its commerce, access, and
-  intelligence layer companions document author-verified shipped ticket
+  intelligence layer companions document implemented and shipped ticket
   purchasing and Stripe processing, QR generation and validation, friend
   sharing, attendee access management, customer-spend tracking, analytics,
   organizer dashboards, predictions, inventory forecasts, operational
   metrics, and event cost planning.
-- The historical visual remains at capability boundaries because production
-  implementation source is unavailable. It does not invent payment handlers,
-  QR validation internals, sharing token mechanics, analytics schemas,
-  forecasting algorithms, service names, or performance values.
+- The product visual relates the inspected Next.js, Rails, and PostgreSQL
+  boundaries to the shipped Stripe, QR access, and organizer-intelligence
+  capabilities. It keeps artifact-backed QR details separate from unavailable
+  production internals and publishes no private schemas, algorithms,
+  credentials, or performance values.
 - The claim ledger is `scripts/tickit-visuals/truth-ledger.json`. Solid yellow
-  marks the current snapshot, solid blue marks author-verified shipped
-  history, and dotted ghost treatment marks the separate local QR WIP
-  artifacts.
+  marks the current event-operations snapshot and solid blue marks implemented
+  and shipped commerce, access, QR, and organizer-intelligence layers.
 - All eight SVGs are self-contained and use no external media, script,
   `foreignObject`, raster embed, customer data, credential, timestamp, or
   random value.
