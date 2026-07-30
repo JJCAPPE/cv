@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "visuals:move": "node scripts/generate-move-visuals.mjs public/media/projects/move"
+    "visuals:move": "node scripts/generate-move-visuals.mjs public/media/projects/move",
+    "visuals:noteworthy": "node scripts/generate-noteworthy-visuals.mjs public/media/projects/ai-notes-or-ocr/technical"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
