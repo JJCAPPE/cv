@@ -1,0 +1,505 @@
+{
+  "schema_version": "noteworthy.visual_truth.v1",
+  "snapshots": {
+    "noteworthy": "cb9aba0b4b445b8a276488033adb37e1696be481",
+    "cv_site": "c67e442ebcd10b5f94babe455a686b6c3675f039",
+    "casma225_tex": "sha256:6ff659b052533eefae8dad480eaf4a3b701db518e1c2248a2fb255f004e6cbab",
+    "casma225_pdf": "sha256:947c1a70a245912d2bf8369491163773087ff8aad7e5482c7442806342d56895"
+  },
+  "sources": {
+    "convert_ui": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/components/Convert/index.tsx",
+      "symbol": "Convert, tabOptions, modelOptions, completion effect, copy and save actions",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "sse_client": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/hooks/useWebSocket.ts",
+      "symbol": "prepareFiles, parseSseStream, startLatexGeneration",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "generate_route": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/app/api/latex/generate/route.ts",
+      "symbol": "POST, MAX_FILES, MAX_TOTAL_BYTES, cleanLatex",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "gemini_runtime": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/app/api/latex/generate/geminiIntegration.js",
+      "symbol": "PROCESS_PROMPTS, getModel, uploadToGemini, run",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "compose_route": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/app/api/latex/compose/route.ts",
+      "symbol": "POST",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "latex_template": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/public/templates/main.txt",
+      "symbol": "<content> template, 1065 repository lines",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "compiler_route": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/app/api/generatePdf/route.ts",
+      "symbol": "getCompilerUrls, buildAttempts, compileWithTarget, isPdfBuffer, POST",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "saved_pdf": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/prisma/schema.prisma",
+      "symbol": "SavedPdf",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "pdf_routes": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/app/api/pdf/{save,combine}/route.ts",
+      "symbol": "authenticated save and combine POST handlers",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "socket_history": {
+      "repo": "noteworthy",
+      "path": "noteworthy-site/src/lib/websocket.ts and server.js",
+      "symbol": "initWebSocketServer and custom Socket.IO bootstrap",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "latex_service_history": {
+      "repo": "noteworthy",
+      "path": "latex-service/{Dockerfile,index.js}",
+      "symbol": "Express /compile route and latexmk process",
+      "snapshot": "cb9aba0b4b445b8a276488033adb37e1696be481"
+    },
+    "casma225_tex": {
+      "repo": "casma225_tex",
+      "path": "public/media/projects/ai-notes-or-ocr/casma225/main.tex",
+      "symbol": "supplied source artifact",
+      "snapshot": "sha256:6ff659b052533eefae8dad480eaf4a3b701db518e1c2248a2fb255f004e6cbab"
+    },
+    "casma225_pdf": {
+      "repo": "casma225_pdf",
+      "path": "public/media/projects/ai-notes-or-ocr/casma225/CASMA225_Giacomo_pieces.pdf",
+      "symbol": "supplied generated PDF artifact",
+      "snapshot": "sha256:947c1a70a245912d2bf8369491163773087ff8aad7e5482c7442806342d56895"
+    }
+  },
+  "claims": [
+    {
+      "id": "current_scope",
+      "display": "CURRENT EXECUTION / SOURCE VERIFIED",
+      "claim": "The solid main path follows current client, route, Gemini, composition, compiler, and output code.",
+      "source": "noteworthy-site/src/components/Convert/index.tsx; src/hooks/useWebSocket.ts; src/app/api/latex/{generate,compose}; src/app/api/generatePdf/route.ts",
+      "source_refs": ["convert_ui", "sse_client", "generate_route", "gemini_runtime", "compose_route", "compiler_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover"],
+      "rendered_surfaces": ["noteworthy-agent-exploded"],
+      "confidence": "verified",
+      "notes": "Optional and historical rails remain visually separate."
+    },
+    {
+      "id": "client_prep",
+      "display": "20 MiB CLIENT GATE / 2000 px / JPEG .82",
+      "claim": "The client compresses image uploads only when the total exceeds 20 MiB, with a 2000 px maximum dimension and JPEG quality 0.82.",
+      "source": "noteworthy-site/src/hooks/useWebSocket.ts — CLIENT_MAX_BYTES, MAX_DIMENSION, JPEG_QUALITY, prepareFiles",
+      "source_refs": ["sse_client"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-ingest-layer"],
+      "confidence": "verified",
+      "notes": "Compression is skipped when the batch is already within the client limit."
+    },
+    {
+      "id": "sse_request",
+      "display": "POST /api/latex/generate + SSE",
+      "claim": "The current client posts multipart form data and requests a text/event-stream response.",
+      "source": "noteworthy-site/src/hooks/useWebSocket.ts — startLatexGeneration",
+      "source_refs": ["sse_client", "generate_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-ingest-layer"],
+      "confidence": "verified",
+      "notes": "The retained useWebSocket name does not describe the current transport."
+    },
+    {
+      "id": "route_guards",
+      "display": "≤10 FILES / ≤25 MiB / DECLARED image/*",
+      "claim": "The route limits count and total bytes and accepts files whose declared MIME value starts with image/.",
+      "source": "noteworthy-site/src/app/api/latex/generate/route.ts — MAX_FILES, MAX_TOTAL_BYTES, file.type.startsWith",
+      "source_refs": ["generate_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-ingest-layer"],
+      "confidence": "verified",
+      "notes": "This is metadata checking, not byte-signature or decoder validation."
+    },
+    {
+      "id": "temp_cleanup",
+      "display": "REQUEST TEMP DIR / POST-RUN CLEANUP",
+      "claim": "Files written for accepted requests are removed after generation success or handled generation failure.",
+      "source": "noteworthy-site/src/app/api/latex/generate/route.ts — uploadDir, cleanupFiles, stream finally and catch paths",
+      "source_refs": ["generate_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-ingest-layer"],
+      "confidence": "qualified",
+      "notes": "Validation exits occur before file writes; an empty temporary directory can remain because it is created before validation."
+    },
+    {
+      "id": "parallel_upload",
+      "display": "PARALLEL GEMINI FILE UPLOAD",
+      "claim": "Normalized image entries are uploaded through GoogleAIFileManager in parallel.",
+      "source": "noteworthy-site/src/app/api/latex/generate/geminiIntegration.js — uploadToGemini and Promise.all",
+      "source_refs": ["gemini_runtime"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-generation-layer"],
+      "confidence": "verified",
+      "notes": "Images go directly to Gemini; there is no separate current OCR stage."
+    },
+    {
+      "id": "generation_modes",
+      "display": "BASE DEFAULT / SUMMARY + EXPANSION SELECTABLE",
+      "claim": "Base is the initial processing mode, while Summary and Expansion are selectable alternatives with separate prompt instructions.",
+      "source": "noteworthy-site/src/components/Convert/index.tsx — tabOptions and processType; geminiIntegration.js — PROCESS_PROMPTS",
+      "source_refs": ["convert_ui", "generate_route", "gemini_runtime"],
+      "scope": "optional",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-generation-layer"],
+      "confidence": "verified",
+      "notes": "The node is dashed so selectable alternatives cannot read as one mandatory default."
+    },
+    {
+      "id": "model_selection",
+      "display": "REGULAR DEFAULT / FAST + PRO PREMIUM-GATED",
+      "claim": "Regular is the initial model choice; Fast and Pro are premium-gated selectable alternatives mapped to Gemini identifiers.",
+      "source": "noteworthy-site/src/components/Convert/index.tsx — modelOptions, isPremiumModel, isDisabled; geminiIntegration.js — getModel",
+      "source_refs": ["convert_ui", "generate_route", "gemini_runtime"],
+      "scope": "optional",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-generation-layer"],
+      "confidence": "verified",
+      "notes": "Fast and Pro are explicit UI selections that require premium access."
+    },
+    {
+      "id": "streamed_body",
+      "display": "STREAMED LATEX BODY / 5 MIN DEADLINE",
+      "claim": "Gemini output is accumulated from sendMessageStream, reported through approximate SSE progress, and bounded by a five-minute generation deadline.",
+      "source": "noteworthy-site/src/app/api/latex/generate/geminiIntegration.js — sendMessageStream and GENERATION_TIMEOUT_MS",
+      "source_refs": ["gemini_runtime", "generate_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-generation-layer"],
+      "confidence": "verified",
+      "notes": "Progress is an estimate, not measured completion."
+    },
+    {
+      "id": "body_cleanup",
+      "display": "FENCE + DOCUMENT WRAPPER CLEANUP",
+      "claim": "The route trims fenced output, removes a returned document wrapper prefix, and strips tdplot_main_coords occurrences.",
+      "source": "noteworthy-site/src/app/api/latex/generate/route.ts — cleanLatex",
+      "source_refs": ["generate_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-generation-layer"],
+      "confidence": "verified",
+      "notes": "This is deterministic normalization, not compile repair."
+    },
+    {
+      "id": "template_compose",
+      "display": "1065-LINE TEMPLATE / <content> INSERT",
+      "claim": "The composition route inserts the generated body at the template content marker.",
+      "source": "noteworthy-site/src/app/api/latex/compose/route.ts — POST; public/templates/main.txt",
+      "source_refs": ["compose_route", "latex_template"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-compile-layer"],
+      "confidence": "verified",
+      "notes": "The template line count is derived from the pinned repository file."
+    },
+    {
+      "id": "compiler_chain",
+      "display": "HTTP COMPILER FALLBACK CHAIN / 30 s",
+      "claim": "The PDF route tries configured HTTP compiler targets with backend-specific request shapes and a 30-second timeout.",
+      "source": "noteworthy-site/src/app/api/generatePdf/route.ts — getCompilerUrls, buildAttempts, compileWithTarget",
+      "source_refs": ["compiler_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-compile-layer"],
+      "confidence": "verified",
+      "notes": "Additional targets depend on environment configuration."
+    },
+    {
+      "id": "retry_verify",
+      "display": "BOUNDED RETRIES / %PDF MAGIC BYTES",
+      "claim": "Compiler attempts have bounded retry delays and successful response bytes must start with the PDF signature.",
+      "source": "noteworthy-site/src/app/api/generatePdf/route.ts — RETRY_DELAYS_MS and isPdfBuffer",
+      "source_refs": ["compiler_route"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-compile-layer"],
+      "confidence": "verified",
+      "notes": "Magic-byte validation is a format check, not document-quality evaluation."
+    },
+    {
+      "id": "output_exports",
+      "display": "PDF BLOB + BODY / FULL LATEX COPY",
+      "claim": "The interface stores the PDF blob and supports copying generated body LaTeX and composed full source.",
+      "source": "noteworthy-site/src/components/Convert/index.tsx — completion effect, copy actions, PDF preview",
+      "source_refs": ["convert_ui"],
+      "scope": "default",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-output-layer"],
+      "confidence": "verified",
+      "notes": "The browser creates an object URL for preview."
+    },
+    {
+      "id": "saved_pdf_option",
+      "display": "AUTH SAVEDPDF + COMBINE",
+      "claim": "Authenticated users can optionally persist PDF bytes and metadata and combine selected saved PDFs.",
+      "source": "noteworthy-site/prisma/schema.prisma — SavedPdf; src/app/api/pdf/{save,combine}/route.ts",
+      "source_refs": ["convert_ui", "saved_pdf", "pdf_routes"],
+      "scope": "optional",
+      "surfaces": ["master", "cover", "companion"],
+      "rendered_surfaces": ["noteworthy-agent-exploded", "noteworthy-agent-output-layer"],
+      "confidence": "verified",
+      "notes": "Persistence is not required for conversion."
+    },
+    {
+      "id": "historical_scope",
+      "display": "HISTORICAL / ALTERNATE RAILS",
+      "claim": "Socket.IO transport and the Docker latexmk service exist but are not the current client and compiler defaults.",
+      "source": "noteworthy-site/src/lib/websocket.ts; server.js; latex-service/{Dockerfile,index.js}; current client and compiler route",
+      "source_refs": ["sse_client", "socket_history", "latex_service_history", "compiler_route"],
+      "scope": "historical",
+      "surfaces": ["master", "cover"],
+      "rendered_surfaces": ["noteworthy-agent-exploded"],
+      "confidence": "qualified",
+      "notes": "The master renders these paths subdued and outside the current solid spine."
+    },
+    {
+      "id": "historical_socket",
+      "display": "SOCKET.IO STREAM",
+      "claim": "The repository retains a custom Socket.IO transport implementation and bootstrap.",
+      "source": "noteworthy-site/src/lib/websocket.ts and server.js",
+      "source_refs": ["socket_history"],
+      "scope": "historical",
+      "surfaces": ["master", "cover"],
+      "rendered_surfaces": ["noteworthy-agent-exploded"],
+      "confidence": "verified",
+      "notes": "The current client hook returns a null socket and uses fetch plus SSE."
+    },
+    {
+      "id": "historical_latexmk",
+      "display": "DOCKER / LATEXMK SERVICE",
+      "claim": "The repository retains an Express service that writes a temporary TeX file and invokes latexmk.",
+      "source": "latex-service/{Dockerfile,index.js}",
+      "source_refs": ["latex_service_history"],
+      "scope": "historical",
+      "surfaces": ["master", "cover"],
+      "rendered_surfaces": ["noteworthy-agent-exploded"],
+      "confidence": "verified",
+      "notes": "The current site route defaults to configured HTTP compiler backends."
+    },
+    {
+      "id": "proposed_scope",
+      "display": "PROPOSED / CONCEPTUAL ML-CV / NOT SHIPPED",
+      "claim": "The dashed coral layer is a user-approved conceptual extension and not evidence of current behavior.",
+      "source": "Task brief — approved proposed overlay, bounded against the current generate, Gemini, and compiler paths",
+      "source_refs": ["generate_route", "gemini_runtime", "compiler_route"],
+      "scope": "proposed",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-agent-proposed-layer"],
+      "confidence": "qualified",
+      "notes": "The label repeats inside the transparent layer so it remains visible when selected."
+    },
+    {
+      "id": "proposed_normalization",
+      "display": "PERSPECTIVE + ILLUMINATION",
+      "claim": "A future preprocessing stage could normalize page geometry and lighting before generation.",
+      "source": "Task brief — proposed perspective and illumination normalization; absent from the current direct image-to-Gemini route",
+      "source_refs": ["generate_route", "gemini_runtime"],
+      "scope": "proposed",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-agent-proposed-layer"],
+      "confidence": "qualified",
+      "notes": "No algorithm, threshold, or measured effect is asserted."
+    },
+    {
+      "id": "proposed_layout",
+      "display": "MATH-AWARE REGION + LAYOUT GRAPH",
+      "claim": "A future document graph could model mathematical regions and reading relationships.",
+      "source": "Task brief — proposed math-aware layout graph; absent from the current direct image-to-Gemini route",
+      "source_refs": ["generate_route", "gemini_runtime"],
+      "scope": "proposed",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-agent-proposed-layer"],
+      "confidence": "qualified",
+      "notes": "No detector, schema, model, or topology is presented as selected."
+    },
+    {
+      "id": "proposed_uncertainty",
+      "display": "REGION UNCERTAINTY MAP / NO VALUES",
+      "claim": "A future review surface could expose uncertainty by region without publishing invented scores.",
+      "source": "Task brief — proposed region uncertainty visualization; no current confidence artifact exists",
+      "source_refs": ["generate_route", "gemini_runtime"],
+      "scope": "proposed",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-agent-proposed-layer"],
+      "confidence": "qualified",
+      "notes": "Decorative bars are explicitly non-numeric and not model outputs."
+    },
+    {
+      "id": "proposed_compile_repair",
+      "display": "COMPILE-REPAIR LOOP / CONCEPT ONLY",
+      "claim": "A future loop could use compiler failures to propose bounded source repairs.",
+      "source": "Task brief — proposed compile-repair stage; current route retries requests but does not repair LaTeX",
+      "source_refs": ["compiler_route", "generate_route"],
+      "scope": "proposed",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-agent-proposed-layer"],
+      "confidence": "qualified",
+      "notes": "Current bounded retries are not represented as source repair."
+    },
+    {
+      "id": "proposed_render_regression",
+      "display": "RENDER-REGRESSION GATE / CONCEPT ONLY",
+      "claim": "A future evaluation gate could compare rendered output against versioned expectations.",
+      "source": "Task brief — proposed render-regression evaluation; current code verifies only the PDF byte signature",
+      "source_refs": ["compiler_route"],
+      "scope": "proposed",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-agent-proposed-layer"],
+      "confidence": "qualified",
+      "notes": "No metric, threshold, dataset, or measured result is asserted."
+    },
+    {
+      "id": "artifact_source",
+      "display": "main.tex / 7237 LINES",
+      "claim": "The supplied source contains 7,237 lines.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/main.tex — wc -l",
+      "source_refs": ["casma225_tex"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "Counted from the byte-stable source artifact."
+    },
+    {
+      "id": "artifact_dependencies",
+      "display": "3 IMPORTS + 2 EXTERNAL IMAGES",
+      "claim": "The source imports preamble, macros, and letterfonts and references two external image files.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/main.tex — lines 3-5, 455, 3306",
+      "source_refs": ["casma225_tex"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "The source is not presented as a standalone compile bundle."
+    },
+    {
+      "id": "artifact_hierarchy",
+      "display": "3 CHAPTERS / 62 SECTIONS",
+      "claim": "The source contains three chapter declarations and 62 numbered section declarations.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/main.tex — counted chapter and section declarations",
+      "source_refs": ["casma225_tex"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "The section count excludes starred headings."
+    },
+    {
+      "id": "artifact_grammar",
+      "display": "dfn / ex / nt / thm / qs / sol",
+      "claim": "The source uses definition, example, note, theorem, question, and solution macros.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/main.tex — macro invocations",
+      "source_refs": ["casma225_tex"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "Display names preserve the source macro names."
+    },
+    {
+      "id": "artifact_graphics",
+      "display": "63 TIKZ SCENES / 32 AXES",
+      "claim": "The source contains 63 tikzpicture blocks and 32 PGFPlots axis blocks.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/main.tex — counted begin blocks",
+      "source_refs": ["casma225_tex"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "Structural counts are not quality metrics."
+    },
+    {
+      "id": "artifact_pdf",
+      "display": "SUPPLIED PDF / 110 LETTER PAGES",
+      "claim": "The supplied generated PDF reports 110 pages at 612 by 792 points.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/CASMA225_Giacomo_pieces.pdf — pdfinfo",
+      "source_refs": ["casma225_pdf"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "No completeness claim is made."
+    },
+    {
+      "id": "artifact_previews",
+      "display": "PAGES 15 / 42 / 75 / 83 / 100",
+      "claim": "The case study curates five full-page previews rendered from the supplied PDF.",
+      "source": "public/media/projects/ai-notes-or-ocr/casma225/CASMA225_Giacomo_pieces.pdf — selected pages",
+      "source_refs": ["casma225_pdf"],
+      "scope": "offline",
+      "surfaces": ["companion", "caption"],
+      "rendered_surfaces": ["noteworthy-document-exploded"],
+      "confidence": "verified",
+      "notes": "The pages cover boxed grammar, equations, 3D and polar plots, and vector fields."
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "no_separate_ocr",
+      "reason": "The current validated route sends accepted images directly to Gemini and has no separately evidenced OCR engine.",
+      "source_refs": ["generate_route", "gemini_runtime"]
+    },
+    {
+      "id": "no_input_pdf",
+      "reason": "The current generation route checks for declared image MIME values and does not establish input-PDF support.",
+      "source_refs": ["generate_route"]
+    },
+    {
+      "id": "no_mime_security_claim",
+      "reason": "The route trusts File.type metadata; it does not verify magic bytes or decode images before accepting them.",
+      "source_refs": ["generate_route"]
+    },
+    {
+      "id": "no_sandbox_claim",
+      "reason": "The current compiler path posts generated source to configurable HTTP services; repository evidence does not establish isolation.",
+      "source_refs": ["compiler_route"]
+    },
+    {
+      "id": "no_cloud_run_default",
+      "reason": "The Docker latexmk service is an alternate historical rail, not the current route default.",
+      "source_refs": ["compiler_route", "latex_service_history"]
+    },
+    {
+      "id": "no_unimplemented_mlcv",
+      "reason": "Conceptual ML-CV stages may appear only on the explicit proposed layer and never on the current master or cover.",
+      "source_refs": ["generate_route", "gemini_runtime", "compiler_route"]
+    },
+    {
+      "id": "no_quality_metrics",
+      "reason": "The supplied artifacts provide structural counts but no reproducible accuracy, latency, confidence, or quality evaluation.",
+      "source_refs": ["casma225_tex", "casma225_pdf"]
+    },
+    {
+      "id": "no_pdf_completeness_claim",
+      "reason": "The file is described only as the supplied generated PDF.",
+      "source_refs": ["casma225_pdf"]
+    }
+  ]
+}

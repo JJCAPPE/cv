@@ -4,6 +4,7 @@ import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
 import { InventoryCaseStudy } from "@/components/InventoryCaseStudy";
 import { Layout } from "@/components/Layout";
 import { MoveProjectStory } from "@/components/MoveProjectStory";
+import { NoteWorthyCaseStudy } from "@/components/NoteWorthyCaseStudy";
 import { RowingCaseStudy } from "@/components/RowingCaseStudy";
 import { TickitCaseStudy } from "@/components/TickitCaseStudy";
 import type { Project } from "@/content/projects";
@@ -15,6 +16,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const isDeskinator = project.slug === "deskinator";
   const isInventory = project.slug === "inventory-system";
   const isMove = project.slug === "move";
+  const isNoteWorthy = project.slug === "ai-notes-or-ocr";
   const isRowing = project.slug === "rowing-biomechanics";
   const isTickit = project.slug === "tickit";
 
@@ -108,7 +110,12 @@ export function ProjectPage({ project }: { project: Project }) {
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
             const media =
-              isDeskinator || isInventory || isMove || isRowing || isTickit
+              isDeskinator ||
+              isInventory ||
+              isMove ||
+              isNoteWorthy ||
+              isRowing ||
+              isTickit
                 ? undefined
                 : project.gallery?.[index];
 
@@ -157,6 +164,8 @@ export function ProjectPage({ project }: { project: Project }) {
           <TickitCaseStudy />
         ) : isRowing ? (
           <RowingCaseStudy project={project} />
+        ) : isNoteWorthy ? (
+          <NoteWorthyCaseStudy project={project} />
         ) : isMove ? (
           <MoveProjectStory />
         ) : isDeskinator ? (

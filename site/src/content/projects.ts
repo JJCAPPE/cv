@@ -16,6 +16,7 @@ export type ProjectMedia = {
   alt: string;
   width: number;
   height: number;
+  page?: number;
   caption?: string;
   fit?: "cover" | "contain";
   railFit?: "cover" | "contain";
@@ -662,33 +663,79 @@ export const projects: Project[] = [
     title: "NoteWorthy",
     slug: "ai-notes-or-ocr",
     summary:
-      "A system for converting handwritten notes into structured, styled PDFs and LaTeX documents.",
+      "A multimodal notes-to-LaTeX pipeline that streams Gemini-generated structure into a styled template, compiles it through configured HTTP backends, and returns PDF plus source.",
     stack: [
       "Next.js",
       "TypeScript",
-      "Google AI Studio",
-      "OAuth",
-      "Docker",
-      "Cloud Run",
+      "Gemini File API",
+      "Server-Sent Events",
+      "LaTeX",
+      "Prisma",
+      "PostgreSQL",
     ],
     year: "2026",
     type: "Applied AI / Product",
     role: "Full-stack developer",
     featured: true,
     cover: {
-      src: "/media/projects/ai-notes-or-ocr/generated-document.png",
-      alt: "A typeset document generated from source notes by NoteWorthy.",
-      width: 1020,
-      height: 1320,
-      caption: "Generated PDF output from the live conversion pipeline.",
+      src: "/media/projects/ai-notes-or-ocr/technical/noteworthy-agent-exploded.svg",
+      alt: "Exploded NoteWorthy system showing image preparation and server request guards, streamed Gemini LaTeX generation, template composition, configurable HTTP compilation, browser output, optional persistence, and separate historical rails.",
+      width: 2400,
+      height: 1350,
+      caption:
+        "Source-led execution atlas pinned to the inspected July 2026 repository. Solid paths are current defaults, dashed nodes are selectable or authenticated options, and subdued rails are historical alternatives.",
       fit: "contain",
+      railFit: "contain",
     },
     gallery: [
       {
-        src: "/media/projects/ai-notes-or-ocr/logo.svg",
-        alt: "NoteWorthy wordmark.",
-        width: 1306,
-        height: 180,
+        src: "/media/projects/ai-notes-or-ocr/casma225/page-015.webp",
+        alt: "Full portrait page 15 from the supplied PDF, with a three-dimensional parametric helix, a theorem box, and a worked question box.",
+        width: 1224,
+        height: 1584,
+        page: 15,
+        caption:
+          "A 3D parametric helix above theorem and question structures generated from the source grammar.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/ai-notes-or-ocr/casma225/page-042.webp",
+        alt: "Full portrait page 42 from the supplied PDF, showing two colored three-dimensional multivariable surface plots and worked limit examples.",
+        width: 1224,
+        height: 1584,
+        page: 42,
+        caption:
+          "Two PGFPlots surfaces pair path-dependent and path-independent multivariable limits with worked examples.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/ai-notes-or-ocr/generated-document.png",
+        alt: "Full portrait page 75 from the supplied PDF, with a boxed definition, worked double-integral example, and a three-dimensional cylinder surface.",
+        width: 1020,
+        height: 1320,
+        page: 75,
+        caption:
+          "Definition and example macros frame a surface-area derivation and its 3D cylinder construction.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/ai-notes-or-ocr/casma225/page-083.webp",
+        alt: "Full portrait page 83 from the supplied PDF, with a boxed Cartesian-to-polar definition and three coordinate diagrams.",
+        width: 1224,
+        height: 1584,
+        page: 83,
+        caption:
+          "Cartesian and polar coordinate diagrams show the same point, angle, and alternate notations.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/ai-notes-or-ocr/casma225/page-100.webp",
+        alt: "Full portrait page 100 from the supplied PDF, with radial and rotational vector-field diagrams and a gradient-vector-field example.",
+        width: 1224,
+        height: 1584,
+        page: 100,
+        caption:
+          "Two vector-field plots contrast radial and rotational behavior before the gradient-field section.",
         fit: "contain",
       },
     ],
@@ -698,54 +745,75 @@ export const projects: Project[] = [
         href: "https://noteworthy-git-main-giacomo-cappellettos-projects.vercel.app/",
       },
     ],
-    diagram: [
-      "Note upload",
-      "OCR / vision model",
-      "Structured document",
-      "LaTeX compiler",
-      "PDF export",
+    metrics: [
+      {
+        value: "7,237",
+        label: "supplied TeX lines",
+        note: "byte-stable source artifact",
+      },
+      {
+        value: "63",
+        label: "TikZ scenes",
+        note: "plus 32 PGFPlots axes",
+      },
+      {
+        value: "110",
+        label: "supplied PDF pages",
+        note: "US-letter metadata",
+      },
     ],
     sections: [
       {
-        title: "Problem",
+        title: "Why the conversion path matters",
         paragraphs: [
-          "Handwritten academic notes are difficult to search, restyle, and reuse. NoteWorthy converts source notes into structured documents without requiring the user to rebuild formatting manually.",
+          "Dense mathematical notes are more than text: hierarchy, notation, diagrams, and relationships must survive the move into an editable document. NoteWorthy turns image notes into a generated LaTeX body, composes that body into a styled source file, and returns both source and a compiled PDF.",
+          "The implementation keeps the user-facing loop visible through streamed status updates, while each server boundary applies a narrower set of request, generation, composition, or response guards.",
         ],
       },
       {
-        title: "Constraints",
+        title: "Current execution path",
         bullets: [
-          "Preserve mathematical notation and document hierarchy.",
-          "Compile untrusted document input inside an isolated environment.",
-          "Support sign-in and a web-first upload-to-export workflow.",
+          "Client-side compression begins only above a 20 MiB batch, with a 2,000 px maximum dimension and JPEG quality 0.82.",
+          "POST /api/latex/generate accepts no more than ten files or 25 MiB, checks browser-declared MIME values for an image/ prefix, and emits Server-Sent Events.",
+          "GoogleAIFileManager uploads images in parallel before streamed Gemini generation accumulates one LaTeX body.",
+          "Files written for accepted requests are removed after generation completes or raises an error; early validation exits happen before those file writes.",
         ],
       },
       {
-        title: "Architecture",
+        title: "Generation contract",
         paragraphs: [
-          "A Next.js application manages uploads, authentication, and document state. Google AI Studio extracts structure and notation, while a Dockerized LaTeX compiler on Cloud Run generates the final output.",
+          "Summary, Base, and Expansion modes change the conversion instruction, while Regular is the default model and Fast/Pro are premium-gated selectable alternatives mapped to Gemini identifiers. The prompt requests a body compatible with the template’s definition, note, theorem, question, solution, example, and TikZ grammar.",
+          "The streamed result is trimmed, fenced output and a returned document prefix are removed, and the cleaned body is handed to composition. This normalization is deterministic cleanup, not a separately implemented OCR or compile-repair stage.",
         ],
       },
       {
-        title: "Implementation",
-        bullets: [
-          "Integrated GitHub and Google OAuth.",
-          "Mapped model output into a controlled LaTeX document shape.",
-          "Containerized compilation and deployed the product across Vercel and Cloud Run.",
-        ],
-      },
-      {
-        title: "Current Status",
+        title: "Proposed / conceptual ML-CV layer",
         paragraphs: [
-          "The application is deployed and supports note conversion into styled PDF and LaTeX output. Current work is centered on extraction consistency for dense notation and varied handwriting.",
+          "A disconnected dashed overlay explores possible perspective and illumination normalization, a math-aware layout graph, region-level uncertainty visualization, and compile-repair plus render-regression gates.",
+          "These components are design hypotheses only. They are not present in the inspected runtime, carry no accuracy or latency claims, and never share the solid visual path used for source-verified behavior.",
         ],
       },
       {
-        title: "Next Steps",
+        title: "Compile and output boundary",
         bullets: [
-          "Improve structured extraction evaluation.",
-          "Add better correction workflows before compilation.",
-          "Explore semantic organization and retrieval across converted notes.",
+          "The composition route replaces <content> in a 1,065-line styled template.",
+          "The PDF route tries configured external HTTP compiler targets with backend-specific payloads, a 30-second request timeout, and bounded retries.",
+          "Returned bytes must begin with the PDF file signature before the browser creates a preview URL.",
+          "The interface retains the generated body, composed source, and PDF blob for copy, preview, and export.",
+        ],
+      },
+      {
+        title: "Optional and historical rails",
+        paragraphs: [
+          "Authenticated users can optionally save PDF bytes and metadata through Prisma and combine selected saved documents. Neither operation is required for conversion.",
+          "The repository also retains a Socket.IO server and a Dockerized latexmk service. They document earlier or alternate approaches; the current client uses fetch plus SSE, and the current PDF route defaults to configured HTTP compiler backends.",
+        ],
+      },
+      {
+        title: "Artifact evidence",
+        paragraphs: [
+          "The supplied main.tex contains 7,237 lines across three chapters and 62 numbered sections, including 63 TikZ scenes and 32 PGFPlots axes. It imports preamble, macros, and letterfonts and references two external images, so it is offered as source-as-is rather than a standalone compile bundle.",
+          "The supplied generated PDF reports 110 US-letter pages. Five full-page previews are shown below without asserting that the file is a complete or partial corpus, and without turning structural counts into model-quality claims.",
         ],
       },
     ],
