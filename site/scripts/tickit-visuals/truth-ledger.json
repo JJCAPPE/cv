@@ -1,0 +1,1090 @@
+{
+  "schema_version": "tickit.visual_truth.v1",
+  "project": "TickIT",
+  "generated_at": "source-pinned; no runtime timestamp",
+  "snapshots": {
+    "cv-site": "c67e442ebcd10b5f94babe455a686b6c3675f039",
+    "tickit": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+    "tickit-client": "824b208b4e337d8560aeb72519d7eb17593cf318",
+    "author-attestation": "2026-07-30",
+    "tickit-rails-stash": "cbf3a8f59c1d7bf608eca3947a93569fc9c2fcf6",
+    "tickit-client-stash": "f8a24157412b281d3f329056477d1a768923cb46"
+  },
+  "evidence_classes": {
+    "current_snapshot": {
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "treatment": "solid_yellow"
+    },
+    "author_verified_shipped": {
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "treatment": "solid_subdued_blue"
+    },
+    "local_historical_wip": {
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "treatment": "dotted_ghost"
+    }
+  },
+  "allowed_surfaces": [
+    "tickit-platform-exploded",
+    "tickit-platform-interface-layer",
+    "tickit-platform-service-layer",
+    "tickit-platform-operations-layer",
+    "tickit-commerce-intelligence-exploded",
+    "tickit-commerce-intelligence-commerce-layer",
+    "tickit-commerce-intelligence-access-layer",
+    "tickit-commerce-intelligence-intelligence-layer",
+    "tickit-cover",
+    "tickit-case-study"
+  ],
+  "sources": {
+    "site.resume": {
+      "repo": "cv-site",
+      "path": "resume-giacomo-cappelletto.tex",
+      "symbol": "TickIT GmbH / Frontend & Backend Engineer",
+      "snapshot": "c67e442ebcd10b5f94babe455a686b6c3675f039",
+      "source_type": "resume"
+    },
+    "author.clarification": {
+      "repo": "author-attestation",
+      "path": "Kandev task context",
+      "symbol": "2026-07-30 clarification that the resume capabilities were implemented and verified",
+      "snapshot": "2026-07-30",
+      "source_type": "author_attestation"
+    },
+    "rails.routes": {
+      "repo": "tickit",
+      "path": "config/routes.rb",
+      "symbol": "admin, business, authenticated user, and public API route scopes",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.business_scope": {
+      "repo": "tickit",
+      "path": "app/controllers/business/api/app_controller.rb",
+      "symbol": "Business::Api::AppController#set_business",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.events": {
+      "repo": "tickit",
+      "path": "app/controllers/business/api/v1/events_controller.rb",
+      "symbol": "Business::Api::V1::EventsController",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.public_events": {
+      "repo": "tickit",
+      "path": "app/controllers/public/api/v1/events_controller.rb",
+      "symbol": "Public::Api::V1::EventsController#index and #show",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.tickets": {
+      "repo": "tickit",
+      "path": "app/controllers/business/api/v1/tickets_controller.rb",
+      "symbol": "Business::Api::V1::TicketsController",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.routines": {
+      "repo": "tickit",
+      "path": "app/controllers/business/api/v1/connect/ticket_checker_routines_controller.rb",
+      "symbol": "Business::Api::V1::Connect::TicketCheckerRoutinesController",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.event_members": {
+      "repo": "tickit",
+      "path": "app/controllers/business/api/v1/event_members_controller.rb",
+      "symbol": "Business::Api::V1::EventMembersController",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.models": {
+      "repo": "tickit",
+      "path": "app/models/event.rb, app/models/ticket.rb, app/models/ticket_tier.rb, app/models/event_member.rb, app/models/invitation.rb",
+      "symbol": "Event, Ticket, TicketTier, EventMember, and Invitation associations and callbacks",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.routine_models": {
+      "repo": "tickit",
+      "path": "app/models/ticket_checker_routine.rb, app/models/ticket_checker.rb",
+      "symbol": "TicketCheckerRoutine and TicketChecker",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.checker_job": {
+      "repo": "tickit",
+      "path": "app/jobs/events/add_ticket_checkers_job.rb",
+      "symbol": "Events::AddTicketCheckersJob#perform",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "rails.schema": {
+      "repo": "tickit",
+      "path": "db/schema.rb",
+      "symbol": "allowlisted_jwts, events, locations, countries, tickets, ticket_tiers, event_members, invitations, ticket_checker_routines, and ticket_checkers",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_schema"
+    },
+    "rails.jwt": {
+      "repo": "tickit",
+      "path": "app/models/user.rb, app/models/concerns/users/allowlist.rb, config/initializers/devise.rb",
+      "symbol": "Devise JWT authentication and allowlist revocation strategy",
+      "snapshot": "0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7",
+      "source_type": "current_code"
+    },
+    "client.event_api": {
+      "repo": "tickit-client",
+      "path": "src/api/business/event.ts",
+      "symbol": "event endpoints",
+      "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
+      "source_type": "current_code"
+    },
+    "client.ticket_api": {
+      "repo": "tickit-client",
+      "path": "src/api/business/ticket.ts",
+      "symbol": "ticket and tier endpoints",
+      "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
+      "source_type": "current_code"
+    },
+    "client.routine_api": {
+      "repo": "tickit-client",
+      "path": "src/api/business/connect/ticket_checker_routine.ts",
+      "symbol": "ticket-checker routine endpoints",
+      "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
+      "source_type": "current_code"
+    },
+    "client.public_event": {
+      "repo": "tickit-client",
+      "path": "src/app/events/[event_id]/page.tsx",
+      "symbol": "EventDetailsPage",
+      "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
+      "source_type": "current_code"
+    },
+    "client.organizer_surfaces": {
+      "repo": "tickit-client",
+      "path": "src/app/organisations/[id]/events and src/app/organisations/[id]/connect",
+      "symbol": "event creation, details, tickets, team, and checker-routine pages",
+      "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
+      "source_type": "current_code"
+    },
+    "client.types": {
+      "repo": "tickit-client",
+      "path": "src/types/index.d.ts",
+      "symbol": "models.business and models.public event, ticket, tier, routine, and member contracts",
+      "snapshot": "824b208b4e337d8560aeb72519d7eb17593cf318",
+      "source_type": "current_code"
+    },
+    "wip.rails_qr": {
+      "repo": "tickit-rails-stash",
+      "path": "app/controllers/api/v1/qr_token_controller.rb and config/initializers/qr_encryptor.rb",
+      "symbol": "QrTokenController#create and qr_message_encryptor",
+      "snapshot": "cbf3a8f59c1d7bf608eca3947a93569fc9c2fcf6",
+      "source_type": "local_stash"
+    },
+    "wip.client_qr": {
+      "repo": "tickit-client-stash",
+      "path": "src/api/qrCode.ts and src/app/(main)/qrcode_viewer/page.tsx",
+      "symbol": "fetchQrToken and TicketQrGenerator draft",
+      "snapshot": "f8a24157412b281d3f329056477d1a768923cb46",
+      "source_type": "local_stash"
+    }
+  },
+  "claims": [
+    {
+      "id": "legend-current",
+      "display": "SOLID YELLOW / CURRENT SNAPSHOT",
+      "claim": "Solid yellow treatment identifies behavior verified in the supplied current source snapshot.",
+      "source_refs": ["rails.routes", "client.types"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-commerce-intelligence-exploded"],
+      "notes": "Evidence legend; color is paired with an explicit text label."
+    },
+    {
+      "id": "legend-shipped",
+      "display": "SOLID BLUE / AUTHOR-VERIFIED SHIPPED",
+      "claim": "Solid blue treatment identifies shipped capabilities verified by the author and resume while their implementation source is absent from the supplied snapshot.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-commerce-intelligence-exploded"],
+      "notes": "Evidence legend; no low-level internal topology is asserted."
+    },
+    {
+      "id": "legend-wip",
+      "display": "DOTTED / LOCAL HISTORICAL WIP",
+      "claim": "Dotted ghost treatment identifies incomplete local QR stash artifacts.",
+      "source_refs": ["wip.rails_qr", "wip.client_qr"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-platform-exploded", "tickit-commerce-intelligence-exploded"],
+      "notes": "Evidence legend; WIP artifacts are not used as proof of the shipped access system."
+    },
+    {
+      "id": "platform-project",
+      "display": "TICKIT / CURRENT PLATFORM",
+      "claim": "The current-platform visual is pinned to the supplied Rails and Next.js snapshots.",
+      "source_refs": ["rails.routes", "client.types"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded"],
+      "notes": "Master header."
+    },
+    {
+      "id": "platform-snapshot",
+      "display": "SOURCE SNAPSHOT / JUL 2026 INSPECTION",
+      "claim": "The visual was audited against the pinned source snapshots recorded in this ledger.",
+      "source_refs": ["rails.routes", "client.types"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded"],
+      "notes": "Inspection label, not a runtime timestamp."
+    },
+    {
+      "id": "platform-title",
+      "display": "EVENT OPERATIONS / EXPLODED",
+      "claim": "The current snapshot implements public discovery and organization-scoped event operations across interface, service, and persistence boundaries.",
+      "source_refs": ["rails.routes", "client.organizer_surfaces", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded"],
+      "notes": "Master title."
+    },
+    {
+      "id": "platform-subtitle",
+      "display": "PUBLIC DISCOVERY → ORGANIZER CONTROL → PERSISTED EVENT STATE",
+      "claim": "The current platform spans public event reads, organizer management, and persisted event state.",
+      "source_refs": ["rails.public_events", "client.organizer_surfaces", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded"],
+      "notes": "High-level current-snapshot relationship."
+    },
+    {
+      "id": "platform-boundary",
+      "display": "CURRENT CODE ONLY / COMMERCE HISTORY SHOWN SEPARATELY",
+      "claim": "The current-platform master does not present absent commerce implementation as part of the supplied snapshot.",
+      "source_refs": ["rails.routes", "site.resume", "author.clarification"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded"],
+      "notes": "Boundary statement."
+    },
+    {
+      "id": "interface-plane",
+      "display": "01 / PRODUCT INTERFACES",
+      "claim": "The interface plane groups public and organizer product surfaces implemented in the supplied Next.js snapshot.",
+      "source_refs": ["client.public_event", "client.organizer_surfaces"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Exploded plane label."
+    },
+    {
+      "id": "interface-public-event",
+      "display": "PUBLIC EVENT DISCOVERY",
+      "claim": "The public interface fetches and displays event details.",
+      "source_refs": ["client.public_event", "rails.public_events"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Public product surface."
+    },
+    {
+      "id": "interface-event-setup",
+      "display": "ORGANIZER EVENT SETUP",
+      "claim": "The organizer interface includes event creation and location selection.",
+      "source_refs": ["client.organizer_surfaces", "client.event_api"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Organizer product surface."
+    },
+    {
+      "id": "interface-event-details",
+      "display": "EVENT DETAILS",
+      "claim": "The organizer interface includes event detail management.",
+      "source_refs": ["client.organizer_surfaces", "client.event_api"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Organizer product surface."
+    },
+    {
+      "id": "interface-ticket-management",
+      "display": "TICKETS + TIERS",
+      "claim": "The organizer interface manages tickets and ticket tiers.",
+      "source_refs": ["client.organizer_surfaces", "client.ticket_api"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Organizer product surface."
+    },
+    {
+      "id": "interface-event-team",
+      "display": "EVENT TEAM",
+      "claim": "The organizer interface displays event members and invitation status.",
+      "source_refs": ["client.organizer_surfaces", "rails.event_members"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Organizer product surface."
+    },
+    {
+      "id": "interface-invitations",
+      "display": "INVITATIONS",
+      "claim": "Invitation state is represented in the current event-member flow.",
+      "source_refs": ["rails.models", "client.types"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Organizer product surface and contract."
+    },
+    {
+      "id": "interface-routines",
+      "display": "CHECKER ROUTINE CONTROLS",
+      "claim": "The organizer interface and API support creating, editing, activating, and disabling checker routines.",
+      "source_refs": ["client.routine_api", "rails.routines"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Organizer product surface."
+    },
+    {
+      "id": "interface-rail",
+      "display": "NEXT.JS PRODUCT SURFACES",
+      "claim": "The first plane represents the current Next.js product surfaces.",
+      "source_refs": ["client.public_event", "client.organizer_surfaces"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer"],
+      "notes": "Plane rail label."
+    },
+    {
+      "id": "service-plane",
+      "display": "02 / REQUEST + SERVICE BOUNDARIES",
+      "claim": "The service plane groups browser API clients, Rails route boundaries, authentication, organization scoping, and controllers.",
+      "source_refs": ["client.event_api", "rails.routes", "rails.business_scope"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Exploded plane label."
+    },
+    {
+      "id": "service-api-clients",
+      "display": "NEXT.JS API CLIENTS",
+      "claim": "Typed frontend modules call current business event, ticket, and routine APIs.",
+      "source_refs": ["client.event_api", "client.ticket_api", "client.routine_api", "client.types"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Client service boundary."
+    },
+    {
+      "id": "service-public-api",
+      "display": "PUBLIC /API/V1/EVENTS",
+      "claim": "A public subdomain API exposes event index and detail reads.",
+      "source_refs": ["rails.routes", "rails.public_events"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Rails route boundary."
+    },
+    {
+      "id": "service-business-api",
+      "display": "BUSINESS /API/V1",
+      "claim": "A business subdomain API exposes organization-scoped event, ticket, member, invitation, and routine operations.",
+      "source_refs": ["rails.routes", "rails.business_scope"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Rails route boundary."
+    },
+    {
+      "id": "service-admin-api",
+      "display": "ADMIN /API/V1",
+      "claim": "A separate admin subdomain API boundary exists for administrative organization and reach operations.",
+      "source_refs": ["rails.routes"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Rails route boundary; no unverified admin behavior is added."
+    },
+    {
+      "id": "service-jwt",
+      "display": "DEVISE JWT + ALLOWLIST",
+      "claim": "User authentication uses Devise JWT with an allowlist revocation strategy.",
+      "source_refs": ["rails.jwt", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Authentication boundary."
+    },
+    {
+      "id": "service-org-scope",
+      "display": "ORGANIZATION SCOPE",
+      "claim": "Business requests resolve the organization through current_user.organisations and organisation_id.",
+      "source_refs": ["rails.business_scope"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Authorization and tenancy boundary."
+    },
+    {
+      "id": "service-location",
+      "display": "GOOGLE MAPS PLACE RESOLUTION",
+      "claim": "Event creation resolves a place through the configured Google Maps helper before persisting a PostGIS point and country relationship.",
+      "source_refs": ["rails.events", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Configured external boundary."
+    },
+    {
+      "id": "service-controllers",
+      "display": "EVENT / TICKET / ROUTINE CONTROLLERS",
+      "claim": "Current Rails controllers implement event, ticket/tier, and checker-routine operations.",
+      "source_refs": ["rails.events", "rails.tickets", "rails.routines"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Grouped current controller boundary."
+    },
+    {
+      "id": "service-rail",
+      "display": "AUTHENTICATED + ORGANIZATION-SCOPED",
+      "claim": "Business service operations pass through authentication and organization resolution.",
+      "source_refs": ["rails.business_scope", "rails.jwt"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Plane rail label."
+    },
+    {
+      "id": "operations-plane",
+      "display": "03 / OPERATIONS + DATA",
+      "claim": "The operations plane groups current persisted event state and the event-created checker routine job.",
+      "source_refs": ["rails.schema", "rails.checker_job"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Exploded plane label."
+    },
+    {
+      "id": "operations-postgres",
+      "display": "POSTGRESQL + POSTGIS",
+      "claim": "The current schema uses PostgreSQL persistence and geographic point columns for countries and locations.",
+      "source_refs": ["rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persistence boundary."
+    },
+    {
+      "id": "operations-events",
+      "display": "EVENTS",
+      "claim": "Events persist organization, location, time, status, description, and banner relationships in the current schema.",
+      "source_refs": ["rails.schema", "rails.models"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persisted model."
+    },
+    {
+      "id": "operations-locations",
+      "display": "LOCATIONS + COUNTRIES",
+      "claim": "Locations and countries persist geographic points and country eligibility in the current schema.",
+      "source_refs": ["rails.events", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persisted model group."
+    },
+    {
+      "id": "operations-tickets",
+      "display": "TICKET CATALOG + TIERS",
+      "claim": "Tickets and ticket tiers persist sale windows, quantities, prices, and event relationships.",
+      "source_refs": ["rails.tickets", "rails.schema", "rails.models"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persisted model group."
+    },
+    {
+      "id": "operations-members",
+      "display": "EVENT MEMBERS",
+      "claim": "Event members persist organization, event, optional user, email, role, and status.",
+      "source_refs": ["rails.event_members", "rails.schema", "rails.models"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persisted model."
+    },
+    {
+      "id": "operations-invitations",
+      "display": "INVITATIONS",
+      "claim": "Invitation records track event-member linkage and accepted or declined state.",
+      "source_refs": ["rails.schema", "rails.models"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persisted model."
+    },
+    {
+      "id": "operations-routines",
+      "display": "CHECKER ROUTINES + CHECKERS",
+      "claim": "Checker routines and their checker email entries persist at organization scope.",
+      "source_refs": ["rails.routines", "rails.routine_models", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Persisted model group."
+    },
+    {
+      "id": "operations-job",
+      "display": "EVENT-CREATED CHECKER JOB",
+      "claim": "After event creation, the current Event callback runs a job that copies the active routine's checker emails into event members.",
+      "source_refs": ["rails.models", "rails.checker_job"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Synchronous perform_now behavior in the supplied snapshot."
+    },
+    {
+      "id": "operations-rail",
+      "display": "PERSISTED EVENT OPERATIONS",
+      "claim": "The third plane represents current persisted event operations.",
+      "source_refs": ["rails.schema", "rails.checker_job"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Plane rail label."
+    },
+    {
+      "id": "flow-public-discovery",
+      "display": "Public event reads cross the public API boundary.",
+      "claim": "The public event page requests event data from the public Rails event API.",
+      "source_refs": ["client.public_event", "rails.public_events"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer", "tickit-platform-service-layer"],
+      "notes": "Connector claim; display text is metadata-only."
+    },
+    {
+      "id": "flow-organizer-clients",
+      "display": "Organizer surfaces use typed event, ticket, and routine clients.",
+      "claim": "Organizer product surfaces call the typed Next.js API client modules.",
+      "source_refs": ["client.organizer_surfaces", "client.event_api", "client.ticket_api", "client.routine_api"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-interface-layer", "tickit-platform-service-layer"],
+      "notes": "Connector claim; display text is metadata-only."
+    },
+    {
+      "id": "flow-auth-scope",
+      "display": "Authenticated business requests resolve organization scope.",
+      "claim": "The business API authenticates users before resolving organization scope.",
+      "source_refs": ["rails.business_scope", "rails.jwt"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer"],
+      "notes": "Connector claim; display text is metadata-only."
+    },
+    {
+      "id": "flow-place-persistence",
+      "display": "Place resolution produces an organization-owned PostGIS location.",
+      "claim": "Event creation resolves place data, checks an active country, builds a PostGIS point, and associates the saved location to the event.",
+      "source_refs": ["rails.events", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer", "tickit-platform-operations-layer"],
+      "notes": "Connector claim; display text is metadata-only."
+    },
+    {
+      "id": "flow-controller-persistence",
+      "display": "Current controllers read and write the documented event-operation models.",
+      "claim": "Event, ticket, member, and routine controller operations cross into their documented persisted models.",
+      "source_refs": ["rails.events", "rails.tickets", "rails.routines", "rails.event_members", "rails.schema"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-service-layer", "tickit-platform-operations-layer"],
+      "notes": "Connector claim; display text is metadata-only."
+    },
+    {
+      "id": "flow-event-created-routine",
+      "display": "Event creation copies the active checker routine into event members.",
+      "claim": "The Event after-create callback runs AddTicketCheckersJob, which creates event-member rows from the active organization routine.",
+      "source_refs": ["rails.models", "rails.checker_job", "rails.routine_models"],
+      "evidence_class": "current_snapshot",
+      "confidence": "verified",
+      "implementation_source_availability": "available_in_supplied_snapshot",
+      "surfaces": ["tickit-platform-exploded", "tickit-platform-operations-layer"],
+      "notes": "Connector claim; display text is metadata-only."
+    },
+    {
+      "id": "history-project",
+      "display": "TICKIT / SHIPPED CAPABILITIES",
+      "claim": "The historical master documents capabilities stated in the resume and verified by the author as shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded"],
+      "notes": "Master header."
+    },
+    {
+      "id": "history-snapshot",
+      "display": "AUTHOR-VERIFIED / IMPLEMENTATION SOURCE ABSENT",
+      "claim": "The shipped capabilities are author-verified, but their implementation source is not available in the supplied repositories.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded"],
+      "notes": "Evidence boundary."
+    },
+    {
+      "id": "history-title",
+      "display": "COMMERCE / ACCESS / INTELLIGENCE",
+      "claim": "The shipped historical capability set covers commerce, attendee access, and organizer intelligence.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded"],
+      "notes": "Master title."
+    },
+    {
+      "id": "history-subtitle",
+      "display": "SHIPPED CAPABILITY BOUNDARIES / NO INVENTED INTERNAL TOPOLOGY",
+      "claim": "The historical visual stays at documented capability boundaries and does not invent absent implementation internals.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded"],
+      "notes": "Master qualification."
+    },
+    {
+      "id": "history-boundary",
+      "display": "EXPLANATORY RELATIONSHIP / NOT A LIVE TRACE OR SERVICE MAP",
+      "claim": "Relationships in the historical master explain product capability adjacency rather than undocumented runtime topology.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded"],
+      "notes": "Footer boundary statement."
+    },
+    {
+      "id": "commerce-plane",
+      "display": "01 / COMMERCE",
+      "claim": "The commerce plane groups the documented shipped ticket purchasing and Stripe payment capabilities.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
+      "notes": "Exploded plane label."
+    },
+    {
+      "id": "commerce-attendee",
+      "display": "ATTENDEE",
+      "claim": "Ticket purchasing was delivered as an attendee-facing product flow.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
+      "notes": "Product actor, not an implementation service."
+    },
+    {
+      "id": "commerce-purchase",
+      "display": "TICKET PURCHASE",
+      "claim": "Ticket purchasing flows were shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
+      "notes": "Capability-level claim."
+    },
+    {
+      "id": "commerce-stripe",
+      "display": "STRIPE PAYMENT PROCESSING",
+      "claim": "Platform payments were processed through Stripe.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
+      "notes": "External processing boundary; no webhook or payment schema is asserted."
+    },
+    {
+      "id": "commerce-rail",
+      "display": "SHIPPED / HIGH-LEVEL PAYMENT BOUNDARY",
+      "claim": "The commerce plane is intentionally limited to the shipped product and Stripe boundary.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
+      "notes": "Plane qualification."
+    },
+    {
+      "id": "flow-commerce",
+      "display": "Attendee ticket purchasing crossed the Stripe processing boundary.",
+      "claim": "The documented shipped commerce capability connects attendee purchasing with Stripe payment processing.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-commerce-layer"],
+      "notes": "Capability connector; no internal payment sequence is asserted."
+    },
+    {
+      "id": "access-plane",
+      "display": "02 / ACCESS",
+      "claim": "The access plane groups shipped QR, validation, sharing, and attendee access management capabilities.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Exploded plane label."
+    },
+    {
+      "id": "access-qr-generation",
+      "display": "QR GENERATION",
+      "claim": "QR-code ticket generation infrastructure was shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Capability-level claim."
+    },
+    {
+      "id": "access-qr-validation",
+      "display": "QR VALIDATION",
+      "claim": "QR-code ticket validation infrastructure and interfaces were shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Capability-level claim; no scan table or validation algorithm is asserted."
+    },
+    {
+      "id": "access-friend-sharing",
+      "display": "FRIEND SHARING",
+      "claim": "Friend-sharing features were shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Capability-level claim; no token mechanics are asserted."
+    },
+    {
+      "id": "access-management",
+      "display": "ATTENDEE ACCESS MANAGEMENT",
+      "claim": "The QR and sharing capabilities supported attendee access management.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Product boundary."
+    },
+    {
+      "id": "access-rail",
+      "display": "AUTHOR-VERIFIED SHIPPED ACCESS",
+      "claim": "The shipped access capability set is author-verified even though implementation source is absent.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Plane qualification."
+    },
+    {
+      "id": "flow-access",
+      "display": "QR generation, validation, sharing, and access management form one documented capability family.",
+      "claim": "The resume groups QR generation, validation, validation interfaces, sharing, and attendee access management.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Capability connector; no internal ordering is asserted."
+    },
+    {
+      "id": "wip-rail",
+      "display": "LOCAL QR WIP / JAN 2025",
+      "claim": "Two local January 2025 QR stash artifacts exist separately from the supplied current snapshot and the author-verified shipped system.",
+      "source_refs": ["wip.rails_qr", "wip.client_qr"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Historical WIP rail."
+    },
+    {
+      "id": "wip-rails",
+      "display": "RAILS TOKEN DRAFT",
+      "claim": "The Rails stash drafts an authenticated encrypted-and-signed QR token response.",
+      "source_refs": ["wip.rails_qr"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "WIP artifact, not proof of the shipped validation path."
+    },
+    {
+      "id": "wip-client",
+      "display": "CLIENT QR VIEWER DRAFT",
+      "claim": "The client stash drafts a QR token API and viewer component.",
+      "source_refs": ["wip.client_qr"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Incomplete WIP artifact."
+    },
+    {
+      "id": "wip-mismatch",
+      "display": "EXPIRATION OPTIONS DISAGREE",
+      "claim": "The Rails and client stash drafts disagree on supported expiration option names.",
+      "source_refs": ["wip.rails_qr", "wip.client_qr"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Concrete incompleteness signal."
+    },
+    {
+      "id": "wip-separation",
+      "display": "NOT THE SHIPPED ACCESS PATH",
+      "claim": "The local WIP stash artifacts are not presented as the implementation of the author-verified shipped access system.",
+      "source_refs": ["wip.rails_qr", "wip.client_qr", "author.clarification"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Explicit provenance boundary."
+    },
+    {
+      "id": "flow-wip",
+      "display": "The Rails and client QR drafts are related WIP artifacts with mismatched expiration contracts.",
+      "claim": "The two stash artifacts are visually grouped as WIP while remaining disconnected from the shipped capability rail.",
+      "source_refs": ["wip.rails_qr", "wip.client_qr"],
+      "evidence_class": "local_historical_wip",
+      "confidence": "artifact_wip",
+      "implementation_source_availability": "partial_local_stash",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-access-layer"],
+      "notes": "Dotted WIP connector."
+    },
+    {
+      "id": "intelligence-plane",
+      "display": "03 / ORGANIZER INTELLIGENCE",
+      "claim": "The intelligence plane groups shipped spend tracking, analytics, dashboards, predictions, forecasts, metrics, and event cost planning.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Exploded plane label."
+    },
+    {
+      "id": "intelligence-spend",
+      "display": "CUSTOMER SPEND TRACKING",
+      "claim": "Internal customer spending tracking systems were shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Capability-level claim."
+    },
+    {
+      "id": "intelligence-analytics",
+      "display": "ANALYTICS PIPELINE",
+      "claim": "Internal analytics pipelines were shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Capability-level claim; no data schema is asserted."
+    },
+    {
+      "id": "intelligence-dashboard",
+      "display": "ORGANIZER DASHBOARD",
+      "claim": "Organizer dashboards were shipped.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Capability-level claim."
+    },
+    {
+      "id": "intelligence-spending-prediction",
+      "display": "SPENDING PREDICTIONS",
+      "claim": "Organizer dashboards included spending predictions.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Output capability; no algorithm or metric is asserted."
+    },
+    {
+      "id": "intelligence-inventory-forecast",
+      "display": "INVENTORY FORECASTS",
+      "claim": "Organizer dashboards included inventory forecasting.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Output capability; no algorithm or inventory schema is asserted."
+    },
+    {
+      "id": "intelligence-operational-metrics",
+      "display": "OPERATIONAL METRICS",
+      "claim": "Organizer dashboards included operational metrics.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Output capability; no metric values are asserted."
+    },
+    {
+      "id": "intelligence-cost-planning",
+      "display": "EVENT COST PLANNING",
+      "claim": "Organizer dashboards supported event cost planning.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Output capability; no planning algorithm is asserted."
+    },
+    {
+      "id": "intelligence-rail",
+      "display": "SHIPPED / CAPABILITY-LEVEL ANALYTICS BOUNDARY",
+      "claim": "The organizer intelligence plane stays at the documented capability boundary.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Plane qualification."
+    },
+    {
+      "id": "flow-intelligence",
+      "display": "Spend tracking, analytics, dashboards, and organizer planning outputs are documented as one shipped capability family.",
+      "claim": "The resume connects spend tracking systems and analytics pipelines to organizer dashboards for predictions, forecasts, metrics, and cost planning.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded", "tickit-commerce-intelligence-intelligence-layer"],
+      "notes": "Capability connector; no low-level pipeline topology is asserted."
+    },
+    {
+      "id": "flow-history-relationship",
+      "display": "Commerce, access, and intelligence are adjacent shipped product capability families.",
+      "claim": "The three historical planes are related as product capabilities without asserting their undocumented internal service topology.",
+      "source_refs": ["site.resume", "author.clarification"],
+      "evidence_class": "author_verified_shipped",
+      "confidence": "author_attested",
+      "implementation_source_availability": "unavailable_in_supplied_snapshot",
+      "surfaces": ["tickit-commerce-intelligence-exploded"],
+      "notes": "Master-only cross-plane relationship."
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "exclude-payment-internals",
+      "reason": "No supplied implementation source supports payment-intent schemas, webhook handlers, internal service names, queues, or retry topology.",
+      "source_refs": ["site.resume", "author.clarification"]
+    },
+    {
+      "id": "exclude-qr-internals",
+      "reason": "The shipped QR validation internals are absent; the local stash drafts are incomplete and are not substituted for the shipped system.",
+      "source_refs": ["author.clarification", "wip.rails_qr", "wip.client_qr"]
+    },
+    {
+      "id": "exclude-sharing-mechanics",
+      "reason": "No supplied implementation source supports friend-sharing token mechanics or data schemas.",
+      "source_refs": ["site.resume", "author.clarification"]
+    },
+    {
+      "id": "exclude-analytics-schema",
+      "reason": "No supplied implementation source supports analytics event schemas, table names, job names, or orchestration topology.",
+      "source_refs": ["site.resume", "author.clarification"]
+    },
+    {
+      "id": "exclude-forecasting-algorithms",
+      "reason": "No supplied implementation source supports model families, forecast algorithms, features, horizons, or evaluation metrics.",
+      "source_refs": ["site.resume", "author.clarification"]
+    },
+    {
+      "id": "exclude-performance-numbers",
+      "reason": "No source artifact supports numeric TickIT performance, conversion, accuracy, throughput, revenue, or latency claims.",
+      "source_refs": ["site.resume", "author.clarification", "rails.routes"]
+    }
+  ]
+}

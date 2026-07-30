@@ -5,6 +5,7 @@ import { InventoryCaseStudy } from "@/components/InventoryCaseStudy";
 import { Layout } from "@/components/Layout";
 import { MoveProjectStory } from "@/components/MoveProjectStory";
 import { RowingCaseStudy } from "@/components/RowingCaseStudy";
+import { TickitCaseStudy } from "@/components/TickitCaseStudy";
 import type { Project } from "@/content/projects";
 import { projects } from "@/content/projects";
 
@@ -15,6 +16,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const isInventory = project.slug === "inventory-system";
   const isMove = project.slug === "move";
   const isRowing = project.slug === "rowing-biomechanics";
+  const isTickit = project.slug === "tickit";
 
   return (
     <Layout className="project-page-shell">
@@ -106,7 +108,7 @@ export function ProjectPage({ project }: { project: Project }) {
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
             const media =
-              isDeskinator || isInventory || isMove || isRowing
+              isDeskinator || isInventory || isMove || isRowing || isTickit
                 ? undefined
                 : project.gallery?.[index];
 
@@ -151,7 +153,9 @@ export function ProjectPage({ project }: { project: Project }) {
           })}
         </div>
 
-        {isRowing ? (
+        {isTickit ? (
+          <TickitCaseStudy />
+        ) : isRowing ? (
           <RowingCaseStudy project={project} />
         ) : isMove ? (
           <MoveProjectStory />

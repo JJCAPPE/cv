@@ -1,0 +1,605 @@
+.explorer,
+.sequence {
+  --tickit-current: #e6d12a;
+  --tickit-history: #6f9ec4;
+  --tickit-wip: #817f78;
+  --tickit-ink: #11110f;
+  --tickit-panel: color-mix(in srgb, var(--panel) 93%, var(--bg));
+  --tickit-line: color-mix(in srgb, var(--line) 92%, transparent);
+  --tickit-tone: var(--tickit-current);
+  margin: clamp(3rem, 7vw, 7rem) 0 0;
+  overflow: hidden;
+  border: 1px solid var(--tickit-line);
+  background: var(--bg);
+}
+
+.explorer[data-tone="history"] {
+  --tickit-tone: var(--tickit-history);
+}
+
+.explorerHeader,
+.sequenceHeader {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.76fr) minmax(0, 1.24fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+  padding: clamp(1.15rem, 2.5vw, 2rem);
+  border-bottom: 1px solid var(--tickit-line);
+}
+
+.explorerHeader > div,
+.sequenceHeader > div {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.explorerHeader p,
+.sequenceHeader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.76rem, 1vw, 0.92rem);
+  line-height: 1.55;
+}
+
+.explorerHeader > div > p,
+.sequenceHeader > div > p {
+  color: var(--tickit-tone);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.61rem;
+  font-weight: 680;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.explorerHeader h3,
+.sequenceHeader h3 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.9rem, 3vw, 3.2rem);
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.layerControls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: var(--tickit-line);
+}
+
+.layerControls button,
+.stageControls button,
+.sequenceHeader button {
+  border: 0;
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.layerControls button {
+  display: grid;
+  min-height: 4.4rem;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.8rem clamp(0.8rem, 1.8vw, 1.35rem);
+  font-size: 0.75rem;
+  text-align: left;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.layerControls button > span {
+  color: var(--muted);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+}
+
+.layerControls button[aria-pressed="true"] {
+  background: var(--tickit-tone);
+  color: var(--tickit-ink);
+}
+
+.layerControls button[aria-pressed="true"] > span {
+  color: rgb(17 17 15 / 58%);
+}
+
+.layerControls button:hover,
+.layerControls button:focus-visible,
+.stageControls button:hover,
+.stageControls button:focus-visible,
+.sequenceHeader button:hover,
+.sequenceHeader button:focus-visible {
+  color: var(--fg);
+}
+
+.layerControls button[aria-pressed="true"]:hover,
+.layerControls button[aria-pressed="true"]:focus-visible,
+.stageControls button[aria-pressed="true"]:hover,
+.stageControls button[aria-pressed="true"]:focus-visible {
+  color: var(--tickit-ink);
+}
+
+.layerControls button:focus-visible,
+.stageControls button:focus-visible,
+.sequenceHeader button:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 2px solid var(--tickit-tone);
+  outline-offset: -3px;
+}
+
+.layerControls button:active,
+.stageControls button:active,
+.sequenceHeader button:active {
+  transform: translateY(1px);
+}
+
+.viewport {
+  min-width: 0;
+  overflow: hidden;
+  background: #0b0b0a;
+  outline: none;
+}
+
+.viewport:focus-visible,
+.sequenceViewport:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--tickit-tone);
+}
+
+.stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.master,
+.layer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.master {
+  position: relative;
+  transition:
+    opacity 220ms ease,
+    filter 220ms ease;
+}
+
+.masterDimmed {
+  filter: saturate(0.32);
+  opacity: 0.16;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.layerActive {
+  opacity: 1;
+}
+
+.readout,
+.sequenceReadout {
+  display: grid;
+  grid-template-columns:
+    minmax(8rem, 0.42fr)
+    minmax(11rem, 0.62fr)
+    minmax(0, 1.08fr)
+    minmax(0, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  border-top: 1px solid var(--tickit-line);
+  background: var(--tickit-line);
+}
+
+.readout > div,
+.readout > p,
+.sequenceReadout > div,
+.sequenceReadout > p {
+  margin: 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: var(--tickit-panel);
+}
+
+.readout > div,
+.sequenceReadout > div {
+  display: grid;
+  align-content: center;
+  gap: 0.45rem;
+}
+
+.readout span,
+.sequenceReadout span {
+  display: block;
+  color: var(--tickit-tone);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.54rem;
+  font-weight: 680;
+  letter-spacing: 0.075em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.readout strong,
+.sequenceReadout strong {
+  font-size: clamp(1.15rem, 1.8vw, 1.65rem);
+  font-weight: 580;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.readout > div p,
+.sequenceReadout > div p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.readout > p,
+.sequenceReadout > p {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.58;
+}
+
+.readout > p > span,
+.sequenceReadout > p > span {
+  margin-bottom: 0.52rem;
+}
+
+.sequence {
+  --tickit-tone: var(--tickit-history);
+}
+
+.sequenceHeader {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.sequenceHeader button {
+  min-height: 2.9rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--tickit-line);
+  color: var(--fg);
+  font-size: 0.61rem;
+  font-weight: 640;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.sequenceHeader button:disabled {
+  cursor: default;
+  opacity: 0.64;
+}
+
+.stageControls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  background: var(--tickit-line);
+  list-style: none;
+}
+
+.stageControls li {
+  min-width: 0;
+}
+
+.stageControls button {
+  display: grid;
+  width: 100%;
+  min-height: 5.35rem;
+  grid-template-columns: auto 1fr;
+  gap: 0.68rem;
+  align-items: start;
+  padding: 0.9rem;
+  font-size: 0.66rem;
+  line-height: 1.35;
+  text-align: left;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.stageControls button > span {
+  color: var(--tickit-history);
+  font-size: 0.54rem;
+}
+
+.stageControls li:first-child button > span {
+  color: var(--tickit-current);
+}
+
+.stageControls button[aria-pressed="true"] {
+  background: var(--tickit-history);
+  color: var(--tickit-ink);
+}
+
+.stageControls li:first-child button[aria-pressed="true"] {
+  background: var(--tickit-current);
+}
+
+.stageControls button[aria-pressed="true"] > span {
+  color: rgb(17 17 15 / 58%);
+}
+
+.sequenceViewport {
+  min-width: 0;
+  overflow: hidden;
+  background: #0b0b0a;
+  outline: none;
+}
+
+.sequenceFlow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: #3b3b35;
+}
+
+.sequenceStage {
+  --stage-tone: var(--tickit-history);
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: clamp(14rem, 22vw, 20rem);
+  grid-template-rows: auto 1fr auto auto;
+  gap: 1rem;
+  padding: clamp(1rem, 2vw, 1.6rem);
+  overflow: hidden;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--stage-tone) 10%, transparent),
+      transparent 48%
+    ),
+    #11110f;
+  color: #f1efe8;
+  opacity: 0.56;
+  transition:
+    opacity 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.sequenceStage[data-tone="current"] {
+  --stage-tone: var(--tickit-current);
+}
+
+.sequenceStageActive {
+  box-shadow: inset 0 0 0 2px var(--stage-tone);
+  opacity: 1;
+}
+
+.sequenceStage > span,
+.sequenceStage > small {
+  color: var(--stage-tone);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.57rem;
+  font-weight: 680;
+  letter-spacing: 0.065em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.sequenceStage > strong {
+  align-self: end;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.45rem, 2.5vw, 2.6rem);
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.sequenceStage > i {
+  display: block;
+  width: 100%;
+  height: 0.65rem;
+  background:
+    linear-gradient(
+      90deg,
+      var(--stage-tone) 0 18%,
+      transparent 18% 24%,
+      var(--stage-tone) 24% 57%,
+      transparent 57% 64%,
+      var(--stage-tone) 64% 100%
+    );
+  opacity: 0.78;
+}
+
+.sequenceStage:not(:last-child)::after {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: -0.42rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-top: 1px solid var(--stage-tone);
+  border-right: 1px solid var(--stage-tone);
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.sequence[data-paused="false"] .sequenceStageActive > i {
+  animation: stage-scan 1600ms linear infinite;
+}
+
+@keyframes stage-scan {
+  0% {
+    background-position: -8rem 0;
+  }
+
+  100% {
+    background-position: 8rem 0;
+  }
+}
+
+@media (max-width: 1120px) {
+  .explorerHeader {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .readout,
+  .sequenceReadout {
+    grid-template-columns: minmax(8rem, 0.45fr) minmax(11rem, 0.65fr) 1fr;
+  }
+
+  .readout > p:last-child,
+  .sequenceReadout > p:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .sequenceFlow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sequenceStage:nth-child(4),
+  .sequenceStage:nth-child(5) {
+    min-height: 12rem;
+  }
+
+  .sequenceStage:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .explorer,
+  .sequence {
+    margin-top: 3rem;
+  }
+
+  .explorerHeader,
+  .sequenceHeader {
+    padding: 1rem;
+  }
+
+  .sequenceHeader {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .sequenceHeader button {
+    justify-self: start;
+  }
+
+  .layerControls,
+  .stageControls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .layerControls button {
+    min-height: 4rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .stageControls li:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .stageControls button {
+    min-height: 4.5rem;
+  }
+
+  .readout,
+  .sequenceReadout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .readout > p,
+  .sequenceReadout > p {
+    grid-column: 1 / -1;
+  }
+
+  .sequenceFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .sequenceStage,
+  .sequenceStage:nth-child(4),
+  .sequenceStage:nth-child(5) {
+    min-height: 8.5rem;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+  }
+
+  .sequenceStage > span {
+    grid-row: 1 / 3;
+  }
+
+  .sequenceStage > strong {
+    align-self: center;
+    font-size: clamp(1.4rem, 7vw, 2rem);
+  }
+
+  .sequenceStage > i {
+    grid-column: 2;
+  }
+
+  .sequenceStage > small {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .readout,
+  .sequenceReadout {
+    grid-template-columns: 1fr;
+  }
+
+  .readout > p,
+  .readout > p:last-child,
+  .sequenceReadout > p,
+  .sequenceReadout > p:last-child {
+    grid-column: 1;
+  }
+
+  .readout > div,
+  .readout > p,
+  .sequenceReadout > div,
+  .sequenceReadout > p {
+    padding: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layerControls button,
+  .master,
+  .layer,
+  .stageControls button,
+  .sequenceHeader button,
+  .sequenceStage {
+    transition: none;
+  }
+
+  .sequence[data-paused] .sequenceStageActive > i {
+    animation: none;
+  }
+}
