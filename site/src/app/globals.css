@@ -501,11 +501,11 @@ a {
 }
 
 .experience-panel:nth-child(3) {
-    background: color-mix(in srgb, var(--bg) 89%, var(--surface));
+    background: color-mix(in srgb, var(--bg) 65%, var(--accent));
 }
 
 .experience-panel:nth-child(4) {
-    background: color-mix(in srgb, var(--bg) 82%, var(--surface));
+    background: var(--accent);
 }
 
 .experience-panel__meta {

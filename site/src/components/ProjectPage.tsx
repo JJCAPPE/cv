@@ -6,6 +6,7 @@ import { Layout } from "@/components/Layout";
 import { MoveProjectStory } from "@/components/MoveProjectStory";
 import { NoteWorthyCaseStudy } from "@/components/NoteWorthyCaseStudy";
 import { RowingCaseStudy } from "@/components/RowingCaseStudy";
+import { TickitCaseStudy } from "@/components/TickitCaseStudy";
 import type { Project } from "@/content/projects";
 import { projects } from "@/content/projects";
 
@@ -17,6 +18,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const isMove = project.slug === "move";
   const isNoteWorthy = project.slug === "ai-notes-or-ocr";
   const isRowing = project.slug === "rowing-biomechanics";
+  const isTickit = project.slug === "tickit";
 
   return (
     <Layout className="project-page-shell">
@@ -112,7 +114,8 @@ export function ProjectPage({ project }: { project: Project }) {
               isInventory ||
               isMove ||
               isNoteWorthy ||
-              isRowing
+              isRowing ||
+              isTickit
                 ? undefined
                 : project.gallery?.[index];
 
@@ -157,7 +160,9 @@ export function ProjectPage({ project }: { project: Project }) {
           })}
         </div>
 
-        {isRowing ? (
+        {isTickit ? (
+          <TickitCaseStudy />
+        ) : isRowing ? (
           <RowingCaseStudy project={project} />
         ) : isNoteWorthy ? (
           <NoteWorthyCaseStudy project={project} />

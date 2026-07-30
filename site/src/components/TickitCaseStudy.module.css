@@ -1,0 +1,260 @@
+.caseStudy {
+  --tickit-current: #e6d12a;
+  --tickit-history: #6f9ec4;
+  --tickit-wip: #817f78;
+  border-top: 1px solid var(--line);
+}
+
+.section {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  padding: clamp(6rem, 12vw, 12rem) clamp(1rem, 3vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.evidenceSection,
+.sequenceSection,
+.boundarySection {
+  background: var(--surface);
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(19rem, 0.72fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 7rem);
+}
+
+.kicker {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2,
+.boundaryHeader h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(4rem, 8.1vw, 8.6rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.sectionHeader > p:last-child {
+  max-width: 40rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.2vw, 1.14rem);
+  line-height: 1.72;
+  text-wrap: pretty;
+}
+
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: clamp(3rem, 7vw, 7rem) 0 0;
+  padding: 1px;
+  background: var(--line);
+}
+
+.evidenceGrid > div {
+  --evidence-tone: var(--tickit-current);
+  display: grid;
+  min-height: 18rem;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5rem;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--evidence-tone) 9%, transparent),
+      transparent 48%
+    ),
+    var(--bg);
+}
+
+.evidenceGrid > div[data-evidence="history"] {
+  --evidence-tone: var(--tickit-history);
+}
+
+.evidenceGrid > div[data-evidence="wip"] {
+  --evidence-tone: var(--tickit-wip);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--evidence-tone) 7%, transparent) 0 1px,
+      transparent 1px 12px
+    ),
+    var(--bg);
+}
+
+.evidenceGrid dt {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: center;
+  color: var(--fg);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 670;
+  letter-spacing: 0.045em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.evidenceGrid dt i {
+  display: block;
+  width: 2.8rem;
+  height: 0;
+  border-top: 3px solid var(--evidence-tone);
+}
+
+.evidenceGrid > div[data-evidence="wip"] dt i {
+  border-top-style: dotted;
+}
+
+.evidenceGrid dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.evidenceGrid dd:last-child {
+  display: grid;
+  align-content: end;
+  gap: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--evidence-tone);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.055em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.boundaryRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: clamp(3rem, 7vw, 7rem) 0 0;
+  padding: 1px;
+  background: var(--line);
+}
+
+.boundaryRail > div {
+  min-height: 10.5rem;
+  padding: clamp(1rem, 2.3vw, 1.6rem);
+  background: var(--bg);
+}
+
+.boundaryRail span {
+  display: block;
+  color: var(--tickit-current);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  font-weight: 680;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.boundaryRail p {
+  margin: 3rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.historySection .kicker {
+  color: var(--tickit-history);
+}
+
+.boundaryHeader {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.boundaryHeader h2 {
+  max-width: 10ch;
+}
+
+.exclusions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(3rem, 7vw, 7rem);
+  padding: 1px;
+  background: var(--line);
+}
+
+.exclusions p {
+  min-height: 16rem;
+  margin: 0;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 1.7;
+}
+
+.exclusions p::before {
+  display: block;
+  width: 3.5rem;
+  margin-bottom: 3rem;
+  border-top: 2px solid var(--accent-ui);
+  content: "";
+}
+
+.exclusions p:last-child::before {
+  border-top-color: var(--tickit-wip);
+  border-top-style: dotted;
+}
+
+@media (max-width: 900px) {
+  .sectionHeader {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .evidenceGrid,
+  .boundaryRail,
+  .exclusions {
+    grid-template-columns: 1fr;
+  }
+
+  .evidenceGrid > div,
+  .boundaryRail > div,
+  .exclusions p {
+    min-height: 0;
+  }
+
+  .boundaryRail p {
+    margin-top: 1.8rem;
+  }
+
+  .exclusions p::before {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: 5rem;
+  }
+
+  .sectionHeader h2,
+  .boundaryHeader h2 {
+    font-size: clamp(3.4rem, 17vw, 5.6rem);
+  }
+}
