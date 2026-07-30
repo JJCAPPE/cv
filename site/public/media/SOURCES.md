@@ -153,6 +153,49 @@ Operational-analysis media is preserved as a separate evidence layer:
   inventory desktop runtime and do not measure the rebuild’s workflow or
   performance.
 
+## TickIT
+
+Current source repositories and historical evidence:
+
+- `tickit` at `0f0c39c5cf5c3e5ec228f8c4411b0c0f9da1d0e7`.
+- `tickit-client` at `824b208b4e337d8560aeb72519d7eb17593cf318`.
+- This `cv-site` source and résumé at
+  `c67e442ebcd10b5f94babe455a686b6c3675f039`.
+- The author’s 2026-07-30 clarification that the résumé’s commerce, access,
+  sharing, analytics, forecasting, and planning capabilities were implemented
+  and verified.
+- The local Rails QR stash
+  `cbf3a8f59c1d7bf608eca3947a93569fc9c2fcf6` and client QR stash
+  `f8a24157412b281d3f329056477d1a768923cb46`, treated only as incomplete
+  January 2025 WIP artifacts.
+
+Generated visual set:
+
+- `tickit-platform-exploded.svg` and its interface, service, and operations
+  layer companions are deterministic 2400 × 1350 exports from
+  `scripts/generate-tickit-visuals.mjs`. They document public and organizer
+  product surfaces, typed API clients, public/business/admin Rails boundaries,
+  Devise JWT, organization scoping, Google Maps place resolution,
+  PostgreSQL/PostGIS state, event membership and invitations, ticket-checker
+  routines, and the event-created checker job in the supplied snapshot.
+- `tickit-commerce-intelligence-exploded.svg` and its commerce, access, and
+  intelligence layer companions document author-verified shipped ticket
+  purchasing and Stripe processing, QR generation and validation, friend
+  sharing, attendee access management, customer-spend tracking, analytics,
+  organizer dashboards, predictions, inventory forecasts, operational
+  metrics, and event cost planning.
+- The historical visual remains at capability boundaries because production
+  implementation source is unavailable. It does not invent payment handlers,
+  QR validation internals, sharing token mechanics, analytics schemas,
+  forecasting algorithms, service names, or performance values.
+- The claim ledger is `scripts/tickit-visuals/truth-ledger.json`. Solid yellow
+  marks the current snapshot, solid blue marks author-verified shipped
+  history, and dotted ghost treatment marks the separate local QR WIP
+  artifacts.
+- All eight SVGs are self-contained and use no external media, script,
+  `foreignObject`, raster embed, customer data, credential, timestamp, or
+  random value.
+
 - `projects/tickit/concert-crowd.webp`: "crowd-and-lights-at-a-concert" from
   [Good Free Photos](https://www.goodfreephotos.com/people/crowd-and-lights-at-a-concert.jpg.php),
   released under CC0 / public domain.

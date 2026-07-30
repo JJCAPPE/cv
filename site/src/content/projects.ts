@@ -581,71 +581,79 @@ export const projects: Project[] = [
     title: "TickIT",
     slug: "tickit",
     summary:
-      "A full-stack ticketing platform built with Next.js, Rails, PostgreSQL, Tailwind, and shadcn/ui.",
+      "A full-stack event platform spanning public discovery and organizer operations in the supplied Next.js and Rails snapshot, plus author-verified shipped commerce, QR access, and organizer intelligence.",
     stack: [
       "Next.js",
+      "TypeScript",
       "React",
       "Rails",
       "PostgreSQL",
+      "PostGIS",
+      "Devise JWT",
+      "Stripe",
       "Tailwind",
       "shadcn/ui",
     ],
     year: "2024-2025",
-    type: "Product Engineering",
-    role: "Frontend & Backend Engineer",
+    type: "Full-Stack Product Engineering",
+    role: "Full-Stack Engineer",
     cover: {
-      src: "/media/projects/tickit/concert-crowd.webp",
-      alt: "A concert audience facing a brightly lit stage.",
+      src: "/media/projects/tickit/tickit-platform-exploded.svg",
+      alt: "Exploded TickIT current platform showing public and organizer interfaces, authenticated organization-scoped Rails services, and PostgreSQL plus PostGIS event operations.",
       width: 2400,
-      height: 1600,
-      caption: "Conceptual event imagery. CC0 public-domain photograph.",
+      height: 1350,
+      fit: "contain",
+      railFit: "contain",
+      caption:
+        "Source-led current-platform master. Solid yellow marks the supplied code snapshot; author-verified shipped history and local QR WIP are documented separately.",
     },
     links: [],
-    diagram: [
-      "Next.js interface",
-      "Rails API",
-      "PostgreSQL",
-      "Ticket authentication",
-    ],
     sections: [
       {
-        title: "Problem",
+        title: "The product boundary",
         paragraphs: [
-          "TickIT needed product interfaces and backend capabilities for a ticketing platform, including reliable API integration and a foundation for ticket authentication.",
+          "TickIT combined attendee-facing event discovery with organizer event operations, ticket commerce, access control, and decision support. I worked across the Next.js and TypeScript interface and the Rails and PostgreSQL backend as part of a four-developer remote team.",
+          "The supplied repositories preserve the event-operations core. The broader commerce, QR access, sharing, and organizer-intelligence capabilities are historically shipped work confirmed by the résumé and the author, while their production implementation source is not present in this workspace.",
         ],
       },
       {
-        title: "Constraints",
+        title: "Current platform",
         bullets: [
-          "Ramp quickly across a mixed Next.js and Rails codebase.",
-          "Keep product UI consistent while backend capabilities evolved.",
-          "Design authentication work around ticket integrity and operational scale.",
+          "Public event index and detail APIs expose active event discovery.",
+          "Organizer surfaces cover event creation and details, ticket and tier management, event teams, invitations, and checker-routine controls.",
+          "Business API requests authenticate with Devise JWT and resolve organization scope before accessing events and related records.",
+          "PostgreSQL and PostGIS persist events, geographic locations, ticket catalogs, members, invitations, checker routines, and JWT allowlists.",
+          "Event creation applies the active checker routine by creating event-member records through the supplied after-create job.",
         ],
       },
       {
-        title: "Architecture",
-        paragraphs: [
-          "The frontend uses Next.js, React, Tailwind, and shadcn/ui. Rails exposes product APIs backed by PostgreSQL, keeping transactional concerns on the server and interface concerns in the web application.",
-        ],
-      },
-      {
-        title: "Implementation",
+        title: "Shipped commerce and access",
         bullets: [
-          "Built responsive frontend flows and reusable interface patterns.",
-          "Implemented Rails and PostgreSQL-backed product features.",
-          "Shipped API integrations and contributed to ticket authentication architecture.",
+          "Delivered attendee ticket-purchasing flows with payments processed through Stripe.",
+          "Developed QR-code ticket generation and validation infrastructure and ticket-validation interfaces.",
+          "Shipped friend-sharing features for attendee access management.",
+          "Kept the implementation story at the capability boundary because the production source for these shipped paths is absent from the supplied snapshot.",
         ],
       },
       {
-        title: "Impact",
-        paragraphs: [
-          "The work moved production features across both sides of the stack and established shared patterns for a team working through a new product architecture.",
+        title: "Organizer intelligence",
+        bullets: [
+          "Built internal customer-spend tracking systems and analytics pipelines.",
+          "Contributed organizer dashboards for spending predictions, inventory forecasts, operational metrics, and event cost planning.",
+          "Published no unsupported model, schema, performance, conversion, revenue, throughput, or accuracy claim.",
         ],
       },
       {
-        title: "Lessons",
+        title: "Cross-stack delivery",
         paragraphs: [
-          "Full-stack delivery was less about using every layer and more about keeping contracts explicit between product UI, APIs, and persistent data.",
+          "The work moved between responsive product interfaces, typed browser-to-API contracts, Rails controllers and models, data persistence, planning, and code review. That cross-stack collaboration mattered more than treating frontend and backend work as separate tracks.",
+        ],
+      },
+      {
+        title: "Evidence boundary",
+        paragraphs: [
+          "Two January 2025 QR stashes remain useful historical artifacts, but they are incomplete and disagree on expiration options. They are shown as dotted WIP evidence, not as the source of the author-verified shipped validation system.",
+          "The visual system therefore distinguishes current code, author-verified shipped history, and local WIP instead of forcing every capability into one false architecture diagram.",
         ],
       },
     ],
