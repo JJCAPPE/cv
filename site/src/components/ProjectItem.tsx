@@ -9,22 +9,22 @@ type ProjectItemProps = {
 
 export function ProjectItem({ project, index }: ProjectItemProps) {
   const order = index ?? 0;
-  const desktopSizes = ["42vw", "42vw", "34vw", "58vw", "50vw", "34vw"];
 
   return (
     <article className="project-card">
-      <Link href={`/projects/${project.slug}`} className="project-card__link">
+      <Link
+        href={`/projects/${project.slug}`}
+        className="project-card__link"
+        aria-label={`View ${project.title} project`}
+      >
         <figure className="project-card__media">
           <Image
-            className={
-              project.cover.fit === "contain" ? "media-contain" : undefined
-            }
             src={project.cover.poster ?? project.cover.src}
-            alt=""
+            alt={project.cover.alt}
             fill
             loading={order === 0 ? "eager" : undefined}
             fetchPriority={order === 0 ? "high" : undefined}
-            sizes={`(max-width: 767px) 100vw, ${desktopSizes[order % desktopSizes.length]}`}
+            sizes="100vw"
           />
         </figure>
         <div className="project-card__caption">
