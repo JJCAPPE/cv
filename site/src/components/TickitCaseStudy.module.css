@@ -1,7 +1,6 @@
 .caseStudy {
   --tickit-current: #e6d12a;
   --tickit-history: #6f9ec4;
-  --tickit-wip: #817f78;
   border-top: 1px solid var(--line);
 }
 
@@ -83,19 +82,9 @@
     var(--bg);
 }
 
-.evidenceGrid > div[data-evidence="history"] {
+.evidenceGrid > div[data-evidence="history"],
+.evidenceGrid > div[data-evidence="access"] {
   --evidence-tone: var(--tickit-history);
-}
-
-.evidenceGrid > div[data-evidence="wip"] {
-  --evidence-tone: var(--tickit-wip);
-  background:
-    repeating-linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--evidence-tone) 7%, transparent) 0 1px,
-      transparent 1px 12px
-    ),
-    var(--bg);
 }
 
 .evidenceGrid dt {
@@ -117,10 +106,6 @@
   width: 2.8rem;
   height: 0;
   border-top: 3px solid var(--evidence-tone);
-}
-
-.evidenceGrid > div[data-evidence="wip"] dt i {
-  border-top-style: dotted;
 }
 
 .evidenceGrid dd {
@@ -217,8 +202,7 @@
 }
 
 .exclusions p:last-child::before {
-  border-top-color: var(--tickit-wip);
-  border-top-style: dotted;
+  border-top-color: var(--tickit-history);
 }
 
 @media (max-width: 900px) {

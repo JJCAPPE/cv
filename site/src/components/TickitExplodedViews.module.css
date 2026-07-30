@@ -2,7 +2,6 @@
 .sequence {
   --tickit-current: #e6d12a;
   --tickit-history: #6f9ec4;
-  --tickit-wip: #817f78;
   --tickit-ink: #11110f;
   --tickit-panel: color-mix(in srgb, var(--panel) 93%, var(--bg));
   --tickit-line: color-mix(in srgb, var(--line) 92%, transparent);

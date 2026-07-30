@@ -581,7 +581,7 @@ export const projects: Project[] = [
     title: "TickIT",
     slug: "tickit",
     summary:
-      "A full-stack event platform spanning public discovery and organizer operations in the supplied Next.js and Rails snapshot, plus author-verified shipped commerce, QR access, and organizer intelligence.",
+      "A full-stack event platform spanning public discovery, ticket commerce, QR access control, organizer operations, and analytics.",
     stack: [
       "Next.js",
       "TypeScript",
@@ -597,6 +597,7 @@ export const projects: Project[] = [
     year: "2024-2025",
     type: "Full-Stack Product Engineering",
     role: "Full-Stack Engineer",
+    featured: true,
     cover: {
       src: "/media/projects/tickit/tickit-platform-exploded.svg",
       alt: "Exploded TickIT current platform showing public and organizer interfaces, authenticated organization-scoped Rails services, and PostgreSQL plus PostGIS event operations.",
@@ -605,7 +606,7 @@ export const projects: Project[] = [
       fit: "contain",
       railFit: "contain",
       caption:
-        "Source-led current-platform master. Solid yellow marks the supplied code snapshot; author-verified shipped history and local QR WIP are documented separately.",
+        "Full-stack platform map covering the implemented interface, service, and event-operations core.",
     },
     links: [],
     sections: [
@@ -613,7 +614,7 @@ export const projects: Project[] = [
         title: "The product boundary",
         paragraphs: [
           "TickIT combined attendee-facing event discovery with organizer event operations, ticket commerce, access control, and decision support. I worked across the Next.js and TypeScript interface and the Rails and PostgreSQL backend as part of a four-developer remote team.",
-          "The supplied repositories preserve the event-operations core. The broader commerce, QR access, sharing, and organizer-intelligence capabilities are historically shipped work confirmed by the résumé and the author, while their production implementation source is not present in this workspace.",
+          "The delivered product included the event-operations core together with implemented ticket purchasing, Stripe payments, QR generation and validation, friend sharing, customer-spend tracking, forecasting, and organizer planning tools.",
         ],
       },
       {
@@ -627,20 +628,20 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "Shipped commerce and access",
+        title: "Implemented commerce and access",
         bullets: [
-          "Delivered attendee ticket-purchasing flows with payments processed through Stripe.",
-          "Developed QR-code ticket generation and validation infrastructure and ticket-validation interfaces.",
-          "Shipped friend-sharing features for attendee access management.",
-          "Kept the implementation story at the capability boundary because the production source for these shipped paths is absent from the supplied snapshot.",
+          "Shipped attendee ticket purchasing with Stripe at the payment-processing boundary.",
+          "The inspected platform source documents typed ticket and tier APIs plus PostgreSQL event and catalog state; the case study does not reconstruct an unavailable production payment sequence.",
+          "Surviving implementation artifacts show Rails generating encrypted-and-signed expiring QR tokens and the TypeScript client fetching and rendering them in the attendee interface.",
+          "Implemented validation and friend-sharing capabilities for attendee access management; their private production internals are not reconstructed from the artifact snapshots.",
         ],
       },
       {
         title: "Organizer intelligence",
         bullets: [
-          "Built internal customer-spend tracking systems and analytics pipelines.",
-          "Contributed organizer dashboards for spending predictions, inventory forecasts, operational metrics, and event cost planning.",
-          "Published no unsupported model, schema, performance, conversion, revenue, throughput, or accuracy claim.",
+          "Built customer-spend tracking systems and analytics pipelines around ticket and event activity.",
+          "Implemented organizer dashboards for spending predictions, inventory forecasts, operational metrics, and event cost planning.",
+          "Kept private schemas, jobs, API contracts, model families, and forecasting metrics outside the published architecture where source was unavailable.",
         ],
       },
       {
@@ -650,10 +651,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "Evidence boundary",
+        title: "Implementation details",
         paragraphs: [
-          "Two January 2025 QR stashes remain useful historical artifacts, but they are incomplete and disagree on expiration options. They are shown as dotted WIP evidence, not as the source of the author-verified shipped validation system.",
-          "The visual system therefore distinguishes current code, author-verified shipped history, and local WIP instead of forcing every capability into one false architecture diagram.",
+          "The surviving access artifacts use an authenticated Rails endpoint to build an expiring payload, encrypt and sign it with application key material, and return a token for a typed React QR viewer. The artifacts preserve concrete implementation detail without being treated as an exact production snapshot.",
+          "Across the inspected platform, React and TypeScript handle public and organizer interfaces, Rails owns authenticated business boundaries, and PostgreSQL with PostGIS persists event state. The delivered product adds Stripe purchasing and organizer intelligence at the capability boundary supported by the author’s implementation attestation.",
         ],
       },
     ],

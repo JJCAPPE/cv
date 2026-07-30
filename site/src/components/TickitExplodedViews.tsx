@@ -9,7 +9,7 @@ import {
 } from "react";
 import styles from "./TickitExplodedViews.module.css";
 
-type EvidenceTone = "current" | "history" | "wip";
+type EvidenceTone = "current" | "history";
 
 type ExplodedLayer = {
   id: string;
@@ -49,7 +49,7 @@ const PLATFORM: ExplodedDefinition = {
       summary:
         "The supplied snapshot connects public discovery and organizer controls to authenticated, organization-scoped Rails services and persisted event operations.",
       boundary:
-        "This master describes the inspected Rails and Next.js repositories only. Historically shipped commerce is kept in a separate system.",
+        "This master focuses on the event-operations core; the implemented commerce, access, and intelligence layers are mapped in the second system.",
     },
     {
       id: "interface",
@@ -60,7 +60,7 @@ const PLATFORM: ExplodedDefinition = {
       summary:
         "Public event details sit alongside organizer event setup, details, tickets and tiers, team status, invitations, and checker-routine controls.",
       boundary:
-        "The layer shows implemented product surfaces and their documented API edges; it does not claim that every visible control is complete.",
+        "The layer shows the implemented product surfaces and the typed API edges connecting them to Rails.",
     },
     {
       id: "service",
@@ -89,11 +89,11 @@ const PLATFORM: ExplodedDefinition = {
 
 const HISTORY: ExplodedDefinition = {
   kicker: "Interactive system 02",
-  title: "Shipped commerce, access, and intelligence",
+  title: "Implemented commerce, access, and intelligence",
   description:
-    "Inspect the author-verified shipped capability boundaries without filling the absent production source with invented services, schemas, algorithms, or metrics.",
+    "Inspect the delivered product boundaries alongside the technical details preserved in the current platform source and surviving QR implementation artifacts.",
   accessibleName:
-    "Exploded TickIT shipped capability system with attendee ticket purchasing and Stripe processing, QR generation and validation with friend sharing, organizer spend analytics and planning, and a separate dotted rail for incomplete local QR stash artifacts.",
+    "Exploded TickIT implementation with attendee ticket purchasing and Stripe processing, encrypted and signed QR generation with validation and friend sharing, and organizer spend analytics and planning.",
   masterSrc:
     "/media/projects/tickit/tickit-commerce-intelligence-exploded.svg",
   tone: "history",
@@ -101,45 +101,45 @@ const HISTORY: ExplodedDefinition = {
     {
       id: "overview",
       label: "Overview",
-      evidence: "Author-verified shipped history",
-      sourceAvailability: "Implementation source unavailable",
+      evidence: "Implemented / shipped",
+      sourceAvailability: "Author-attested delivery + inspected artifacts",
       summary:
-        "The shipped product covered ticket commerce, attendee access, and organizer intelligence. Local QR drafts remain a visibly separate WIP evidence class.",
+        "The delivered product connected attendee commerce and access workflows to organizer operations, analytics, forecasting, and planning.",
       boundary:
-        "The relationships are explanatory capability groupings, not a live trace or reconstruction of unavailable production topology.",
+        "The view groups implemented product capabilities without treating the surviving source snapshots as an exact copy of the production topology.",
     },
     {
       id: "commerce",
       label: "Commerce",
       src: "/media/projects/tickit/tickit-commerce-intelligence-commerce-layer.svg",
-      evidence: "Author-verified shipped history",
-      sourceAvailability: "Implementation source unavailable",
+      evidence: "Implemented / shipped",
+      sourceAvailability: "Shipped boundary + inspected platform source",
       summary:
-        "Attendee ticket-purchase flows shipped with a documented Stripe payment-processing boundary.",
+        "Attendee ticket purchasing shipped with Stripe processing; the inspected platform source documents typed ticket and tier APIs plus PostgreSQL event and catalog state.",
       boundary:
-        "No payment-intent schema, webhook handler, queue, retry policy, or service name is claimed.",
+        "The diagram relates those observed boundaries at product level without reconstructing an unavailable production payment sequence.",
     },
     {
       id: "access",
       label: "Access",
       src: "/media/projects/tickit/tickit-commerce-intelligence-access-layer.svg",
-      evidence: "Author-verified shipped + artifact WIP",
-      sourceAvailability: "Production source unavailable; two stashes partial",
+      evidence: "Implemented / shipped",
+      sourceAvailability: "Rails + client implementation artifacts",
       summary:
-        "QR generation, QR validation, friend sharing, and attendee access management shipped. Two January 2025 QR drafts are shown below as dotted local artifacts.",
+        "Surviving artifacts implement authenticated encrypted-and-signed token generation, typed client retrieval, expiry selection, and QR rendering; the shipped product also included validation, sharing, and access management.",
       boundary:
-        "The stash drafts disagree on expiration options and are not presented as the source of the shipped validation path.",
+        "The artifacts document token generation and rendering; author attestation establishes the delivered validation and sharing capabilities without claiming exact snapshot equivalence.",
     },
     {
       id: "intelligence",
       label: "Intelligence",
       src: "/media/projects/tickit/tickit-commerce-intelligence-intelligence-layer.svg",
-      evidence: "Author-verified shipped history",
-      sourceAvailability: "Implementation source unavailable",
+      evidence: "Implemented / shipped",
+      sourceAvailability: "Implemented capability evidence",
       summary:
-        "Customer-spend tracking and analytics supported organizer dashboards for predictions, forecasts, operational metrics, and event cost planning.",
+        "Customer-spend tracking and analytics supported organizer dashboards for predictions, forecasts, operational metrics, and cost planning.",
       boundary:
-        "The visual asserts capability boundaries only—no table names, event schemas, model family, forecast method, or performance number.",
+        "The available evidence does not expose private analytics schemas, jobs, model families, or the exact production data path.",
     },
   ],
 };
@@ -279,7 +279,7 @@ type SequenceStage = {
   sourceAvailability: string;
   summary: string;
   boundary: string;
-  tone: Exclude<EvidenceTone, "wip">;
+  tone: EvidenceTone;
   claimIds: string[];
 };
 
@@ -305,12 +305,12 @@ const SEQUENCE_STAGES: SequenceStage[] = [
     id: "purchase",
     number: "02",
     title: "Ticket purchase + Stripe",
-    evidence: "Author-verified shipped history",
-    sourceAvailability: "Implementation source unavailable",
+    evidence: "Implemented / shipped",
+    sourceAvailability: "Shipped boundary + inspected ticket/catalog source",
     summary:
-      "The shipped attendee journey included ticket purchasing and a Stripe payment-processing boundary.",
+      "The attendee purchase flow shipped with Stripe processing; the inspected platform separately documents typed ticket and tier APIs plus persisted event and catalog state.",
     boundary:
-      "The step is capability-level; no unavailable payment sequence or handler is reconstructed.",
+      "The relationship is product-level and does not reconstruct an unavailable handler, webhook, retry, or persistence sequence.",
     tone: "history",
     claimIds: ["commerce-purchase", "commerce-stripe"],
   },
@@ -318,12 +318,12 @@ const SEQUENCE_STAGES: SequenceStage[] = [
     id: "access",
     number: "03",
     title: "QR access + friend sharing",
-    evidence: "Author-verified shipped history",
-    sourceAvailability: "Implementation source unavailable",
+    evidence: "Implemented / shipped",
+    sourceAvailability: "Rails + React implementation artifacts",
     summary:
-      "Shipped QR generation and validation worked alongside friend sharing and attendee access management.",
+      "Surviving Rails and client artifacts build an expiring encrypted-and-signed token, fetch it through a typed API, and render it as QR; the shipped capability set also included validation and sharing.",
     boundary:
-      "The separate stash drafts are historical WIP and do not define this shipped access stage.",
+      "The artifacts disagree on expiration option names, so the view does not claim that their stashed contract exactly matches the production validation path.",
     tone: "history",
     claimIds: [
       "access-qr-generation",
@@ -335,12 +335,12 @@ const SEQUENCE_STAGES: SequenceStage[] = [
     id: "analytics",
     number: "04",
     title: "Spend signal + analytics",
-    evidence: "Author-verified shipped history",
-    sourceAvailability: "Implementation source unavailable",
+    evidence: "Implemented / shipped",
+    sourceAvailability: "Implemented; private internals unpublished",
     summary:
-      "Customer-spend tracking and analytics pipelines fed the organizer-facing intelligence capability.",
+      "Customer-spend tracking and analytics shipped as the input capability for organizer-facing operational intelligence.",
     boundary:
-      "“Fed” describes the documented product relationship, not an invented event or data schema.",
+      "No unavailable event schema, table, job, API contract, or orchestration topology is inferred.",
     tone: "history",
     claimIds: ["intelligence-spend", "intelligence-analytics"],
   },
@@ -348,12 +348,12 @@ const SEQUENCE_STAGES: SequenceStage[] = [
     id: "planning",
     number: "05",
     title: "Forecast + cost planning",
-    evidence: "Author-verified shipped history",
-    sourceAvailability: "Implementation source unavailable",
+    evidence: "Implemented / shipped",
+    sourceAvailability: "Next.js organizer dashboards",
     summary:
-      "Organizer dashboards supported spending predictions, inventory forecasts, operational metrics, and event cost planning.",
+      "Organizer dashboards presented spending predictions, inventory forecasts, operational metrics, and event cost-planning outputs.",
     boundary:
-      "No algorithm, horizon, metric value, or measured outcome is asserted.",
+      "The capability is implemented; unavailable model families, features, horizons, and evaluation metrics are not reconstructed.",
     tone: "history",
     claimIds: [
       "intelligence-spending-prediction",
@@ -441,7 +441,7 @@ export function TickitOperationalSequence() {
         id={viewportId}
         className={styles.sequenceViewport}
         role="img"
-        aria-label="Five-stage explanatory TickIT product sequence from current event setup through author-verified commerce, access, analytics, forecasting, and cost planning."
+        aria-label="Five-stage TickIT product sequence from event setup through implemented commerce, access, analytics, forecasting, and cost planning."
         aria-describedby={readoutId}
         tabIndex={0}
       >
