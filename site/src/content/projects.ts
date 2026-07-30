@@ -179,6 +179,7 @@ export const projects: Project[] = [
       alt: "Rowing biomechanics pipeline showcase combining side-view video, two-dimensional pose tracking, a three-dimensional skeleton, joint-angle traces, stroke phase, and synchronized RP3 force telemetry.",
       width: 1440,
       height: 810,
+      railLayout: "background",
       caption:
         "The complete pipeline on a synchronized ergometer capture: pose, phase, joint angles, 3D lift, and RP3 force in one inspectable view. RP3 supplies supervision during dataset construction; the intended inference path uses video alone.",
     },
@@ -610,6 +611,7 @@ export const projects: Project[] = [
       height: 1350,
       fit: "contain",
       railFit: "contain",
+      railLayout: "background",
       caption:
         "Full-stack platform map covering the implemented interface, service, and event-operations core.",
     },
@@ -691,6 +693,7 @@ export const projects: Project[] = [
         "Source-led execution atlas pinned to the inspected July 2026 repository. Solid paths are current defaults, dashed nodes are selectable or authenticated options, and subdued rails are historical alternatives.",
       fit: "contain",
       railFit: "contain",
+      railLayout: "background",
     },
     gallery: [
       {
