@@ -35,6 +35,7 @@ export default function Home() {
           height: selectedCover.height,
           fit: selectedCover.fit,
           railFit: project.cover.railFit,
+          railLayout: project.cover.railLayout,
         },
       };
     });

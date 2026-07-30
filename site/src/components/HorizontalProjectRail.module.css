@@ -271,7 +271,9 @@
     grid-template-areas: "media copy";
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .panelLink {
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .panelLink {
     position: relative;
     display: grid;
     grid-template: "stage" 1fr / 1fr;
@@ -279,12 +281,18 @@
       clamp(2rem, 4vw, 4rem);
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .media,
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .copy {
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .media,
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .copy {
     grid-area: stage;
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .media::before {
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .media::before {
     position: absolute;
     z-index: 1;
     inset: 0;
@@ -300,19 +308,33 @@
     pointer-events: none;
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .copy {
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .imageRailContain {
+    object-fit: cover;
+  }
+
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .copy {
     z-index: 2;
     width: min(42vw, 42rem);
     color: #f2f1eb;
     pointer-events: none;
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .summary,
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .meta {
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .summary,
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .meta {
     color: rgb(242 241 235 / 74%);
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(3n) .action {
+  .rail[data-enhanced="true"]
+    .panel[data-project-layout="background"]
+    .action {
     border-color: rgb(242 241 235 / 32%);
   }
 
