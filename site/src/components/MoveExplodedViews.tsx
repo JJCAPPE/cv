@@ -117,7 +117,6 @@ const SKILLS_ADG: ExplodedDefinition = {
 
 function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
   const viewportId = useId();
-  const hintId = useId();
   const [selectedId, setSelectedId] = useState("overview");
   const selected =
     definition.layers.find((layer) => layer.id === selectedId) ??
@@ -157,8 +156,6 @@ function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
         className={styles.viewport}
         role="img"
         aria-label={definition.accessibleName}
-        aria-describedby={hintId}
-        tabIndex={0}
       >
         <div className={styles.stack}>
           <Image
@@ -167,7 +164,7 @@ function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
             alt=""
             width={2400}
             height={1350}
-            sizes="(max-width: 767px) 76rem, 94vw"
+            sizes="(max-width: 767px) 92vw, 94vw"
             unoptimized
             draggable={false}
           />
@@ -185,7 +182,7 @@ function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
                 alt=""
                 width={2400}
                 height={1350}
-                sizes="(max-width: 767px) 76rem, 94vw"
+                sizes="(max-width: 767px) 92vw, 94vw"
                 unoptimized
                 draggable={false}
                 aria-hidden="true"
@@ -193,10 +190,6 @@ function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
             ))}
         </div>
       </div>
-
-      <p id={hintId} className={styles.mobileHint}>
-        Scroll horizontally to inspect the full technical plate.
-      </p>
 
       <figcaption className={styles.readout} aria-live="polite" aria-atomic="true">
         <div>

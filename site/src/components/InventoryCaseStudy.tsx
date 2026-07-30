@@ -7,7 +7,6 @@ const operationalAnalysisMedia = [
     src: "/media/projects/inventory-system/checkout-funnel.png",
     width: 1920,
     height: 1247,
-    layout: "standard",
     label: "Checkout-stage analysis",
     alt: "Bar chart summarizing where abandoned checkout records contain shipping and payment-stage fields.",
     caption:
@@ -17,7 +16,6 @@ const operationalAnalysisMedia = [
     src: "/media/projects/inventory-system/cluster-diagnostics.webp",
     width: 2400,
     height: 945,
-    layout: "full",
     label: "Segmentation diagnostics",
     alt: "Clustering diagnostics and a principal-component projection for abandoned checkout records.",
     caption:
@@ -27,7 +25,6 @@ const operationalAnalysisMedia = [
     src: "/media/projects/inventory-system/correlation-heatmap.webp",
     width: 2000,
     height: 1774,
-    layout: "standard",
     label: "Behavior relationships",
     alt: "Spearman correlation heatmap for derived abandoned-checkout behavior features.",
     caption:
@@ -58,18 +55,13 @@ export function InventoryCaseStudy() {
         </header>
 
         <figure className={styles.systemFigure}>
-          <div
-            className={styles.systemFigureViewport}
-            aria-label="Scrollable exact-SKU and inventory decrement execution diagram"
-            role="region"
-            tabIndex={0}
-          >
+          <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/inventory-system/inventory-decrement-exploded.svg"
               alt="Exploded execution stack showing staff SKU input, exact GraphQL search with title fallback, two-location hydration, Tauri IPC, Rust orchestration, Shopify REST adjustment and optional draft status, Firestore logging, and refresh."
               width={2400}
               height={1350}
-              sizes="(max-width: 560px) 70rem, (max-width: 767px) 100vw, 94vw"
+              sizes="(max-width: 767px) 92vw, 94vw"
               unoptimized
             />
           </div>
@@ -79,9 +71,6 @@ export function InventoryCaseStudy() {
             before the zero check, optional status update, and Firestore log,
             so the sequence is not atomic.
           </figcaption>
-          <p className={styles.mobileHint}>
-            Scroll the diagram horizontally to inspect every execution layer.
-          </p>
         </figure>
       </section>
 
@@ -104,18 +93,13 @@ export function InventoryCaseStudy() {
         </header>
 
         <figure className={styles.systemFigure}>
-          <div
-            className={styles.systemFigureViewport}
-            aria-label="Scrollable inventory undo and transfer rollback diagram"
-            role="region"
-            tabIndex={0}
-          >
+          <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/inventory-system/inventory-recovery-exploded.svg"
               alt="Companion exploded view comparing one-unit undo and possible reactivation with a two-location transfer, destination-failure source rollback, rollback-failure error, and non-rolled-back Firestore logging warnings."
               width={2400}
               height={1350}
-              sizes="(max-width: 560px) 70rem, (max-width: 767px) 100vw, 94vw"
+              sizes="(max-width: 767px) 92vw, 94vw"
               unoptimized
             />
           </div>
@@ -124,9 +108,6 @@ export function InventoryCaseStudy() {
             not every later step. “Transaction” and “atomic” would overstate
             the implemented guarantee.
           </figcaption>
-          <p className={styles.mobileHint}>
-            Scroll horizontally to compare the undo and transfer mechanisms.
-          </p>
         </figure>
       </section>
 
@@ -171,12 +152,7 @@ export function InventoryCaseStudy() {
 
         <div className={styles.analysisGrid}>
           {operationalAnalysisMedia.map((media) => (
-            <figure
-              key={media.src}
-              className={
-                media.layout === "full" ? styles.analysisFigureFull : undefined
-              }
-            >
+            <figure key={media.src}>
               <p>{media.label}</p>
               <div className={styles.analysisImage}>
                 <Image
@@ -184,11 +160,7 @@ export function InventoryCaseStudy() {
                   alt={media.alt}
                   width={media.width}
                   height={media.height}
-                  sizes={
-                    media.layout === "full"
-                      ? "(max-width: 767px) 100vw, 94vw"
-                      : "(max-width: 767px) 100vw, 46vw"
-                  }
+                  sizes="(max-width: 767px) 100vw, 94vw"
                 />
               </div>
               <figcaption>{media.caption}</figcaption>

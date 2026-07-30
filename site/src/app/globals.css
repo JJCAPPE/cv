@@ -143,7 +143,6 @@ a {
 
 .media-contain {
     object-fit: contain !important;
-    padding: clamp(1.5rem, 4vw, 4rem);
 }
 
 
@@ -762,33 +761,20 @@ a {
     width: 100%;
 }
 
-/* Let the final sticky card settle below the fixed header like every card before it. */
-.project-gallery::after {
-    display: block;
-    height: var(--header-height);
-    content: "";
-    visibility: hidden;
-}
-
 .project-card {
-    position: sticky;
-    top: var(--header-height);
-    height: calc(100dvh - var(--header-height));
+    position: relative;
+    height: auto;
     min-width: 0;
     border-top: 1px solid var(--project-stage-line);
     background: var(--project-stage-bg);
     color: var(--project-stage-fg);
 }
 
-.project-card:not(:last-child) {
-    margin-bottom: var(--header-height);
-}
-
 .project-card__link {
     display: grid;
-    height: 100%;
+    height: auto;
     min-height: 0;
-    grid-template-rows: minmax(0, 1fr) var(--project-caption-height);
+    grid-template-rows: auto var(--project-caption-height);
     background: var(--project-stage-bg);
     color: inherit;
     text-decoration: none;
@@ -802,6 +788,7 @@ a {
 .project-card__media {
     position: relative;
     display: block;
+    aspect-ratio: 16 / 9;
     min-height: 0;
     margin: 0;
     overflow: hidden;
@@ -809,7 +796,7 @@ a {
 }
 
 .project-card__media img {
-    object-fit: contain;
+    object-fit: cover;
     filter: saturate(0.78) contrast(1.04);
     transition: filter 520ms var(--ease-out);
 }
@@ -1768,12 +1755,6 @@ a {
     .project-card {
         position: relative;
         top: auto;
-    }
-    .project-card:not(:last-child) {
-        margin-bottom: 0;
-    }
-    .project-gallery::after {
-        display: none;
     }
     .home-hero__video {
         display: none;

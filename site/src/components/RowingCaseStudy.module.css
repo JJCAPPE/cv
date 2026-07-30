@@ -209,8 +209,8 @@
 
 .evidenceGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 3.5vw, 3.5rem);
+  grid-template-columns: 1fr;
+  gap: clamp(3rem, 7vw, 7rem);
 }
 
 .evidenceGrid figure {
@@ -218,32 +218,30 @@
   margin: 0;
 }
 
-.wideMedia {
-  grid-column: 1 / -1;
-}
-
-.mediaFrame {
+.videoFrame {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--panel);
+  background: #070706;
 }
 
-.mediaFrame img {
-  object-fit: cover;
+.imageFrame {
+  overflow: hidden;
 }
 
-.mediaFrame .contain {
-  object-fit: contain;
-  padding: clamp(1rem, 2.5vw, 2.5rem);
-}
-
-.mediaFrame video {
+.imageFrame img,
+.videoFrame video {
   display: block;
   width: 100%;
+}
+
+.imageFrame img {
+  height: auto;
+}
+
+.videoFrame video {
   height: 100%;
-  background: #070706;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .evidenceGrid figcaption {
@@ -363,10 +361,6 @@
 
   .output {
     gap: 1rem;
-  }
-
-  .wideMedia {
-    grid-column: 1;
   }
 
   .evidenceGrid {
