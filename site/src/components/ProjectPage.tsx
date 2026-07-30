@@ -19,6 +19,8 @@ export function ProjectPage({ project }: { project: Project }) {
   const isNoteWorthy = project.slug === "ai-notes-or-ocr";
   const isRowing = project.slug === "rowing-biomechanics";
   const isTickit = project.slug === "tickit";
+  const caseStudyRendersCover =
+    isDeskinator || isInventory || isMove || isNoteWorthy || isTickit;
 
   return (
     <Layout className="project-page-shell">
@@ -45,41 +47,45 @@ export function ProjectPage({ project }: { project: Project }) {
           </div>
         </header>
 
-        <figure className="project-page__cover">
-          {project.cover.kind === "video" ? (
-            <div className="project-page__cover-video-frame">
-              <video
-                className="project-page__cover-video"
-                autoPlay
-                controls
-                loop
-                muted
-                playsInline
-                poster={project.cover.poster}
-                preload="metadata"
-                aria-label={project.cover.alt}
-              >
-                <source src={project.cover.src} type="video/mp4" />
-                Your browser does not support embedded video.
-              </video>
-            </div>
-          ) : (
-            <div className="project-page__cover-image">
-              <Image
-                className={
-                  project.cover.fit === "contain" ? "media-contain" : undefined
-                }
-                src={project.cover.src}
-                alt={project.cover.alt}
-                fill
-                sizes="100vw"
-              />
-            </div>
-          )}
-          {project.cover.caption ? (
-            <figcaption>{project.cover.caption}</figcaption>
-          ) : null}
-        </figure>
+        {!caseStudyRendersCover ? (
+          <figure className="project-page__cover">
+            {project.cover.kind === "video" ? (
+              <div className="project-page__cover-video-frame">
+                <video
+                  className="project-page__cover-video"
+                  autoPlay
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  poster={project.cover.poster}
+                  preload="metadata"
+                  aria-label={project.cover.alt}
+                >
+                  <source src={project.cover.src} type="video/mp4" />
+                  Your browser does not support embedded video.
+                </video>
+              </div>
+            ) : (
+              <div className="project-page__cover-image">
+                <Image
+                  className={
+                    project.cover.fit === "contain"
+                      ? "media-contain"
+                      : undefined
+                  }
+                  src={project.cover.src}
+                  alt={project.cover.alt}
+                  fill
+                  sizes="100vw"
+                />
+              </div>
+            )}
+            {project.cover.caption ? (
+              <figcaption>{project.cover.caption}</figcaption>
+            ) : null}
+          </figure>
+        ) : null}
 
         <dl className="project-page__facts">
           <div>

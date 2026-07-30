@@ -62,7 +62,7 @@
 
 .systemFigureViewport {
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 0;
   background: #0b0b0a;
 }
 
@@ -84,10 +84,6 @@
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   line-height: 1.55;
-}
-
-.mobileHint {
-  display: none;
 }
 
 .comparison {
@@ -432,18 +428,14 @@
 
 .analysisGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2.5rem, 5vw, 5rem) clamp(1rem, 2.5vw, 2.5rem);
+  grid-template-columns: 1fr;
+  gap: clamp(3rem, 7vw, 7rem);
   margin-top: clamp(4rem, 8vw, 8rem);
 }
 
 .analysisGrid figure {
   min-width: 0;
   margin: 0;
-}
-
-.analysisFigureFull {
-  grid-column: 1 / -1;
 }
 
 .analysisGrid figure > p {
@@ -456,11 +448,8 @@
 }
 
 .analysisImage {
-  display: grid;
-  min-height: 22rem;
-  place-items: center;
+  display: block;
   overflow: hidden;
-  background: #f4f3ef;
 }
 
 .analysisImage img {
@@ -591,34 +580,6 @@
     grid-column: 1;
   }
 
-  .analysisFigureFull {
-    grid-column: 1;
-  }
-
-  .analysisImage {
-    min-height: 0;
-  }
-
-  .systemFigureViewport {
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scrollbar-color: var(--accent-ui) var(--panel);
-    scrollbar-width: thin;
-  }
-
-  .systemFigureViewport img {
-    width: 70rem;
-    max-width: none;
-  }
-
-  .mobileHint {
-    display: block;
-    margin: 0.7rem 0 0;
-    color: var(--subtle);
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 0.62rem;
-    line-height: 1.5;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

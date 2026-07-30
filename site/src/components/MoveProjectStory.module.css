@@ -76,8 +76,7 @@
   line-height: 1.62;
 }
 
-.interfaceOverview figcaption,
-.interfaceEvidence figcaption {
+.interfaceOverview figcaption {
   max-width: 60rem;
   margin-top: 0.7rem;
   color: var(--move-muted);
@@ -462,36 +461,15 @@
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border: 1px solid var(--move-line);
-  background: #f6f6f5;
 }
 
 .interfaceOverview img {
   object-fit: contain;
 }
 
-.interfaceEvidence {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.6fr);
-  gap: clamp(2rem, 6vw, 6rem);
+.contractCopy {
+  max-width: 64rem;
   margin-top: clamp(3rem, 6vw, 6rem);
-  align-items: center;
-}
-
-.interfaceEvidence figure {
-  margin: 0;
-}
-
-.interfaceEvidence figure > div {
-  position: relative;
-  aspect-ratio: 954 / 686;
-  overflow: hidden;
-  border: 1px solid var(--move-line);
-  background: #f6f6f5;
-}
-
-.interfaceEvidence img {
-  object-fit: contain;
 }
 
 .contractCopy h3,
@@ -662,8 +640,7 @@
   .sectionHeader,
   .requestHeader,
   .sqlHeader,
-  .contractHeader,
-  .interfaceEvidence {
+  .contractHeader {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -749,7 +726,7 @@
     min-height: 9rem;
   }
 
-  .interfaceEvidence {
+  .contractCopy {
     margin-top: 3rem;
   }
 

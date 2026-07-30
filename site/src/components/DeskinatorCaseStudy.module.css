@@ -58,7 +58,7 @@
 
 .systemFigureViewport {
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 0;
   background: #0c100d;
 }
 
@@ -341,7 +341,6 @@
   display: block;
   width: 100%;
   height: auto;
-  background: #f4f3ef;
 }
 
 .wiringFigure figcaption,
@@ -388,8 +387,8 @@
 
 .evidenceGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 4vw, 4rem) clamp(1rem, 2.5vw, 2.5rem);
+  grid-template-columns: 1fr;
+  gap: clamp(3rem, 7vw, 7rem);
   margin-top: clamp(4rem, 8vw, 8rem);
 }
 
@@ -398,31 +397,15 @@
   margin: 0;
 }
 
-.evidenceGrid figure:nth-child(n + 3) {
-  grid-column: 1 / -1;
-}
-
-.evidenceGrid figure:nth-child(-n + 2) .evidenceImage {
-  aspect-ratio: 1;
-}
-
 .evidenceImage {
-  display: grid;
+  display: block;
   overflow: hidden;
-  min-height: 18rem;
-  place-items: center;
-  background: #f4f3ef;
 }
 
 .evidenceImage img {
   display: block;
   width: 100%;
   height: auto;
-}
-
-.evidenceGrid figure:nth-child(-n + 2) .evidenceImage img {
-  height: 100%;
-  object-fit: contain;
 }
 
 .evidenceGrid figcaption {
@@ -444,10 +427,6 @@
   font-size: 0.86rem;
   line-height: 1.6;
   text-wrap: pretty;
-}
-
-.mobileHint {
-  display: none;
 }
 
 .resultReadout {
@@ -486,7 +465,7 @@
 
 .artifactLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+  grid-template-columns: 1fr;
   align-items: start;
   gap: clamp(2rem, 5vw, 6rem);
   margin-top: clamp(4rem, 8vw, 8rem);
@@ -635,14 +614,6 @@
     min-height: 12rem;
   }
 
-  .evidenceGrid figure:nth-child(n + 3) {
-    grid-column: 1;
-  }
-
-  .evidenceImage {
-    min-height: 0;
-  }
-
   .decisionFlow {
     grid-template-columns: 1fr;
   }
@@ -652,45 +623,6 @@
     transform: rotate(90deg);
   }
 
-  .scrollablePlot {
-    display: block;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    place-items: start;
-    scrollbar-color: var(--accent-ui) var(--panel);
-    scrollbar-width: thin;
-  }
-
-  .scrollablePlot img {
-    width: 44rem;
-    max-width: none;
-    height: auto;
-  }
-
-  .systemFigureViewport {
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scrollbar-color: var(--accent-ui) var(--panel);
-    scrollbar-width: thin;
-  }
-
-  .systemFigureViewport img {
-    width: 64rem;
-    max-width: none;
-  }
-
-  .softwareSystemFigure .systemFigureViewport img {
-    margin-left: -14rem;
-  }
-
-  .mobileHint {
-    display: block;
-    margin-top: 0.7rem;
-    color: var(--subtle);
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 0.62rem;
-    line-height: 1.5;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

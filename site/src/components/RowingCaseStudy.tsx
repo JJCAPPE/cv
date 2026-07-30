@@ -209,11 +209,14 @@ export function RowingCaseStudy({ project }: { project: Project }) {
           </header>
           <div className={styles.evidenceGrid}>
             {project.gallery.map((media) => (
-              <figure
-                className={media.kind === "video" ? styles.wideMedia : undefined}
-                key={media.src}
-              >
-                <div className={styles.mediaFrame}>
+              <figure key={media.src}>
+                <div
+                  className={
+                    media.kind === "video"
+                      ? styles.videoFrame
+                      : styles.imageFrame
+                  }
+                >
                   {media.kind === "video" ? (
                     <video
                       controls
@@ -228,13 +231,11 @@ export function RowingCaseStudy({ project }: { project: Project }) {
                     </video>
                   ) : (
                     <Image
-                      className={
-                        media.fit === "contain" ? styles.contain : undefined
-                      }
                       src={media.src}
                       alt={media.alt}
-                      fill
-                      sizes="(max-width: 767px) 100vw, 46vw"
+                      width={media.width}
+                      height={media.height}
+                      sizes="(max-width: 767px) 100vw, 94vw"
                     />
                   )}
                 </div>

@@ -324,7 +324,7 @@
 
 .documentViewport {
   overflow: hidden;
-  border: 1px solid var(--nw-line);
+  border: 0;
 }
 
 .documentFigure figcaption {
@@ -495,7 +495,7 @@
 }
 
 .pageFigure {
-  width: min(100%, 46rem);
+  width: 100%;
   margin: clamp(2rem, 5vw, 5rem) auto 0;
 }
 
@@ -504,9 +504,7 @@
   aspect-ratio: 612 / 792;
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--nw-line);
-  background: #f5f3ed;
-  box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 18%);
+  border: 0;
 }
 
 .pageFrame img {

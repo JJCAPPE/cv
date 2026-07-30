@@ -56,7 +56,6 @@ const evidence = [
     src: "/media/projects/deskinator/boundary-discovery.webp",
     width: 1499,
     height: 1507,
-    layout: "standard",
     label: "Perception / simulated trace",
     alt: "A Deskinator simulation trace with robot poses, edge observations, and an orthogonal rectangle fitted around a square tabletop.",
     caption:
@@ -66,7 +65,6 @@ const evidence = [
     src: "/media/projects/deskinator/coverage-path.webp",
     width: 1061,
     height: 1121,
-    layout: "standard",
     label: "Planning / simulated trace",
     alt: "A Deskinator simulation showing an inset rectangular boundary, alternating cleaning lanes, and perimeter waypoints.",
     caption:
@@ -76,7 +74,6 @@ const evidence = [
     src: "/media/projects/deskinator/coverage-inset-distribution.webp",
     width: 1600,
     height: 953,
-    layout: "full",
     label: "Validation / 48 retained runs",
     alt: "Distribution of safe-inset coverage across 48 retained Deskinator simulations, centered near 99.4 percent.",
     caption:
@@ -86,7 +83,6 @@ const evidence = [
     src: "/media/projects/deskinator/runtime-distribution.webp",
     width: 1600,
     height: 461,
-    layout: "scrollable",
     label: "Validation / 48 retained runs",
     alt: "Distribution of Deskinator simulation completion times, centered near 137 seconds and above the 120-second target.",
     caption:
@@ -153,21 +149,14 @@ export function DeskinatorCaseStudy() {
           </p>
         </header>
 
-        <figure
-          className={`${styles.systemFigure} ${styles.softwareSystemFigure}`}
-        >
-          <div
-            className={styles.systemFigureViewport}
-            aria-label="Scrollable Deskinator software architecture diagram"
-            role="region"
-            tabIndex={0}
-          >
+        <figure className={styles.systemFigure}>
+          <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/deskinator/deskinator-software-exploded.svg"
               alt="Exploded software stack showing three APDS9960 inputs and wheel step counts feeding filtering, odometry, four controller states, rectangle fitting, coverage planning, StepperDrive, vacuum PWM, mapping, and telemetry."
               width={2400}
               height={1350}
-              sizes="(max-width: 560px) 64rem, (max-width: 767px) 100vw, 94vw"
+              sizes="(max-width: 767px) 92vw, 94vw"
               unoptimized
             />
           </div>
@@ -261,18 +250,13 @@ export function DeskinatorCaseStudy() {
         </header>
 
         <figure className={styles.systemFigure}>
-          <div
-            className={styles.systemFigureViewport}
-            aria-label="Scrollable Deskinator hardware system diagram"
-            role="region"
-            tabIndex={0}
-          >
+          <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/deskinator/deskinator-cover-a-exploded.svg"
               alt="Exploded CAD-style Deskinator system showing battery packs, Raspberry Pi, A4988 drivers, gesture sensor, enclosure, removable tray, NEMA17 wheel axis, paired edge sensors, fan, and vacuum scoop."
               width={2400}
               height={1350}
-              sizes="(max-width: 560px) 64rem, (max-width: 767px) 100vw, 94vw"
+              sizes="(max-width: 767px) 92vw, 94vw"
               unoptimized
             />
           </div>
@@ -391,40 +375,18 @@ export function DeskinatorCaseStudy() {
         <div className={styles.evidenceGrid}>
           {evidence.map((item) => (
             <figure key={item.src}>
-              <div
-                className={`${styles.evidenceImage} ${
-                  item.layout === "scrollable" ? styles.scrollablePlot : ""
-                }`}
-                aria-label={
-                  item.layout === "scrollable"
-                    ? "Scrollable timing distribution plot"
-                    : undefined
-                }
-                role={item.layout === "scrollable" ? "region" : undefined}
-                tabIndex={item.layout === "scrollable" ? 0 : undefined}
-              >
+              <div className={styles.evidenceImage}>
                 <Image
                   src={item.src}
                   alt={item.alt}
                   width={item.width}
                   height={item.height}
-                  sizes={
-                    item.layout === "scrollable"
-                      ? "(max-width: 560px) 44rem, (max-width: 767px) 100vw, 88vw"
-                      : item.layout === "full"
-                        ? "(max-width: 767px) 100vw, 88vw"
-                        : "(max-width: 560px) 100vw, (max-width: 767px) 50vw, 44vw"
-                  }
+                  sizes="(max-width: 767px) 100vw, 94vw"
                 />
               </div>
               <figcaption>
                 <span>{item.label}</span>
                 <p>{item.caption}</p>
-                {item.layout === "scrollable" ? (
-                  <small className={styles.mobileHint}>
-                    Scroll horizontally to inspect all three distributions.
-                  </small>
-                ) : null}
               </figcaption>
             </figure>
           ))}
@@ -464,7 +426,7 @@ export function DeskinatorCaseStudy() {
               alt="Dimensioned final assembly drawing of the Deskinator tabletop robot."
               width={3300}
               height={2550}
-              sizes="(max-width: 900px) 100vw, 52vw"
+              sizes="(max-width: 767px) 100vw, 94vw"
             />
             <figcaption>
               Final assembly drawing. The one-page source PDF is available in

@@ -266,35 +266,19 @@ export function MoveProjectStory() {
           </figcaption>
         </figure>
 
-        <div className={styles.interfaceEvidence}>
-          <figure>
-            <div>
-              <Image
-                src="/media/projects/move/move-interface-evidence.webp"
-                alt="MOVE rendering synthetic portfolio metrics beside a priority-segment chart."
-                fill
-                sizes="(max-width: 767px) 100vw, 54vw"
-              />
-            </div>
-            <figcaption>
-              The real renderer consuming a fictional typed response through
-              the existing adapter.
-            </figcaption>
-          </figure>
-          <div className={styles.contractCopy}>
-            <h3>Failure-tolerant by design</h3>
-            <p>
-              Each block has a stable type and each renderable is referenced by
-              identifier. An unsupported chart does not invalidate the answer,
-              and a partial stream can still preserve the evidence already
-              received.
-            </p>
-            <ul>
-              <li>Structured answers remain accessible without a chart.</li>
-              <li>Tool traces use public summaries, not hidden reasoning.</li>
-              <li>Citations, metrics, and tables keep their source context.</li>
-            </ul>
-          </div>
+        <div className={styles.contractCopy}>
+          <h3>Failure-tolerant by design</h3>
+          <p>
+            Each block has a stable type and each renderable is referenced by
+            identifier. An unsupported chart does not invalidate the answer,
+            and a partial stream can still preserve the evidence already
+            received.
+          </p>
+          <ul>
+            <li>Structured answers remain accessible without a chart.</li>
+            <li>Tool traces use public summaries, not hidden reasoning.</li>
+            <li>Citations, metrics, and tables keep their source context.</li>
+          </ul>
         </div>
       </section>
 

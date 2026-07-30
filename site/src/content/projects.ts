@@ -78,17 +78,6 @@ export const projects: Project[] = [
       caption:
         "Source-led system master pinned to the inspected July 2026 repositories. Solid paths are tracked defaults; dashed paths are optional or configured.",
     },
-    gallery: [
-      {
-        src: "/media/projects/move/move-interface-evidence.webp",
-        alt: "Synthetic MOVE portfolio metrics and a priority-segment chart rendered from typed agent output.",
-        width: 954,
-        height: 686,
-        fit: "contain",
-        caption:
-          "Typed metric and chart renderables from a synthetic portfolio response. No customer or production data is shown.",
-      },
-    ],
     links: [],
     metrics: [
       {
