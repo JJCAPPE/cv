@@ -1,0 +1,385 @@
+{
+  "project": "Forging Adaptability",
+  "visual": "Independent evidence atlas for a literature synthesis",
+  "authority_order": [
+    "supplied final paper PDF",
+    "supplied cover-memo PDF",
+    "supplied TeX source as provided"
+  ],
+  "sources": [
+    {
+      "path": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf",
+      "sha256": "2e86eabf6415c8ea49c7916d78079691ea289b5e9bedc2470ece6b056734826b",
+      "notes": "Delivered 8-page A4 paper with embedded fonts and no raster images."
+    },
+    {
+      "path": "public/media/projects/biomimetic-ai/forging-adaptability-cover-memo.pdf",
+      "sha256": "662932eeaad9f83f321e71fca218b052d419004830063be0211cfa2d377415b1",
+      "notes": "Delivered 9-page A4 cover-memo edition with embedded fonts and no raster images."
+    },
+    {
+      "path": "public/media/projects/biomimetic-ai/forging-adaptability.tex",
+      "sha256": "fe1e6a7520cb892970751c61aecccf2a56ae8e1d73129ef5733d5771fcbcead0",
+      "notes": "199-line source as provided. structure.tex and article.bib were not supplied."
+    }
+  ],
+  "facts": [
+    {
+      "id": "project-title",
+      "display": "FORGING ADAPTABILITY",
+      "claim": "The atlas represents the supplied paper titled Forging Adaptability.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: PDF title metadata and page 1",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "Display title is shortened from the full paper title elsewhere on the page."
+    },
+    {
+      "id": "literature-synthesis",
+      "display": "LITERATURE SYNTHESIS / INDEPENDENT EVIDENCE LANES",
+      "claim": "The visual summarizes cited research programs as independent evidence rather than one implemented architecture.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: sections 2, 3, and 4; separate cited studies",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "caption"],
+      "confidence": "verified",
+      "notes": "This boundary must remain legible in the master and surrounding page copy."
+    },
+    {
+      "id": "overview-and-scope",
+      "display": "BIOMIMETIC INSPIRATION / MODULARITY / HIERARCHICAL FEEDBACK / TRANSLATION GAP",
+      "claim": "The paper examines modular organization and hierarchical feedback as sources of targeted inspiration while preserving the translation gap between biological brains and artificial hardware.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 1, Overview and Scope; TeX lines 95-102",
+      "scope": "offline",
+      "surfaces": ["caption"],
+      "confidence": "verified",
+      "notes": "Supports the page narrative only; it is not rendered as an invented architecture in the atlas."
+    },
+    {
+      "id": "independent-evidence-label",
+      "display": "INDEPENDENT EVIDENCE",
+      "claim": "Each lane summarizes a separate cited research program.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: separate sections 2, 3, and 4",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "Repeated beside every lane to prevent the studies from reading as one system."
+    },
+    {
+      "id": "artifact-verification-label",
+      "display": "SUPPLIED ARTIFACT / VERIFIED",
+      "claim": "The page and line counts in the footer were measured from byte-preserved supplied artifacts.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: pdfinfo; public/media/projects/biomimetic-ai/forging-adaptability-cover-memo.pdf: pdfinfo; public/media/projects/biomimetic-ai/forging-adaptability.tex: wc -l",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "The source hashes are stored in this ledger and checked by the generator."
+    },
+    {
+      "id": "source-led-boundary-label",
+      "display": "SOURCE-LED ATLAS / NO CROSS-LANE CONNECTORS",
+      "claim": "The atlas is source-led and does not connect separate cited research programs.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: separate sections 2, 3, and 4",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "This footer restates the independent-evidence boundary."
+    },
+    {
+      "id": "compose-lane",
+      "display": "01 COMPOSE",
+      "claim": "One evidence lane summarizes systematic compositionality and the MLC study.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2, Human-Like Systematic Compositionality",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "Independent from the Retain and Renew lanes."
+    },
+    {
+      "id": "known-primitives",
+      "display": "KNOWN PRIMITIVES",
+      "claim": "Systematic compositionality combines previously known elements into novel combinations.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2.1, The Human Benchmark",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No specific primitive vocabulary is invented in the artwork."
+    },
+    {
+      "id": "study-examples",
+      "display": "STUDY EXAMPLES",
+      "claim": "MLC episodes provide a small set of input-output study examples that demonstrate a compositional grammar.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2.2, The MLC Approach; TeX lines 117-119",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "The diagram asserts only the episode structure described in the paper."
+    },
+    {
+      "id": "novel-query",
+      "display": "NOVEL QUERY",
+      "claim": "An MLC episode asks the network to generalize to a novel query instruction using elements seen during study.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2.2, The MLC Approach; TeX lines 117-119",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No accuracy value is displayed."
+    },
+    {
+      "id": "rule-application",
+      "display": "RULE APPLICATION",
+      "claim": "Across changing episodes, MLC encourages systematic rule learning rather than memorization of specific input-output patterns.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2.2, The MLC Approach; TeX line 119",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "Shown as the documented study objective, not a result measured by the author."
+    },
+    {
+      "id": "mlc-transformer",
+      "display": "MLC / STANDARD TRANSFORMER",
+      "claim": "The cited MLC approach operates on a standard transformer architecture.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2.2, The MLC Approach; TeX line 117",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No topology or parameter count is shown."
+    },
+    {
+      "id": "compose-connectors",
+      "display": "KNOWN PRIMITIVES + STUDY EXAMPLES -> NOVEL QUERY -> RULE APPLICATION",
+      "claim": "Connectors within the Compose lane describe the study/query episode relationship summarized by the paper.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 2.2, The MLC Approach",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "These connectors do not continue into another evidence lane."
+    },
+    {
+      "id": "retain-lane",
+      "display": "02 RETAIN",
+      "claim": "One evidence lane summarizes the cited continual-learning model with PFC-inspired mechanisms.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 3, Continual Learning and Adaptive Plasticity",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "Independent from the Compose and Renew lanes."
+    },
+    {
+      "id": "sequential-tasks",
+      "display": "SEQUENTIAL TASKS",
+      "claim": "The continual-learning challenge concerns learning tasks sequentially while retaining prior knowledge.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 3.1, The Continual Learning Challenge",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No task count is shown."
+    },
+    {
+      "id": "sluggish-units",
+      "display": "SLUGGISH TASK UNITS",
+      "claim": "The cited model uses sluggish task units that carry recent contextual information through an exponential moving average.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 3.2, PFC-Inspired Mechanisms; TeX line 146",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No undocumented brain topology is depicted."
+    },
+    {
+      "id": "hebbian-gating",
+      "display": "HEBBIAN CONTEXT GATING",
+      "claim": "The cited model adds Hebbian context gating after a standard supervised update.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 3.2, PFC-Inspired Mechanisms; TeX line 146",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "The artwork omits unsupported circuit geometry."
+    },
+    {
+      "id": "task-representation-separation",
+      "display": "SEPARATED TASK REPRESENTATIONS",
+      "claim": "The cited gating process learns to separate, described in the paper as orthogonalize, different task representations in a hidden layer.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 3.2, PFC-Inspired Mechanisms; TeX line 146",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "The display label is a concise paraphrase."
+    },
+    {
+      "id": "retain-connectors",
+      "display": "SEQUENTIAL TASKS -> CONTEXT MECHANISMS -> SEPARATED TASK REPRESENTATIONS",
+      "claim": "Connectors within the Retain lane summarize the model relationship described in the PFC-inspired mechanisms section.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: sections 3.1 and 3.2",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "These connectors do not continue into another evidence lane."
+    },
+    {
+      "id": "renew-lane",
+      "display": "03 RENEW",
+      "claim": "One evidence lane summarizes plasticity loss during prolonged standard training and a documented intervention from the cited study.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4, Plasticity Loss in Standard Deep Learning",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "Independent from the Compose and Retain lanes."
+    },
+    {
+      "id": "prolonged-training",
+      "display": "PROLONGED STANDARD TRAINING",
+      "claim": "The paper reports progressive plasticity loss during extended standard deep-learning training.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.1, The Problem of Plasticity Loss; TeX line 164",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No training duration or metric is invented."
+    },
+    {
+      "id": "dormant-units",
+      "display": "DORMANT UNITS",
+      "claim": "The paper identifies dormant or dead units as one mechanism correlated with declining learning ability.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.2, Mechanisms of Decline; TeX line 168",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No fraction of units is displayed."
+    },
+    {
+      "id": "effective-rank-loss",
+      "display": "EFFECTIVE RANK LOSS",
+      "claim": "The paper identifies a drop in hidden-layer effective rank as internal representation diversity diminishes.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.2, Mechanisms of Decline; TeX line 170",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No numeric rank value is shown."
+    },
+    {
+      "id": "weight-dynamics",
+      "display": "PROBLEMATIC WEIGHT DYNAMICS",
+      "claim": "The paper identifies problematic trends in weight magnitude during prolonged training.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.2, Mechanisms of Decline; TeX line 170",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "No causal certainty or numeric weight value is asserted."
+    },
+    {
+      "id": "continual-backpropagation",
+      "display": "CONTINUAL BACKPROPAGATION",
+      "claim": "The cited study proposes continual backpropagation as an intervention to maintain plasticity.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.3, Biological Contrast and Required Interventions; TeX line 176",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "Labeled as a documented intervention, not an implementation in this project."
+    },
+    {
+      "id": "reinitialize-less-used",
+      "display": "REINITIALIZE LESS-USED UNITS",
+      "claim": "The paper describes continual backpropagation as reinitializing less-used units to inject variability back into the network.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.3, Biological Contrast and Required Interventions; TeX line 176",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "Shown through a dashed intervention connector."
+    },
+    {
+      "id": "renew-connectors",
+      "display": "PROLONGED TRAINING -> DECLINE MARKERS; DOCUMENTED INTERVENTION -> REINITIALIZE LESS-USED UNITS",
+      "claim": "Solid connectors identify reported decline markers; a dashed connector distinguishes the separately documented intervention.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: sections 4.2 and 4.3",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "companion"],
+      "confidence": "verified",
+      "notes": "The intervention is not drawn as an automatic feedback loop."
+    },
+    {
+      "id": "conclusion-boundary",
+      "display": "SPECIFIC CAPABILITIES IMPROVE / BROADER HUMAN-LIKE INTELLIGENCE GAP REMAINS",
+      "claim": "The paper concludes that specific brain-inspired mechanisms can improve learning capabilities without closing the broader gap to human-like intelligence.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 5, Conclusion",
+      "scope": "offline",
+      "surfaces": ["master", "cover", "caption"],
+      "confidence": "verified",
+      "notes": "No AGI capability is implied."
+    },
+    {
+      "id": "study-line-legend",
+      "display": "SOLID / WITHIN CITED STUDY",
+      "claim": "Solid connectors relate mechanisms within one cited research program.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: separate sections 2, 3, and 4",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "Solid connectors never cross between evidence lanes."
+    },
+    {
+      "id": "intervention-line-legend",
+      "display": "DASHED / SEPARATE INTERVENTION",
+      "claim": "The dashed connector marks continual backpropagation as a separately documented intervention rather than an automatic feedback path.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: section 4.3, Biological Contrast and Required Interventions",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "The intervention appears only inside the Renew lane."
+    },
+    {
+      "id": "paper-pages",
+      "display": "8 A4 PAGES / FINAL PAPER",
+      "claim": "The delivered final paper contains 8 A4 pages.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: pdfinfo",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "Measured after the byte-preserved copy."
+    },
+    {
+      "id": "cover-memo-pages",
+      "display": "9 A4 PAGES / COVER MEMO",
+      "claim": "The delivered cover-memo edition contains 9 A4 pages.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-cover-memo.pdf: pdfinfo",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "Measured after the byte-preserved copy."
+    },
+    {
+      "id": "source-lines",
+      "display": "199 LINES / SOURCE AS PROVIDED",
+      "claim": "The supplied TeX source contains 199 lines and is published as provided.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability.tex: wc -l",
+      "scope": "offline",
+      "surfaces": ["master", "cover"],
+      "confidence": "verified",
+      "notes": "The source is not described as a standalone compile bundle."
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "unified-runtime",
+      "reason": "Do not combine the three cited research programs into one executable architecture, pipeline, or automatic feedback loop.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: separate sections 2, 3, and 4"
+    },
+    {
+      "id": "authored-experiments",
+      "reason": "Do not imply that Giacomo ran the cited experiments or produced original model metrics.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-cover-memo.pdf: page 2 cover memo; literature-research process"
+    },
+    {
+      "id": "unsupported-neuroscience",
+      "reason": "Do not depict undocumented brain regions, neural topology, parameter counts, energy savings, AGI capability, or automatic retraining.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability-paper.pdf: scope and conclusion boundaries"
+    },
+    {
+      "id": "mlc-percentages",
+      "reason": "Exclude MLC accuracy figures from artwork and page copy. Unescaped percent signs in the supplied TeX cause the delivered final PDF to stop the sentence at 80.7.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability.tex: line 123; final paper PDF page 3"
+    },
+    {
+      "id": "standalone-tex",
+      "reason": "Do not claim that the TeX source compiles standalone because structure.tex and article.bib were not supplied.",
+      "source": "public/media/projects/biomimetic-ai/forging-adaptability.tex: lines 33 and 195"
+    }
+  ]
+}

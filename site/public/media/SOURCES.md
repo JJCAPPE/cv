@@ -203,3 +203,51 @@ Generated visual set:
 - `projects/tickit/concert-crowd.webp`: "crowd-and-lights-at-a-concert" from
   [Good Free Photos](https://www.goodfreephotos.com/people/crowd-and-lights-at-a-concert.jpg.php),
   released under CC0 / public domain.
+
+## Biomimetic AI
+
+Supplied source artifacts:
+
+- `biomimetic_ai_giacomo_cappelletto.pdf` was copied byte-for-byte to
+  `projects/biomimetic-ai/forging-adaptability-paper.pdf`. SHA-256:
+  `2e86eabf6415c8ea49c7916d78079691ea289b5e9bedc2470ece6b056734826b`.
+- `article-cover-memo.pdf` was copied byte-for-byte to
+  `projects/biomimetic-ai/forging-adaptability-cover-memo.pdf`. SHA-256:
+  `662932eeaad9f83f321e71fca218b052d419004830063be0211cfa2d377415b1`.
+- `article.tex` was copied byte-for-byte to
+  `projects/biomimetic-ai/forging-adaptability.tex`. SHA-256:
+  `fe1e6a7520cb892970751c61aecccf2a56ae8e1d73129ef5733d5771fcbcead0`.
+- The final paper reports 8 A4 pages at 595.276 × 841.89 points. The
+  cover-memo edition reports 9 A4 pages at the same dimensions. Both PDFs
+  contain embedded fonts and no raster images.
+- `page-001.webp`, `page-002.webp`, `page-004.webp`,
+  `page-006.webp`, and `page-007.webp` were derived from the final paper
+  with Poppler at 160 dpi, then encoded as full-page WebP previews at quality
+  88. Each preview is 1323 × 1871 pixels and retains the complete A4 page.
+- The TeX artifact contains 199 lines. It is published as source as provided,
+  not as a reproducible standalone compile bundle: `structure.tex` and
+  `article.bib` are referenced but were not supplied.
+- The MLC validation sentence in the TeX source contains unescaped percent
+  signs. The delivered final PDF stops that sentence at `80.7`; the missing
+  remainder and all percentages from that sentence are intentionally excluded
+  from the project copy and visuals rather than silently corrected.
+
+Generated visual set:
+
+- `biomimetic-ai-adaptability-atlas.svg` and the compositionality,
+  continual-learning, and plasticity focus layers are deterministic
+  2400 × 1350 exports from
+  `scripts/generate-biomimetic-ai-visuals.mjs`.
+- The claim ledger is
+  `scripts/biomimetic-ai-visuals/truth-ledger.json`. It maps visible labels
+  and connectors to the supplied paper sections and records unsupported
+  concepts as exclusions.
+- Compose, Retain, and Renew are independent evidence lanes for three cited
+  research programs. No connector crosses between lanes, and the atlas is not
+  an executable architecture or a record of experiments run by the author.
+- Solid connectors relate mechanisms within one cited study. The dashed Renew
+  branch marks continual backpropagation as a separately documented
+  intervention, not automatic retraining or a closed feedback loop.
+- The visual set contains no MLC percentages, invented model topology,
+  parameter counts, energy-savings claim, AGI capability, external asset,
+  script, raster embed, or `foreignObject`.
