@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BiomimeticAiCaseStudy } from "@/components/BiomimeticAiCaseStudy";
 import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
 import { InventoryCaseStudy } from "@/components/InventoryCaseStudy";
 import { Layout } from "@/components/Layout";
@@ -13,6 +14,7 @@ import { projects } from "@/content/projects";
 export function ProjectPage({ project }: { project: Project }) {
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(projectIndex + 1) % projects.length];
+  const isBiomimeticAi = project.slug === "biomimetic-ai";
   const isDeskinator = project.slug === "deskinator";
   const isInventory = project.slug === "inventory-system";
   const isMove = project.slug === "move";
@@ -20,7 +22,12 @@ export function ProjectPage({ project }: { project: Project }) {
   const isRowing = project.slug === "rowing-biomechanics";
   const isTickit = project.slug === "tickit";
   const caseStudyRendersCover =
-    isDeskinator || isInventory || isMove || isNoteWorthy || isTickit;
+    isBiomimeticAi ||
+    isDeskinator ||
+    isInventory ||
+    isMove ||
+    isNoteWorthy ||
+    isTickit;
 
   return (
     <Layout className="project-page-shell">
@@ -93,7 +100,7 @@ export function ProjectPage({ project }: { project: Project }) {
             <dd>{project.role}</dd>
           </div>
           <div>
-            <dt>Stack</dt>
+            <dt>{project.stackLabel ?? "Stack"}</dt>
             <dd>{project.stack.join(" / ")}</dd>
           </div>
         </dl>
@@ -116,6 +123,7 @@ export function ProjectPage({ project }: { project: Project }) {
         <div className="project-page__chapters">
           {project.sections.map((section, index) => {
             const media =
+              isBiomimeticAi ||
               isDeskinator ||
               isInventory ||
               isMove ||
@@ -168,6 +176,8 @@ export function ProjectPage({ project }: { project: Project }) {
 
         {isTickit ? (
           <TickitCaseStudy />
+        ) : isBiomimeticAi ? (
+          <BiomimeticAiCaseStudy project={project} />
         ) : isRowing ? (
           <RowingCaseStudy project={project} />
         ) : isNoteWorthy ? (

@@ -1,0 +1,513 @@
+.caseStudy {
+  width: 100%;
+  overflow: clip;
+}
+
+.atlasSection,
+.paperSection,
+.artifactSection {
+  width: 100%;
+  padding: clamp(5rem, 10vw, 10rem) clamp(1rem, 3vw, 3rem);
+}
+
+.sectionIntro {
+  display: grid;
+  width: min(100%, 78rem);
+  grid-template-columns: minmax(8rem, 0.55fr) minmax(0, 1.45fr);
+  gap: 2rem;
+  margin: 0 auto clamp(3rem, 6vw, 6rem);
+}
+
+.sectionIntro h2 {
+  max-width: 10ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.sectionIntro>div>p {
+  max-width: 44rem;
+  margin: clamp(2rem, 4vw, 4rem) 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.atlasShell,
+.paperViewer,
+.artifactGrid {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+}
+
+.atlasControls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: var(--line);
+}
+
+.atlasControls button,
+.pageControls button {
+  min-height: 3rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--panel);
+  color: var(--fg);
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.69rem;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.atlasControls button {
+  min-height: 3.5rem;
+  padding: 0.9rem 1rem;
+  white-space: nowrap;
+}
+
+.atlasControls button[aria-pressed="true"],
+.pageNumbers button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.atlasControls button:focus-visible,
+.pageControls button:focus-visible,
+.artifactCard:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--accent-ui);
+  outline-offset: -3px;
+}
+
+.atlasControls button[aria-pressed="true"]:focus-visible,
+.pageNumbers button[aria-pressed="true"]:focus-visible {
+  outline-color: var(--accent-ink);
+}
+
+.atlasFigure,
+.pageFigure {
+  margin: 0;
+}
+
+.atlasViewport {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0b0b0a;
+}
+
+.atlasBase,
+.atlasOverlay {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.atlasBase {
+  transition:
+    opacity 280ms ease,
+    filter 280ms ease;
+}
+
+.atlasViewport[data-focused="true"] .atlasBase {
+  opacity: 0.44;
+  filter: saturate(0.68);
+}
+
+.atlasOverlay {
+  position: absolute;
+  inset: 0;
+  animation: atlas-focus-in 280ms ease both;
+  pointer-events: none;
+}
+
+@keyframes atlas-focus-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.atlasFigure figcaption {
+  padding: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+  line-height: 1.55;
+}
+
+.atlasReadout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  background: var(--line);
+}
+
+.atlasReadout>div {
+  min-height: 13rem;
+  padding: clamp(1.25rem, 2.5vw, 2.5rem);
+  background: var(--panel);
+}
+
+.atlasReadout dt,
+.pageCaption>span,
+.artifactType {
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.67rem;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.atlasReadout dd {
+  margin: clamp(1.5rem, 3vw, 3rem) 0 0;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.1vw, 1.02rem);
+  line-height: 1.55;
+}
+
+.paperSection {
+  background: var(--surface);
+}
+
+.paperViewer {
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.pageControls {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) minmax(0, 1fr) minmax(7rem, auto);
+  gap: 1px;
+  padding: 1px;
+  background: var(--line);
+}
+
+.pageControls>button {
+  padding: 0.8rem 1.25rem;
+  white-space: nowrap;
+}
+
+.pageControls button:disabled {
+  color: var(--subtle);
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+
+.pageNumbers {
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+  background: var(--line);
+}
+
+.pageNumbers button {
+  width: 3rem;
+  min-width: 2.75rem;
+  padding: 0.75rem;
+}
+
+.pageFigure {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.34fr);
+  align-items: stretch;
+}
+
+.pageFrame {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 4rem);
+  background: #d7d4ca;
+}
+
+.pageFrame img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: min(78vh, 60rem);
+  object-fit: contain;
+}
+
+.pageCaption {
+  display: flex;
+  min-height: 18rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.pageCaption p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.1vw, 1.03rem);
+  line-height: 1.55;
+}
+
+.artifactSection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.artifactSection .sectionIntro h2 {
+  max-width: 11ch;
+}
+
+.artifactSection .sectionIntro>div>p {
+  color: rgb(17 17 15 / 72%);
+}
+
+.artifactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: rgb(17 17 15 / 38%);
+}
+
+.artifactCard {
+  display: flex;
+  min-height: clamp(18rem, 24vw, 25rem);
+  flex-direction: column;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  background: var(--accent);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.artifactCard:hover,
+.artifactCard:focus-visible {
+  background: var(--accent-ink);
+  color: #f1efe8;
+}
+
+.artifactType {
+  color: currentcolor;
+  opacity: 0.7;
+}
+
+.artifactCard h3 {
+  max-width: 8ch;
+  margin: clamp(2.5rem, 5vw, 5rem) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5.8rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.artifactCard p {
+  max-width: 32rem;
+  margin: 1.5rem 0 0;
+  font-size: clamp(0.88rem, 1vw, 1rem);
+  line-height: 1.5;
+  opacity: 0.76;
+}
+
+.artifactAction {
+  margin-top: auto;
+  padding-top: 2rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.artifactAction::after {
+  content: " ↓";
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 1020px) {
+  .sectionIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionIntro h2 {
+    max-width: 12ch;
+  }
+
+  .kicker {
+    margin-bottom: 1rem;
+  }
+
+  .atlasReadout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .atlasReadout>div {
+    min-height: 10rem;
+  }
+
+  .pageFigure {
+    grid-template-columns: 1fr;
+  }
+
+  .pageCaption {
+    min-height: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .atlasSection,
+  .paperSection,
+  .artifactSection {
+    padding-inline: 1rem;
+  }
+
+  .sectionIntro {
+    margin-bottom: 3rem;
+  }
+
+  .sectionIntro h2 {
+    font-size: clamp(3.2rem, 15vw, 5.5rem);
+  }
+
+  .atlasControls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .atlasReadout,
+  .artifactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .atlasReadout>div {
+    min-height: 0;
+  }
+
+  .atlasFigure figcaption {
+    font-size: 0.62rem;
+  }
+
+  .pageControls {
+    grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr) minmax(5.5rem, auto);
+  }
+
+  .pageControls>button {
+    padding-inline: 0.75rem;
+  }
+
+  .pageNumbers button {
+    width: 2.75rem;
+  }
+
+  .pageFrame {
+    padding: 1rem;
+  }
+
+  .pageFrame img {
+    width: 100%;
+    height: auto;
+  }
+
+  .artifactCard {
+    min-height: 18rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .atlasControls {
+    grid-template-columns: 1fr;
+  }
+
+  .atlasControls button {
+    min-height: 3rem;
+  }
+
+  .pageControls {
+    grid-template-areas:
+      "previous"
+      "pages"
+      "next";
+    grid-template-columns: 1fr;
+  }
+
+  .pageControls>button:first-child {
+    grid-area: previous;
+  }
+
+  .pageControls>button:last-child {
+    grid-area: next;
+  }
+
+  .pageNumbers {
+    grid-area: pages;
+  }
+
+  .pageNumbers button {
+    flex: 1;
+    width: auto;
+  }
+
+  .pageCaption {
+    padding: 1.25rem;
+  }
+
+  .artifactAction {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlasBase,
+  .atlasOverlay,
+  .artifactCard {
+    animation: none;
+    transition: none;
+  }
+}

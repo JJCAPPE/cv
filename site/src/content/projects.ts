@@ -34,6 +34,7 @@ export type Project = {
   slug: string;
   summary: string;
   stack: string[];
+  stackLabel?: string;
   year: string;
   type: string;
   role: string;
@@ -811,6 +812,132 @@ export const projects: Project[] = [
         paragraphs: [
           "The supplied main.tex contains 7,237 lines across three chapters and 62 numbered sections, including 63 TikZ scenes and 32 PGFPlots axes. It imports preamble, macros, and letterfonts and references two external images, so it is offered as source-as-is rather than a standalone compile bundle.",
           "The supplied generated PDF reports 110 US-letter pages. Five full-page previews are shown below without asserting that the file is a complete or partial corpus, and without turning structural counts into model-quality claims.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Forging Adaptability",
+    slug: "biomimetic-ai",
+    summary:
+      "A literature-based examination of systematic compositionality, continual learning, adaptive plasticity, and the limits of biomimetic AI.",
+    stack: [
+      "Systematic compositionality",
+      "Meta-learning",
+      "Continual learning",
+      "Adaptive plasticity",
+    ],
+    stackLabel: "Focus",
+    year: "2025",
+    type: "Research / Technical Writing",
+    role: "Researcher and author",
+    cover: {
+      src: "/media/projects/biomimetic-ai/technical/biomimetic-ai-adaptability-atlas.svg",
+      alt: "Three independent evidence lanes relate MLC study and query episodes, PFC-inspired context mechanisms, and plasticity-loss markers with a separate continual-backpropagation intervention.",
+      width: 2400,
+      height: 1350,
+      caption:
+        "Literature-synthesis atlas derived from the supplied paper. Each lane summarizes one cited research program; the dashed Renew branch is a separate documented intervention.",
+      fit: "contain",
+      railFit: "contain",
+      railLayout: "background",
+    },
+    gallery: [
+      {
+        src: "/media/projects/biomimetic-ai/page-001.webp",
+        alt: "Full portrait page 1 of the final paper, showing the title, author, and contents.",
+        width: 1323,
+        height: 1871,
+        page: 1,
+        caption:
+          "Title, contents, and the paper's five-section map from scope through conclusion.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/biomimetic-ai/page-002.webp",
+        alt: "Full portrait page 2 of the final paper, showing Overview and Scope and the opening of Human-Like Systematic Compositionality.",
+        width: 1323,
+        height: 1871,
+        page: 2,
+        caption:
+          "Overview and Scope sets the research question, then introduces the systematicity challenge.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/biomimetic-ai/page-004.webp",
+        alt: "Full portrait page 4 of the final paper, showing the transition from compositionality to Continual Learning and Adaptive Plasticity.",
+        width: 1323,
+        height: 1871,
+        page: 4,
+        caption:
+          "The argument turns from compositionality to continual learning and introduces PFC-inspired mechanisms.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/biomimetic-ai/page-006.webp",
+        alt: "Full portrait page 6 of the final paper, showing Mechanisms of Decline and Biological Contrast and Required Interventions.",
+        width: 1323,
+        height: 1871,
+        page: 6,
+        caption:
+          "Dormant units, effective-rank loss, weight dynamics, and continual backpropagation frame the plasticity discussion.",
+        fit: "contain",
+      },
+      {
+        src: "/media/projects/biomimetic-ai/page-007.webp",
+        alt: "Full portrait page 7 of the final paper, showing Implications for Standard Deep Learning and the Conclusion.",
+        width: 1323,
+        height: 1871,
+        page: 7,
+        caption:
+          "The conclusion separates targeted gains from the remaining gap to adaptable, human-like intelligence.",
+        fit: "contain",
+      },
+    ],
+    links: [
+      {
+        label: "Final paper",
+        href: "/media/projects/biomimetic-ai/forging-adaptability-paper.pdf",
+      },
+      {
+        label: "Cover memo",
+        href: "/media/projects/biomimetic-ai/forging-adaptability-cover-memo.pdf",
+      },
+    ],
+    sections: [
+      {
+        title: "The research question",
+        paragraphs: [
+          "The paper asks whether selected principles associated with modular brain organization and hierarchical feedback can improve how artificial neural networks combine known elements, retain prior knowledge, and remain plastic over time.",
+          "Biomimicry is treated as a source of targeted mechanisms, not a claim that artificial hardware reproduces the brain. The evidence comes from recent literature rather than experiments run for this project.",
+        ],
+      },
+      {
+        title: "Learning compositional rules",
+        paragraphs: [
+          "Lake and Baroni's MLC approach trains a standard transformer across dynamic few-shot episodes. Each episode provides study examples for a compositional grammar, then asks for a novel query that recombines elements encountered during study.",
+          "The important distinction is the learning process: the cited method is optimized to infer and apply compositional rules instead of memorizing a fixed set of input-output patterns. Numeric validation figures are omitted because the delivered PDF truncates the sentence containing them.",
+        ],
+      },
+      {
+        title: "Retaining knowledge with context control",
+        paragraphs: [
+          "The continual-learning study introduces two PFC-inspired motifs. Sluggish task units carry recent context through an exponential moving average, while a Hebbian update gates task-relevant hidden units and helps separate task representations during sequential learning.",
+          "These mechanisms belong to a distinct cited model. They are not connected to MLC as one runtime, and the case study does not invent a larger neural topology around them.",
+        ],
+      },
+      {
+        title: "Plasticity loss and intervention",
+        paragraphs: [
+          "The paper summarizes dormant units, declining effective rank, and problematic weight dynamics as mechanisms associated with plasticity loss during prolonged standard training.",
+          "Continual backpropagation is presented as a documented intervention that reinitializes less-used units. This project does not claim to implement or evaluate it, and the atlas keeps the intervention outside an automatic feedback loop.",
+        ],
+      },
+      {
+        title: "The remaining biological and AI boundary",
+        paragraphs: [
+          "The literature supports a careful conclusion: specific brain-inspired mechanisms can improve specific learning capabilities without establishing human-like general intelligence.",
+          "Biological brains and artificial hardware operate under very different physical constraints. The paper therefore ends with a translation gap, not a unified architecture or a claim that biomimicry alone closes the distance.",
         ],
       },
     ],
