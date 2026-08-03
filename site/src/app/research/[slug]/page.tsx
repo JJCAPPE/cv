@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectPage } from "@/components/ProjectPage";
-import { getProject, projectItems } from "@/content/projects";
+import { getProject, researchProjects } from "@/content/projects";
 
-type ProjectRouteProps = {
+type ResearchRouteProps = {
   params: Promise<{ slug: string }>;
 };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projectItems.map((project) => ({ slug: project.slug }));
+  return researchProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
   params,
-}: ProjectRouteProps): Promise<Metadata> {
+}: ResearchRouteProps): Promise<Metadata> {
   const project = getProject((await params).slug);
 
-  if (!project || project.collection !== "project") {
+  if (!project || project.collection !== "research") {
     return {};
   }
 
@@ -33,10 +33,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectRoute({ params }: ProjectRouteProps) {
+export default async function ResearchRoute({ params }: ResearchRouteProps) {
   const project = getProject((await params).slug);
 
-  if (!project || project.collection !== "project") {
+  if (!project || project.collection !== "research") {
     notFound();
   }
 

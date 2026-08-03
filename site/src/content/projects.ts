@@ -32,6 +32,7 @@ export type ProjectMetric = {
 export type Project = {
   title: string;
   slug: string;
+  collection: "project" | "research";
   summary: string;
   stack: string[];
   stackLabel?: string;
@@ -51,6 +52,7 @@ export const projects: Project[] = [
   {
     title: "MOVE",
     slug: "move",
+    collection: "project",
     summary:
       "A governed enterprise AI copilot that turns natural-language questions into scoped, traceable answers across approved CRM and document sources.",
     stack: [
@@ -146,6 +148,7 @@ export const projects: Project[] = [
   {
     title: "Rowing Biomechanics Pipeline",
     slug: "rowing-biomechanics",
+    collection: "project",
     summary:
       "An inspectable research system that learns a stroke-level force representation from synchronized video and RP3 telemetry, then packages the same kinematic contract for video-only inference.",
     stack: [
@@ -353,6 +356,7 @@ export const projects: Project[] = [
   {
     title: "Deskinator",
     slug: "deskinator",
+    collection: "project",
     summary:
       "An end-to-end tabletop-cleaning robot that turns touchless edge sensing into a fitted workspace, a safe coverage plan, and measurable motor commands.",
     stack: [
@@ -500,6 +504,7 @@ export const projects: Project[] = [
   {
     title: "Inventory System Rebuild",
     slug: "inventory-system",
+    collection: "project",
     summary:
       "A Tauri desktop workflow that resolves exact SKUs across two locations, decrements one available unit through Shopify, records an app-owned audit log, and exposes bounded recovery paths.",
     stack: [
@@ -576,6 +581,7 @@ export const projects: Project[] = [
   {
     title: "TickIT",
     slug: "tickit",
+    collection: "project",
     summary:
       "A full-stack event platform spanning public discovery, ticket commerce, QR access control, organizer operations, and analytics.",
     stack: [
@@ -659,6 +665,7 @@ export const projects: Project[] = [
   {
     title: "NoteWorthy",
     slug: "ai-notes-or-ocr",
+    collection: "project",
     summary:
       "A multimodal notes-to-LaTeX pipeline that streams Gemini-generated structure into a styled template, compiles it through configured HTTP backends, and returns PDF plus source.",
     stack: [
@@ -819,6 +826,7 @@ export const projects: Project[] = [
   {
     title: "Forging Adaptability",
     slug: "biomimetic-ai",
+    collection: "research",
     summary:
       "A literature-based examination of systematic compositionality, continual learning, adaptive plasticity, and the limits of biomimetic AI.",
     stack: [
@@ -943,6 +951,14 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const projectItems = projects.filter(
+  (project) => project.collection === "project",
+);
+
+export const researchProjects = projects.filter(
+  (project) => project.collection === "research",
+);
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);

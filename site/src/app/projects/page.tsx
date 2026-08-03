@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Layout } from "@/components/Layout";
 import { ProjectItem } from "@/components/ProjectItem";
-import { projects } from "@/content/projects";
+import { projectItems } from "@/content/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
         </p>
       </header>
       <div className="project-gallery">
-        {projects.map((project, index) => (
+        {projectItems.map((project, index) => (
           <ProjectItem key={project.slug} project={project} index={index} />
         ))}
       </div>
