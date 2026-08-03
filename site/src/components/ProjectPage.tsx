@@ -17,6 +17,8 @@ export function ProjectPage({ project }: { project: Project }) {
   const itemIndex = collectionItems.findIndex(
     (item) => item.slug === project.slug,
   );
+  const itemPosition = String(itemIndex + 1).padStart(2, "0");
+  const collectionSize = String(collectionItems.length).padStart(2, "0");
   const nextItem = collectionItems[(itemIndex + 1) % collectionItems.length];
   const collectionHref = isResearch ? "/#research" : "/projects";
   const collectionLabel = isResearch ? "research" : "projects";
@@ -42,9 +44,15 @@ export function ProjectPage({ project }: { project: Project }) {
           <Link href={collectionHref} className="back-link">
             All {collectionLabel}
           </Link>
-          <p className="project-page__type">
-            {project.year} / {project.type}
-          </p>
+          <div className="project-page__meta">
+            <p className="project-page__type">
+              {project.year} / {project.type}
+            </p>
+            <p className="project-page__position">
+              {isResearch ? "Research" : "Project"} {itemPosition} /{" "}
+              {collectionSize}
+            </p>
+          </div>
           <h1>{project.title}</h1>
           <p className="project-page__summary">{project.summary}</p>
           <div className="project-page__actions">

@@ -9,6 +9,7 @@ type ProjectItemProps = {
 
 export function ProjectItem({ project, index }: ProjectItemProps) {
   const order = index ?? 0;
+  const ordinal = String(order + 1).padStart(2, "0");
 
   return (
     <article className="project-card" data-project-card>
@@ -28,11 +29,17 @@ export function ProjectItem({ project, index }: ProjectItemProps) {
           />
         </figure>
         <div className="project-card__caption">
-          <p>
-            {project.year} / {project.type}
+          <p className="project-card__meta">
+            <span aria-hidden="true">{ordinal}</span>
+            <span>
+              {project.year} / {project.type}
+            </span>
           </p>
           <h2>{project.title}</h2>
           <p className="project-card__summary">{project.summary}</p>
+          <span className="project-card__action" aria-hidden="true">
+            Open project
+          </span>
         </div>
       </Link>
     </article>

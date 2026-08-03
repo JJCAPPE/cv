@@ -34,11 +34,17 @@ function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
 }
 
+function formatProjectPosition(value: number) {
+  return String(value).padStart(2, "0");
+}
+
 export function HorizontalProjectRail({
   projects,
 }: HorizontalProjectRailProps) {
   const railRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const progressTextRef = useRef<HTMLSpanElement>(null);
+  const progressFillRef = useRef<HTMLSpanElement>(null);
   const triggerRef = useRef<ScrollTriggerInstance>(null);
   const updateTriggerRef = useRef<(() => void) | null>(null);
 
@@ -91,6 +97,14 @@ export function HorizontalProjectRail({
           });
 
           timeline.to(track, { x: () => -distance(), duration: 1 }, 0);
+          if (progressFillRef.current) {
+            timeline.fromTo(
+              progressFillRef.current,
+              { scaleX: 0 },
+              { scaleX: 1, duration: 1 },
+              0,
+            );
+          }
           triggerRef.current = timeline.scrollTrigger ?? null;
           updateTriggerRef.current = () => ScrollTrigger.update();
 
@@ -114,10 +128,9 @@ export function HorizontalProjectRail({
 
               timeline.fromTo(
                 copy,
-                { x: 72, opacity: 0.32 },
+                { x: 72 },
                 {
                   x: 0,
-                  opacity: 1,
                   duration: panelInterval * 0.3,
                 },
                 revealStart,
@@ -145,21 +158,70 @@ export function HorizontalProjectRail({
             }
           });
 
+          const updateProgress = () => {
+            if (!progressTextRef.current) {
+              return;
+            }
+
+            const currentProject = Math.min(
+              Math.round(timeline.progress() * (projects.length - 1)) + 1,
+              projects.length,
+            );
+
+            progressTextRef.current.textContent = `${formatProjectPosition(
+              currentProject,
+            )} / ${formatProjectPosition(projects.length)}`;
+          };
+
+          timeline.eventCallback("onUpdate", updateProgress);
+          updateProgress();
+
           const unloadedImages = Array.from(
             rail.querySelectorAll("img"),
           ).filter((image) => !image.complete);
-          const refresh = () => ScrollTrigger.refresh();
+          const alignWorkHash = () => {
+            if (window.location.hash !== "#work") {
+              return;
+            }
+
+            window.scrollTo({
+              top: window.scrollY + rail.getBoundingClientRect().top,
+              behavior: "auto",
+            });
+          };
+          let hashAlignmentTimeout: number | null = null;
+          const scheduleWorkHashAlignment = () => {
+            if (window.location.hash !== "#work") {
+              return;
+            }
+
+            if (hashAlignmentTimeout !== null) {
+              window.clearTimeout(hashAlignmentTimeout);
+            }
+
+            hashAlignmentTimeout = window.setTimeout(() => {
+              hashAlignmentTimeout = null;
+              alignWorkHash();
+            }, 120);
+          };
+          const refresh = () => {
+            ScrollTrigger.refresh();
+            scheduleWorkHashAlignment();
+          };
+          const handleHashChange = () => {
+            if (window.location.hash === "#work") {
+              refresh();
+            }
+          };
           const hashFrame =
             window.location.hash === "#work"
               ? window.requestAnimationFrame(() => {
                   refresh();
-                  document.getElementById("work")?.scrollIntoView({
-                    behavior: "auto",
-                    block: "start",
-                  });
                 })
               : null;
           let active = true;
+
+          window.addEventListener("hashchange", handleHashChange);
 
           unloadedImages.forEach((image) => {
             image.addEventListener("load", refresh, { once: true });
@@ -178,12 +240,21 @@ export function HorizontalProjectRail({
             if (hashFrame !== null) {
               window.cancelAnimationFrame(hashFrame);
             }
+            if (hashAlignmentTimeout !== null) {
+              window.clearTimeout(hashAlignmentTimeout);
+            }
+            window.removeEventListener("hashchange", handleHashChange);
             unloadedImages.forEach((image) => {
               image.removeEventListener("load", refresh);
               image.removeEventListener("error", refresh);
             });
             triggerRef.current = null;
             updateTriggerRef.current = null;
+            if (progressTextRef.current) {
+              progressTextRef.current.textContent = `${formatProjectPosition(
+                projects.length,
+              )} projects`;
+            }
           };
         });
       }, rail);
@@ -265,9 +336,17 @@ export function HorizontalProjectRail({
         className={styles.rail}
         aria-labelledby="selected-work-heading"
       >
-        <h2 id="selected-work-heading" className={styles.srOnly}>
-          Selected work
-        </h2>
+        <header className={styles.header}>
+          <h2 id="selected-work-heading">Selected work</h2>
+          <div className={styles.orientation} aria-hidden="true">
+            <span ref={progressTextRef}>
+              {formatProjectPosition(projects.length)} projects
+            </span>
+            <span className={styles.progressTrack}>
+              <span ref={progressFillRef} className={styles.progressFill} />
+            </span>
+          </div>
+        </header>
         <div ref={trackRef} className={styles.track}>
           {projects.map((project, index) => (
             <article
@@ -326,8 +405,7 @@ export function HorizontalProjectRail({
                     {normalizeDashes(project.summary)}
                   </p>
                   <span className={styles.action} aria-hidden="true">
-                    <span>View project</span>
-                    <span className={styles.arrow}>↗</span>
+                    View project
                   </span>
                 </div>
               </Link>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectPage } from "@/components/ProjectPage";
 import { getProject, projectItems } from "@/content/projects";
+import { createPageMetadata } from "@/lib/metadata";
 
 type ProjectRouteProps = {
   params: Promise<{ slug: string }>;
@@ -22,15 +23,13 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return createPageMetadata({
     title: project.title,
     description: project.summary,
-    openGraph: {
-      title: project.title,
-      description: project.summary,
-      type: "article",
-    },
-  };
+    pathname: `/projects/${project.slug}`,
+    type: "article",
+    modifiedTime: project.updatedAt,
+  });
 }
 
 export default async function ProjectRoute({ params }: ProjectRouteProps) {
