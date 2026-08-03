@@ -84,6 +84,10 @@ export default function Home() {
         </div>
 
         <div className="home-hero__content">
+          <div className="home-hero__orientation" aria-hidden="true">
+            <span>Software / ML / Robotics</span>
+            <span>01 / Intro</span>
+          </div>
           <h1 className="home-hero__title">
             <span>Giacomo</span>
             <span>Cappelletto</span>
@@ -111,11 +115,11 @@ export default function Home() {
             Software is most useful when it survives contact with the real
             world.
           </h2>
-          <div className="current-panel__details">
-            <p>AI engineering in Milan</p>
-            <p>Biomechanics research at Boston University</p>
-            <p>Seeking Summer 2027 software and AI roles</p>
-          </div>
+          <ol className="current-panel__details" aria-label="Current focus">
+            <li>AI engineering in Milan</li>
+            <li>Biomechanics research at Boston University</li>
+            <li>Seeking Summer 2027 software and AI roles</li>
+          </ol>
         </div>
       </section>
 
@@ -129,12 +133,16 @@ export default function Home() {
         </header>
 
         <div className="experience-stack">
-          {experience.map((item) => (
+          {experience.map((item, index) => (
             <article
               className="experience-panel"
               key={`${item.organization}-${item.role}`}
             >
               <div className="experience-panel__meta">
+                <span className="experience-panel__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")} /{" "}
+                  {String(experience.length).padStart(2, "0")}
+                </span>
                 <p>{item.dates}</p>
                 <p>{item.location}</p>
               </div>
