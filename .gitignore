@@ -24,3 +24,5 @@ indent.log
 .research/20260728-prompt-agent-systems-a91f
 .vercel
 node_modules
+.codex
+.serena
