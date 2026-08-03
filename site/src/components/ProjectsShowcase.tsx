@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
+import { mountGsapScrollEnhancement } from "@/lib/gsapScroll";
 
 type ProjectsShowcaseProps = {
   children: ReactNode;
@@ -38,21 +39,15 @@ export function ProjectsShowcase({
       return;
     }
 
-    let cancelled = false;
-    let teardown: (() => void) | undefined;
-
-    void (async () => {
-      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-
-      if (cancelled) {
-        return;
-      }
-
-      gsap.registerPlugin(ScrollTrigger);
-
+    return mountGsapScrollEnhancement({
+      mediaQuery: DESKTOP_MOTION_QUERY,
+      prepare: () => {
+        gallery.dataset.enhanced = "pending";
+      },
+      reset: () => {
+        delete gallery.dataset.enhanced;
+      },
+      setup: ({ gsap, ScrollTrigger }) => {
       const media = gsap.matchMedia();
       const context = gsap.context(() => {
         media.add(DESKTOP_MOTION_QUERY, () => {
@@ -95,7 +90,8 @@ export function ProjectsShowcase({
                   window.innerHeight * Math.max(cards.length - 1, 1) * 0.55,
                 )}`,
               pin: gallery,
-              scrub: 0.8,
+              scrub: true,
+              fastScrollEnd: true,
               invalidateOnRefresh: true,
               anticipatePin: 1,
             },
@@ -161,16 +157,12 @@ export function ProjectsShowcase({
         });
       }, gallery);
 
-      teardown = () => {
-        context.revert();
-        media.revert();
-      };
-    })();
-
-    return () => {
-      cancelled = true;
-      teardown?.();
-    };
+        return () => {
+          context.revert();
+          media.revert();
+        };
+      },
+    });
   }, [projectCount]);
 
   return (

@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
+import { mountGsapScrollEnhancement } from "@/lib/gsapScroll";
 import styles from "./HorizontalProjectRail.module.css";
 
 export type HorizontalProjectRailProject = {
@@ -56,21 +57,17 @@ export function HorizontalProjectRail({
       return;
     }
 
-    let cancelled = false;
-    let teardown: (() => void) | undefined;
-
-    void (async () => {
-      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-
-      if (cancelled) {
-        return;
-      }
-
-      gsap.registerPlugin(ScrollTrigger);
-
+    return mountGsapScrollEnhancement({
+      mediaQuery: DESKTOP_MOTION_QUERY,
+      prepare: () => {
+        rail.dataset.enhanced = "pending";
+      },
+      reset: () => {
+        delete rail.dataset.enhanced;
+        triggerRef.current = null;
+        updateTriggerRef.current = null;
+      },
+      setup: ({ gsap, ScrollTrigger }) => {
       const media = gsap.matchMedia();
       const context = gsap.context(() => {
         media.add(DESKTOP_MOTION_QUERY, () => {
@@ -90,7 +87,8 @@ export function HorizontalProjectRail({
               start: "top top",
               end: () => `+=${distance()}`,
               pin: rail,
-              scrub: 0.9,
+              scrub: true,
+              fastScrollEnd: true,
               invalidateOnRefresh: true,
               anticipatePin: 1,
             },
@@ -259,18 +257,14 @@ export function HorizontalProjectRail({
         });
       }, rail);
 
-      teardown = () => {
-        context.revert();
-        media.revert();
-        triggerRef.current = null;
-        updateTriggerRef.current = null;
-      };
-    })();
-
-    return () => {
-      cancelled = true;
-      teardown?.();
-    };
+        return () => {
+          context.revert();
+          media.revert();
+          triggerRef.current = null;
+          updateTriggerRef.current = null;
+        };
+      },
+    });
   }, [projects.length]);
 
   function scrollFocusedProjectIntoView(index: number) {

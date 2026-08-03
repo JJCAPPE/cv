@@ -107,6 +107,26 @@ a {
     transform: translateY(0);
 }
 
+.page-progress {
+    position: fixed;
+    z-index: calc(var(--layer-header) + 1);
+    top: calc(var(--header-height) - 2px);
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: var(--accent-ui);
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+@supports (animation-timeline: scroll()) {
+    .page-progress {
+        animation: page-progress linear both;
+        animation-timeline: scroll(root block);
+    }
+}
+
 .action-link,
 .back-link {
     display: inline-flex;
@@ -1055,7 +1075,7 @@ a {
 }
 
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-    .project-gallery[data-enhanced="true"] {
+    .project-gallery[data-enhanced] {
         display: grid;
         height: calc(100dvh - var(--header-height));
         grid-template-rows: auto minmax(0, 1fr);
@@ -1063,12 +1083,12 @@ a {
         overflow: clip;
     }
 
-    .project-gallery[data-enhanced="true"] .project-gallery__stage {
+    .project-gallery[data-enhanced] .project-gallery__stage {
         position: relative;
         min-height: 0;
     }
 
-    .project-gallery[data-enhanced="true"] .project-card {
+    .project-gallery[data-enhanced] .project-card {
         position: absolute;
         inset: 0;
         height: 100%;
@@ -1076,20 +1096,20 @@ a {
         will-change: transform;
     }
 
-    .project-gallery[data-enhanced="true"] .project-card:nth-child(even) {
+    .project-gallery[data-enhanced] .project-card:nth-child(even) {
         box-shadow: -1.5rem 0 3.5rem rgb(0 0 0 / 32%);
     }
 
-    .project-gallery[data-enhanced="true"] .project-card:nth-child(odd):not(:first-child) {
+    .project-gallery[data-enhanced] .project-card:nth-child(odd):not(:first-child) {
         box-shadow: 1.5rem 0 3.5rem rgb(0 0 0 / 32%);
     }
 
-    .project-gallery[data-enhanced="true"] .project-card__link {
+    .project-gallery[data-enhanced] .project-card__link {
         height: 100%;
         grid-template-rows: minmax(0, 1fr) var(--project-caption-height);
     }
 
-    .project-gallery[data-enhanced="true"] .project-card__media {
+    .project-gallery[data-enhanced] .project-card__media {
         aspect-ratio: auto;
     }
 
@@ -1807,6 +1827,12 @@ a {
     }
 }
 
+@keyframes page-progress {
+    to {
+        transform: scaleX(1);
+    }
+}
+
 @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
         .notes-feature__item, .project-chapter {
@@ -2154,6 +2180,9 @@ a {
         top: auto;
     }
     .home-hero__video {
+        display: none;
+    }
+    .page-progress {
         display: none;
     }
     *,

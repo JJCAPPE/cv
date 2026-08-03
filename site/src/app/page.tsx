@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroVideo } from "@/components/HeroVideo";
 import { HorizontalProjectRail } from "@/components/HorizontalProjectRail";
 import { HorizontalResearchRail } from "@/components/HorizontalResearchRail";
 import { JsonLd } from "@/components/JsonLd";
@@ -98,19 +99,10 @@ export default function Home() {
                 sizes="(max-width: 767px) 100vw, 72vw"
               />
             ) : null}
-            <video
-              className="home-hero__video"
-              autoPlay
-              disablePictureInPicture
-              loop
-              muted
-              playsInline
+            <HeroVideo
               poster={rowingProject.cover.poster}
-              preload="metadata"
-            >
-              <source src={rowingProject.cover.src} type="video/mp4" />
-              Your browser does not support embedded video.
-            </video>
+              src={rowingProject.cover.src}
+            />
           </div>
         </div>
 

@@ -25,7 +25,10 @@
 
 .overview[data-paused="true"] *,
 .overview[data-paused="true"] *::before,
-.overview[data-paused="true"] *::after {
+.overview[data-paused="true"] *::after,
+.overview[data-visibility-paused="true"] *,
+.overview[data-visibility-paused="true"] *::before,
+.overview[data-visibility-paused="true"] *::after {
   animation-play-state: paused !important;
 }
 

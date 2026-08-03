@@ -241,12 +241,12 @@
 }
 
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  .rail[data-enhanced="true"] {
+  .rail[data-enhanced] {
     height: 100dvh;
     min-height: 40rem;
   }
 
-  .rail[data-enhanced="true"] .header {
+  .rail[data-enhanced] .header {
     position: absolute;
     z-index: 3;
     top: var(--header-height, 4.25rem);
@@ -256,21 +256,21 @@
     background: color-mix(in srgb, var(--rail-background) 97%, transparent);
   }
 
-  .rail[data-enhanced="true"] .header h2 {
+  .rail[data-enhanced] .header h2 {
     font-size: clamp(2.25rem, 3.6vw, 3.75rem);
   }
 
-  .rail[data-enhanced="true"] .progressFill {
+  .rail[data-enhanced] .progressFill {
     will-change: transform;
   }
 
-  .rail[data-enhanced="true"] .track {
+  .rail[data-enhanced] .track {
     display: flex;
     width: max-content;
     height: 100%;
   }
 
-  .rail[data-enhanced="true"] .panel {
+  .rail[data-enhanced] .panel {
     width: 100vw;
     height: 100%;
     flex: 0 0 100vw;
@@ -278,11 +278,11 @@
     border-left: 1px solid var(--rail-line);
   }
 
-  .rail[data-enhanced="true"] .panel:first-child {
+  .rail[data-enhanced] .panel:first-child {
     border-left: 0;
   }
 
-  .rail[data-enhanced="true"] .panelLink {
+  .rail[data-enhanced] .panelLink {
     display: grid;
     height: 100%;
     min-height: 0;
@@ -293,7 +293,7 @@
       clamp(2rem, 4vw, 4rem);
   }
 
-  .rail[data-enhanced="true"] .media {
+  .rail[data-enhanced] .media {
     grid-area: media;
     width: 100%;
     height: 100%;
@@ -301,40 +301,40 @@
     aspect-ratio: auto;
   }
 
-  .rail[data-enhanced="true"] .rowingImage {
+  .rail[data-enhanced] .rowingImage {
     object-position: 100% 50%;
   }
 
-  .rail[data-enhanced="true"] .copy {
+  .rail[data-enhanced] .copy {
     grid-area: copy;
     align-self: stretch;
     padding: 0;
   }
 
-  .rail[data-enhanced="true"] .meta {
+  .rail[data-enhanced] .meta {
     font-size: clamp(0.66rem, 0.7vw, 0.76rem);
   }
 
-  .rail[data-enhanced="true"] .title {
+  .rail[data-enhanced] .title {
     margin-top: clamp(3rem, 8vh, 6rem);
     font-size: clamp(3.6rem, 20cqi, 8rem);
   }
 
-  .rail[data-enhanced="true"] .summary {
+  .rail[data-enhanced] .summary {
     margin-top: clamp(1.75rem, 4vh, 3rem);
     font-size: clamp(1rem, 1.2vw, 1.28rem);
   }
 
-  .rail[data-enhanced="true"] .action {
+  .rail[data-enhanced] .action {
     padding-top: clamp(1.5rem, 3vh, 2.5rem);
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(even) .panelLink {
+  .rail[data-enhanced] .panel:nth-child(even) .panelLink {
     grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 0.72fr);
     grid-template-areas: "media copy";
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .panelLink {
     position: relative;
@@ -343,16 +343,16 @@
     padding: 0;
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .media,
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .copy {
     grid-area: stage;
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .media::before {
     position: absolute;
@@ -370,13 +370,13 @@
     pointer-events: none;
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .imageRailContain {
     object-fit: contain;
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .copy {
     z-index: 2;
@@ -388,16 +388,16 @@
     pointer-events: none;
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .summary,
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .meta {
     color: rgb(242 241 235 / 74%);
   }
 
-  .rail[data-enhanced="true"]
+  .rail[data-enhanced]
     .panel[data-project-layout="background"]
     .action {
     border-color: rgb(242 241 235 / 32%);

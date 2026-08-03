@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
 import type { ResearchShowcaseItem } from "@/content/research";
+import { mountGsapScrollEnhancement } from "@/lib/gsapScroll";
 import { ResearchOverviewAnimation } from "./ResearchOverviewAnimation";
 import styles from "./HorizontalResearchRail.module.css";
 
@@ -117,21 +118,17 @@ export function HorizontalResearchRail({
       return () => observer.disconnect();
     }
 
-    let cancelled = false;
-    let teardown: (() => void) | undefined;
-
-    void (async () => {
-      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-
-      if (cancelled) {
-        return;
-      }
-
-      gsap.registerPlugin(ScrollTrigger);
-
+    const teardown = mountGsapScrollEnhancement({
+      mediaQuery: WIDE_MOTION_QUERY,
+      prepare: () => {
+        rail.dataset.enhanced = "pending";
+      },
+      reset: () => {
+        delete rail.dataset.enhanced;
+        triggerRef.current = null;
+        updateTriggerRef.current = null;
+      },
+      setup: ({ gsap, ScrollTrigger }) => {
       const media = gsap.matchMedia();
       const context = gsap.context(() => {
         media.add(WIDE_MOTION_QUERY, () => {
@@ -266,18 +263,18 @@ export function HorizontalResearchRail({
         });
       }, rail);
 
-      teardown = () => {
-        context.revert();
-        media.revert();
-        triggerRef.current = null;
-        updateTriggerRef.current = null;
-      };
-    })();
+        return () => {
+          context.revert();
+          media.revert();
+          triggerRef.current = null;
+          updateTriggerRef.current = null;
+        };
+      },
+    });
 
     return () => {
-      cancelled = true;
       observer.disconnect();
-      teardown?.();
+      teardown();
     };
   }, [items.length, setActiveIndex]);
 
