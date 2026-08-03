@@ -163,7 +163,8 @@ export function HorizontalResearchRail({
               start: "top top",
               end: () => `+=${distance()}`,
               pin: rail,
-              scrub: 0.9,
+              scrub: true,
+              fastScrollEnd: true,
               invalidateOnRefresh: true,
               anticipatePin: 1,
               onUpdate: (trigger) => {
