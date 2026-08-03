@@ -16,14 +16,19 @@ export default function NotesPage() {
     <Layout className="notes-index">
       <header className="page-intro notes-intro">
         <h1>Notes</h1>
-        <p>
-          Working notes on machine learning, computer vision, systems, and
-          rowing biomechanics.
-        </p>
+        <div className="notes-intro__meta">
+          <p>
+            Working notes on machine learning, computer vision, systems, and
+            rowing biomechanics.
+          </p>
+          <p className="notes-intro__count">
+            {String(notes.length).padStart(2, "0")} entries
+          </p>
+        </div>
       </header>
       <div className="notes-index__list">
-        {notes.map((note) => (
-          <NotePreview key={note.slug} note={note} />
+        {notes.map((note, index) => (
+          <NotePreview key={note.slug} note={note} index={index} />
         ))}
       </div>
     </Layout>

@@ -181,15 +181,13 @@ export function ProjectsShowcase({
     >
       <header className="projects-intro">
         <div className="projects-intro__heading">
-          <p>Selected work</p>
           <h1 id="projects-heading">Projects</h1>
         </div>
         <p className="projects-intro__description">
           Software, ML, robotics, and product work shaped by measurable
           constraints.
         </p>
-        <p className="projects-intro__progress" aria-hidden="true">
-          <span>Scroll to explore</span>
+        <p className="projects-intro__progress">
           <span ref={progressRef}>
             {formatProjectNumber(projectCount - 1)} projects
           </span>
