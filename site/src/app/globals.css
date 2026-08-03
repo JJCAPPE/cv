@@ -704,6 +704,63 @@ a {
     --project-stage-line: rgb(241 239 232 / 18%);
     --project-caption-height: 9.5rem;
     width: 100%;
+    background: var(--project-stage-bg);
+    color: var(--project-stage-fg);
+}
+
+.projects-intro {
+    display: grid;
+    min-height: 6rem;
+    grid-template-columns: minmax(12rem, 0.6fr) minmax(18rem, 1fr) minmax(12rem, 0.5fr);
+    align-items: end;
+    gap: clamp(1.5rem, 3vw, 4rem);
+    padding: 1rem clamp(1rem, 3vw, 3rem);
+    border-bottom: 1px solid var(--project-stage-line);
+    background: var(--project-stage-bg);
+}
+
+.projects-intro__heading {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.projects-intro__heading p,
+.projects-intro__progress {
+    margin: 0;
+    color: var(--project-stage-muted);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.68rem;
+    line-height: 1.3;
+}
+
+.projects-intro h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 4.5vw, 4.8rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.72;
+    text-transform: uppercase;
+}
+
+.projects-intro__description {
+    max-width: 36rem;
+    margin: 0;
+    color: var(--project-stage-muted);
+    font-size: clamp(0.82rem, 1vw, 0.95rem);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.projects-intro__progress {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.project-gallery__stage {
+    width: 100%;
 }
 
 .project-card {
@@ -808,6 +865,46 @@ a {
     font-size: clamp(0.8rem, 1vw, 0.92rem);
     line-height: 1.45;
     text-wrap: pretty;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .project-gallery[data-enhanced="true"] {
+        display: grid;
+        height: calc(100dvh - var(--header-height));
+        grid-template-rows: auto minmax(0, 1fr);
+        overflow: hidden;
+        overflow: clip;
+    }
+
+    .project-gallery[data-enhanced="true"] .project-gallery__stage {
+        position: relative;
+        min-height: 0;
+    }
+
+    .project-gallery[data-enhanced="true"] .project-card {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        border-top: 0;
+        will-change: transform;
+    }
+
+    .project-gallery[data-enhanced="true"] .project-card:nth-child(even) {
+        box-shadow: -1.5rem 0 3.5rem rgb(0 0 0 / 32%);
+    }
+
+    .project-gallery[data-enhanced="true"] .project-card:nth-child(odd):not(:first-child) {
+        box-shadow: 1.5rem 0 3.5rem rgb(0 0 0 / 32%);
+    }
+
+    .project-gallery[data-enhanced="true"] .project-card__link {
+        height: 100%;
+        grid-template-rows: minmax(0, 1fr) var(--project-caption-height);
+    }
+
+    .project-gallery[data-enhanced="true"] .project-card__media {
+        aspect-ratio: auto;
+    }
 }
 
 
@@ -1546,6 +1643,29 @@ a {
     }
     .project-gallery {
         --project-caption-height: 15rem;
+    }
+    .projects-intro {
+        min-height: auto;
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    .projects-intro__heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .projects-intro h1 {
+        font-size: clamp(3rem, 16vw, 4.2rem);
+    }
+    .projects-intro__description {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+    .projects-intro__progress {
+        align-self: end;
+        flex-direction: column;
+        align-items: flex-end;
     }
     .project-card__caption {
         grid-template-columns: 1fr;

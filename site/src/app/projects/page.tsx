@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Layout } from "@/components/Layout";
 import { ProjectItem } from "@/components/ProjectItem";
+import { ProjectsShowcase } from "@/components/ProjectsShowcase";
 import { projectItems } from "@/content/projects";
 
 export const metadata: Metadata = {
@@ -12,18 +13,11 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <Layout className="projects-index">
-      <header className="page-intro projects-intro">
-        <h1>Projects</h1>
-        <p>
-          Software, ML, robotics, and product work shaped by measurable
-          constraints.
-        </p>
-      </header>
-      <div className="project-gallery">
+      <ProjectsShowcase projectCount={projectItems.length}>
         {projectItems.map((project, index) => (
           <ProjectItem key={project.slug} project={project} index={index} />
         ))}
-      </div>
+      </ProjectsShowcase>
     </Layout>
   );
 }

@@ -11,7 +11,7 @@ export function ProjectItem({ project, index }: ProjectItemProps) {
   const order = index ?? 0;
 
   return (
-    <article className="project-card">
+    <article className="project-card" data-project-card>
       <Link
         href={`/projects/${project.slug}`}
         className="project-card__link"
