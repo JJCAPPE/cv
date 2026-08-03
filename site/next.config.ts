@@ -1,6 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  headers() {
+    return [
+      {
+        source: "/resume.pdf",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex",
+          },
+        ],
+      },
+    ];
+  },
   redirects() {
     return [
       {

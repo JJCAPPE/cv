@@ -10,6 +10,7 @@ export type Note = {
   description: string;
   category: string;
   date: string;
+  updatedAt: string;
   content: string;
 };
 
@@ -36,6 +37,7 @@ export function getNote(slug: string): Note | undefined {
     description: data.description,
     category: data.category,
     date: data.date,
+    updatedAt: data.updated ?? data.date,
     content,
   };
 }

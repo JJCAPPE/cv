@@ -2,10 +2,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { HorizontalProjectRail } from "@/components/HorizontalProjectRail";
 import { HorizontalResearchRail } from "@/components/HorizontalResearchRail";
+import { JsonLd } from "@/components/JsonLd";
 import { experience } from "@/content/experience";
+import { links } from "@/content/links";
 import { projectItems } from "@/content/projects";
 import { researchShowcase } from "@/content/research";
+import {
+  createPageMetadata,
+  siteDescription,
+  siteName,
+} from "@/lib/metadata";
 import { getNotes } from "@/lib/notes";
+import { absoluteUrl } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: siteName,
+  description: siteDescription,
+  pathname: "/",
+});
+
+const profilePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${absoluteUrl("/")}#profile-page`,
+  url: absoluteUrl("/"),
+  name: siteName,
+  description: siteDescription,
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${absoluteUrl("/")}#person`,
+    name: siteName,
+    url: absoluteUrl("/"),
+    sameAs: [links.github, links.linkedin],
+  },
+};
 
 export default function Home() {
   const notes = getNotes().slice(0, 3);
@@ -53,6 +83,7 @@ export default function Home() {
 
   return (
     <main id="main-content" className="home-page" tabIndex={-1}>
+      <JsonLd data={profilePageJsonLd} />
       <section id="intro" className="home-hero">
         <div className="home-hero__media" aria-hidden="true">
           <div className="home-hero__media-primary">

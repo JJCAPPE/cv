@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Layout } from "@/components/Layout";
 import { experience } from "@/content/experience";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Resume",
   description:
     "Education, experience, projects, technical skills, and athletics for Giacomo Cappelletto.",
-};
+  pathname: "/resume",
+});
 
 const additionalExperience = [
   {
