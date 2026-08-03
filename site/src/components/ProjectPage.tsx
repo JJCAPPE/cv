@@ -9,11 +9,17 @@ import { NoteWorthyCaseStudy } from "@/components/NoteWorthyCaseStudy";
 import { RowingCaseStudy } from "@/components/RowingCaseStudy";
 import { TickitCaseStudy } from "@/components/TickitCaseStudy";
 import type { Project } from "@/content/projects";
-import { projects } from "@/content/projects";
+import { projectItems, researchProjects } from "@/content/projects";
 
 export function ProjectPage({ project }: { project: Project }) {
-  const projectIndex = projects.findIndex((item) => item.slug === project.slug);
-  const nextProject = projects[(projectIndex + 1) % projects.length];
+  const isResearch = project.collection === "research";
+  const collectionItems = isResearch ? researchProjects : projectItems;
+  const itemIndex = collectionItems.findIndex(
+    (item) => item.slug === project.slug,
+  );
+  const nextItem = collectionItems[(itemIndex + 1) % collectionItems.length];
+  const collectionHref = isResearch ? "/#research" : "/projects";
+  const collectionLabel = isResearch ? "research" : "projects";
   const isBiomimeticAi = project.slug === "biomimetic-ai";
   const isDeskinator = project.slug === "deskinator";
   const isInventory = project.slug === "inventory-system";
@@ -33,8 +39,8 @@ export function ProjectPage({ project }: { project: Project }) {
     <Layout className="project-page-shell">
       <article className="project-page">
         <header className="project-page__hero">
-          <Link href="/projects" className="back-link">
-            All projects
+          <Link href={collectionHref} className="back-link">
+            All {collectionLabel}
           </Link>
           <p className="project-page__type">
             {project.year} / {project.type}
@@ -108,7 +114,7 @@ export function ProjectPage({ project }: { project: Project }) {
         {project.metrics?.length ? (
           <dl
             className="project-page__metrics"
-            aria-label={`${project.title} project facts`}
+            aria-label={`${project.title} facts`}
           >
             {project.metrics.map((metric) => (
               <div key={metric.label}>
@@ -199,12 +205,17 @@ export function ProjectPage({ project }: { project: Project }) {
           </section>
         ) : null}
 
-        <nav className="next-project" aria-label="Next project">
-          <p>Next project</p>
-          <Link href={`/projects/${nextProject.slug}`}>
-            {nextProject.title}
-          </Link>
-        </nav>
+        {collectionItems.length > 1 ? (
+          <nav
+            className="next-project"
+            aria-label={`Next ${isResearch ? "research item" : "project"}`}
+          >
+            <p>Next {isResearch ? "research" : "project"}</p>
+            <Link href={`/${collectionLabel}/${nextItem.slug}`}>
+              {nextItem.title}
+            </Link>
+          </nav>
+        ) : null}
       </article>
     </Layout>
   );

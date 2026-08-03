@@ -333,7 +333,6 @@ a {
 
 .home-hero__media-primary img,
 .home-hero__media-secondary img,
-.research-feature__media img,
 .project-card__media img,
 .project-page__cover-image img,
 .project-inline-media__image img {
@@ -556,60 +555,6 @@ a {
     margin-top: auto;
     padding-top: 2rem;
     font-size: 0.75rem;
-}
-
-.research-feature {
-    display: grid;
-    min-height: 100dvh;
-    grid-template-columns: minmax(0, 1.7fr) minmax(21rem, 0.9fr);
-    background: var(--bg);
-}
-
-.research-feature__media {
-    position: relative;
-    min-height: 72dvh;
-    overflow: hidden;
-    filter: grayscale(1) contrast(1.1);
-}
-
-.research-feature__media--overview {
-    filter: none;
-}
-
-.research-feature__content {
-    container-type: inline-size;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: clamp(2rem, 5vw, 5rem);
-    border-left: 1px solid var(--line);
-    background: var(--surface);
-}
-
-.research-feature__content h2 {
-    max-width: 8ch;
-    margin: 0;
-    color: var(--accent-ui);
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 22cqi, 10rem);
-    font-weight: 500;
-    letter-spacing: -0.05em;
-    line-height: 0.78;
-    text-transform: uppercase;
-}
-
-.research-feature__content p {
-    max-width: 29rem;
-    margin: clamp(2rem, 5vh, 4rem) 0 1.5rem;
-    color: var(--muted);
-    font-size: clamp(1rem, 1.25vw, 1.22rem);
-}
-
-.research-feature__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.5rem;
 }
 
 .notes-feature {
@@ -1578,14 +1523,6 @@ a {
     .experience-panel {
         grid-template-columns: 13rem minmax(0, 1fr);
     }
-    .research-feature {
-        grid-template-columns: 1fr;
-    }
-    .research-feature__content {
-        min-height: 60dvh;
-        border-top: 1px solid var(--line);
-        border-left: 0;
-    }
     .project-system ol {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -1685,12 +1622,6 @@ a {
     }
     .experience-panel__body h3 {
         font-size: clamp(4.5rem, 21vw, 7rem);
-    }
-    .research-feature__media {
-        min-height: 58dvh;
-    }
-    .research-feature__content h2 {
-        font-size: clamp(5rem, 22vw, 8rem);
     }
     .notes-feature__header {
         align-items: start;

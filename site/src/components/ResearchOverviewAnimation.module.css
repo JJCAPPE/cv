@@ -16,8 +16,10 @@
   isolation: isolate;
 }
 
-.overview[data-variant="cover"] {
-  min-height: 100dvh;
+.overview[data-variant="rail"] {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
   border: 0;
 }
 
@@ -525,8 +527,7 @@
 }
 
 @media (max-width: 760px) {
-  .overview,
-  .overview[data-variant="cover"] {
+  .overview {
     min-height: 66dvh;
   }
 
@@ -548,8 +549,7 @@
 }
 
 @media (max-width: 480px) {
-  .overview,
-  .overview[data-variant="cover"] {
+  .overview {
     min-height: 72dvh;
   }
 

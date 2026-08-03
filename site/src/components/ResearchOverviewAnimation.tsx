@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import styles from "./ResearchOverviewAnimation.module.css";
 
 type ResearchOverviewAnimationProps = {
-  variant?: "hero" | "cover";
+  variant?: "hero" | "rail";
 };
 
 const LIMBS = [

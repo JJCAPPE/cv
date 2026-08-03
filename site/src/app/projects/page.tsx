@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Layout } from "@/components/Layout";
 import { ProjectItem } from "@/components/ProjectItem";
 import { ProjectsShowcase } from "@/components/ProjectsShowcase";
-import { projects } from "@/content/projects";
+import { projectItems } from "@/content/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <Layout className="projects-index">
-      <ProjectsShowcase projectCount={projects.length}>
-        {projects.map((project, index) => (
+      <ProjectsShowcase projectCount={projectItems.length}>
+        {projectItems.map((project, index) => (
           <ProjectItem key={project.slug} project={project} index={index} />
         ))}
       </ProjectsShowcase>

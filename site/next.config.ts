@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  redirects() {
+    return [
+      {
+        source: "/projects/biomimetic-ai",
+        destination: "/research/biomimetic-ai",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HorizontalProjectRail } from "@/components/HorizontalProjectRail";
-import { ResearchOverviewAnimation } from "@/components/ResearchOverviewAnimation";
+import { HorizontalResearchRail } from "@/components/HorizontalResearchRail";
 import { experience } from "@/content/experience";
-import { projects } from "@/content/projects";
+import { projectItems } from "@/content/projects";
+import { researchShowcase } from "@/content/research";
 import { getNotes } from "@/lib/notes";
 
 export default function Home() {
   const notes = getNotes().slice(0, 3);
-  const featuredProjects = projects
+  const featuredProjects = projectItems
     .filter((project) => project.featured)
     .map((project) => {
       const selectedCover =
@@ -39,10 +40,10 @@ export default function Home() {
         },
       };
     });
-  const rowingProject = projects.find(
+  const rowingProject = projectItems.find(
     (project) => project.slug === "rowing-biomechanics",
   );
-  const deskinatorProject = projects.find(
+  const deskinatorProject = projectItems.find(
     (project) => project.slug === "deskinator",
   );
 
@@ -154,33 +155,9 @@ export default function Home() {
 
       <HorizontalProjectRail projects={featuredProjects} />
 
-      <section id="research" className="research-feature" tabIndex={-1}>
-        <div className="research-feature__media research-feature__media--overview">
-          <ResearchOverviewAnimation variant="cover" />
-        </div>
-        <div className="research-feature__content">
-          <h2>Can motion survive bad poses?</h2>
-          <p>
-            My current proposal tests whether neighborhood-aware metric
-            learning can preserve motion retrieval when joints jitter,
-            disappear, or frames drop—an idea born from failures in the rowing
-            pipeline.
-          </p>
-          <div className="research-feature__actions">
-            <Link href="/research" className="action-link action-link--accent">
-              Research proposal
-            </Link>
-            <Link
-              href="/projects/rowing-biomechanics"
-              className="action-link"
-            >
-              Rowing origin
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HorizontalResearchRail items={researchShowcase} />
 
-      <section id="notes" className="notes-feature">
+      <section id="notes" className="notes-feature" tabIndex={-1}>
         <header className="notes-feature__header">
           <h2>Notes</h2>
           <Link href="/notes" className="action-link">
