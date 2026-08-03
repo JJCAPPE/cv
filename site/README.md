@@ -16,7 +16,13 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 npm run lint
 npm run build
+npm run test:scroll
 ```
+
+The scrolling check launches a local browser and covers desktop enhancement,
+reduced-motion fallbacks, the page progress cue, and offscreen media pausing.
+Install Chromium once with `npx playwright install chromium` if Playwright asks
+for a browser binary.
 
 Run the production server:
 
