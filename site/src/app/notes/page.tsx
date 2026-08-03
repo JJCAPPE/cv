@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { Layout } from "@/components/Layout";
 import { NotePreview } from "@/components/NotePreview";
+import { createPageMetadata } from "@/lib/metadata";
 import { getNotes } from "@/lib/notes";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Notes",
   description:
     "Technical notes on machine learning, computer vision, systems, rowing biomechanics, and building useful tools.",
-};
+  pathname: "/notes",
+});
 
 export default function NotesPage() {
   const notes = getNotes();

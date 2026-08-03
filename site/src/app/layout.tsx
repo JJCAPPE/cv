@@ -4,7 +4,12 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { siteUrl } from "@/lib/site";
+import {
+  createPageMetadata,
+  siteDescription,
+  siteName,
+} from "@/lib/metadata";
+import { absoluteUrl, isIndexableDeployment, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,41 +29,21 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: siteName,
+    description: siteDescription,
+    pathname: "/",
+  }),
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Giacomo Cappelletto",
+    default: siteName,
     template: "%s / Giacomo Cappelletto",
   },
-  description:
-    "Computer Engineering student at Boston University building software systems, applied ML tools, robotics autonomy projects, and computer vision pipelines for biomechanics.",
-  keywords: [
-    "software engineering",
-    "machine learning",
-    "computer vision",
-    "robotics",
-    "autonomy",
-    "Boston University",
-    "rowing biomechanics",
-    "full-stack",
-    "Rust",
-    "Tauri",
-    "Next.js",
-  ],
-  authors: [{ name: "Giacomo Cappelletto" }],
-  creator: "Giacomo Cappelletto",
-  openGraph: {
-    title: "Giacomo Cappelletto",
-    description:
-      "Software systems, applied ML, robotics autonomy, and computer vision for biomechanics.",
-    type: "website",
-    url: siteUrl,
-    siteName: "Giacomo Cappelletto",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Giacomo Cappelletto",
-    description:
-      "Software systems, applied ML, robotics autonomy, and computer vision for biomechanics.",
+  authors: [{ name: siteName, url: absoluteUrl("/") }],
+  creator: siteName,
+  robots: {
+    index: isIndexableDeployment,
+    follow: isIndexableDeployment,
   },
 };
 

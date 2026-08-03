@@ -6,6 +6,7 @@ export type ResearchShowcaseItem = {
   title: string;
   summary: string;
   year: string;
+  updatedAt: string;
   type: string;
   actionLabel: string;
   media:
@@ -38,6 +39,7 @@ export const researchShowcase: ResearchShowcaseItem[] = [
     summary:
       "A retrieval-first study of whether contextual metric learning can preserve motion similarity when joints jitter, disappear, or frames drop.",
     year: "2026",
+    updatedAt: "2026-07-29",
     type: "Metric Learning / Pose Retrieval",
     actionLabel: "Read proposal",
     media: {
@@ -50,6 +52,7 @@ export const researchShowcase: ResearchShowcaseItem[] = [
     title: biomimeticPaper.title,
     summary: biomimeticPaper.summary,
     year: biomimeticPaper.year,
+    updatedAt: biomimeticPaper.updatedAt,
     type: biomimeticPaper.type,
     actionLabel: "Read paper",
     media: {

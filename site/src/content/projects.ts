@@ -37,6 +37,7 @@ export type Project = {
   stack: string[];
   stackLabel?: string;
   year: string;
+  updatedAt: string;
   type: string;
   role: string;
   links: ProjectLink[];
@@ -67,6 +68,7 @@ export const projects: Project[] = [
       "Lakebase",
     ],
     year: "2026",
+    updatedAt: "2026-07-30",
     type: "Enterprise AI / Platform",
     role: "Lead developer, Software and AI Engineering Intern",
     featured: true,
@@ -161,6 +163,7 @@ export const projects: Project[] = [
       "PyTorch",
     ],
     year: "2026",
+    updatedAt: "2026-07-30",
     type: "Research / Applied ML",
     role: "Undergraduate researcher",
     featured: true,
@@ -370,6 +373,7 @@ export const projects: Project[] = [
       "Matplotlib",
     ],
     year: "2025",
+    updatedAt: "2026-07-30",
     type: "Robotics / Autonomy",
     role: "Sole designer and developer",
     featured: true,
@@ -516,6 +520,7 @@ export const projects: Project[] = [
       "Firestore REST",
     ],
     year: "2025",
+    updatedAt: "2026-07-30",
     type: "Systems / Product",
     role: "Sole developer",
     featured: true,
@@ -597,6 +602,7 @@ export const projects: Project[] = [
       "shadcn/ui",
     ],
     year: "2024-2025",
+    updatedAt: "2026-07-30",
     type: "Full-Stack Product Engineering",
     role: "Full-Stack Engineer",
     featured: true,
@@ -678,6 +684,7 @@ export const projects: Project[] = [
       "PostgreSQL",
     ],
     year: "2026",
+    updatedAt: "2026-07-30",
     type: "Applied AI / Product",
     role: "Full-stack developer",
     featured: true,
@@ -837,6 +844,7 @@ export const projects: Project[] = [
     ],
     stackLabel: "Focus",
     year: "2025",
+    updatedAt: "2026-08-03",
     type: "Research / Technical Writing",
     role: "Researcher and author",
     cover: {

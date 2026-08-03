@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { JsonLd } from "@/components/JsonLd";
 import { Layout } from "@/components/Layout";
+import { links } from "@/content/links";
+import { createPageMetadata, siteName, socialImage } from "@/lib/metadata";
 import { getNote, getNoteSlugs } from "@/lib/notes";
+import { absoluteUrl } from "@/lib/site";
 
 type NoteRouteProps = {
   params: Promise<{ slug: string }>;
@@ -24,16 +28,14 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return createPageMetadata({
     title: note.title,
     description: note.description,
-    openGraph: {
-      title: note.title,
-      description: note.description,
-      type: "article",
-      publishedTime: note.date,
-    },
-  };
+    pathname: `/notes/${note.slug}`,
+    type: "article",
+    publishedTime: note.date,
+    modifiedTime: note.updatedAt,
+  });
 }
 
 export default async function NoteRoute({ params }: NoteRouteProps) {
@@ -43,8 +45,30 @@ export default async function NoteRoute({ params }: NoteRouteProps) {
     notFound();
   }
 
+  const canonicalUrl = absoluteUrl(`/notes/${note.slug}`);
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${canonicalUrl}#article`,
+    url: canonicalUrl,
+    mainEntityOfPage: canonicalUrl,
+    headline: note.title,
+    description: note.description,
+    datePublished: note.date,
+    dateModified: note.updatedAt,
+    image: socialImage.url,
+    author: {
+      "@type": "Person",
+      "@id": `${absoluteUrl("/")}#person`,
+      name: siteName,
+      url: absoluteUrl("/"),
+      sameAs: [links.github, links.linkedin],
+    },
+  };
+
   return (
     <Layout>
+      <JsonLd data={blogPostingJsonLd} />
       <article className="note-page">
         <Link href="/notes" className="back-link">
           All notes

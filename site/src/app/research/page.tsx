@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Layout } from "@/components/Layout";
 import {
@@ -7,13 +6,20 @@ import {
   PoseCorruptionLab,
 } from "@/components/PoseResearchVisuals";
 import { ResearchOverviewAnimation } from "@/components/ResearchOverviewAnimation";
+import { researchShowcase } from "@/content/research";
+import { createPageMetadata } from "@/lib/metadata";
 import styles from "./research.module.css";
 
-export const metadata: Metadata = {
-  title: "Robust pose-sequence retrieval",
+const researchPage = researchShowcase.find((item) => item.href === "/research");
+
+export const metadata = createPageMetadata({
+  title: "Research: Robust pose-sequence retrieval",
   description:
     "A research proposal testing contextual metric learning for pose-sequence retrieval under joint noise, missing limbs, frame loss, and pose-estimator shift.",
-};
+  pathname: "/research",
+  type: "article",
+  modifiedTime: researchPage?.updatedAt,
+});
 
 const PROPOSAL_URL =
   "/media/research/pose-embedding/robust-pose-sequence-retrieval-prospectus.pdf";
