@@ -25,6 +25,22 @@
   padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem);
 }
 
+.collectionNav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.collectionNav > p {
+  margin: 0;
+  color: var(--accent-ui);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 2.75rem;
+  white-space: nowrap;
+}
+
 .eyebrow,
 .heroFacts dt,
 .heroFacts dd,

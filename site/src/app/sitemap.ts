@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { projectItems, researchProjects } from "@/content/projects";
+import { projectItems } from "@/content/projects";
 import { researchShowcase } from "@/content/research";
 import { getNotes } from "@/lib/notes";
 import { absoluteUrl } from "@/lib/site";
@@ -13,8 +13,8 @@ function latestDate(dates: string[]) {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const notes = getNotes();
-  const researchPage = researchShowcase.find(
-    (item) => item.href === "/research",
+  const researchLastModified = latestDate(
+    researchShowcase.map((item) => item.updatedAt),
   );
   const homeLastModified = latestDate([
     ...projectItems
@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/research"),
-      lastModified: researchPage?.updatedAt,
+      lastModified: researchLastModified,
     },
     {
       url: absoluteUrl("/notes"),
@@ -50,12 +50,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: absoluteUrl(`/projects/${project.slug}`),
     lastModified: project.updatedAt,
   }));
-  const researchRoutes: MetadataRoute.Sitemap = researchProjects.map(
-    (project) => ({
-      url: absoluteUrl(`/research/${project.slug}`),
-      lastModified: project.updatedAt,
-    }),
-  );
+  const researchRoutes: MetadataRoute.Sitemap = researchShowcase.map((item) => ({
+    url: absoluteUrl(item.href),
+    lastModified: item.updatedAt,
+  }));
   const noteRoutes: MetadataRoute.Sitemap = notes.map((note) => ({
     url: absoluteUrl(`/notes/${note.slug}`),
     lastModified: note.updatedAt,

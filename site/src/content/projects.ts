@@ -20,7 +20,6 @@ export type ProjectMedia = {
   caption?: string;
   fit?: "cover" | "contain";
   railFit?: "cover" | "contain";
-  railLayout?: "split" | "background";
 };
 
 export type ProjectMetric = {
@@ -79,7 +78,6 @@ export const projects: Project[] = [
       height: 1350,
       fit: "cover",
       railFit: "contain",
-      railLayout: "background",
       caption:
         "Source-led system master pinned to the inspected July 2026 repositories. Solid paths are tracked defaults; dashed paths are optional or configured.",
     },
@@ -150,7 +148,7 @@ export const projects: Project[] = [
   {
     title: "Rowing Biomechanics Pipeline",
     slug: "rowing-biomechanics",
-    collection: "project",
+    collection: "research",
     summary:
       "An inspectable research system that learns a stroke-level force representation from synchronized video and RP3 telemetry, then packages the same kinematic contract for video-only inference.",
     stack: [
@@ -175,7 +173,6 @@ export const projects: Project[] = [
       alt: "Rowing biomechanics pipeline showcase combining side-view video, two-dimensional pose tracking, a three-dimensional skeleton, joint-angle traces, stroke phase, and synchronized RP3 force telemetry.",
       width: 1440,
       height: 810,
-      railLayout: "background",
       caption:
         "The complete pipeline on a synchronized ergometer capture: pose, phase, joint angles, 3D lift, and RP3 force in one inspectable view. RP3 supplies supervision during dataset construction; the intended inference path uses video alone.",
     },
@@ -382,7 +379,6 @@ export const projects: Project[] = [
       alt: "Exploded Deskinator software stack showing sensing, signal stabilization, controller states, coverage planning, actuation, evidence, and the separate stepper pulse timing boundary.",
       width: 2400,
       height: 1350,
-      railLayout: "background",
       caption:
         "The supported runtime as one inspectable stack: a synchronous 50 Hz supervisory loop above the StepperDrive hardware timing boundary.",
     },
@@ -530,7 +526,6 @@ export const projects: Project[] = [
       width: 2400,
       height: 1350,
       railFit: "contain",
-      railLayout: "background",
       caption:
         "Generated from the current execution path at source commit 3b2169e6; solid paths are default and dashed paths are conditional.",
     },
@@ -613,7 +608,6 @@ export const projects: Project[] = [
       height: 1350,
       fit: "contain",
       railFit: "contain",
-      railLayout: "background",
       caption:
         "Full-stack platform map covering the implemented interface, service, and event-operations core.",
     },
@@ -697,7 +691,6 @@ export const projects: Project[] = [
         "Source-led execution atlas pinned to the inspected July 2026 repository. Solid paths are current defaults, dashed nodes are selectable or authenticated options, and subdued rails are historical alternatives.",
       fit: "contain",
       railFit: "contain",
-      railLayout: "background",
     },
     gallery: [
       {
@@ -856,7 +849,6 @@ export const projects: Project[] = [
         "Literature-synthesis atlas derived from the supplied paper. Each lane summarizes one cited research program; the dashed Renew branch is a separate documented intervention.",
       fit: "contain",
       railFit: "contain",
-      railLayout: "background",
     },
     gallery: [
       {

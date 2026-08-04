@@ -18,14 +18,28 @@ import {
 import { ResearchOverviewAnimation } from "./ResearchOverviewAnimation";
 import styles from "./HorizontalResearchRail.module.css";
 
+export type HorizontalShowcaseItem = Omit<
+  ResearchShowcaseItem,
+  "updatedAt"
+>;
+
 type HorizontalResearchRailProps = {
-  items: ResearchShowcaseItem[];
+  items: HorizontalShowcaseItem[];
+  sectionId?: string;
+  anchorId?: string;
+  heading?: string;
+  description?: string;
+  navigationLabel?: string;
+  skipTargetId?: string;
+  skipLabel?: string;
+  dataNamespace?: "project" | "research";
 };
 
 const WIDE_MOTION_QUERY =
   "(min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-const EAGER_HASHES = ["#research", "#notes", "#contact"];
+const RESEARCH_EAGER_HASHES = ["#research", "#notes", "#contact"];
+const PROJECT_EAGER_HASHES = ["#work", "#research", "#notes", "#contact"];
 
 function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
@@ -33,6 +47,15 @@ function normalizeDashes(value: string) {
 
 export function HorizontalResearchRail({
   items,
+  sectionId = "research",
+  anchorId,
+  heading = "Research",
+  description =
+    "Studies on robust learning, from noisy motion embeddings to biologically inspired adaptability.",
+  navigationLabel = "Research navigation",
+  skipTargetId = "notes",
+  skipLabel = "Skip research showcase",
+  dataNamespace = "research",
 }: HorizontalResearchRailProps) {
   const railRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -43,6 +66,9 @@ export function HorizontalResearchRail({
   const triggerRef = useRef<ScrollTriggerInstance>(null);
   const updateTriggerRef = useRef<(() => void) | null>(null);
   const activeIndexRef = useRef(0);
+  const eagerHashes =
+    dataNamespace === "project" ? PROJECT_EAGER_HASHES : RESEARCH_EAGER_HASHES;
+  const headingId = `${sectionId}-heading`;
 
   const setActiveIndex = useCallback(
     (requestedIndex: number) => {
@@ -65,7 +91,7 @@ export function HorizontalResearchRail({
       }
 
       rail
-        ?.querySelectorAll<HTMLElement>("[data-research-panel]")
+        ?.querySelectorAll<HTMLElement>("[data-showcase-panel]")
         .forEach((panel, panelIndex) => {
           panel.dataset.active = String(panelIndex === index);
         });
@@ -85,7 +111,7 @@ export function HorizontalResearchRail({
     setActiveIndex(0);
 
     const panels = Array.from(
-      rail.querySelectorAll<HTMLElement>("[data-research-panel]"),
+      rail.querySelectorAll<HTMLElement>("[data-showcase-panel]"),
     );
     const observer = new IntersectionObserver(
       () => {
@@ -125,7 +151,7 @@ export function HorizontalResearchRail({
 
     const teardown = mountGsapScrollEnhancement({
       target: rail,
-      eagerHashes: EAGER_HASHES,
+      eagerHashes,
       mediaQuery: WIDE_MOTION_QUERY,
       prepare: () => {
         rail.dataset.enhanced = "pending";
@@ -212,10 +238,10 @@ export function HorizontalResearchRail({
 
             panels.forEach((panel, index) => {
               const motionMedia = panel.querySelector<HTMLElement>(
-                "[data-research-media]",
+                "[data-showcase-media]",
               );
               const copy = panel.querySelector<HTMLElement>(
-                "[data-research-copy]",
+                "[data-showcase-copy]",
               );
 
               if (motionMedia) {
@@ -248,7 +274,7 @@ export function HorizontalResearchRail({
             triggerRef.current = timeline.scrollTrigger ?? null;
             updateTriggerRef.current = () => ScrollTrigger.update();
 
-            const alignHash = () => alignCurrentHash(EAGER_HASHES);
+            const alignHash = () => alignCurrentHash(eagerHashes);
             const disconnectGeometry = observeScrollGeometry({
               elements: [rail, viewport],
               refresh: () => {
@@ -258,7 +284,7 @@ export function HorizontalResearchRail({
               alignHash,
             });
             const handleHashChange = () => {
-              if (EAGER_HASHES.includes(window.location.hash)) {
+              if (eagerHashes.includes(window.location.hash)) {
                 lockTrackWidth();
                 ScrollTrigger.refresh();
                 window.requestAnimationFrame(alignHash);
@@ -291,7 +317,7 @@ export function HorizontalResearchRail({
       observer.disconnect();
       teardown();
     };
-  }, [items.length, setActiveIndex]);
+  }, [eagerHashes, items.length, setActiveIndex]);
 
   function scrollToItem(index: number, requestedBehavior: ScrollBehavior) {
     const rail = railRef.current;
@@ -299,7 +325,7 @@ export function HorizontalResearchRail({
     const track = trackRef.current;
     const trigger = triggerRef.current;
     const panels = rail?.querySelectorAll<HTMLElement>(
-      "[data-research-panel]",
+      "[data-showcase-panel]",
     );
     const panel = panels?.item(
       Math.min(Math.max(index, 0), Math.max(items.length - 1, 0)),
@@ -344,8 +370,8 @@ export function HorizontalResearchRail({
     });
   }
 
-  function skipResearch(event: MouseEvent<HTMLAnchorElement>) {
-    const target = document.getElementById("notes");
+  function skipShowcase(event: MouseEvent<HTMLAnchorElement>) {
+    const target = document.getElementById(skipTargetId);
 
     if (!target) {
       return;
@@ -353,7 +379,7 @@ export function HorizontalResearchRail({
 
     event.preventDefault();
     const oldURL = window.location.href;
-    window.history.pushState(null, "", "#notes");
+    window.history.pushState(null, "", `#${skipTargetId}`);
     window.dispatchEvent(
       new HashChangeEvent("hashchange", {
         oldURL,
@@ -374,27 +400,31 @@ export function HorizontalResearchRail({
 
   return (
     <>
-      <a className={styles.skipLink} href="#notes" onClick={skipResearch}>
-        Skip research showcase
+      {anchorId ? (
+        <span id={anchorId} className={styles.anchor} aria-hidden="true" />
+      ) : null}
+      <a
+        className={styles.skipLink}
+        href={`#${skipTargetId}`}
+        onClick={skipShowcase}
+      >
+        {skipLabel}
       </a>
       <section
-        id="research"
+        id={sectionId}
         ref={railRef}
         className={styles.rail}
-        aria-labelledby="research-heading"
+        aria-labelledby={headingId}
         tabIndex={-1}
       >
         <header className={styles.header}>
-          <h2 id="research-heading" data-section-heading>
-            Research
+          <h2 id={headingId} data-section-heading>
+            {heading}
           </h2>
-          <p>
-            Studies on robust learning, from noisy motion embeddings to
-            biologically inspired adaptability.
-          </p>
+          <p>{description}</p>
         </header>
 
-        <div className={styles.controls} aria-label="Research navigation">
+        <div className={styles.controls} aria-label={navigationLabel}>
           <button
             ref={previousButtonRef}
             type="button"
@@ -417,14 +447,32 @@ export function HorizontalResearchRail({
         <div
           ref={viewportRef}
           className={styles.viewport}
-          data-research-viewport
+          data-showcase-viewport
+          data-research-viewport={
+            dataNamespace === "research" ? "" : undefined
+          }
+          data-project-viewport={dataNamespace === "project" ? "" : undefined}
         >
-          <div ref={trackRef} className={styles.track} data-research-track>
+          <div
+            ref={trackRef}
+            className={styles.track}
+            data-showcase-track
+            data-research-track={
+              dataNamespace === "research" ? "" : undefined
+            }
+            data-project-track={dataNamespace === "project" ? "" : undefined}
+          >
             {items.map((item, index) => (
               <article
                 key={item.slug}
                 className={styles.panel}
-                data-research-panel
+                data-showcase-panel
+                data-research-panel={
+                  dataNamespace === "research" ? "" : undefined
+                }
+                data-project-panel={
+                  dataNamespace === "project" ? "" : undefined
+                }
                 data-active={index === 0}
               >
                 <div className={styles.mediaFrame}>
@@ -432,7 +480,7 @@ export function HorizontalResearchRail({
                     className={`${styles.mediaMotion} ${
                       item.media.kind === "image" ? styles.mediaOverscan : ""
                     }`}
-                    data-research-media={
+                    data-showcase-media={
                       item.media.kind === "image" ? "true" : undefined
                     }
                   >
@@ -455,7 +503,7 @@ export function HorizontalResearchRail({
                   </div>
                 </div>
 
-                <div className={styles.copy} data-research-copy>
+                <div className={styles.copy} data-showcase-copy>
                   <div className={styles.meta}>
                     <span>{normalizeDashes(item.type)}</span>
                     <span>{normalizeDashes(item.year)}</span>
