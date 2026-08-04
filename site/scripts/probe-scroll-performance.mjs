@@ -140,16 +140,37 @@ try {
         };
 
         requestAnimationFrame(sampleFrame);
-        const maxScroll = Math.max(root.scrollHeight - innerHeight, 0);
-        const steps = Math.max(Math.ceil(maxScroll / Math.max(innerHeight / 3, 180)), 1);
+        const scrollStep = Math.max(innerHeight / 3, 180);
+        let maxScroll = Math.max(root.scrollHeight - innerHeight, 0);
+        let targetScroll = 0;
 
-        for (let index = 0; index <= steps; index += 1) {
-          window.scrollTo(0, (maxScroll * index) / steps);
+        while (targetScroll < maxScroll) {
+          window.scrollTo(0, targetScroll);
           await new Promise((resolve) =>
             requestAnimationFrame(() => requestAnimationFrame(resolve)),
           );
+
+          maxScroll = Math.max(maxScroll, root.scrollHeight - innerHeight);
+          targetScroll = Math.min(targetScroll + scrollStep, maxScroll);
         }
 
+        let stableBottomFrames = 0;
+        while (stableBottomFrames < 4) {
+          window.scrollTo(0, maxScroll);
+          await new Promise((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(resolve)),
+          );
+
+          const nextMaxScroll = Math.max(root.scrollHeight - innerHeight, 0);
+          if (nextMaxScroll > maxScroll) {
+            maxScroll = nextMaxScroll;
+            stableBottomFrames = 0;
+          } else {
+            stableBottomFrames += 1;
+          }
+        }
+
+        const steps = Math.max(Math.ceil(maxScroll / scrollStep), 1);
         for (let index = steps; index >= 0; index -= 1) {
           window.scrollTo(0, (maxScroll * index) / steps);
           await new Promise((resolve) =>

@@ -197,9 +197,22 @@ export function mountGsapScrollEnhancement({
     observer.disconnect();
     void initialize();
   };
+  const handlePageShow = () => {
+    if (!eagerHashes.includes(window.location.hash)) {
+      return;
+    }
+
+    shouldInitialize = true;
+    observer.disconnect();
+    void initialize();
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => alignCurrentHash(eagerHashes));
+    });
+  };
 
   media.addEventListener("change", handleCapabilityChange);
   window.addEventListener("hashchange", handleHashChange);
+  window.addEventListener("pageshow", handlePageShow);
 
   if (shouldInitialize) {
     void initialize();
@@ -212,6 +225,7 @@ export function mountGsapScrollEnhancement({
     observer.disconnect();
     media.removeEventListener("change", handleCapabilityChange);
     window.removeEventListener("hashchange", handleHashChange);
+    window.removeEventListener("pageshow", handlePageShow);
     teardown?.();
     reset();
   };

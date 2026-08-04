@@ -129,7 +129,7 @@ test("deep links eagerly prepare preceding pins and align below the header", asy
 }) => {
   await page.setViewportSize({ width: 1200, height: 818 });
 
-  for (const id of ["work", "research", "notes"]) {
+  for (const id of ["work", "research", "notes", "contact"]) {
     await page.goto(`/#${id}`, { waitUntil: "domcontentloaded" });
     await waitForFonts(page);
     await expectHashAlignment(page, id);
@@ -148,7 +148,7 @@ test("deep links eagerly prepare preceding pins and align below the header", asy
         page.locator("#research [data-research-panel]").first(),
       ).toHaveAttribute("data-active", "true");
     }
-    if (id === "notes") {
+    if (id === "notes" || id === "contact") {
       await expect(page.locator("#research")).toHaveAttribute(
         "data-enhanced",
         "true",

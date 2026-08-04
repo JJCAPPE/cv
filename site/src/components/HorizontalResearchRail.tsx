@@ -25,7 +25,7 @@ type HorizontalResearchRailProps = {
 const WIDE_MOTION_QUERY =
   "(min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-const EAGER_HASHES = ["#research", "#notes"];
+const EAGER_HASHES = ["#research", "#notes", "#contact"];
 
 function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");

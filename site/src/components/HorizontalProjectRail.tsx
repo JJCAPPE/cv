@@ -34,7 +34,7 @@ type HorizontalProjectRailProps = {
 
 const DESKTOP_MOTION_QUERY =
   "(min-width: 768px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
-const EAGER_HASHES = ["#work", "#research", "#notes"];
+const EAGER_HASHES = ["#work", "#research", "#notes", "#contact"];
 
 function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
