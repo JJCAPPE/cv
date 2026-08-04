@@ -2,18 +2,18 @@
 
 ## Production setup
 
-- Set `NEXT_PUBLIC_SITE_URL=https://giacomocappelletto.com` for the production environment. The value must be an origin without a path; a trailing slash is normalized.
-- Attach `giacomocappelletto.com` and `www.giacomocappelletto.com` to this deployment only. Make the apex primary and configure one permanent redirect from `www` to the matching apex URL.
+- Set `NEXT_PUBLIC_SITE_URL=https://www.giacomocappelletto.com` for the production environment. The value must be an origin without a path; a trailing slash is normalized.
+- Attach `giacomocappelletto.com` and `www.giacomocappelletto.com` to this deployment only. Make `www` primary and configure one permanent redirect from the apex to the matching `www` URL.
 - Protect preview deployments. The application also emits `noindex, nofollow` and a closed robots policy unless it is a production deployment configured with the exact canonical origin.
 - On non-Vercel hosting, `NODE_ENV=production` plus the exact `NEXT_PUBLIC_SITE_URL` is the production/indexability signal.
 - Do not attach product, API, documentation, wildcard, preview, or staging subdomains to this repository.
 
-After changing domains or redirects, verify HTTP, HTTPS, `www`, and any former host. Each should take at most one permanent redirect to the matching apex HTTPS URL without a loop.
+After changing domains or redirects, verify HTTP, HTTPS, the apex, and any former host. Each should take at most one permanent redirect to the matching `www` HTTPS URL without a loop.
 
 ## Launch checklist
 
 1. In Google Search Console, create a Domain property for `giacomocappelletto.com` and verify it with the supplied DNS TXT record.
-2. Submit `https://giacomocappelletto.com/sitemap.xml` once in the Sitemaps report. Use URL Inspection for the home page and a few high-value pages after launch.
+2. Submit `https://www.giacomocappelletto.com/sitemap.xml` once in the Sitemaps report. Use URL Inspection for the home page and a few high-value pages after launch.
 3. In Bing Webmaster Tools, import the verified Search Console property or verify it separately, then submit the same sitemap URL once.
 4. Put the canonical site URL on the GitHub profile, relevant repository READMEs, LinkedIn, and legitimate university, lab, or ORCID profiles.
 5. Do not create a Google Business Profile for this online-only portfolio. DuckDuckGo needs no separate baseline submission. Defer IndexNow unless publishing frequency grows materially.
