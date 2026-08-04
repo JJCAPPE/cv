@@ -267,7 +267,7 @@
   border: 0;
 }
 
-@media (min-width: 961px) {
+@media (min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
   .rail[data-enhanced] {
     --research-panel-width: min(72vw, 72rem);
 
@@ -317,12 +317,20 @@
     padding: clamp(10rem, 18dvh, 12rem)
       max(4vw, calc((100vw - var(--research-panel-width)) / 2))
       clamp(4rem, 8dvh, 6rem);
+    will-change: transform;
+  }
+
+  .rail[data-enhanced] [data-research-media] {
+    will-change: transform;
   }
 
   .rail[data-enhanced] .panel {
     height: min(72dvh, 46rem);
     flex-basis: var(--research-panel-width);
     grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 0.75fr);
+    contain: layout paint;
+    contain-intrinsic-size: var(--research-panel-width) min(72dvh, 46rem);
+    content-visibility: auto;
   }
 
   .rail[data-enhanced] .panel:nth-child(even) {

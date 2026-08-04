@@ -146,7 +146,7 @@ export default function Home() {
 
       <section id="experience" className="experience-story">
         <header className="experience-story__intro">
-          <h2>Experience</h2>
+          <h2 data-section-heading>Experience</h2>
           <p>
             Four environments, from enterprise AI systems to physical sensing
             and product delivery.
@@ -188,7 +188,7 @@ export default function Home() {
 
       <section id="notes" className="notes-feature" tabIndex={-1}>
         <header className="notes-feature__header">
-          <h2>Notes</h2>
+          <h2 data-section-heading>Notes</h2>
           <Link href="/notes" className="action-link">
             All notes
           </Link>

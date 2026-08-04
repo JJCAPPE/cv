@@ -1,7 +1,10 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
-import { mountGsapScrollEnhancement } from "@/lib/gsapScroll";
+import {
+  mountGsapScrollEnhancement,
+  observeScrollGeometry,
+} from "@/lib/gsapScroll";
 
 type ProjectsShowcaseProps = {
   children: ReactNode;
@@ -9,7 +12,7 @@ type ProjectsShowcaseProps = {
 };
 
 const DESKTOP_MOTION_QUERY =
-  "(min-width: 768px) and (prefers-reduced-motion: no-preference)";
+  "(min-width: 768px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
 
 function formatProjectNumber(index: number) {
   return String(index + 1).padStart(2, "0");
@@ -40,6 +43,8 @@ export function ProjectsShowcase({
     }
 
     return mountGsapScrollEnhancement({
+      target: gallery,
+      rootMargin: "100% 0px",
       mediaQuery: DESKTOP_MOTION_QUERY,
       prepare: () => {
         gallery.dataset.enhanced = "pending";
@@ -51,8 +56,6 @@ export function ProjectsShowcase({
       const media = gsap.matchMedia();
       const context = gsap.context(() => {
         media.add(DESKTOP_MOTION_QUERY, () => {
-          gallery.dataset.enhanced = "true";
-
           cards.forEach((card, index) => {
             gsap.set(card, {
               xPercent: index === 0 ? 0 : index % 2 === 1 ? 106 : -106,
@@ -144,9 +147,15 @@ export function ProjectsShowcase({
           };
 
           stage.addEventListener("focusin", handleFocusIn);
+          const disconnectGeometry = observeScrollGeometry({
+            elements: [gallery, stage],
+            refresh: () => ScrollTrigger.refresh(),
+          });
+          gallery.dataset.enhanced = "true";
 
           return () => {
             delete gallery.dataset.enhanced;
+            disconnectGeometry();
             stage.removeEventListener("focusin", handleFocusIn);
             if (progressRef.current) {
               progressRef.current.textContent = `${formatProjectNumber(
@@ -173,7 +182,9 @@ export function ProjectsShowcase({
     >
       <header className="projects-intro">
         <div className="projects-intro__heading">
-          <h1 id="projects-heading">Projects</h1>
+          <h1 id="projects-heading" data-section-heading>
+            Projects
+          </h1>
         </div>
         <p className="projects-intro__description">
           Software, ML, robotics, and product work shaped by measurable

@@ -8,6 +8,11 @@ export default defineConfig({
   outputDir: join(tmpdir(), "cv-site-playwright"),
   reporter: "line",
   workers: 1,
+  projects: [
+    { name: "chromium", use: { browserName: "chromium" } },
+    { name: "firefox", use: { browserName: "firefox" } },
+    { name: "webkit", use: { browserName: "webkit" } },
+  ],
   use: {
     baseURL: "http://127.0.0.1:3100",
     trace: "retain-on-failure",

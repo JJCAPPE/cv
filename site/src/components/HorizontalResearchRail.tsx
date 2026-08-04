@@ -10,7 +10,11 @@ import {
 } from "react";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
 import type { ResearchShowcaseItem } from "@/content/research";
-import { mountGsapScrollEnhancement } from "@/lib/gsapScroll";
+import {
+  alignCurrentHash,
+  mountGsapScrollEnhancement,
+  observeScrollGeometry,
+} from "@/lib/gsapScroll";
 import { ResearchOverviewAnimation } from "./ResearchOverviewAnimation";
 import styles from "./HorizontalResearchRail.module.css";
 
@@ -19,8 +23,9 @@ type HorizontalResearchRailProps = {
 };
 
 const WIDE_MOTION_QUERY =
-  "(min-width: 961px) and (prefers-reduced-motion: no-preference)";
+  "(min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const EAGER_HASHES = ["#research", "#notes"];
 
 function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
@@ -119,6 +124,8 @@ export function HorizontalResearchRail({
     }
 
     const teardown = mountGsapScrollEnhancement({
+      target: rail,
+      eagerHashes: EAGER_HASHES,
       mediaQuery: WIDE_MOTION_QUERY,
       prepare: () => {
         rail.dataset.enhanced = "pending";
@@ -134,8 +141,26 @@ export function HorizontalResearchRail({
         media.add(WIDE_MOTION_QUERY, () => {
           rail.dataset.enhanced = "true";
 
+          const lockTrackWidth = () => {
+            const trackStyle = window.getComputedStyle(track);
+            const panelsWidth = panels.reduce(
+              (width, panel) => width + panel.getBoundingClientRect().width,
+              0,
+            );
+            const gap = Number.parseFloat(trackStyle.columnGap) || 0;
+            const padding =
+              (Number.parseFloat(trackStyle.paddingLeft) || 0) +
+              (Number.parseFloat(trackStyle.paddingRight) || 0);
+
+            track.style.width = `${Math.ceil(
+              panelsWidth + gap * Math.max(panels.length - 1, 0) + padding,
+            )}px`;
+          };
+
+          lockTrackWidth();
+
           const distance = () =>
-            Math.max(track.scrollWidth - viewport.clientWidth, 0);
+            Math.max(track.clientWidth - viewport.clientWidth, 0);
 
           if (distance() === 0) {
             delete rail.dataset.enhanced;
@@ -223,40 +248,30 @@ export function HorizontalResearchRail({
           triggerRef.current = timeline.scrollTrigger ?? null;
           updateTriggerRef.current = () => ScrollTrigger.update();
 
-          const unloadedImages = Array.from(
-            rail.querySelectorAll("img"),
-          ).filter((image) => !image.complete);
-          const refresh = () => ScrollTrigger.refresh();
-          const hashFrame =
-            window.location.hash === "#research"
-              ? window.requestAnimationFrame(() => {
-                  refresh();
-                  rail.scrollIntoView({ behavior: "auto", block: "start" });
-                })
-              : null;
-          let active = true;
-
-          unloadedImages.forEach((image) => {
-            image.addEventListener("load", refresh, { once: true });
-            image.addEventListener("error", refresh, { once: true });
+          const alignHash = () => alignCurrentHash(EAGER_HASHES);
+          const disconnectGeometry = observeScrollGeometry({
+            elements: [rail, viewport],
+            refresh: () => {
+              lockTrackWidth();
+              ScrollTrigger.refresh();
+            },
+            alignHash,
           });
-
-          void document.fonts?.ready.then(() => {
-            if (active) {
-              refresh();
+          const handleHashChange = () => {
+            if (EAGER_HASHES.includes(window.location.hash)) {
+              lockTrackWidth();
+              ScrollTrigger.refresh();
+              window.requestAnimationFrame(alignHash);
             }
-          });
+          };
+
+          window.addEventListener("hashchange", handleHashChange);
 
           return () => {
-            active = false;
             delete rail.dataset.enhanced;
-            if (hashFrame !== null) {
-              window.cancelAnimationFrame(hashFrame);
-            }
-            unloadedImages.forEach((image) => {
-              image.removeEventListener("load", refresh);
-              image.removeEventListener("error", refresh);
-            });
+            track.style.removeProperty("width");
+            disconnectGeometry();
+            window.removeEventListener("hashchange", handleHashChange);
             triggerRef.current = null;
             updateTriggerRef.current = null;
           };
@@ -337,8 +352,20 @@ export function HorizontalResearchRail({
     }
 
     event.preventDefault();
+    const oldURL = window.location.href;
+    window.history.pushState(null, "", "#notes");
+    window.dispatchEvent(
+      new HashChangeEvent("hashchange", {
+        oldURL,
+        newURL: window.location.href,
+      }),
+    );
+    target.dataset.restoreFocus = "true";
     target.scrollIntoView({ behavior: "auto", block: "start" });
     target.focus({ preventScroll: true });
+    window.setTimeout(() => {
+      delete target.dataset.restoreFocus;
+    }, 2_000);
   }
 
   if (items.length === 0) {
@@ -358,7 +385,9 @@ export function HorizontalResearchRail({
         tabIndex={-1}
       >
         <header className={styles.header}>
-          <h2 id="research-heading">Research</h2>
+          <h2 id="research-heading" data-section-heading>
+            Research
+          </h2>
           <p>
             Studies on robust learning, from noisy motion embeddings to
             biologically inspired adaptability.
@@ -390,7 +419,7 @@ export function HorizontalResearchRail({
           className={styles.viewport}
           data-research-viewport
         >
-          <div ref={trackRef} className={styles.track}>
+          <div ref={trackRef} className={styles.track} data-research-track>
             {items.map((item, index) => (
               <article
                 key={item.slug}

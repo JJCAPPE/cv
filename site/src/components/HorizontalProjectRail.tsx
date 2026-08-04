@@ -4,7 +4,11 @@ import { useLayoutEffect, useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
-import { mountGsapScrollEnhancement } from "@/lib/gsapScroll";
+import {
+  alignCurrentHash,
+  mountGsapScrollEnhancement,
+  observeScrollGeometry,
+} from "@/lib/gsapScroll";
 import styles from "./HorizontalProjectRail.module.css";
 
 export type HorizontalProjectRailProject = {
@@ -29,7 +33,8 @@ type HorizontalProjectRailProps = {
 };
 
 const DESKTOP_MOTION_QUERY =
-  "(min-width: 768px) and (prefers-reduced-motion: no-preference)";
+  "(min-width: 768px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
+const EAGER_HASHES = ["#work", "#research", "#notes"];
 
 function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
@@ -58,6 +63,8 @@ export function HorizontalProjectRail({
     }
 
     return mountGsapScrollEnhancement({
+      target: rail,
+      eagerHashes: EAGER_HASHES,
       mediaQuery: DESKTOP_MOTION_QUERY,
       prepare: () => {
         rail.dataset.enhanced = "pending";
@@ -156,6 +163,7 @@ export function HorizontalProjectRail({
             }
           });
 
+          let displayedProject = -1;
           const updateProgress = () => {
             if (!progressTextRef.current) {
               return;
@@ -166,6 +174,12 @@ export function HorizontalProjectRail({
               projects.length,
             );
 
+            if (currentProject === displayedProject) {
+              return;
+            }
+
+            displayedProject = currentProject;
+
             progressTextRef.current.textContent = `${formatProjectPosition(
               currentProject,
             )} / ${formatProjectPosition(projects.length)}`;
@@ -174,78 +188,25 @@ export function HorizontalProjectRail({
           timeline.eventCallback("onUpdate", updateProgress);
           updateProgress();
 
-          const unloadedImages = Array.from(
-            rail.querySelectorAll("img"),
-          ).filter((image) => !image.complete);
-          const alignWorkHash = () => {
-            if (window.location.hash !== "#work") {
-              return;
-            }
-
-            window.scrollTo({
-              top: window.scrollY + rail.getBoundingClientRect().top,
-              behavior: "auto",
-            });
-          };
-          let hashAlignmentTimeout: number | null = null;
-          const scheduleWorkHashAlignment = () => {
-            if (window.location.hash !== "#work") {
-              return;
-            }
-
-            if (hashAlignmentTimeout !== null) {
-              window.clearTimeout(hashAlignmentTimeout);
-            }
-
-            hashAlignmentTimeout = window.setTimeout(() => {
-              hashAlignmentTimeout = null;
-              alignWorkHash();
-            }, 120);
-          };
-          const refresh = () => {
-            ScrollTrigger.refresh();
-            scheduleWorkHashAlignment();
-          };
+          const alignHash = () => alignCurrentHash(EAGER_HASHES);
+          const disconnectGeometry = observeScrollGeometry({
+            elements: [rail, track],
+            refresh: () => ScrollTrigger.refresh(),
+            alignHash,
+          });
           const handleHashChange = () => {
-            if (window.location.hash === "#work") {
-              refresh();
+            if (EAGER_HASHES.includes(window.location.hash)) {
+              ScrollTrigger.refresh();
+              window.requestAnimationFrame(alignHash);
             }
           };
-          const hashFrame =
-            window.location.hash === "#work"
-              ? window.requestAnimationFrame(() => {
-                  refresh();
-                })
-              : null;
-          let active = true;
 
           window.addEventListener("hashchange", handleHashChange);
 
-          unloadedImages.forEach((image) => {
-            image.addEventListener("load", refresh, { once: true });
-            image.addEventListener("error", refresh, { once: true });
-          });
-
-          void document.fonts?.ready.then(() => {
-            if (active) {
-              refresh();
-            }
-          });
-
           return () => {
-            active = false;
             delete rail.dataset.enhanced;
-            if (hashFrame !== null) {
-              window.cancelAnimationFrame(hashFrame);
-            }
-            if (hashAlignmentTimeout !== null) {
-              window.clearTimeout(hashAlignmentTimeout);
-            }
+            disconnectGeometry();
             window.removeEventListener("hashchange", handleHashChange);
-            unloadedImages.forEach((image) => {
-              image.removeEventListener("load", refresh);
-              image.removeEventListener("error", refresh);
-            });
             triggerRef.current = null;
             updateTriggerRef.current = null;
             if (progressTextRef.current) {
@@ -306,8 +267,20 @@ export function HorizontalProjectRail({
     }
 
     event.preventDefault();
+    const oldURL = window.location.href;
+    window.history.pushState(null, "", "#research");
+    window.dispatchEvent(
+      new HashChangeEvent("hashchange", {
+        oldURL,
+        newURL: window.location.href,
+      }),
+    );
+    target.dataset.restoreFocus = "true";
     target.scrollIntoView({ behavior: "auto", block: "start" });
     target.focus({ preventScroll: true });
+    window.setTimeout(() => {
+      delete target.dataset.restoreFocus;
+    }, 2_000);
   }
 
   if (projects.length === 0) {
@@ -331,7 +304,9 @@ export function HorizontalProjectRail({
         aria-labelledby="selected-work-heading"
       >
         <header className={styles.header}>
-          <h2 id="selected-work-heading">Selected work</h2>
+          <h2 id="selected-work-heading" data-section-heading>
+            Selected work
+          </h2>
           <div className={styles.orientation} aria-hidden="true">
             <span ref={progressTextRef}>
               {formatProjectPosition(projects.length)} projects
@@ -341,7 +316,7 @@ export function HorizontalProjectRail({
             </span>
           </div>
         </header>
-        <div ref={trackRef} className={styles.track}>
+        <div ref={trackRef} className={styles.track} data-project-track>
           {projects.map((project, index) => (
             <article
               key={project.slug}
