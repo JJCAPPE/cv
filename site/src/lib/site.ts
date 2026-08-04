@@ -1,4 +1,4 @@
-const productionSiteUrl = "https://giacomocappelletto.com";
+const productionSiteUrl = "https://www.giacomocappelletto.com";
 const localSiteUrl = "http://localhost:3000";
 
 function normalizeOrigin(value: string) {

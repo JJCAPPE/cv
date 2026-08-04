@@ -30,6 +30,6 @@ Then, in another terminal:
 npm run seo:check -- http://127.0.0.1:3000
 ```
 
-Set `NEXT_PUBLIC_SITE_URL=https://giacomocappelletto.com` in production. Deployments are indexable only when the exact canonical origin is configured and the host reports a production environment.
+Set `NEXT_PUBLIC_SITE_URL=https://www.giacomocappelletto.com` in production. Deployments are indexable only when the exact canonical origin is configured and the host reports a production environment.
 
 See [SEO operations](docs/seo-operations.md) for domain setup, search-engine launch steps, publishing checks, and the product-subdomain policy.
