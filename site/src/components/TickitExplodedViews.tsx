@@ -5,8 +5,8 @@ import {
   useEffect,
   useId,
   useState,
-  useSyncExternalStore,
 } from "react";
+import { useMotionActivity } from "@/hooks/useMotionActivity";
 import styles from "./TickitExplodedViews.module.css";
 
 type EvidenceTone = "current" | "history";
@@ -143,22 +143,6 @@ const HISTORY: ExplodedDefinition = {
     },
   ],
 };
-
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeReducedMotion(callback: () => void) {
-  const media = window.matchMedia(REDUCED_MOTION_QUERY);
-  media.addEventListener("change", callback);
-  return () => media.removeEventListener("change", callback);
-}
-
-function getReducedMotionSnapshot() {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function getReducedMotionServerSnapshot() {
-  return false;
-}
 
 function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
   const viewportId = useId();
@@ -366,15 +350,12 @@ const SEQUENCE_STAGES: SequenceStage[] = [
 export function TickitOperationalSequence() {
   const viewportId = useId();
   const readoutId = useId();
-  const reducedMotion = useSyncExternalStore(
-    subscribeReducedMotion,
-    getReducedMotionSnapshot,
-    getReducedMotionServerSnapshot,
-  );
+  const { isActive, reducedMotion, ref: motionRef } =
+    useMotionActivity<HTMLElement>();
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const active = SEQUENCE_STAGES[activeIndex];
-  const sequencePaused = paused || reducedMotion;
+  const sequencePaused = paused || !isActive;
 
   useEffect(() => {
     if (sequencePaused) {
@@ -397,6 +378,7 @@ export function TickitOperationalSequence() {
 
   return (
     <figure
+      ref={motionRef}
       className={styles.sequence}
       data-paused={sequencePaused}
       data-active={active.id}

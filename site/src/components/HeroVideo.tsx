@@ -1,70 +1,65 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { useMotionActivity } from "@/hooks/useMotionActivity";
 
 type HeroVideoProps = {
-  poster?: string;
-  src: string;
+  desktopSrc: string;
+  mobileSrc: string;
 };
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const MOBILE_QUERY = "(max-width: 767px)";
 
-export function HeroVideo({ poster, src }: HeroVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+export function HeroVideo({ desktopSrc, mobileSrc }: HeroVideoProps) {
+  const { isActive, ref } = useMotionActivity<HTMLVideoElement>({
+    rootMargin: "10% 0px",
+  });
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
+    const video = ref.current;
 
     if (!video) {
       return;
     }
 
-    const motionPreference = window.matchMedia(REDUCED_MOTION_QUERY);
-    let isVisible = true;
-
-    const syncPlayback = () => {
-      if (motionPreference.matches || document.hidden || !isVisible) {
-        video.pause();
-        return;
+    if (isActive) {
+      if (!video.src) {
+        video.src = window.matchMedia(MOBILE_QUERY).matches
+          ? mobileSrc
+          : desktopSrc;
+        video.load();
       }
-
       void video.play().catch(() => undefined);
-    };
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        syncPlayback();
-      },
-      { rootMargin: "10% 0px", threshold: 0.01 },
-    );
+    } else {
+      video.pause();
+    }
+  }, [desktopSrc, isActive, mobileSrc, ref]);
 
-    observer.observe(video);
-    motionPreference.addEventListener("change", syncPlayback);
-    document.addEventListener("visibilitychange", syncPlayback);
-    syncPlayback();
+  useEffect(() => {
+    const video = ref.current;
 
     return () => {
-      observer.disconnect();
-      motionPreference.removeEventListener("change", syncPlayback);
-      document.removeEventListener("visibilitychange", syncPlayback);
+      if (video) {
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+      }
     };
-  }, []);
+  }, [ref]);
 
   return (
     <video
-      ref={videoRef}
+      ref={ref}
       className="home-hero__video"
-      autoPlay
       data-hero-video
+      data-ready={isReady}
       disablePictureInPicture
       loop
       muted
+      onCanPlay={() => setIsReady(true)}
       playsInline
-      poster={poster}
-      preload="metadata"
-    >
-      <source src={src} type="video/mp4" />
-      Your browser does not support embedded video.
-    </video>
+      preload="none"
+    />
   );
 }

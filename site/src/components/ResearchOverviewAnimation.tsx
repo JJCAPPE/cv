@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useState } from "react";
+import { useMotionActivity } from "@/hooks/useMotionActivity";
 import styles from "./ResearchOverviewAnimation.module.css";
 
 type ResearchOverviewAnimationProps = {
@@ -60,36 +61,18 @@ function MiniPose({
 export function ResearchOverviewAnimation({
   variant = "hero",
 }: ResearchOverviewAnimationProps) {
-  const overviewRef = useRef<HTMLElement>(null);
+  const { isActive, ref: overviewRef } =
+    useMotionActivity<HTMLElement>();
   const titleId = useId();
   const descriptionId = useId();
   const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    const overview = overviewRef.current;
-
-    if (!overview) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        overview.dataset.visibilityPaused = String(!entry.isIntersecting);
-      },
-      { rootMargin: "12% 0px", threshold: 0.01 },
-    );
-
-    observer.observe(overview);
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <figure
       ref={overviewRef}
       className={styles.overview}
       data-paused={paused}
-      data-visibility-paused="true"
+      data-visibility-paused={!isActive}
       data-variant={variant}
     >
       <div className={styles.header}>

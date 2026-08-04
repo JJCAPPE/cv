@@ -88,20 +88,18 @@ export default function Home() {
       <section id="intro" className="home-hero">
         <div className="home-hero__media" aria-hidden="true">
           <div className="home-hero__media-primary">
-            {rowingProject.cover.poster ? (
-              <Image
-                className="home-hero__poster"
-                src={rowingProject.cover.poster}
-                alt=""
-                fill
-                loading="eager"
-                fetchPriority="high"
-                sizes="(max-width: 767px) 100vw, 72vw"
-              />
-            ) : null}
+            <Image
+              className="home-hero__poster"
+              src="/media/home/rowing-signal-poster-v1.webp"
+              alt=""
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(max-width: 767px) 100vw, 72vw"
+            />
             <HeroVideo
-              poster={rowingProject.cover.poster}
-              src={rowingProject.cover.src}
+              desktopSrc="/media/home/rowing-signal-loop-desktop-v1.mp4"
+              mobileSrc="/media/home/rowing-signal-loop-mobile-v1.mp4"
             />
           </div>
         </div>

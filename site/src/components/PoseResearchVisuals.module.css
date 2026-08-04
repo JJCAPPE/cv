@@ -429,6 +429,10 @@
   animation: query-halo 2.6s ease-in-out infinite;
 }
 
+.visual[data-motion-paused="true"] .queryHalo {
+  animation-play-state: paused;
+}
+
 .rankingPanel {
   display: flex;
   min-width: 0;
