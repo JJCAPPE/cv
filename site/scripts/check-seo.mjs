@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const productionOrigin = "https://giacomocappelletto.com";
+const productionOrigin = "https://www.giacomocappelletto.com";
 const suppliedBaseUrl = process.argv[2];
 
 if (!suppliedBaseUrl) {
@@ -96,7 +96,7 @@ function isForbiddenPublicUrl(value) {
     const url = new URL(value);
     return (
       localHostnames.has(url.hostname) ||
-      url.hostname === "www.giacomocappelletto.com" ||
+      url.hostname === "giacomocappelletto.com" ||
       url.hostname.endsWith(".vercel.app")
     );
   } catch {
@@ -169,7 +169,7 @@ function parseJsonLd(html, pageUrl) {
       check(
         !serialized.includes("localhost") &&
           !serialized.includes(".vercel.app") &&
-          !serialized.includes("www.giacomocappelletto.com"),
+          !serialized.includes("https://giacomocappelletto.com"),
         `${pageUrl} JSON-LD contains a forbidden public host`,
       );
 
