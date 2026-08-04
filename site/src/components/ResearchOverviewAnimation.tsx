@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { useMotionActivity } from "@/hooks/useMotionActivity";
 import styles from "./ResearchOverviewAnimation.module.css";
 
 type ResearchOverviewAnimationProps = {
@@ -60,14 +61,18 @@ function MiniPose({
 export function ResearchOverviewAnimation({
   variant = "hero",
 }: ResearchOverviewAnimationProps) {
+  const { isActive, ref: overviewRef } =
+    useMotionActivity<HTMLElement>();
   const titleId = useId();
   const descriptionId = useId();
   const [paused, setPaused] = useState(false);
 
   return (
     <figure
+      ref={overviewRef}
       className={styles.overview}
       data-paused={paused}
+      data-visibility-paused={!isActive}
       data-variant={variant}
     >
       <div className={styles.header}>

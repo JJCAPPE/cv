@@ -7,7 +7,6 @@ import {
   useMemo,
   useRef,
   useState,
-  useSyncExternalStore,
   type CSSProperties,
   type KeyboardEvent,
 } from "react";
@@ -21,6 +20,7 @@ import {
   type DemoPointShape,
   type Matrix,
 } from "@/lib/contextualSimilarity";
+import { useMotionActivity } from "@/hooks/useMotionActivity";
 import styles from "./PoseResearchVisuals.module.css";
 
 const JOINT_NAMES = [
@@ -152,20 +152,6 @@ function jitterPose(pose: Pose, frame: number, severity: number): Pose {
   return jittered;
 }
 
-function subscribeToReducedMotion(onChange: () => void) {
-  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  media.addEventListener("change", onChange);
-  return () => media.removeEventListener("change", onChange);
-}
-
-function getReducedMotionSnapshot() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function getReducedMotionServerSnapshot() {
-  return false;
-}
-
 function Skeleton({
   pose,
   hiddenJoints = [],
@@ -217,16 +203,13 @@ function Skeleton({
 export function PoseCorruptionLab() {
   const titleId = useId();
   const descriptionId = useId();
-  const reducedMotion = useSyncExternalStore(
-    subscribeToReducedMotion,
-    getReducedMotionSnapshot,
-    getReducedMotionServerSnapshot,
-  );
+  const { isActive, reducedMotion, ref: motionRef } =
+    useMotionActivity<HTMLDivElement>();
   const [corruption, setCorruption] = useState<CorruptionType>("jitter");
   const [severity, setSeverity] = useState(2);
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(true);
-  const isPlaying = playing && !reducedMotion;
+  const isPlaying = playing && isActive;
   const cleanPose = POSE_FRAMES[frame];
   const observedPose =
     corruption === "jitter"
@@ -262,7 +245,11 @@ export function PoseCorruptionLab() {
   }
 
   return (
-    <div className={`${styles.visual} ${styles.poseLab}`}>
+    <div
+      ref={motionRef}
+      className={`${styles.visual} ${styles.poseLab}`}
+      data-motion-paused={!isActive}
+    >
       <div className={styles.visualHeader}>
         <div>
           <p className={styles.visualKicker}>Interactive 01</p>
@@ -471,6 +458,7 @@ function ShapeMark({ shape }: { shape: DemoPointShape }) {
 export function NeighborhoodExplorer() {
   const titleId = useId();
   const descriptionId = useId();
+  const { isActive, ref: motionRef } = useMotionActivity<HTMLDivElement>();
   const [queryId, setQueryId] = useState<(typeof QUERY_IDS)[number]>("R1");
   const [noise, setNoise] = useState(2);
   const [mode, setMode] = useState<NeighborhoodMode>("pairwise");
@@ -521,7 +509,11 @@ export function NeighborhoodExplorer() {
   const scoreName = mode === "pairwise" ? "cosine score" : "contextual score";
 
   return (
-    <div className={`${styles.visual} ${styles.neighborhoodExplorer}`}>
+    <div
+      ref={motionRef}
+      className={`${styles.visual} ${styles.neighborhoodExplorer}`}
+      data-motion-paused={!isActive}
+    >
       <div className={styles.visualHeader}>
         <div>
           <p className={styles.visualKicker}>Interactive 02</p>

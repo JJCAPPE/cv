@@ -63,6 +63,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
+        <span className="page-progress" aria-hidden="true" />
         {children}
         <Footer />
         {process.env.VERCEL ? <Analytics /> : null}

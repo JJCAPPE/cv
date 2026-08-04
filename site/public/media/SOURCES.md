@@ -10,6 +10,10 @@ Source repository: `rowing-video-analysis`
 - `rowing-biomechanics-showcase.mp4` is a web-optimized 1440 × 810,
   30 fps export of `paper/rowing-biomechanics-showcase.mp4`.
 - `rowing-biomechanics-showcase-poster.webp` is a still from that showcase.
+- `home/rowing-signal-loop-{desktop,mobile}-v1.mp4` are 12-second,
+  24 fps, pre-graded hero-only cuts of that showcase. The mobile version uses
+  a portrait crop centered on the athlete.
+- `home/rowing-signal-poster-v1.webp` is the matching pre-graded hero poster.
 - `pose3d-tracking-example.mp4` is a web-optimized 1440 × 810, 30 fps export
   of
   `runs/rp3-normal-240cfr_20260208_191630/overlay/pose3d_overlay.mp4`.

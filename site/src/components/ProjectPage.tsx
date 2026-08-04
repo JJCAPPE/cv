@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ActivityVideo } from "@/components/ActivityVideo";
 import { BiomimeticAiCaseStudy } from "@/components/BiomimeticAiCaseStudy";
 import { DeskinatorCaseStudy } from "@/components/DeskinatorCaseStudy";
 import { InventoryCaseStudy } from "@/components/InventoryCaseStudy";
@@ -72,20 +73,12 @@ export function ProjectPage({ project }: { project: Project }) {
           <figure className="project-page__cover">
             {project.cover.kind === "video" ? (
               <div className="project-page__cover-video-frame">
-                <video
+                <ActivityVideo
                   className="project-page__cover-video"
-                  autoPlay
-                  controls
-                  loop
-                  muted
-                  playsInline
                   poster={project.cover.poster}
-                  preload="metadata"
-                  aria-label={project.cover.alt}
-                >
-                  <source src={project.cover.src} type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
+                  src={project.cover.src}
+                  ariaLabel={project.cover.alt}
+                />
               </div>
             ) : (
               <div className="project-page__cover-image">

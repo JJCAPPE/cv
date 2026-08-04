@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroVideo } from "@/components/HeroVideo";
 import { HorizontalProjectRail } from "@/components/HorizontalProjectRail";
 import { HorizontalResearchRail } from "@/components/HorizontalResearchRail";
 import { JsonLd } from "@/components/JsonLd";
@@ -87,30 +88,19 @@ export default function Home() {
       <section id="intro" className="home-hero">
         <div className="home-hero__media" aria-hidden="true">
           <div className="home-hero__media-primary">
-            {rowingProject.cover.poster ? (
-              <Image
-                className="home-hero__poster"
-                src={rowingProject.cover.poster}
-                alt=""
-                fill
-                loading="eager"
-                fetchPriority="high"
-                sizes="(max-width: 767px) 100vw, 72vw"
-              />
-            ) : null}
-            <video
-              className="home-hero__video"
-              autoPlay
-              disablePictureInPicture
-              loop
-              muted
-              playsInline
-              poster={rowingProject.cover.poster}
-              preload="metadata"
-            >
-              <source src={rowingProject.cover.src} type="video/mp4" />
-              Your browser does not support embedded video.
-            </video>
+            <Image
+              className="home-hero__poster"
+              src="/media/home/rowing-signal-poster-v1.webp"
+              alt=""
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(max-width: 767px) 100vw, 72vw"
+            />
+            <HeroVideo
+              desktopSrc="/media/home/rowing-signal-loop-desktop-v1.mp4"
+              mobileSrc="/media/home/rowing-signal-loop-mobile-v1.mp4"
+            />
           </div>
         </div>
 
@@ -156,7 +146,7 @@ export default function Home() {
 
       <section id="experience" className="experience-story">
         <header className="experience-story__intro">
-          <h2>Experience</h2>
+          <h2 data-section-heading>Experience</h2>
           <p>
             Four environments, from enterprise AI systems to physical sensing
             and product delivery.
@@ -198,7 +188,7 @@ export default function Home() {
 
       <section id="notes" className="notes-feature" tabIndex={-1}>
         <header className="notes-feature__header">
-          <h2>Notes</h2>
+          <h2 data-section-heading>Notes</h2>
           <Link href="/notes" className="action-link">
             All notes
           </Link>

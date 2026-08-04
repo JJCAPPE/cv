@@ -267,8 +267,8 @@
   border: 0;
 }
 
-@media (min-width: 961px) {
-  .rail[data-enhanced="true"] {
+@media (min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+  .rail[data-enhanced] {
     --research-panel-width: min(72vw, 72rem);
 
     height: 100dvh;
@@ -277,7 +277,7 @@
     overflow: clip;
   }
 
-  .rail[data-enhanced="true"] .header {
+  .rail[data-enhanced] .header {
     position: absolute;
     z-index: 4;
     top: calc(var(--header-height) + 0.5rem);
@@ -288,15 +288,15 @@
     background: color-mix(in srgb, var(--bg) 88%, transparent);
   }
 
-  .rail[data-enhanced="true"] .header h2 {
+  .rail[data-enhanced] .header h2 {
     font-size: clamp(3.6rem, 6vw, 6.3rem);
   }
 
-  .rail[data-enhanced="true"] .header p {
+  .rail[data-enhanced] .header p {
     font-size: 0.83rem;
   }
 
-  .rail[data-enhanced="true"] .controls {
+  .rail[data-enhanced] .controls {
     position: absolute;
     z-index: 5;
     right: clamp(1rem, 3vw, 3rem);
@@ -304,51 +304,59 @@
     padding: 0;
   }
 
-  .rail[data-enhanced="true"] .viewport {
+  .rail[data-enhanced] .viewport {
     height: 100%;
     padding: 0;
     overflow: visible;
   }
 
-  .rail[data-enhanced="true"] .track {
+  .rail[data-enhanced] .track {
     align-items: center;
     gap: 4vw;
     height: 100%;
     padding: clamp(10rem, 18dvh, 12rem)
       max(4vw, calc((100vw - var(--research-panel-width)) / 2))
       clamp(4rem, 8dvh, 6rem);
+    will-change: transform;
   }
 
-  .rail[data-enhanced="true"] .panel {
+  .rail[data-enhanced] [data-research-media] {
+    will-change: transform;
+  }
+
+  .rail[data-enhanced] .panel {
     height: min(72dvh, 46rem);
     flex-basis: var(--research-panel-width);
     grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 0.75fr);
+    contain: layout paint;
+    contain-intrinsic-size: var(--research-panel-width) min(72dvh, 46rem);
+    content-visibility: auto;
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(even) {
+  .rail[data-enhanced] .panel:nth-child(even) {
     margin-top: 0;
     grid-template-columns: minmax(19rem, 0.75fr) minmax(0, 1.5fr);
     transform: translateY(6dvh);
   }
 
-  .rail[data-enhanced="true"] .panel:nth-child(even) .mediaFrame {
+  .rail[data-enhanced] .panel:nth-child(even) .mediaFrame {
     order: 2;
     border-right: 0;
     border-left: 1px solid var(--line);
   }
 
-  .rail[data-enhanced="true"] .mediaFrame {
+  .rail[data-enhanced] .mediaFrame {
     height: 100%;
     border-right: 1px solid var(--line);
     border-bottom: 0;
   }
 
-  .rail[data-enhanced="true"] .copy {
+  .rail[data-enhanced] .copy {
     min-height: 0;
     padding: clamp(1.5rem, 2.8vw, 3rem);
   }
 
-  .rail[data-enhanced="true"] .copy h3 {
+  .rail[data-enhanced] .copy h3 {
     font-size: clamp(3.1rem, 4vw, 4.5rem);
   }
 }
