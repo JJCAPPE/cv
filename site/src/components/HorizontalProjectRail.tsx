@@ -75,155 +75,155 @@ export function HorizontalProjectRail({
         updateTriggerRef.current = null;
       },
       setup: ({ gsap, ScrollTrigger }) => {
-      const media = gsap.matchMedia();
-      const context = gsap.context(() => {
-        media.add(DESKTOP_MOTION_QUERY, () => {
-          rail.dataset.enhanced = "true";
-          const distance = () =>
-            Math.max(track.scrollWidth - rail.clientWidth, 0);
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+          media.add(DESKTOP_MOTION_QUERY, () => {
+            rail.dataset.enhanced = "true";
+            const distance = () =>
+              Math.max(track.scrollWidth - rail.clientWidth, 0);
 
-          if (distance() === 0) {
-            delete rail.dataset.enhanced;
-            return;
-          }
+            if (distance() === 0) {
+              delete rail.dataset.enhanced;
+              return;
+            }
 
-          const timeline = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-              trigger: rail,
-              start: "top top",
-              end: () => `+=${distance()}`,
-              pin: rail,
-              scrub: true,
-              fastScrollEnd: true,
-              invalidateOnRefresh: true,
-              anticipatePin: 1,
-            },
-          });
+            const timeline = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: rail,
+                start: "top top",
+                end: () => `+=${distance()}`,
+                pin: rail,
+                scrub: true,
+                fastScrollEnd: true,
+                invalidateOnRefresh: true,
+                anticipatePin: 1,
+              },
+            });
 
-          timeline.to(track, { x: () => -distance(), duration: 1 }, 0);
-          if (progressFillRef.current) {
-            timeline.fromTo(
-              progressFillRef.current,
-              { scaleX: 0 },
-              { scaleX: 1, duration: 1 },
-              0,
-            );
-          }
-          triggerRef.current = timeline.scrollTrigger ?? null;
-          updateTriggerRef.current = () => ScrollTrigger.update();
-
-          const panels = gsap.utils.toArray<HTMLElement>(
-            "[data-project-panel]",
-            rail,
-          );
-
-          const panelInterval = 1 / Math.max(panels.length - 1, 1);
-
-          panels.forEach((panel, index) => {
-            const copy = panel.querySelector<HTMLElement>(
-              "[data-project-copy]",
-            );
-            const image = panel.querySelector<HTMLElement>(
-              "[data-project-image]",
-            );
-
-            if (copy && index > 0) {
-              const revealStart = Math.max((index - 0.86) * panelInterval, 0);
-
+            timeline.to(track, { x: () => -distance(), duration: 1 }, 0);
+            if (progressFillRef.current) {
               timeline.fromTo(
-                copy,
-                { x: 72 },
-                {
-                  x: 0,
-                  duration: panelInterval * 0.3,
-                },
-                revealStart,
+                progressFillRef.current,
+                { scaleX: 0 },
+                { scaleX: 1, duration: 1 },
+                0,
               );
             }
+            triggerRef.current = timeline.scrollTrigger ?? null;
+            updateTriggerRef.current = () => ScrollTrigger.update();
 
-            if (image) {
-              if (image.dataset.projectImageMotion === "static") {
-                gsap.set(image, { xPercent: 0, scale: 1 });
-              } else {
-                const imageStart = Math.max((index - 1) * panelInterval, 0);
-                const imageEnd = Math.min((index + 1) * panelInterval, 1);
-
-                timeline.fromTo(
-                  image,
-                  { xPercent: -2.5, scale: 1.055 },
-                  {
-                    xPercent: 2.5,
-                    scale: 1.055,
-                    duration: Math.max(imageEnd - imageStart, 0.01),
-                  },
-                  imageStart,
-                );
-              }
-            }
-          });
-
-          let displayedProject = -1;
-          const updateProgress = () => {
-            if (!progressTextRef.current) {
-              return;
-            }
-
-            const currentProject = Math.min(
-              Math.round(timeline.progress() * (projects.length - 1)) + 1,
-              projects.length,
+            const panels = gsap.utils.toArray<HTMLElement>(
+              "[data-project-panel]",
+              rail,
             );
 
-            if (currentProject === displayedProject) {
-              return;
-            }
+            const panelInterval = 1 / Math.max(panels.length - 1, 1);
 
-            displayedProject = currentProject;
+            panels.forEach((panel, index) => {
+              const copy = panel.querySelector<HTMLElement>(
+                "[data-project-copy]",
+              );
+              const image = panel.querySelector<HTMLElement>(
+                "[data-project-image]",
+              );
 
-            progressTextRef.current.textContent = `${formatProjectPosition(
-              currentProject,
-            )} / ${formatProjectPosition(projects.length)}`;
-          };
+              if (copy && index > 0) {
+                const revealStart = Math.max((index - 0.86) * panelInterval, 0);
 
-          timeline.eventCallback("onUpdate", updateProgress);
-          updateProgress();
+                timeline.fromTo(
+                  copy,
+                  { x: 72 },
+                  {
+                    x: 0,
+                    duration: panelInterval * 0.3,
+                  },
+                  revealStart,
+                );
+              }
 
-          const alignHash = () => alignCurrentHash(EAGER_HASHES);
-          const disconnectGeometry = observeScrollGeometry({
-            elements: [rail, track],
-            refresh: () => ScrollTrigger.refresh(),
-            alignHash,
+              if (image) {
+                if (image.dataset.projectImageMotion === "static") {
+                  gsap.set(image, { xPercent: 0, scale: 1 });
+                } else {
+                  const imageStart = Math.max((index - 1) * panelInterval, 0);
+                  const imageEnd = Math.min((index + 1) * panelInterval, 1);
+
+                  timeline.fromTo(
+                    image,
+                    { xPercent: -2.5, scale: 1.055 },
+                    {
+                      xPercent: 2.5,
+                      scale: 1.055,
+                      duration: Math.max(imageEnd - imageStart, 0.01),
+                    },
+                    imageStart,
+                  );
+                }
+              }
+            });
+
+            let displayedProject = -1;
+            const updateProgress = () => {
+              if (!progressTextRef.current) {
+                return;
+              }
+
+              const currentProject = Math.min(
+                Math.round(timeline.progress() * (projects.length - 1)) + 1,
+                projects.length,
+              );
+
+              if (currentProject === displayedProject) {
+                return;
+              }
+
+              displayedProject = currentProject;
+
+              progressTextRef.current.textContent = `${formatProjectPosition(
+                currentProject,
+              )} / ${formatProjectPosition(projects.length)}`;
+            };
+
+            timeline.eventCallback("onUpdate", updateProgress);
+            updateProgress();
+
+            const alignHash = () => alignCurrentHash(EAGER_HASHES);
+            const disconnectGeometry = observeScrollGeometry({
+              elements: [rail, track],
+              refresh: () => ScrollTrigger.refresh(),
+              alignHash,
+            });
+            const handleHashChange = () => {
+              if (EAGER_HASHES.includes(window.location.hash)) {
+                ScrollTrigger.refresh();
+                window.requestAnimationFrame(alignHash);
+              }
+            };
+
+            window.addEventListener("hashchange", handleHashChange);
+
+            return () => {
+              delete rail.dataset.enhanced;
+              disconnectGeometry();
+              window.removeEventListener("hashchange", handleHashChange);
+              triggerRef.current = null;
+              updateTriggerRef.current = null;
+              if (progressTextRef.current) {
+                progressTextRef.current.textContent = `${formatProjectPosition(
+                  projects.length,
+                )} projects`;
+              }
+            };
           });
-          const handleHashChange = () => {
-            if (EAGER_HASHES.includes(window.location.hash)) {
-              ScrollTrigger.refresh();
-              window.requestAnimationFrame(alignHash);
-            }
-          };
-
-          window.addEventListener("hashchange", handleHashChange);
+        }, rail);
 
           return () => {
-            delete rail.dataset.enhanced;
-            disconnectGeometry();
-            window.removeEventListener("hashchange", handleHashChange);
+            context.revert();
+            media.revert();
             triggerRef.current = null;
             updateTriggerRef.current = null;
-            if (progressTextRef.current) {
-              progressTextRef.current.textContent = `${formatProjectPosition(
-                projects.length,
-              )} projects`;
-            }
           };
-        });
-      }, rail);
-
-        return () => {
-          context.revert();
-          media.revert();
-          triggerRef.current = null;
-          updateTriggerRef.current = null;
-        };
       },
     });
   }, [projects.length]);

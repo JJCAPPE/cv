@@ -136,154 +136,154 @@ export function HorizontalResearchRail({
         updateTriggerRef.current = null;
       },
       setup: ({ gsap, ScrollTrigger }) => {
-      const media = gsap.matchMedia();
-      const context = gsap.context(() => {
-        media.add(WIDE_MOTION_QUERY, () => {
-          rail.dataset.enhanced = "true";
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+          media.add(WIDE_MOTION_QUERY, () => {
+            rail.dataset.enhanced = "true";
 
-          const lockTrackWidth = () => {
-            const trackStyle = window.getComputedStyle(track);
-            const panelsWidth = panels.reduce(
-              (width, panel) => width + panel.getBoundingClientRect().width,
-              0,
-            );
-            const gap = Number.parseFloat(trackStyle.columnGap) || 0;
-            const padding =
-              (Number.parseFloat(trackStyle.paddingLeft) || 0) +
-              (Number.parseFloat(trackStyle.paddingRight) || 0);
+            const lockTrackWidth = () => {
+              const trackStyle = window.getComputedStyle(track);
+              const panelsWidth = panels.reduce(
+                (width, panel) => width + panel.getBoundingClientRect().width,
+                0,
+              );
+              const gap = Number.parseFloat(trackStyle.columnGap) || 0;
+              const padding =
+                (Number.parseFloat(trackStyle.paddingLeft) || 0) +
+                (Number.parseFloat(trackStyle.paddingRight) || 0);
 
-            track.style.width = `${Math.ceil(
-              panelsWidth + gap * Math.max(panels.length - 1, 0) + padding,
-            )}px`;
-          };
+              track.style.width = `${Math.ceil(
+                panelsWidth + gap * Math.max(panels.length - 1, 0) + padding,
+              )}px`;
+            };
 
-          lockTrackWidth();
+            lockTrackWidth();
 
-          const distance = () =>
-            Math.max(track.clientWidth - viewport.clientWidth, 0);
+            const distance = () =>
+              Math.max(track.clientWidth - viewport.clientWidth, 0);
 
-          if (distance() === 0) {
-            delete rail.dataset.enhanced;
-            return;
-          }
+            if (distance() === 0) {
+              delete rail.dataset.enhanced;
+              return;
+            }
 
-          const panelStops = () => {
-            const leadingInset = panels[0]?.offsetLeft ?? 0;
+            const panelStops = () => {
+              const leadingInset = panels[0]?.offsetLeft ?? 0;
 
-            return panels.map((panel) =>
-              Math.min(
-                Math.max(panel.offsetLeft - leadingInset, 0),
-                distance(),
-              ),
-            );
-          };
+              return panels.map((panel) =>
+                Math.min(
+                  Math.max(panel.offsetLeft - leadingInset, 0),
+                  distance(),
+                ),
+              );
+            };
 
-          const timeline = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-              trigger: rail,
-              start: "top top",
-              end: () => `+=${distance()}`,
-              pin: rail,
-              scrub: true,
-              fastScrollEnd: true,
-              invalidateOnRefresh: true,
-              anticipatePin: 1,
-              onUpdate: (trigger) => {
-                const position = trigger.progress * distance();
-                const stops = panelStops();
-                const closestIndex = stops.reduce(
-                  (closest, stop, index) =>
-                    Math.abs(stop - position) <
-                    Math.abs(stops[closest] - position)
-                      ? index
-                      : closest,
+            const timeline = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: rail,
+                start: "top top",
+                end: () => `+=${distance()}`,
+                pin: rail,
+                scrub: true,
+                fastScrollEnd: true,
+                invalidateOnRefresh: true,
+                anticipatePin: 1,
+                onUpdate: (trigger) => {
+                  const position = trigger.progress * distance();
+                  const stops = panelStops();
+                  const closestIndex = stops.reduce(
+                    (closest, stop, index) =>
+                      Math.abs(stop - position) <
+                      Math.abs(stops[closest] - position)
+                        ? index
+                        : closest,
+                    0,
+                  );
+
+                  if (closestIndex !== activeIndexRef.current) {
+                    setActiveIndex(closestIndex);
+                  }
+                },
+              },
+            });
+
+            timeline.to(track, { x: () => -distance(), duration: 1 }, 0);
+
+            panels.forEach((panel, index) => {
+              const motionMedia = panel.querySelector<HTMLElement>(
+                "[data-research-media]",
+              );
+              const copy = panel.querySelector<HTMLElement>(
+                "[data-research-copy]",
+              );
+
+              if (motionMedia) {
+                timeline.fromTo(
+                  motionMedia,
+                  { xPercent: index % 2 === 0 ? -3 : 3 },
+                  {
+                    xPercent: index % 2 === 0 ? 3 : -3,
+                    duration: 1,
+                  },
+                  0,
+                );
+              }
+
+              if (copy && index > 0) {
+                const revealAt = Math.max(
+                  index / Math.max(panels.length - 1, 1) - 0.2,
                   0,
                 );
 
-                if (closestIndex !== activeIndexRef.current) {
-                  setActiveIndex(closestIndex);
-                }
+                timeline.fromTo(
+                  copy,
+                  { x: 64, opacity: 0.45 },
+                  { x: 0, opacity: 1, duration: 0.2 },
+                  revealAt,
+                );
+              }
+            });
+
+            triggerRef.current = timeline.scrollTrigger ?? null;
+            updateTriggerRef.current = () => ScrollTrigger.update();
+
+            const alignHash = () => alignCurrentHash(EAGER_HASHES);
+            const disconnectGeometry = observeScrollGeometry({
+              elements: [rail, viewport],
+              refresh: () => {
+                lockTrackWidth();
+                ScrollTrigger.refresh();
               },
-            },
+              alignHash,
+            });
+            const handleHashChange = () => {
+              if (EAGER_HASHES.includes(window.location.hash)) {
+                lockTrackWidth();
+                ScrollTrigger.refresh();
+                window.requestAnimationFrame(alignHash);
+              }
+            };
+
+            window.addEventListener("hashchange", handleHashChange);
+
+            return () => {
+              delete rail.dataset.enhanced;
+              track.style.removeProperty("width");
+              disconnectGeometry();
+              window.removeEventListener("hashchange", handleHashChange);
+              triggerRef.current = null;
+              updateTriggerRef.current = null;
+            };
           });
-
-          timeline.to(track, { x: () => -distance(), duration: 1 }, 0);
-
-          panels.forEach((panel, index) => {
-            const motionMedia = panel.querySelector<HTMLElement>(
-              "[data-research-media]",
-            );
-            const copy = panel.querySelector<HTMLElement>(
-              "[data-research-copy]",
-            );
-
-            if (motionMedia) {
-              timeline.fromTo(
-                motionMedia,
-                { xPercent: index % 2 === 0 ? -3 : 3 },
-                {
-                  xPercent: index % 2 === 0 ? 3 : -3,
-                  duration: 1,
-                },
-                0,
-              );
-            }
-
-            if (copy && index > 0) {
-              const revealAt = Math.max(
-                index / Math.max(panels.length - 1, 1) - 0.2,
-                0,
-              );
-
-              timeline.fromTo(
-                copy,
-                { x: 64, opacity: 0.45 },
-                { x: 0, opacity: 1, duration: 0.2 },
-                revealAt,
-              );
-            }
-          });
-
-          triggerRef.current = timeline.scrollTrigger ?? null;
-          updateTriggerRef.current = () => ScrollTrigger.update();
-
-          const alignHash = () => alignCurrentHash(EAGER_HASHES);
-          const disconnectGeometry = observeScrollGeometry({
-            elements: [rail, viewport],
-            refresh: () => {
-              lockTrackWidth();
-              ScrollTrigger.refresh();
-            },
-            alignHash,
-          });
-          const handleHashChange = () => {
-            if (EAGER_HASHES.includes(window.location.hash)) {
-              lockTrackWidth();
-              ScrollTrigger.refresh();
-              window.requestAnimationFrame(alignHash);
-            }
-          };
-
-          window.addEventListener("hashchange", handleHashChange);
+        }, rail);
 
           return () => {
-            delete rail.dataset.enhanced;
-            track.style.removeProperty("width");
-            disconnectGeometry();
-            window.removeEventListener("hashchange", handleHashChange);
+            context.revert();
+            media.revert();
             triggerRef.current = null;
             updateTriggerRef.current = null;
           };
-        });
-      }, rail);
-
-        return () => {
-          context.revert();
-          media.revert();
-          triggerRef.current = null;
-          updateTriggerRef.current = null;
-        };
       },
     });
 
