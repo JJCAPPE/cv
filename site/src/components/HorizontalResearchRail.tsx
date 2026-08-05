@@ -478,10 +478,16 @@ export function HorizontalResearchRail({
                 <div className={styles.mediaFrame}>
                   <div
                     className={`${styles.mediaMotion} ${
-                      item.media.kind === "image" ? styles.mediaOverscan : ""
+                      item.media.kind === "image" &&
+                      item.media.fit !== "contain"
+                        ? styles.mediaOverscan
+                        : ""
                     }`}
                     data-showcase-media={
-                      item.media.kind === "image" ? "true" : undefined
+                      item.media.kind === "image" &&
+                      item.media.fit !== "contain"
+                        ? "true"
+                        : undefined
                     }
                   >
                     {item.media.kind === "contextual-overview" ? (

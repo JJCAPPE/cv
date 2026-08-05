@@ -376,27 +376,16 @@
   .relay[data-enhanced="true"] .folio {
     position: absolute;
     inset: 0;
-    width: 100%;
+    width: auto;
     height: 100%;
     contain: layout paint;
     contain-intrinsic-size: 80rem 42rem;
     scroll-snap-align: none;
-    will-change: transform, clip-path;
-  }
-
-  .relay[data-enhanced="true"] .folio:nth-child(2) {
-    width: calc(100% - var(--relay-spine-width));
-  }
-
-  .relay[data-enhanced="true"] .folio:nth-child(3) {
-    width: calc(
-      100% - var(--relay-spine-width) - var(--relay-spine-width)
-    );
+    will-change: transform;
   }
 
   .relay[data-enhanced="true"] .folio:not(:first-child) {
-    clip-path: inset(0 0 0 100%);
-    transform: translateX(100%);
+    transform: translateX(100vw);
   }
 
   .relay[data-enhanced="true"] .folioBody,
