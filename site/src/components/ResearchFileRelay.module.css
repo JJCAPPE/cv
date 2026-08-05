@@ -190,25 +190,16 @@
 .folioBody {
   display: grid;
   min-width: 0;
-  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.75fr);
-}
-
-.folio:nth-child(even) .folioBody {
   grid-template-columns: minmax(18rem, 0.75fr) minmax(0, 1.45fr);
-}
-
-.folio:nth-child(even) .mediaFrame {
-  order: 2;
-  border-right: 0;
-  border-left: 1px solid var(--line);
 }
 
 .mediaFrame {
   position: relative;
+  order: 2;
   height: clamp(30rem, 68dvh, 46rem);
   min-width: 0;
   overflow: hidden;
-  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
   background: var(--panel);
 }
 
@@ -432,21 +423,16 @@
     flex-basis: calc(100vw - 2rem);
   }
 
-  .folioBody,
-  .folio:nth-child(even) .folioBody {
+  .folioBody {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .folio:nth-child(even) .mediaFrame {
+  .mediaFrame {
     order: 0;
-    border-left: 0;
-  }
-
-  .mediaFrame,
-  .folio:nth-child(even) .mediaFrame {
     height: clamp(22rem, 50dvh, 30rem);
     border-right: 0;
     border-bottom: 1px solid var(--line);
+    border-left: 0;
   }
 
   .copy {
