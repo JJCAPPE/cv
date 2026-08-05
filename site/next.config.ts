@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         destination: "/research/biomimetic-ai",
         permanent: true,
       },
+      {
+        source: "/projects/rowing-biomechanics",
+        destination: "/research/rowing-biomechanics",
+        permanent: true,
+      },
     ];
   },
 };

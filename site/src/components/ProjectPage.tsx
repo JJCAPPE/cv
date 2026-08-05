@@ -10,19 +10,24 @@ import { NoteWorthyCaseStudy } from "@/components/NoteWorthyCaseStudy";
 import { RowingCaseStudy } from "@/components/RowingCaseStudy";
 import { TickitCaseStudy } from "@/components/TickitCaseStudy";
 import type { Project } from "@/content/projects";
-import { projectItems, researchProjects } from "@/content/projects";
+import { projectItems } from "@/content/projects";
+import { researchShowcase } from "@/content/research";
 
 export function ProjectPage({ project }: { project: Project }) {
   const isResearch = project.collection === "research";
-  const collectionItems = isResearch ? researchProjects : projectItems;
+  const collectionItems = isResearch ? researchShowcase : projectItems;
   const itemIndex = collectionItems.findIndex(
     (item) => item.slug === project.slug,
   );
   const itemPosition = String(itemIndex + 1).padStart(2, "0");
   const collectionSize = String(collectionItems.length).padStart(2, "0");
   const nextItem = collectionItems[(itemIndex + 1) % collectionItems.length];
-  const collectionHref = isResearch ? "/#research" : "/projects";
+  const collectionHref = isResearch ? "/research" : "/projects";
   const collectionLabel = isResearch ? "research" : "projects";
+  const nextItemHref =
+    isResearch && "href" in nextItem
+      ? nextItem.href
+      : `/projects/${nextItem.slug}`;
   const isBiomimeticAi = project.slug === "biomimetic-ai";
   const isDeskinator = project.slug === "deskinator";
   const isInventory = project.slug === "inventory-system";
@@ -212,9 +217,7 @@ export function ProjectPage({ project }: { project: Project }) {
             aria-label={`Next ${isResearch ? "research item" : "project"}`}
           >
             <p>Next {isResearch ? "research" : "project"}</p>
-            <Link href={`/${collectionLabel}/${nextItem.slug}`}>
-              {nextItem.title}
-            </Link>
+            <Link href={nextItemHref}>{nextItem.title}</Link>
           </nav>
         ) : null}
       </article>

@@ -40,47 +40,7 @@ const profilePageJsonLd = {
 
 export default function Home() {
   const notes = getNotes().slice(0, 3);
-  const featuredProjects = projectItems
-    .filter((project) => project.featured)
-    .map((project) => {
-      const selectedCover =
-        project.slug === "rowing-biomechanics"
-          ? {
-              src: "/media/projects/rowing-biomechanics/full-tracking.png",
-              alt: "Side-view rowing frame with full-body pose landmarks, face and hand tracking, ergometer detection, joint angles, and a 3D pose inset.",
-              width: 2726,
-              height: 1676,
-              fit: "cover" as const,
-            }
-          : project.cover;
-
-      return {
-        slug: project.slug,
-        title: project.title,
-        summary: project.summary,
-        year: project.year,
-        type: project.type,
-        cover: {
-          src: selectedCover.src,
-          alt: selectedCover.alt,
-          width: selectedCover.width,
-          height: selectedCover.height,
-          fit: selectedCover.fit,
-          railFit: project.cover.railFit,
-          railLayout: project.cover.railLayout,
-        },
-      };
-    });
-  const rowingProject = projectItems.find(
-    (project) => project.slug === "rowing-biomechanics",
-  );
-  const deskinatorProject = projectItems.find(
-    (project) => project.slug === "deskinator",
-  );
-
-  if (!rowingProject || !deskinatorProject) {
-    throw new Error("Featured portfolio media is missing.");
-  }
+  const featuredProjects = projectItems.filter((project) => project.featured);
 
   return (
     <main id="main-content" className="home-page" tabIndex={-1}>

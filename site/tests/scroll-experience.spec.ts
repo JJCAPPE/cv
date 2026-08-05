@@ -1,6 +1,17 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const HERO_VIDEO_PATTERN = /rowing-signal-loop-(desktop|mobile)-v1\.mp4/;
+const EXPECTED_RESEARCH = [
+  {
+    title: "Contextual Similarity",
+    href: "/research/contextual-similarity",
+  },
+  {
+    title: "Rowing Biomechanics Pipeline",
+    href: "/research/rowing-biomechanics",
+  },
+  { title: "Forging Adaptability", href: "/research/biomimetic-ai" },
+] as const;
 
 async function scrollInstantly(page: Page, top: number) {
   await page.evaluate((nextTop) => {
@@ -102,6 +113,7 @@ test("homepage rails defer GSAP until they approach, then stop with native input
     page,
     "#featured-work",
     "[data-project-track]",
+    "[data-project-viewport]",
   );
 
   await page.locator("#research").scrollIntoViewIfNeeded();
@@ -122,6 +134,30 @@ test("homepage rails defer GSAP until they approach, then stop with native input
     page.locator("#research").getByRole("button", { name: /Next/ }),
   ).toBeDisabled();
   expect(pageErrors).toEqual([]);
+});
+
+test("homepage rails keep project and research collections distinct", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 768, height: 700 });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const projectPanels = page.locator("#featured-work [data-project-panel]");
+  await expect(projectPanels).toHaveCount(5);
+  await expect(
+    projectPanels.locator('a[href="/projects/rowing-biomechanics"]'),
+  ).toHaveCount(0);
+
+  const researchPanels = page.locator("#research [data-research-panel]");
+  await expect(researchPanels).toHaveCount(EXPECTED_RESEARCH.length);
+
+  for (const [index, item] of EXPECTED_RESEARCH.entries()) {
+    await expect(
+      researchPanels
+        .nth(index)
+        .getByRole("link", { name: item.title, exact: true }),
+    ).toHaveAttribute("href", item.href);
+  }
 });
 
 test("deep links eagerly prepare preceding pins and align below the header", async ({
@@ -263,9 +299,9 @@ test("enhancement thresholds match at 768 and 961 CSS pixels", async ({
 
   await page.setViewportSize({ width: 768, height: 700 });
   await page.goto("/#work", { waitUntil: "domcontentloaded" });
-  await expect(page.locator("#featured-work")).toHaveAttribute(
+  await expect(page.locator("#featured-work")).not.toHaveAttribute(
     "data-enhanced",
-    "true",
+    /.+/,
   );
   await expect(page.locator("#research")).not.toHaveAttribute(
     "data-enhanced",
@@ -274,6 +310,10 @@ test("enhancement thresholds match at 768 and 961 CSS pixels", async ({
 
   await page.setViewportSize({ width: 960, height: 818 });
   await page.goto("/#research", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#featured-work")).not.toHaveAttribute(
+    "data-enhanced",
+    /.+/,
+  );
   await expect(page.locator("#research")).not.toHaveAttribute(
     "data-enhanced",
     /.+/,
@@ -281,6 +321,10 @@ test("enhancement thresholds match at 768 and 961 CSS pixels", async ({
 
   await page.setViewportSize({ width: 961, height: 818 });
   await page.goto("/#research", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#featured-work")).toHaveAttribute(
+    "data-enhanced",
+    "true",
+  );
   await expect(page.locator("#research")).toHaveAttribute(
     "data-enhanced",
     "true",
@@ -312,18 +356,18 @@ test("resizing below the height capability removes pin spacers", async ({
     .toBe(true);
 });
 
-test("research activity pauses off-screen and project gallery remains keyboard aligned", async ({
+test("research activity pauses behind inactive relay files and project gallery remains keyboard aligned", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1200, height: 818 });
   await page.goto("/research", { waitUntil: "domcontentloaded" });
 
   const overview = page.locator("[data-visibility-paused]").first();
+  await overview.scrollIntoViewIfNeeded();
   await expect(overview).toHaveAttribute("data-visibility-paused", "false");
-  await scrollInstantly(
-    page,
-    await page.evaluate(() => document.documentElement.scrollHeight - innerHeight),
-  );
+  await page
+    .getByRole("button", { name: "Show Forging Adaptability" })
+    .click();
   await expect(overview).toHaveAttribute("data-visibility-paused", "true");
 
   await page.goto("/projects", { waitUntil: "domcontentloaded" });
@@ -343,6 +387,146 @@ test("research activity pauses off-screen and project gallery remains keyboard a
       }),
     )
     .toBe(true);
+});
+
+test("research relay presents three ordered files with direct navigation", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 768, height: 700 });
+  await page.goto("/research", { waitUntil: "domcontentloaded" });
+
+  const relay = page.locator(
+    'section[aria-labelledby="research-relay-heading"]',
+  );
+  const panels = relay.locator("[data-relay-panel]");
+  await expect(panels).toHaveCount(EXPECTED_RESEARCH.length);
+
+  for (const [index, item] of EXPECTED_RESEARCH.entries()) {
+    const titleLink = panels
+      .nth(index)
+      .getByRole("link", { name: item.title, exact: true });
+    await expect(titleLink).toHaveAttribute("href", item.href);
+    await titleLink.click();
+    await expect(page).toHaveURL(new RegExp(`${item.href}/?$`));
+
+    if (item.href === "/research/contextual-similarity") {
+      await expect(
+        page.getByRole("heading", {
+          level: 1,
+          name: "Can motion embeddings survive bad poses?",
+        }),
+      ).toBeVisible();
+    }
+
+    if (index < EXPECTED_RESEARCH.length - 1) {
+      await page.goto("/research", { waitUntil: "domcontentloaded" });
+    }
+  }
+});
+
+test("research relay enhances on desktop and keeps its reduced-motion fallback native", async ({
+  page,
+}) => {
+  test.skip(test.info().project.name !== "chromium");
+  await page.setViewportSize({ width: 961, height: 818 });
+  await page.goto("/research", { waitUntil: "domcontentloaded" });
+
+  const relay = page.locator(
+    'section[aria-labelledby="research-relay-heading"]',
+  );
+  await expect(relay).toHaveAttribute("data-enhanced", "true");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/research", { waitUntil: "domcontentloaded" });
+
+  const nativePanels = relay.locator("[data-relay-panel]");
+  await expect(relay).not.toHaveAttribute("data-enhanced", /.+/);
+  await expect(nativePanels).toHaveCount(3);
+  expect(
+    await nativePanels.evaluateAll((panels) =>
+      panels.every(
+        (panel) =>
+          !panel.hasAttribute("inert") && !panel.hasAttribute("aria-hidden"),
+      ),
+    ),
+  ).toBe(true);
+  await expect
+    .poll(() =>
+      nativePanels.first().evaluate((panel) => {
+        const viewport = panel.parentElement?.parentElement;
+        return viewport ? getComputedStyle(viewport).overflowX : null;
+      }),
+    )
+    .toBe("auto");
+});
+
+test("research relay moves focus before hiding an inactive file", async ({
+  page,
+}) => {
+  test.skip(test.info().project.name !== "chromium");
+  await page.setViewportSize({ width: 1200, height: 818 });
+  await page.goto("/research", { waitUntil: "domcontentloaded" });
+
+  const relay = page.locator(
+    'section[aria-labelledby="research-relay-heading"]',
+  );
+  await relay.scrollIntoViewIfNeeded();
+  await expect(relay).toHaveAttribute("data-enhanced", "true");
+
+  const firstLink = relay
+    .locator("[data-relay-panel]")
+    .first()
+    .getByRole("link", { name: "Contextual Similarity", exact: true });
+  await firstLink.focus();
+  await expect(firstLink).toBeFocused();
+
+  const relayStart = await relay.evaluate((element) => {
+    const spacer = element.parentElement;
+
+    if (!spacer?.classList.contains("pin-spacer")) {
+      throw new Error("Research relay pin spacer is unavailable.");
+    }
+
+    return scrollY + spacer.getBoundingClientRect().top;
+  });
+  await scrollInstantly(page, relayStart + 900);
+
+  const secondControl = relay.locator('[data-relay-control="1"]');
+  await expect(secondControl).toHaveAttribute("aria-pressed", "true");
+  await expect(secondControl).toBeFocused();
+  expect(
+    await page.evaluate(() => document.activeElement?.closest("[inert]") !== null),
+  ).toBe(false);
+});
+
+test("rowing redirects into research and the proposal route loads", async ({
+  page,
+}) => {
+  await page.goto("/projects/rowing-biomechanics", {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page).toHaveURL(/\/research\/rowing-biomechanics\/?$/);
+
+  await page.goto("/research/contextual-similarity", {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page).toHaveURL(/\/research\/contextual-similarity\/?$/);
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Can motion embeddings survive bad poses?",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "All research", exact: true }),
+  ).toHaveAttribute("href", "/research");
+  await expect(page.getByText("Research 01 / 03", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Next research item" }).getByRole(
+      "link",
+      { name: "Rowing Biomechanics Pipeline", exact: true },
+    ),
+  ).toHaveAttribute("href", "/research/rowing-biomechanics");
 });
 
 test("back navigation restores a deep-linked rail below the header", async ({

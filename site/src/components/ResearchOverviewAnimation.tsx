@@ -5,6 +5,7 @@ import { useMotionActivity } from "@/hooks/useMotionActivity";
 import styles from "./ResearchOverviewAnimation.module.css";
 
 type ResearchOverviewAnimationProps = {
+  active?: boolean;
   variant?: "hero" | "rail";
 };
 
@@ -59,6 +60,7 @@ function MiniPose({
 }
 
 export function ResearchOverviewAnimation({
+  active = true,
   variant = "hero",
 }: ResearchOverviewAnimationProps) {
   const { isActive, ref: overviewRef } =
@@ -72,7 +74,7 @@ export function ResearchOverviewAnimation({
       ref={overviewRef}
       className={styles.overview}
       data-paused={paused}
-      data-visibility-paused={!isActive}
+      data-visibility-paused={!isActive || !active}
       data-variant={variant}
     >
       <div className={styles.header}>
