@@ -196,17 +196,32 @@ export function ResearchFileRelay({
               0,
             );
           const stepCount = Math.max(panels.length - 1, 1);
+          const syncPanelPositions = (timelineProgress: number) => {
+            const timelinePosition = timelineProgress * stepCount;
+            const width = spineWidth();
+
+            panels.forEach((panel, index) => {
+              const parked = index === 0 ? 0 : parkedPosition(index);
+              const revealed = index * width;
+              const revealProgress =
+                index === 0
+                  ? 1
+                  : Math.min(
+                      Math.max(timelinePosition - (index - 1), 0),
+                      1,
+                    );
+
+              gsap.set(panel, {
+                x: parked + (revealed - parked) * revealProgress,
+              });
+            });
+          };
 
           positionPanels();
           gsap.set(panels, {
             zIndex: (index: number) => index + 1,
           });
-          gsap.set(panels[0], {
-            x: 0,
-          });
-          gsap.set(panels.slice(1), {
-            x: (index: number) => parkedPosition(index + 1),
-          });
+          syncPanelPositions(0);
 
           const timeline = gsap.timeline({
             defaults: { ease: "none" },
@@ -259,6 +274,7 @@ export function ResearchFileRelay({
             refresh: () => {
               positionPanels();
               ScrollTrigger.refresh();
+              syncPanelPositions(timeline.progress());
             },
           });
 

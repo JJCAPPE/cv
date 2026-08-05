@@ -416,39 +416,53 @@ test("project relay presents every project and keeps the fifth panel aligned", a
     );
   }
 
-  const parkedGeometry = await relay.evaluate((element) => {
-    const relayPanels = Array.from(
-      element.querySelectorAll<HTMLElement>("[data-relay-panel]"),
-    );
-    const stage = relayPanels[0]?.parentElement;
-    const spine = relayPanels[0]?.querySelector<HTMLElement>(
-      "[data-relay-spine]",
-    );
+  const relayOffsetsMatch = async (revealedThrough: number) => {
+    const geometry = await relay.evaluate((element) => {
+      const relayPanels = Array.from(
+        element.querySelectorAll<HTMLElement>("[data-relay-panel]"),
+      );
+      const stage = relayPanels[0]?.parentElement;
+      const spine = relayPanels[0]?.querySelector<HTMLElement>(
+        "[data-relay-spine]",
+      );
 
-    if (!stage || !spine) {
-      throw new Error("Project relay parking geometry is unavailable.");
-    }
+      if (!stage || !spine) {
+        throw new Error("Project relay parking geometry is unavailable.");
+      }
 
-    const stageBounds = stage.getBoundingClientRect();
+      const stageBounds = stage.getBoundingClientRect();
 
-    return {
-      panelOffsets: relayPanels.map(
-        (panel) => panel.getBoundingClientRect().left - stageBounds.left,
-      ),
-      spineWidth: spine.getBoundingClientRect().width,
-      stageWidth: stageBounds.width,
-    };
+      return {
+        panelOffsets: relayPanels.map(
+          (panel) => panel.getBoundingClientRect().left - stageBounds.left,
+        ),
+        spineWidth: spine.getBoundingClientRect().width,
+        stageWidth: stageBounds.width,
+      };
+    });
+
+    return geometry.panelOffsets.every((offset, index, offsets) => {
+      const expectedOffset =
+        index <= revealedThrough
+          ? index * geometry.spineWidth
+          : geometry.stageWidth -
+            (offsets.length - index) * geometry.spineWidth;
+
+      return Math.abs(offset - expectedOffset) <= 1;
+    });
+  };
+
+  await expect.poll(() => relayOffsetsMatch(0)).toBe(true);
+  await page.setViewportSize({ width: 1600, height: 818 });
+  await expect.poll(() => relayOffsetsMatch(0)).toBe(true);
+
+  const middleControl = relay.getByRole("button", {
+    name: `Show ${EXPECTED_PROJECTS[2].title}`,
   });
-
-  parkedGeometry.panelOffsets.forEach((offset, index, offsets) => {
-    const expectedOffset =
-      index === 0
-        ? 0
-        : parkedGeometry.stageWidth -
-          (offsets.length - index) * parkedGeometry.spineWidth;
-
-    expect(offset).toBeCloseTo(expectedOffset, 0);
-  });
+  await middleControl.click();
+  await expect(middleControl).toHaveAttribute("aria-pressed", "true");
+  await page.setViewportSize({ width: 1400, height: 818 });
+  await expect.poll(() => relayOffsetsMatch(2)).toBe(true);
 
   const lastProject = EXPECTED_PROJECTS[EXPECTED_PROJECTS.length - 1];
   const lastControl = relay.getByRole("button", {
