@@ -337,7 +337,7 @@
   .rail[data-enhanced] .panel {
     height: min(72dvh, 46rem);
     flex-basis: var(--research-panel-width);
-    grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 0.75fr);
+    grid-template-columns: minmax(19rem, 0.75fr) minmax(0, 1.5fr);
     contain: layout paint;
     contain-intrinsic-size: var(--research-panel-width) min(72dvh, 46rem);
     content-visibility: auto;
@@ -356,9 +356,11 @@
   }
 
   .rail[data-enhanced] .mediaFrame {
+    order: 2;
     height: 100%;
-    border-right: 1px solid var(--line);
+    border-right: 0;
     border-bottom: 0;
+    border-left: 1px solid var(--line);
   }
 
   .rail[data-enhanced] .copy {

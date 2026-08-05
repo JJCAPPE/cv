@@ -68,7 +68,7 @@ export const researchShowcase: ResearchShowcaseItem[] = [
       alt: "Side-view rowing frame with full-body pose landmarks, face and hand tracking, ergometer detection, joint angles, and a 3D pose inset.",
       width: 2726,
       height: 1676,
-      fit: "cover",
+      fit: "contain",
     },
   },
   {

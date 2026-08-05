@@ -1,6 +1,5 @@
 import { Layout } from "@/components/Layout";
-import { ProjectItem } from "@/components/ProjectItem";
-import { ProjectsShowcase } from "@/components/ProjectsShowcase";
+import { ResearchFileRelay } from "@/components/ResearchFileRelay";
 import { projectItems } from "@/content/projects";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -11,14 +10,37 @@ export const metadata = createPageMetadata({
   pathname: "/projects",
 });
 
+const projectShowcase = projectItems.map((project) => ({
+  slug: project.slug,
+  href: `/projects/${project.slug}`,
+  title: project.title,
+  summary: project.summary,
+  year: project.year,
+  type: project.type,
+  actionLabel: "View project",
+  media: {
+    kind: "image" as const,
+    src: project.cover.poster ?? project.cover.src,
+    alt: project.cover.alt,
+    width: project.cover.width,
+    height: project.cover.height,
+    fit: project.cover.railFit ?? project.cover.fit,
+  },
+}));
+
 export default function ProjectsPage() {
   return (
     <Layout className="projects-index">
-      <ProjectsShowcase projectCount={projectItems.length}>
-        {projectItems.map((project, index) => (
-          <ProjectItem key={project.slug} project={project} index={index} />
-        ))}
-      </ProjectsShowcase>
+      <ResearchFileRelay
+        items={projectShowcase}
+        sectionId="projects-relay"
+        heading="Projects"
+        eyebrow="Project archive"
+        description="Software, ML, robotics, and product work shaped by measurable constraints."
+        itemNoun="project"
+        controlsLabel="Choose project"
+        navigationLabel="Project navigation"
+      />
     </Layout>
   );
 }

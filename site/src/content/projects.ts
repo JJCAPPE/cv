@@ -379,6 +379,7 @@ export const projects: Project[] = [
       alt: "Exploded Deskinator software stack showing sensing, signal stabilization, controller states, coverage planning, actuation, evidence, and the separate stepper pulse timing boundary.",
       width: 2400,
       height: 1350,
+      railFit: "contain",
       caption:
         "The supported runtime as one inspectable stack: a synchronous 50 Hz supervisory loop above the StepperDrive hardware timing boundary.",
     },

@@ -12,6 +12,13 @@ const EXPECTED_RESEARCH = [
   },
   { title: "Forging Adaptability", href: "/research/biomimetic-ai" },
 ] as const;
+const EXPECTED_PROJECTS = [
+  { title: "MOVE", href: "/projects/move" },
+  { title: "Deskinator", href: "/projects/deskinator" },
+  { title: "Inventory System Rebuild", href: "/projects/inventory-system" },
+  { title: "TickIT", href: "/projects/tickit" },
+  { title: "NoteWorthy", href: "/projects/ai-notes-or-ocr" },
+] as const;
 
 async function scrollInstantly(page: Page, top: number) {
   await page.evaluate((nextTop) => {
@@ -147,6 +154,14 @@ test("homepage rails keep project and research collections distinct", async ({
   await expect(
     projectPanels.locator('a[href="/projects/rowing-biomechanics"]'),
   ).toHaveCount(0);
+  await expect(projectPanels.locator("img")).toHaveCount(
+    EXPECTED_PROJECTS.length,
+  );
+  await expect(projectPanels.locator("[data-showcase-media]")).toHaveCount(0);
+
+  for (const image of await projectPanels.locator("img").all()) {
+    await expect(image).toHaveCSS("object-fit", "contain");
+  }
 
   const researchPanels = page.locator("#research [data-research-panel]");
   await expect(researchPanels).toHaveCount(EXPECTED_RESEARCH.length);
@@ -157,6 +172,11 @@ test("homepage rails keep project and research collections distinct", async ({
         .nth(index)
         .getByRole("link", { name: item.title, exact: true }),
     ).toHaveAttribute("href", item.href);
+  }
+
+  await expect(researchPanels.locator("img")).toHaveCount(2);
+  for (const image of await researchPanels.locator("img").all()) {
+    await expect(image).toHaveCSS("object-fit", "contain");
   }
 });
 
@@ -356,9 +376,7 @@ test("resizing below the height capability removes pin spacers", async ({
     .toBe(true);
 });
 
-test("research activity pauses behind inactive relay files and project gallery remains keyboard aligned", async ({
-  page,
-}) => {
+test("research activity pauses behind inactive relay files", async ({ page }) => {
   await page.setViewportSize({ width: 1200, height: 818 });
   await page.goto("/research", { waitUntil: "domcontentloaded" });
 
@@ -369,24 +387,137 @@ test("research activity pauses behind inactive relay files and project gallery r
     .getByRole("button", { name: "Show Forging Adaptability" })
     .click();
   await expect(overview).toHaveAttribute("data-visibility-paused", "true");
+});
 
+test("project relay presents every project and keeps the fifth panel aligned", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1200, height: 818 });
   await page.goto("/projects", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".project-gallery")).toHaveAttribute(
-    "data-enhanced",
-    "true",
-  );
-  await page.waitForTimeout(100);
-  const lastLink = page.locator("[data-project-card] a").last();
+  const relay = page.locator("#projects-relay");
+  const panels = relay.locator("[data-relay-panel]");
+
+  await expect(relay).toHaveAttribute("data-enhanced", "true");
+  await expect(panels).toHaveCount(EXPECTED_PROJECTS.length);
+  await expect(
+    relay.getByRole("group", { name: "Choose project" }),
+  ).toBeVisible();
+  await expect(
+    relay.getByRole("group", { name: "Project navigation" }),
+  ).toBeVisible();
+
+  for (const [index, project] of EXPECTED_PROJECTS.entries()) {
+    await expect(
+      panels.nth(index).locator("h2 a"),
+    ).toHaveAttribute("href", project.href);
+    await expect(panels.nth(index).locator("img")).toHaveCSS(
+      "object-fit",
+      "contain",
+    );
+  }
+
+  const relayOffsetsMatch = async (revealedThrough: number) => {
+    const geometry = await relay.evaluate((element) => {
+      const relayPanels = Array.from(
+        element.querySelectorAll<HTMLElement>("[data-relay-panel]"),
+      );
+      const stage = relayPanels[0]?.parentElement;
+      const spine = relayPanels[0]?.querySelector<HTMLElement>(
+        "[data-relay-spine]",
+      );
+
+      if (!stage || !spine) {
+        throw new Error("Project relay parking geometry is unavailable.");
+      }
+
+      const stageBounds = stage.getBoundingClientRect();
+
+      return {
+        panelOffsets: relayPanels.map(
+          (panel) => panel.getBoundingClientRect().left - stageBounds.left,
+        ),
+        spineWidth: spine.getBoundingClientRect().width,
+        stageWidth: stageBounds.width,
+      };
+    });
+
+    return geometry.panelOffsets.every((offset, index, offsets) => {
+      const expectedOffset =
+        index <= revealedThrough
+          ? index * geometry.spineWidth
+          : geometry.stageWidth -
+            (offsets.length - index) * geometry.spineWidth;
+
+      return Math.abs(offset - expectedOffset) <= 1;
+    });
+  };
+
+  await expect.poll(() => relayOffsetsMatch(0)).toBe(true);
+  await page.setViewportSize({ width: 1600, height: 818 });
+  await expect.poll(() => relayOffsetsMatch(0)).toBe(true);
+
+  const middleControl = relay.getByRole("button", {
+    name: `Show ${EXPECTED_PROJECTS[2].title}`,
+  });
+  await middleControl.click();
+  await expect(middleControl).toHaveAttribute("aria-pressed", "true");
+  await page.setViewportSize({ width: 1400, height: 818 });
+  await expect.poll(() => relayOffsetsMatch(2)).toBe(true);
+
+  const lastProject = EXPECTED_PROJECTS[EXPECTED_PROJECTS.length - 1];
+  const lastControl = relay.getByRole("button", {
+    name: `Show ${lastProject.title}`,
+  });
+  await lastControl.click();
+  await expect(lastControl).toHaveAttribute("aria-pressed", "true");
+
+  const lastPanel = panels.last();
+  const lastLink = lastPanel.getByRole("link", {
+    name: lastProject.title,
+    exact: true,
+  });
   await lastLink.focus();
   await expect(lastLink).toBeFocused();
-  await expect
-    .poll(() =>
-      lastLink.evaluate((link) => {
-        const bounds = link.getBoundingClientRect();
-        return bounds.left < innerWidth && bounds.right > 0;
-      }),
-    )
-    .toBe(true);
+
+  const geometry = await relay.evaluate((element) => {
+    const relayPanels = Array.from(
+      element.querySelectorAll<HTMLElement>("[data-relay-panel]"),
+    );
+    const last = relayPanels.at(-1);
+    const stage = last?.parentElement;
+    const spine = relayPanels[0]?.querySelector<HTMLElement>(
+      "[data-relay-spine]",
+    );
+
+    if (!stage || !last || !spine) {
+      throw new Error("Project relay geometry is unavailable.");
+    }
+
+    const stageBounds = stage.getBoundingClientRect();
+    const panelBounds = last.getBoundingClientRect();
+
+    return {
+      documentWidth: document.documentElement.scrollWidth,
+      panelLeft: panelBounds.left,
+      panelOffsets: relayPanels.map(
+        (panel) => panel.getBoundingClientRect().left - stageBounds.left,
+      ),
+      panelRight: panelBounds.right,
+      panelWidth: panelBounds.width,
+      spineWidth: spine.getBoundingClientRect().width,
+      stageLeft: stageBounds.left,
+      stageRight: stageBounds.right,
+      viewportWidth: document.documentElement.clientWidth,
+    };
+  });
+
+  expect(geometry.panelLeft).toBeGreaterThanOrEqual(geometry.stageLeft - 1);
+  expect(geometry.panelRight).toBeLessThanOrEqual(geometry.stageRight + 1);
+  expect(geometry.panelWidth).toBeGreaterThan(0);
+  geometry.panelOffsets.forEach((offset, index) => {
+    expect(offset).toBeCloseTo(index * geometry.spineWidth, 0);
+  });
+  expect(geometry.documentWidth).toBe(geometry.viewportWidth);
 });
 
 test("research relay presents three ordered files with direct navigation", async ({
@@ -453,6 +584,56 @@ test("research relay enhances on desktop and keeps its reduced-motion fallback n
   await expect
     .poll(() =>
       nativePanels.first().evaluate((panel) => {
+        const viewport = panel.parentElement?.parentElement;
+        return viewport ? getComputedStyle(viewport).overflowX : null;
+      }),
+    )
+    .toBe("auto");
+});
+
+test("project relay shares the research capability thresholds and native fallback", async ({
+  page,
+}) => {
+  test.skip(test.info().project.name !== "chromium");
+
+  for (const viewport of [
+    { width: 960, height: 818 },
+    { width: 1200, height: 699 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/projects", { waitUntil: "domcontentloaded" });
+    await expect(page.locator("#projects-relay")).not.toHaveAttribute(
+      "data-enhanced",
+      /.+/,
+    );
+  }
+
+  await page.setViewportSize({ width: 961, height: 818 });
+  await page.goto("/projects", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#projects-relay")).toHaveAttribute(
+    "data-enhanced",
+    "true",
+  );
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1200, height: 818 });
+  await page.goto("/projects", { waitUntil: "domcontentloaded" });
+
+  const relay = page.locator("#projects-relay");
+  const panels = relay.locator("[data-relay-panel]");
+  await expect(relay).not.toHaveAttribute("data-enhanced", /.+/);
+  await expect(panels).toHaveCount(EXPECTED_PROJECTS.length);
+  expect(
+    await panels.evaluateAll((items) =>
+      items.every(
+        (item) =>
+          !item.hasAttribute("inert") && !item.hasAttribute("aria-hidden"),
+      ),
+    ),
+  ).toBe(true);
+  await expect
+    .poll(() =>
+      panels.first().evaluate((panel) => {
         const viewport = panel.parentElement?.parentElement;
         return viewport ? getComputedStyle(viewport).overflowX : null;
       }),

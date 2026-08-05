@@ -190,25 +190,16 @@
 .folioBody {
   display: grid;
   min-width: 0;
-  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.75fr);
-}
-
-.folio:nth-child(even) .folioBody {
   grid-template-columns: minmax(18rem, 0.75fr) minmax(0, 1.45fr);
-}
-
-.folio:nth-child(even) .mediaFrame {
-  order: 2;
-  border-right: 0;
-  border-left: 1px solid var(--line);
 }
 
 .mediaFrame {
   position: relative;
+  order: 2;
   height: clamp(30rem, 68dvh, 46rem);
   min-width: 0;
   overflow: hidden;
-  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
   background: var(--panel);
 }
 
@@ -376,27 +367,16 @@
   .relay[data-enhanced="true"] .folio {
     position: absolute;
     inset: 0;
-    width: 100%;
+    width: auto;
     height: 100%;
     contain: layout paint;
     contain-intrinsic-size: 80rem 42rem;
     scroll-snap-align: none;
-    will-change: transform, clip-path;
-  }
-
-  .relay[data-enhanced="true"] .folio:nth-child(2) {
-    width: calc(100% - var(--relay-spine-width));
-  }
-
-  .relay[data-enhanced="true"] .folio:nth-child(3) {
-    width: calc(
-      100% - var(--relay-spine-width) - var(--relay-spine-width)
-    );
+    will-change: transform;
   }
 
   .relay[data-enhanced="true"] .folio:not(:first-child) {
-    clip-path: inset(0 0 0 100%);
-    transform: translateX(100%);
+    transform: translateX(100vw);
   }
 
   .relay[data-enhanced="true"] .folioBody,
@@ -443,21 +423,16 @@
     flex-basis: calc(100vw - 2rem);
   }
 
-  .folioBody,
-  .folio:nth-child(even) .folioBody {
+  .folioBody {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .folio:nth-child(even) .mediaFrame {
+  .mediaFrame {
     order: 0;
-    border-left: 0;
-  }
-
-  .mediaFrame,
-  .folio:nth-child(even) .mediaFrame {
     height: clamp(22rem, 50dvh, 30rem);
     border-right: 0;
     border-bottom: 1px solid var(--line);
+    border-left: 0;
   }
 
   .copy {

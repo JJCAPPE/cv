@@ -12,8 +12,17 @@ import {
 import { ResearchOverviewAnimation } from "./ResearchOverviewAnimation";
 import styles from "./ResearchFileRelay.module.css";
 
+type FileRelayItem = Omit<ResearchShowcaseItem, "updatedAt">;
+
 type ResearchFileRelayProps = {
-  items: ResearchShowcaseItem[];
+  items: FileRelayItem[];
+  sectionId?: string;
+  heading?: string;
+  eyebrow?: string;
+  description?: string;
+  itemNoun?: string;
+  controlsLabel?: string;
+  navigationLabel?: string;
 };
 
 const DESKTOP_MOTION_QUERY =
@@ -27,7 +36,17 @@ function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
 }
 
-export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
+export function ResearchFileRelay({
+  items,
+  sectionId = "research-relay",
+  heading = "Research",
+  eyebrow = "Research archive",
+  description =
+    "Three lines of inquiry across motion, noisy observations, and adaptable learning systems.",
+  itemNoun = "file",
+  controlsLabel = "Choose research file",
+  navigationLabel = "Research navigation",
+}: ResearchFileRelayProps) {
   const relayRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -37,6 +56,7 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
   const updateTriggerRef = useRef<(() => void) | null>(null);
   const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const headingId = `${sectionId}-heading`;
 
   const activateItem = useCallback(
     (requestedIndex: number) => {
@@ -156,21 +176,52 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
           relay.dataset.enhanced = "true";
 
           const spineWidth = () => {
-            const value = window
-              .getComputedStyle(relay)
-              .getPropertyValue("--relay-spine-width");
+            const spine = panels[0]?.querySelector<HTMLElement>(
+              "[data-relay-spine]",
+            );
 
-            return Number.parseFloat(value) || 56;
+            return spine?.getBoundingClientRect().width || 56;
           };
-          const stepCount = Math.max(panels.length - 1, 1);
+          const positionPanels = () => {
+            const width = spineWidth();
 
+            panels.forEach((panel, index) => {
+              panel.style.right = `${index * width}px`;
+            });
+          };
+          const parkedPosition = (panelIndex: number) =>
+            Math.max(
+              stage.clientWidth -
+                (panels.length - panelIndex) * spineWidth(),
+              0,
+            );
+          const stepCount = Math.max(panels.length - 1, 1);
+          const syncPanelPositions = (timelineProgress: number) => {
+            const timelinePosition = timelineProgress * stepCount;
+            const width = spineWidth();
+
+            panels.forEach((panel, index) => {
+              const parked = index === 0 ? 0 : parkedPosition(index);
+              const revealed = index * width;
+              const revealProgress =
+                index === 0
+                  ? 1
+                  : Math.min(
+                      Math.max(timelinePosition - (index - 1), 0),
+                      1,
+                    );
+
+              gsap.set(panel, {
+                x: parked + (revealed - parked) * revealProgress,
+              });
+            });
+          };
+
+          positionPanels();
           gsap.set(panels, {
             zIndex: (index: number) => index + 1,
           });
-          gsap.set(panels[0], {
-            clipPath: "inset(0 0 0 0%)",
-            x: 0,
-          });
+          syncPanelPositions(0);
 
           const timeline = gsap.timeline({
             defaults: { ease: "none" },
@@ -185,12 +236,14 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
               invalidateOnRefresh: true,
               anticipatePin: 1,
               onUpdate: (trigger) => {
-                activateItem(
-                  Math.min(
-                    Math.round(trigger.progress * stepCount),
-                    panels.length - 1,
-                  ),
+                const nextIndex = Math.min(
+                  Math.round(trigger.progress * stepCount),
+                  panels.length - 1,
                 );
+
+                if (nextIndex !== activeIndexRef.current) {
+                  activateItem(nextIndex);
+                }
               },
             },
           });
@@ -201,11 +254,9 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
             timeline.fromTo(
               panel,
               {
-                clipPath: "inset(0 0 0 100%)",
-                x: () => stage.clientWidth,
+                x: () => parkedPosition(panelIndex),
               },
               {
-                clipPath: "inset(0 0 0 0%)",
                 duration: 1,
                 immediateRender: false,
                 x: () => panelIndex * spineWidth(),
@@ -220,7 +271,11 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
 
           const disconnectGeometry = observeScrollGeometry({
             elements: [relay, viewport, stage],
-            refresh: () => ScrollTrigger.refresh(),
+            refresh: () => {
+              positionPanels();
+              ScrollTrigger.refresh();
+              syncPanelPositions(timeline.progress());
+            },
           });
 
           return () => {
@@ -229,6 +284,7 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
             triggerRef.current = null;
             updateTriggerRef.current = null;
             panels.forEach((panel) => {
+              panel.style.removeProperty("right");
               panel.removeAttribute("inert");
               panel.removeAttribute("aria-hidden");
             });
@@ -296,21 +352,26 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
 
   return (
     <section
+      id={sectionId}
       ref={relayRef}
       className={styles.relay}
-      aria-labelledby="research-relay-heading"
+      aria-labelledby={headingId}
     >
       <header className={styles.header}>
-        <p className={styles.eyebrow}>Research archive / 03 files</p>
-        <h1 id="research-relay-heading">Research</h1>
-        <p className={styles.intro}>
-          Three lines of inquiry across motion, noisy observations, and
-          adaptable learning systems.
+        <p className={styles.eyebrow}>
+          {eyebrow} / {formatPosition(items.length)} {itemNoun}
+          {items.length === 1 ? "" : "s"}
         </p>
+        <h1 id={headingId}>{heading}</h1>
+        <p className={styles.intro}>{description}</p>
       </header>
 
       <div className={styles.controls}>
-        <div className={styles.fileControls} aria-label="Choose research file">
+        <div
+          className={styles.fileControls}
+          role="group"
+          aria-label={controlsLabel}
+        >
           {items.map((item, index) => (
             <button
               key={item.slug}
@@ -325,7 +386,11 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
             </button>
           ))}
         </div>
-        <div className={styles.stepControls} aria-label="Research navigation">
+        <div
+          className={styles.stepControls}
+          role="group"
+          aria-label={navigationLabel}
+        >
           <button
             ref={previousButtonRef}
             type="button"
@@ -353,7 +418,7 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
             <article
               key={item.slug}
               className={styles.folio}
-              aria-labelledby={`research-file-${item.slug}`}
+              aria-labelledby={`${sectionId}-item-${item.slug}`}
               data-active={index === 0}
               data-relay-panel
               onFocusCapture={() => {
@@ -362,7 +427,11 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
                 }
               }}
             >
-              <div className={styles.spine} aria-hidden="true">
+              <div
+                className={styles.spine}
+                data-relay-spine
+                aria-hidden="true"
+              >
                 <span>{formatPosition(index + 1)}</span>
                 <span className={styles.spineTitle}>
                   {normalizeDashes(item.title)}
@@ -385,6 +454,8 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
                       alt={normalizeDashes(item.media.alt)}
                       width={item.media.width}
                       height={item.media.height}
+                      loading={index === 0 ? "eager" : undefined}
+                      fetchPriority={index === 0 ? "high" : undefined}
                       sizes="(max-width: 960px) 88vw, 54vw"
                     />
                   )}
@@ -395,7 +466,7 @@ export function ResearchFileRelay({ items }: ResearchFileRelayProps) {
                     <span>{normalizeDashes(item.type)}</span>
                     <span>{normalizeDashes(item.year)}</span>
                   </div>
-                  <h2 id={`research-file-${item.slug}`}>
+                  <h2 id={`${sectionId}-item-${item.slug}`}>
                     <Link href={item.href}>
                       {normalizeDashes(item.title)}
                     </Link>
