@@ -422,6 +422,7 @@ a {
     z-index: 1;
     opacity: 0;
     transition: opacity 320ms var(--ease-out);
+    object-position: 100% 50%;
 }
 
 .home-hero__video[data-ready="true"] {
