@@ -11,7 +11,7 @@ export const experience: Experience[] = [
   {
     role: "Software & AI Engineering Intern",
     organization: "Banca Mediolanum",
-    dates: "Jun 2026 - Present",
+    dates: "Jun 2026 - Aug 2026",
     location: "Milan, Italy",
     summary: [
       "Lead developer, as an intern, for internal AI agent and prompt-governance platforms; own backend, frontend, data workflows, evaluation, deployment, and stakeholder requirements.",
