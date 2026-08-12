@@ -1,0 +1,63 @@
+name: Compile resume PDF
+
+on:
+  push:
+    paths:
+      - "resume-giacomo-cappelletto.tex"
+      - ".github/workflows/compile-resume.yml"
+  pull_request:
+    paths:
+      - "resume-giacomo-cappelletto.tex"
+      - ".github/workflows/compile-resume.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: compile-resume-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    name: Build resume
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compile LaTeX resume
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume-giacomo-cappelletto.tex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Verify generated PDF
+        shell: bash
+        run: test -s resume-giacomo-cappelletto.pdf
+
+      - name: Upload compiled PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-giacomo-cappelletto-${{ github.sha }}
+          path: resume-giacomo-cappelletto.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit refreshed PDF
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        shell: bash
+        run: |
+          if git diff --quiet -- resume-giacomo-cappelletto.pdf; then
+            echo "Tracked PDF is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add resume-giacomo-cappelletto.pdf
+          git commit -m "chore: refresh compiled resume PDF [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
