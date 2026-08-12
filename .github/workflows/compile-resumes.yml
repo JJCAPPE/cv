@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -41,9 +41,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y \
             latexmk \
+            lmodern \
             poppler-utils \
             texlive-fonts-recommended \
             texlive-latex-base \
+            texlive-latex-extra \
             texlive-latex-recommended
 
       - name: Compile and validate every resume
