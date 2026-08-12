@@ -63,7 +63,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Committed PDFs already match their sources."
           else
-            git commit -m "chore(resume): compile PDF variants [skip ci]"
+            git commit -m "chore(resume): compile PDF variants"
             git push
           fi
 
