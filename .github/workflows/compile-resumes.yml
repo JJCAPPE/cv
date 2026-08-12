@@ -1,0 +1,87 @@
+name: Compile resume PDFs
+
+on:
+  pull_request:
+    paths:
+      - "resume/**"
+      - "resume-*.tex"
+      - "resume-*.pdf"
+      - "scripts/compile-resumes.sh"
+      - "Makefile"
+      - ".github/workflows/compile-resumes.yml"
+  push:
+    branches:
+      - main
+      - "resume-*"
+    paths:
+      - "resume/**"
+      - "resume-*.tex"
+      - "resume-*.pdf"
+      - "scripts/compile-resumes.sh"
+      - "Makefile"
+      - ".github/workflows/compile-resumes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install LaTeX and PDF validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            latexmk \
+            lmodern \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended
+
+      - name: Compile and validate every resume
+        run: make resumes
+
+      - name: Commit generated PDFs on resume branches
+        if: >-
+          github.event_name == 'push' &&
+          startsWith(github.ref_name, 'resume-') &&
+          github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- resume-*.pdf
+          if git diff --cached --quiet; then
+            echo "Committed PDFs already match their sources."
+          else
+            git commit -m "chore(resume): compile PDF variants"
+            git push
+          fi
+
+      - name: Verify committed PDFs match their sources
+        if: >-
+          github.event_name != 'push' ||
+          !startsWith(github.ref_name, 'resume-') ||
+          github.actor == 'github-actions[bot]'
+        run: |
+          if [[ -n "$(git status --porcelain -- resume-*.pdf)" ]]; then
+            git status --short -- resume-*.pdf
+            echo "Committed resume PDFs do not match their LaTeX sources." >&2
+            exit 1
+          fi
+
+      - name: Upload compiled resumes
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-resumes
+          path: resume-*.pdf
+          if-no-files-found: error
