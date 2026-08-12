@@ -9,6 +9,26 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    role: "Undergraduate Machine Learning Researcher",
+    organization: "Boston University · Prof. Brian Kulis",
+    dates: "Aug 2026 - Present",
+    location: "Boston, MA",
+    summary: [
+      "Researching robust contextual metric learning for human-motion retrieval, learning fixed-length embeddings from temporal 2D/3D pose sequences for nearest-neighbor search across labeled movement classes.",
+      "Adapting supervised contextual-similarity optimization from image retrieval to motion embeddings and comparing contextual + contrastive objectives against triplet, supervised contrastive, and classification-based retrieval baselines.",
+      "Designing controlled robustness experiments for pose-estimation noise, missing joints, temporal jitter, occlusion, and viewpoint shift, evaluated with Recall@K and mAP on public skeleton and motion benchmarks.",
+    ],
+    stack: [
+      "Python",
+      "PyTorch",
+      "Metric Learning",
+      "Pose Embeddings",
+      "MotionBERT",
+      "MMPose",
+      "Nearest-Neighbor Retrieval",
+    ],
+  },
+  {
     role: "Software & AI Engineering Intern",
     organization: "Banca Mediolanum",
     dates: "Jun 2026 - Aug 2026",
