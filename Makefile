@@ -11,7 +11,7 @@ RESUME_PDFS := \
 .PHONY: resumes clean list-resumes
 
 resumes:
-	./scripts/compile-resumes.sh
+	bash ./scripts/compile-resumes.sh
 
 list-resumes:
 	@printf '%s\n' $(RESUME_PDFS)
