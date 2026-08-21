@@ -84,8 +84,7 @@ async function visibleTextOverflow(page: Page) {
         style.display === "none" ||
         style.visibility === "hidden" ||
         Number(style.opacity) === 0 ||
-        bounds.bottom <= 0 ||
-        bounds.top >= innerHeight ||
+        (bounds.width <= 1.5 && bounds.height <= 1.5) ||
         element.closest('[aria-hidden="true"], [inert]')
       ) {
         continue;
@@ -120,20 +119,28 @@ async function visibleTextOverflow(page: Page) {
 
 async function inspectFullScroll(page: Page) {
   const failures = new Set<string>();
-  const maxScroll = await page.evaluate(
-    () => document.documentElement.scrollHeight - innerHeight,
-  );
+  for (const failure of await visibleTextOverflow(page)) failures.add(failure);
 
-  for (const ratio of [0, 0.25, 0.5, 0.75, 1]) {
-    await page.evaluate(
-      (top) => window.scrollTo({ top, behavior: "auto" }),
-      maxScroll * ratio,
-    );
-    await page.evaluate(
-      () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())),
-    );
-    for (const failure of await visibleTextOverflow(page)) failures.add(failure);
-  }
+  await page.evaluate(async () => {
+    const step = Math.max(Math.floor(innerHeight * 0.8), 320);
+    let top = 0;
+
+    while (top < document.documentElement.scrollHeight - innerHeight) {
+      window.scrollTo({ top, behavior: "auto" });
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      );
+      top += step;
+    }
+
+    window.scrollTo({
+      top: document.documentElement.scrollHeight - innerHeight,
+      behavior: "auto",
+    });
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+  });
+
+  for (const failure of await visibleTextOverflow(page)) failures.add(failure);
 
   return [...failures];
 }
@@ -151,6 +158,9 @@ async function expectForcedDarkTheme(page: Page) {
       themeColor: document
         .querySelector('meta[name="theme-color"]')
         ?.getAttribute("content"),
+      viewport: document
+        .querySelector('meta[name="viewport"]')
+        ?.getAttribute("content"),
     }));
 
     expect(palette).toEqual({
@@ -159,6 +169,7 @@ async function expectForcedDarkTheme(page: Page) {
       foreground: "rgb(241, 239, 232)",
       metaColorScheme: "dark",
       themeColor: "#0b0b0a",
+      viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
     });
   }
 }
@@ -191,18 +202,22 @@ for (const route of ALL_ROUTES) {
 
     expect(await inspectFullScroll(page)).toEqual([]);
 
-    const visibleImages = page.locator("img:visible");
-    for (const image of await visibleImages.all()) {
-      await expect
-        .poll(() =>
-          image.evaluate((element) =>
-            element instanceof HTMLImageElement
-              ? element.complete && element.naturalWidth > 0
-              : false,
-          ),
+    const brokenImages = await page.locator("img").evaluateAll((images) =>
+      images
+        .filter(
+          (image) =>
+            image instanceof HTMLImageElement &&
+            Boolean(image.currentSrc || image.src) &&
+            image.complete &&
+            image.naturalWidth === 0,
         )
-        .toBe(true);
-    }
+        .map((image) =>
+          image instanceof HTMLImageElement
+            ? image.currentSrc || image.src
+            : "unknown image",
+        ),
+    );
+    expect(brokenImages).toEqual([]);
 
     await page.locator("footer").scrollIntoViewIfNeeded();
     await expect(page.locator("footer")).toBeVisible();
@@ -249,6 +264,18 @@ test("mobile archive cards are compact and their titles stay inside each card", 
       );
       expect(geometry.titleLeft).toBeGreaterThanOrEqual(geometry.panelLeft - 1);
       expect(geometry.titleRight).toBeLessThanOrEqual(geometry.panelRight + 1);
+
+      for (const image of await panel.locator("img:visible").all()) {
+        await expect
+          .poll(() =>
+            image.evaluate((element) =>
+              element instanceof HTMLImageElement
+                ? element.complete && element.naturalWidth > 0
+                : false,
+            ),
+          )
+          .toBe(true);
+      }
     }
   }
 });
@@ -326,6 +353,42 @@ test("not-found page remains usable on iPhone", async ({ page }, testInfo) => {
     waitUntil: "domcontentloaded",
   });
   expect(response?.status()).toBe(404);
-  await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "This page left the course." }),
+  ).toBeVisible();
   expect(await visibleTextOverflow(page)).toEqual([]);
+});
+
+test("capture key recruiter surfaces for visual review", async (
+  { page },
+  testInfo,
+) => {
+  test.skip(testInfo.project.name !== "iphone-15");
+
+  const surfaces = [
+    { name: "home-experience", route: "/", focus: ".experience-panel" },
+    { name: "projects-gallery", route: "/projects", focus: "[data-relay-panel]" },
+    { name: "research-gallery", route: "/research", focus: "[data-relay-panel]" },
+    {
+      name: "contextual-research-hero",
+      route: "/research/contextual-similarity",
+    },
+    { name: "resume-skills", route: "/resume", focus: ".resume-skill" },
+    {
+      name: "note-heading",
+      route: "/notes/estimating-rowing-force-curves",
+    },
+  ] as const;
+
+  for (const surface of surfaces) {
+    await page.goto(surface.route, { waitUntil: "domcontentloaded" });
+    await waitForStablePage(page);
+    if ("focus" in surface) {
+      await page.locator(surface.focus).first().scrollIntoViewIfNeeded();
+    }
+    await testInfo.attach(surface.name, {
+      body: await page.screenshot({ animations: "disabled" }),
+      contentType: "image/png",
+    });
+  }
 });

@@ -56,11 +56,11 @@ jobs:
       - name: Crawl every route on iPhone WebKit
         run: MOBILE_PRODUCTION=1 npm run test:mobile
 
-      - name: Upload mobile failure evidence
-        if: failure()
+      - name: Upload mobile review evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: iphone-webkit-failures
+          name: iphone-webkit-evidence
           path: |
             site/test-results/mobile
           if-no-files-found: ignore

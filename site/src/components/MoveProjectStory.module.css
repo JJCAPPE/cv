@@ -650,7 +650,9 @@
   .sqlHeader h2,
   .contractHeader h2,
   .evidenceHeader h2 {
-    font-size: clamp(3.8rem, 19vw, 6rem);
+    max-width: 100%;
+    font-size: clamp(3rem, 15.5vw, 5rem);
+    overflow-wrap: anywhere;
   }
 
   .sqlFlow {
@@ -733,6 +735,7 @@
   .evidenceHeader {
     display: grid;
     align-items: start;
+    justify-content: stretch;
   }
 
   .evidenceHeader h2 {
