@@ -559,7 +559,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 800px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
   .sectionHeader {
     grid-template-columns: 1fr;
     align-items: start;

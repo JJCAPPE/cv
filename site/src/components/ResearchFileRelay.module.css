@@ -393,13 +393,15 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 720px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
   .relay {
     --relay-spine-width: 2.7rem;
   }
 
   .header h1 {
-    font-size: clamp(5rem, 24vw, 8rem);
+    max-width: 100%;
+    font-size: clamp(3.8rem, 19vw, 6rem);
+    overflow-wrap: anywhere;
   }
 
   .controls {
@@ -420,7 +422,7 @@
   }
 
   .folio {
-    flex-basis: calc(100vw - 2rem);
+    flex-basis: calc(100vw - var(--safe-left) - var(--safe-right) - 2rem);
   }
 
   .folioBody {
@@ -429,18 +431,30 @@
 
   .mediaFrame {
     order: 0;
-    height: clamp(22rem, 50dvh, 30rem);
+    height: clamp(11rem, 28dvh, 16rem);
     border-right: 0;
     border-bottom: 1px solid var(--line);
     border-left: 0;
   }
 
   .copy {
-    min-height: 23rem;
+    min-height: 0;
+    padding: 1.25rem;
   }
 
   .copy h2 {
-    font-size: clamp(3rem, 13vw, 4.8rem);
+    max-width: 100%;
+    margin-top: 1.75rem;
+    font-size: clamp(2.25rem, 10.8vw, 3.8rem);
+    overflow-wrap: anywhere;
+  }
+
+  .copy > p {
+    margin-top: 1rem;
+  }
+
+  .imageContain {
+    padding: 0.75rem;
   }
 }
 

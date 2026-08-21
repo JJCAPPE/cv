@@ -8,7 +8,8 @@ type HeroVideoProps = {
   mobileSrc: string;
 };
 
-const MOBILE_QUERY = "(max-width: 767px)";
+const MOBILE_QUERY =
+  "(max-width: 767px), ((pointer: coarse) and (orientation: landscape) and (max-height: 500px))";
 
 export function HeroVideo({ desktopSrc, mobileSrc }: HeroVideoProps) {
   const { isActive, ref } = useMotionActivity<HTMLVideoElement>({

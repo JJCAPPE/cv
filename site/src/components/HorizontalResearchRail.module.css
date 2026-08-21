@@ -373,9 +373,11 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
   .header h2 {
-    font-size: clamp(5rem, 24vw, 8rem);
+    max-width: 100%;
+    font-size: clamp(3.6rem, 18vw, 5.5rem);
+    overflow-wrap: anywhere;
   }
 
   .controls {
@@ -383,7 +385,7 @@
   }
 
   .panel {
-    flex-basis: calc(100vw - 2rem);
+    flex-basis: calc(100vw - var(--safe-left) - var(--safe-right) - 2rem);
   }
 
   .track {
@@ -391,15 +393,27 @@
   }
 
   .mediaFrame {
-    height: clamp(25rem, 58dvh, 32rem);
+    height: clamp(12rem, 30dvh, 17rem);
   }
 
   .copy {
-    min-height: 22rem;
+    min-height: 0;
+    padding: 1.25rem;
   }
 
   .copy h3 {
-    font-size: clamp(3.2rem, 14vw, 5rem);
+    max-width: 100%;
+    margin-top: 1.75rem;
+    font-size: clamp(2.35rem, 11.5vw, 3.8rem);
+    overflow-wrap: anywhere;
+  }
+
+  .copy > p {
+    margin-top: 1rem;
+  }
+
+  .imageContain {
+    padding: 0.75rem;
   }
 }
 
