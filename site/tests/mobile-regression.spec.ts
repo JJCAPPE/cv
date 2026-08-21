@@ -347,8 +347,6 @@ test("capture key recruiter surfaces for visual review", async (
   { page },
   testInfo,
 ) => {
-  test.skip(testInfo.project.name !== "iphone-15");
-
   const evidenceDir = join(
     process.cwd(),
     "mobile-evidence",
