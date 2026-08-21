@@ -1,4 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
+import { mkdir } from "node:fs/promises";
+import { join } from "node:path";
 
 const ALL_ROUTES = [
   "/",
@@ -365,6 +367,13 @@ test("capture key recruiter surfaces for visual review", async (
 ) => {
   test.skip(testInfo.project.name !== "iphone-15");
 
+  const evidenceDir = join(
+    process.cwd(),
+    "mobile-evidence",
+    testInfo.project.name,
+  );
+  await mkdir(evidenceDir, { recursive: true });
+
   const surfaces = [
     { name: "home-experience", route: "/", focus: ".experience-panel" },
     { name: "projects-gallery", route: "/projects", focus: "[data-relay-panel]" },
@@ -386,8 +395,14 @@ test("capture key recruiter surfaces for visual review", async (
     if ("focus" in surface) {
       await page.locator(surface.focus).first().scrollIntoViewIfNeeded();
     }
+
+    const screenshotPath = join(evidenceDir, `${surface.name}.png`);
+    await page.screenshot({
+      animations: "disabled",
+      path: screenshotPath,
+    });
     await testInfo.attach(surface.name, {
-      body: await page.screenshot({ animations: "disabled" }),
+      path: screenshotPath,
       contentType: "image/png",
     });
   }
