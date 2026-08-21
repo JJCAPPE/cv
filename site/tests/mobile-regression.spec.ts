@@ -22,18 +22,6 @@ const ALL_ROUTES = [
   "/notes/small-tools-that-get-used",
 ] as const;
 
-const CORE_ROUTES = new Set([
-  "/",
-  "/projects",
-  "/projects/move",
-  "/research",
-  "/research/contextual-similarity",
-  "/resume",
-  "/notes",
-]);
-
-const FULL_CRAWL_PROJECTS = new Set(["iphone-15", "iphone-15-landscape"]);
-
 type BrowserFailures = {
   consoleErrors: string[];
   pageErrors: string[];
@@ -177,13 +165,7 @@ async function expectForcedDarkTheme(page: Page) {
 }
 
 for (const route of ALL_ROUTES) {
-  test(`${route} is recruiter-ready on iPhone`, async ({ page }, testInfo) => {
-    test.skip(
-      !FULL_CRAWL_PROJECTS.has(testInfo.project.name) &&
-        !CORE_ROUTES.has(route),
-      "Standard portrait and landscape iPhones crawl every route; edge sizes cover core routes.",
-    );
-
+  test(`${route} is recruiter-ready on iPhone`, async ({ page }) => {
     const failures = observeFailures(page);
     const response = await page.goto(route, { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBe(200);
