@@ -5,13 +5,17 @@ import { join } from "node:path";
 const production = process.env.MOBILE_PRODUCTION === "1";
 const browserName =
   process.env.MOBILE_BROWSER === "chromium" ? "chromium" : "webkit";
+const outputDir = process.env.CI
+  ? join(process.cwd(), "test-results", "mobile")
+  : join(tmpdir(), "cv-site-mobile-playwright");
 
 export default defineConfig({
   testDir: "./tests",
   testMatch: "mobile-regression.spec.ts",
   fullyParallel: false,
-  outputDir: join(tmpdir(), "cv-site-mobile-playwright"),
+  outputDir,
   reporter: "line",
+  retries: process.env.CI ? 1 : 0,
   workers: 1,
   timeout: 60_000,
   expect: { timeout: 10_000 },
@@ -29,6 +33,7 @@ export default defineConfig({
     browserName,
     colorScheme: "light",
     contextOptions: { reducedMotion: "reduce" },
+    screenshot: "only-on-failure",
     trace: "retain-on-failure",
   },
   webServer: {

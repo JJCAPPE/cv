@@ -1,0 +1,67 @@
+name: Site mobile regression
+
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - ".github/workflows/site-mobile.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "site/**"
+      - ".github/workflows/site-mobile.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: site-mobile-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  webkit-iphone:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: site
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install WebKit and system dependencies
+        run: npx playwright install --with-deps webkit
+
+      - name: Check types and lint
+        run: |
+          npx tsc --noEmit
+          npm run lint
+
+      - name: Build the production site
+        run: npm run build
+
+      - name: Crawl every route on iPhone WebKit
+        run: MOBILE_PRODUCTION=1 npm run test:mobile
+
+      - name: Upload mobile failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iphone-webkit-failures
+          path: |
+            site/test-results/mobile
+          if-no-files-found: ignore
+          retention-days: 7
