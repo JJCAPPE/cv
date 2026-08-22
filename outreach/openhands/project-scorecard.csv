@@ -1,0 +1,4 @@
+candidate,current_relevance,technical_depth,external_contribution_feasibility,reproducible_data,two_to_four_week_feasibility,demonstration_value,alignment_with_giacomo,maintainer_attention,total,outcome
+Automation Event Ledger and Deterministic Replay Harness,10,9,9,10,9,9,10,9,75,SELECTED
+Verification Stack merge-readiness plugin,7,8,8,9,8,8,9,5,62,Rejected-existing OpenHands verification stack reduces novelty
+Multi-repository orchestration prototype,7,9,5,7,5,9,8,6,56,Rejected-scope and semantics exceed first contribution
