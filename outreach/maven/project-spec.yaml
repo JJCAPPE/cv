@@ -1,0 +1,241 @@
+schema_version: tenantdiff.project.v1
+snapshot_date: 2026-08-22
+project:
+  name: TenantDiff
+  subtitle: Customer-Specific Agent Release Impact Lab
+  positioning: >-
+    Vendor-neutral differential release testing for action-taking enterprise agents
+    across tenant configurations, roles, channels, integrations, and deterministic
+    business invariants.
+  primary_question: >-
+    Which customer configurations regress between release A and release B, what is
+    the severity-weighted blast radius, and what is the smallest changed component
+    set sufficient to reproduce each regression?
+  novelty_boundary:
+    include:
+      - multi_tenant_configuration_matrix
+      - declared_intended_changes
+      - severity_weighted_blast_radius
+      - cross_channel_invariant_comparison
+      - bounded_counterfactual_component_substitution
+      - measured_attribution_accuracy
+    exclude_as_primary_contribution:
+      - generic_agent_chatbot
+      - generic_rag_evaluation
+      - generic_fault_injection
+      - generic_state_oracle
+      - generic_trace_dashboard
+      - replay_only
+      - prompt_comparison_only
+      - llm_judge_only
+
+v1_scope:
+  tenants:
+    - id: commerce_standard
+      domain: ecommerce
+      distinguishing_policy: standard_address_and_refund_permissions
+    - id: commerce_restricted
+      domain: ecommerce
+      distinguishing_policy: threshold_refunds_require_escalation
+    - id: saas_enterprise
+      domain: b2b_saas
+      distinguishing_policy: role_sensitive_entitlement_and_ticket_actions
+    - id: saas_regulated
+      domain: b2b_saas
+      distinguishing_policy: strict_segment_gating_and_mandatory_readback
+  roles:
+    - end_customer
+    - support_copilot_user
+    - administrator
+    - restricted_contractor
+  channels:
+    - chat
+    - email
+    - voice_transcript
+  connectors:
+    - commerce
+    - ticketing_crm
+  workflow_families:
+    - order_lookup_and_address_update
+    - refund_and_ticket_close
+    - entitlement_check_and_ticket_action
+    - ambiguity_or_failure_to_human_escalation
+  release_components:
+    - model_config
+    - instructions
+    - policy_bundle
+    - knowledge_snapshot
+    - permission_segments
+    - action_schema
+    - connector_build
+    - retry_policy
+    - channel_adapter
+  deterministic_failures:
+    - expired_oauth_before_effect
+    - missing_permission_before_effect
+    - rate_limit_with_retry_after
+    - transient_5xx_before_effect
+    - lost_response_after_commit
+    - action_schema_drift
+    - stale_or_conflicting_knowledge
+    - duplicated_event
+    - delayed_read_after_write
+    - partial_multi_step_success
+    - interrupted_voice_turn
+
+architecture:
+  services:
+    - manifest_registry
+    - tenant_matrix_compiler
+    - scenario_and_channel_generator
+    - execution_orchestrator
+    - framework_neutral_agent_adapter
+    - deterministic_policy_gate
+    - stateful_mock_connectors
+    - fault_scheduler
+    - normalized_trace_store
+    - hard_invariant_evaluator
+    - release_differ
+    - attribution_engine
+    - release_gate_api
+    - react_inspector
+  persistence:
+    implementation: postgresql
+    reproducibility_artifacts:
+      - immutable_manifests
+      - jsonl_events
+      - normalized_traces
+      - external_state_snapshots
+      - comparison_results
+      - attribution_trials
+      - benchmark_summary
+  deployment:
+    local: docker_compose
+    ci: github_actions
+
+hard_invariants:
+  - permission_eligibility
+  - action_authorization
+  - action_schema_validity
+  - evidence_version_and_segment_eligibility
+  - exact_logical_effect_count
+  - external_final_state
+  - post_action_readback_when_required
+  - resolution_claim_matches_verified_state
+  - escalation_and_handoff_policy
+  - latency_budget
+  - fixed_seed_reproducibility
+
+baselines:
+  - id: output_only
+    observes: [final_response]
+  - id: trajectory_only
+    observes: [tool_names, tool_arguments]
+  - id: state_aware_single_tenant
+    observes: [trace, external_state]
+  - id: replay_only
+    observes: [recorded_failure_trace]
+  - id: tenantdiff
+    observes:
+      - release_component_manifest
+      - tenant_role_channel_matrix
+      - trace_and_external_state
+      - intended_change_manifest
+      - counterfactual_substitutions
+
+metrics:
+  primary:
+    - blocking_regression_detection_precision
+    - blocking_regression_detection_recall
+    - attribution_component_set_exact_match
+    - attribution_top_1_accuracy
+    - attribution_top_2_accuracy
+    - severity_weighted_tenant_blast_radius
+    - cross_channel_invariant_divergence_rate
+    - permission_policy_violation_rate
+    - external_state_correctness
+    - false_resolution_rate
+    - duplicate_effect_rate
+  secondary:
+    - evidence_eligibility_violation_rate
+    - typed_field_stability
+    - escalation_precision
+    - escalation_recall
+    - fault_recovery_success_rate
+    - p50_total_latency_ms
+    - p95_total_latency_ms
+    - replay_determinism
+    - attribution_counterfactual_cost
+
+minimum_benchmark:
+  canonical_scenarios_before_expansion: 36
+  injected_regressions_with_known_causes: 20
+  tenant_count: 4
+  role_count: 4
+  channel_count: 3
+  connector_count: 2
+  workflow_family_count: 4
+  minimum_swappable_component_classes: 5
+  repeated_trials_for_stochastic_cells: 3
+
+success_gates:
+  - all_hard_scores_are_deterministic_for_scripted_reference_agent
+  - zero_false_passes_on_injected_permission_violations
+  - at_least_one_regression_hidden_by_default_tenant_or_aggregate_evaluation
+  - at_least_one_regression_requires_two_component_interaction
+  - tenantdiff_outperforms_all_baselines_on_detection_or_attribution
+  - clean_clone_runs_tests_benchmark_report_and_replay
+  - raw_results_and_manifests_are_published
+  - claims_are_bounded_and_include_negative_results
+
+repository_layout:
+  - docs
+  - packages/contracts
+  - packages/matrix
+  - packages/policies
+  - packages/scenarios
+  - packages/channels
+  - packages/faults
+  - packages/connectors
+  - packages/tracing
+  - packages/evaluation
+  - packages/differ
+  - packages/attribution
+  - adapters
+  - apps/api
+  - apps/inspector
+  - fixtures/tenants
+  - fixtures/releases
+  - fixtures/scenarios
+  - tests/unit
+  - tests/contract
+  - tests/property
+  - tests/mutation
+  - tests/integration
+  - tests/ui
+  - benchmarks/manifests
+  - benchmarks/raw
+  - benchmarks/results
+
+execution_plan:
+  day_1: freeze_question_related_work_contracts_and_novelty_boundary
+  day_2: build_tenant_configuration_policy_and_world_state_core
+  day_3: build_stateful_connectors_and_fault_semantics
+  day_4: build_agent_adapters_and_canonical_scenarios
+  day_5: build_matrix_channels_and_normalized_traces
+  day_6: build_differential_evaluator_and_ci_gate
+  day_7: build_attribution_engine_and_mutation_corpus
+  day_8: execute_benchmarks_and_freeze_raw_results
+  day_9: build_minimal_inspector_memo_diagram_and_demo
+  day_10: clean_room_verification_and_publication
+
+outreach:
+  first_technical_contact: Justin_Wright_or_Solutions_Engineering
+  second_technical_contact: Ryan_Gemos_or_Forward_Deployed_Engineering
+  product_contact: Sam_Granat
+  founder_contact: Eugene_Mann
+  architecture_follow_on: Sami_Shalabi
+  recruiting_contact: Sam_Schatz_or_current_Maven_talent_team
+  initial_goal: technical_criticism
+  prohibited_initial_goal: internship_request
+  communications_sent: false
