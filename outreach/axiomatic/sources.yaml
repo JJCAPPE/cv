@@ -1,0 +1,487 @@
+schema_version: "1.0"
+evidence_cutoff: "2026-08-22"
+audited_at: "2026-08-22"
+
+labels:
+  V: "verified public evidence"
+  A: "authorized private-account evidence summarized without private content"
+  I: "inference supported by multiple signals"
+  S: "speculation requiring validation"
+  N: "not publicly knowable"
+
+immutable_revisions:
+  ax_mcp:
+    repository: "Axiomatic-AI/ax-mcp"
+    sha: "ef53332b866b29b6d5d7a3dc6d77698e42334c24"
+    head_date: "2026-08-21"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/tree/ef53332b866b29b6d5d7a3dc6d77698e42334c24"
+  ax_prover_base:
+    repository: "Axiomatic-AI/ax-prover-base"
+    sha: "06dfadc9ab439755af5efcfe0add95bfef2733c7"
+    head_date: "2026-08-14"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/tree/06dfadc9ab439755af5efcfe0add95bfef2733c7"
+
+sources:
+  - id: "AX-COMPANY-001"
+    title: "Axiomatic AI"
+    type: "company_primary"
+    url: "https://axiomatic-ai.com/"
+    accessed: "2026-08-22"
+    supports:
+      - "company technical positioning"
+      - "Lemma and AxProver public program"
+    quality: "primary"
+
+  - id: "AX-LEMMA-001"
+    title: "Lemma product page"
+    type: "company_primary"
+    url: "https://axiomatic-ai.com/products/lemma/"
+    accessed: "2026-08-22"
+    supports:
+      - "scientific and engineering co-explorer positioning"
+      - "persistent executable artifacts and notebook workflow"
+    quality: "primary"
+
+  - id: "AX-TEAM-001"
+    title: "Axiomatic team"
+    type: "company_primary"
+    url: "https://axiomatic-ai.com/team/"
+    accessed: "2026-08-22"
+    supports:
+      - "current public leadership roles"
+      - "technical heads and advisors"
+    quality: "primary"
+
+  - id: "AX-DT-001"
+    title: "Grating-coupler digital twin"
+    type: "company_technical_post"
+    url: "https://axiomatic-ai.com/blog/grating-coupler-digital-twin"
+    accessed: "2026-08-22"
+    supports:
+      - "literature-to-model workflow"
+      - "recipe and validation-target separation"
+      - "cross-method simulation and V&V gate"
+      - "authors Maosheng Yang, Flemming Holtorf, Frank Schäfer"
+    quality: "primary"
+    caveat: "A different solver does not alone establish full independence; the brief adds explicit evidence grades."
+
+  - id: "AX-DAFNY-001"
+    title: "AxDafny company technical post"
+    type: "company_technical_post"
+    url: "https://axiomatic-ai.com/blog/axdafny/"
+    accessed: "2026-08-22"
+    supports:
+      - "verifier-guided code generation"
+      - "gap between formal correctness and runtime usability"
+    quality: "primary"
+
+  - id: "AX-DAFNY-002"
+    title: "AxDafny paper"
+    type: "research_paper"
+    url: "https://arxiv.org/abs/2606.32007"
+    accessed: "2026-08-22"
+    supports:
+      - "AxDafny authors"
+      - "benchmark methodology and results"
+    quality: "primary"
+
+  - id: "AX-SORRYDB-001"
+    title: "SorryDB company technical post"
+    type: "company_technical_post"
+    url: "https://axiomatic-ai.com/blog/sorrydb/"
+    accessed: "2026-08-22"
+    supports:
+      - "dynamic benchmark design"
+      - "real Lean repositories and reproducible environments"
+      - "public author list"
+    quality: "primary"
+
+  - id: "AX-SORRYDB-002"
+    title: "SorryDB code"
+    type: "source_repository"
+    url: "https://github.com/SorryDB/SorryDB"
+    accessed: "2026-08-22"
+    supports:
+      - "public implementation availability"
+    quality: "primary"
+
+  - id: "AX-SORRYDB-003"
+    title: "SorryDB data"
+    type: "dataset_repository"
+    url: "https://github.com/SorryDB/sorrydb-data"
+    accessed: "2026-08-22"
+    supports:
+      - "public data availability"
+    quality: "primary"
+
+  - id: "AX-SKILL-001"
+    title: "Skill-Synthesizer company technical post"
+    type: "company_technical_post"
+    url: "https://axiomatic-ai.com/blog/skill-synthesizer/"
+    accessed: "2026-08-22"
+    supports:
+      - "query-aware scientific-agent memory"
+      - "retrieval and skill synthesis"
+      - "execution-based verification signal"
+    quality: "primary"
+
+  - id: "AX-SKILL-002"
+    title: "Skill-Synthesizer OpenReview record"
+    type: "research_record"
+    url: "https://openreview.net/forum?id=T3WDCimC5K"
+    accessed: "2026-08-22"
+    supports:
+      - "paper identity"
+      - "author list"
+    quality: "primary"
+    caveat: "Automated PDF access was inconsistent; no unseen implementation detail is asserted."
+
+  - id: "AX-AGENTOPTICS-001"
+    title: "AgentOptics"
+    type: "research_paper"
+    url: "https://arxiv.org/abs/2602.20144"
+    accessed: "2026-08-22"
+    supports:
+      - "optical-engineering tool framework"
+      - "benchmark and author list"
+    quality: "primary"
+
+  - id: "AX-PUBS-001"
+    title: "Axiomatic publications"
+    type: "company_primary"
+    url: "https://axiomatic-ai.com/research/publications/"
+    accessed: "2026-08-22"
+    supports:
+      - "publication identity and author cross-checks"
+    quality: "primary"
+
+  - id: "AX-MCP-README"
+    title: "Axiomatic MCP inventory at audited revision"
+    type: "source_code_documentation"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/blob/ef53332b866b29b6d5d7a3dc6d77698e42334c24/README.md"
+    accessed: "2026-08-22"
+    supports:
+      - "current public MCP server inventory"
+      - "model fitting, optimization, document, photonics, Tidy3D, KB, paper-search tools"
+    quality: "primary_immutable"
+
+  - id: "AX-MCP-PDF-CODE"
+    title: "PDF parser helper at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/blob/ef53332b866b29b6d5d7a3dc6d77698e42334c24/axiomatic_mcp/shared/documents/pdf_to_markdown.py"
+    accessed: "2026-08-22"
+    supports:
+      - "hardcoded Mistral method"
+      - "whole-file public helper interface"
+    quality: "primary_immutable"
+
+  - id: "AX-MCP-CLIENT-CODE"
+    title: "Shared MCP API client at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/blob/ef53332b866b29b6d5d7a3dc6d77698e42334c24/axiomatic_mcp/shared/api_client.py"
+    accessed: "2026-08-22"
+    supports:
+      - "fixed timeout and raise-for-status behavior"
+      - "absence of visible retry in this client"
+    quality: "primary_immutable"
+
+  - id: "AX-MCP-PLOT-CODE"
+    title: "Plot extraction server at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/blob/ef53332b866b29b6d5d7a3dc6d77698e42334c24/axiomatic_mcp/servers/plots/server.py"
+    accessed: "2026-08-22"
+    supports:
+      - "one visible upstream call without retry"
+      - "unseeded random sampling during point limiting"
+    quality: "primary_immutable"
+
+  - id: "AX-MCP-MODELFITTER"
+    title: "AxModelFitter README at audited revision"
+    type: "source_code_documentation"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/blob/ef53332b866b29b6d5d7a3dc6d77698e42334c24/axiomatic_mcp/servers/modelfitter/README.md"
+    accessed: "2026-08-22"
+    supports:
+      - "restored sandboxed JAX model-fitter workflow"
+    quality: "primary_immutable"
+
+  - id: "AX-MCP-TIDY3D"
+    title: "AxTidy3D README at audited revision"
+    type: "source_code_documentation"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/blob/ef53332b866b29b6d5d7a3dc6d77698e42334c24/axiomatic_mcp/servers/tidy3d/README.md"
+    accessed: "2026-08-22"
+    supports:
+      - "generate, execute, estimate, confirm, and poll workflow"
+    quality: "primary_immutable"
+
+  - id: "AX-PROVER-AGENT"
+    title: "AxProverBase graph and builder at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/blob/06dfadc9ab439755af5efcfe0add95bfef2733c7/src/ax_prover/prover/agent.py"
+    accessed: "2026-08-22"
+    supports:
+      - "proposer-builder-reviewer-memory graph"
+      - "warning suppression invocation"
+      - "first/last oversized-output compaction"
+    quality: "primary_immutable"
+
+  - id: "AX-PROVER-BUILD"
+    title: "Lean build utility at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/blob/06dfadc9ab439755af5efcfe0add95bfef2733c7/src/ax_prover/utils/build.py"
+    accessed: "2026-08-22"
+    supports:
+      - "warning filtering"
+      - "timeout and process handling"
+    quality: "primary_immutable"
+
+  - id: "AX-PROVER-LLM"
+    title: "AxProverBase LLM client at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/blob/06dfadc9ab439755af5efcfe0add95bfef2733c7/src/ax_prover/utils/llm.py"
+    accessed: "2026-08-22"
+    supports:
+      - "provider-neutral retryable structured/tool calls"
+    quality: "primary_immutable"
+
+  - id: "AX-PROVER-CONFIG"
+    title: "AxProverBase retry configuration at audited revision"
+    type: "source_code"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/blob/06dfadc9ab439755af5efcfe0add95bfef2733c7/src/ax_prover/config.py"
+    accessed: "2026-08-22"
+    supports:
+      - "high retry-attempt default and jitter configuration"
+    quality: "primary_immutable"
+
+  - id: "AX-PROVER-MCP"
+    title: "Axiomatic Prover MCP"
+    type: "source_repository"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base-mcp"
+    accessed: "2026-08-22"
+    supports:
+      - "asynchronous build/prove jobs and status polling"
+    quality: "primary"
+
+  - id: "AX-ISSUE-108"
+    title: "PDF parse Mistral 401"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/issues/108"
+    state_at_audit: "open"
+    created: "2026-07-17"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+    caveat: "Issue report is not independent live reproduction."
+
+  - id: "AX-ISSUE-95"
+    title: "Large-document 25k-token failure"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/issues/95"
+    state_at_audit: "open"
+    created: "2026-03-29"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+
+  - id: "AX-ISSUE-94"
+    title: "Intermittent plot extraction failure"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/issues/94"
+    state_at_audit: "open"
+    created: "2026-03-29"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+
+  - id: "AX-ISSUE-64"
+    title: "Upstream 429 surfaced through MCP"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/issues/64"
+    state_at_audit: "open"
+    created: "2026-01-25"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+
+  - id: "AX-ISSUE-53"
+    title: "Revive AxModelFitter"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/issues/53"
+    state_at_audit: "open_but_stale"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+    caveat: "Current model-fitter implementation has been restored."
+
+  - id: "AX-ISSUE-40"
+    title: "Document MCP examples"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-mcp/issues/40"
+    state_at_audit: "open_partially_addressed"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+
+  - id: "AX-PROVER-ISSUE-2"
+    title: "Incomplete provider calls"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/issues/2"
+    state_at_audit: "open_likely_partially_addressed"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+
+  - id: "AX-PROVER-ISSUE-9"
+    title: "Warnings dominate context"
+    type: "github_issue"
+    url: "https://github.com/Axiomatic-AI/ax-prover-base/issues/9"
+    state_at_audit: "open_immediate_problem_appears_addressed"
+    accessed: "2026-08-22"
+    quality: "primary_report"
+
+  - id: "AX-FUNDING-001"
+    title: "Axiomatic AI raises $18M"
+    type: "company_press_release_distribution"
+    url: "https://www.businesswire.com/news/home/20260309009285/en/Axiomatic-AI-Raises-%2418M-to-Build-the-Intelligence-Infrastructure-for-Verified-Science-Engineering"
+    published: "2026-03-09"
+    accessed: "2026-08-22"
+    supports:
+      - "$18M seed announcement"
+      - "$25M publicly disclosed total"
+      - "The Engine Ventures leadership"
+    quality: "primary_announcement"
+
+  - id: "AX-ENGINE-001"
+    title: "Axiomatic AI — The Engine Ventures"
+    type: "investor_portfolio"
+    url: "https://engineventures.com/companies/axiomatic-ai"
+    accessed: "2026-08-22"
+    supports:
+      - "investor relationship"
+    quality: "primary_investor"
+
+  - id: "AX-JOB-RESEARCH"
+    title: "Research Scientist — Scientific Reasoning"
+    type: "job_description"
+    url: "https://job-boards.eu.greenhouse.io/axiomaticai/jobs/4844948101"
+    accessed: "2026-08-22"
+    supports:
+      - "validation, benchmarking, and data-curation hiring signal"
+    quality: "primary"
+    caveat: "Job availability can change after the evidence cutoff."
+
+  - id: "AX-JOB-INTERN"
+    title: "Research Internship"
+    type: "job_description"
+    url: "https://job-boards.eu.greenhouse.io/axiomaticai/jobs/4845060101"
+    accessed: "2026-08-22"
+    supports:
+      - "scientific-output verification, formal methods, retrieval, open-source, and publication signal"
+    quality: "primary"
+    caveat: "Job availability can change after the evidence cutoff."
+
+  - id: "AX-JOB-BACKEND"
+    title: "Staff Backend Engineer"
+    type: "job_description"
+    url: "https://job-boards.eu.greenhouse.io/axiomaticai/jobs/4885093101"
+    accessed: "2026-08-22"
+    supports:
+      - "routing, fallback, persistence, observability, SLO, and regression-testing signal"
+    quality: "primary"
+    caveat: "Job availability can change after the evidence cutoff."
+
+  - id: "GIAC-CV-001"
+    title: "JJCAPPE/cv"
+    type: "candidate_repository"
+    url: "https://github.com/JJCAPPE/cv"
+    accessed: "2026-08-22"
+    supports:
+      - "candidate resume and portfolio evidence"
+    quality: "primary_candidate"
+
+  - id: "GIAC-POSE-001"
+    title: "JJCAPPE/pose-embedding"
+    type: "candidate_repository"
+    url: "https://github.com/JJCAPPE/pose-embedding"
+    accessed: "2026-08-22"
+    supports:
+      - "current robust motion-retrieval research preparation"
+    quality: "primary_candidate"
+
+  - id: "GIAC-ROWING-001"
+    title: "JJCAPPE/rowing-dynamics-analysis"
+    type: "candidate_repository"
+    url: "https://github.com/JJCAPPE/rowing-dynamics-analysis"
+    accessed: "2026-08-22"
+    supports:
+      - "scientific pipeline, telemetry validation, provenance, reports, and tests"
+    quality: "primary_candidate"
+
+  - id: "BU-KULIS-001"
+    title: "Brian Kulis"
+    type: "academic_profile"
+    url: "https://people.bu.edu/bkulis/"
+    accessed: "2026-08-22"
+    supports:
+      - "research relevance in metric learning, retrieval, and machine learning"
+    quality: "primary"
+
+  - id: "LIAO-CONTEXT-001"
+    title: "Supervised Metric Learning to Rank for Retrieval via Contextual Similarity Optimization"
+    type: "research_paper"
+    url: "https://proceedings.mlr.press/v202/liao23b.html"
+    accessed: "2026-08-22"
+    supports:
+      - "Christopher Liao and Brian Kulis research connection"
+      - "contextual retrieval methodology"
+    quality: "primary"
+
+  - id: "BU-POPOVIC-001"
+    title: "Miloš Popović"
+    type: "academic_profile"
+    url: "https://www.bu.edu/eng/profile/milos-popovic/"
+    accessed: "2026-08-22"
+    supports:
+      - "BU integrated-photonics expertise"
+    quality: "primary"
+
+  - id: "BENCH-MEIJ-001"
+    title: "Linearized dynamics equations for the balance and steer of a bicycle"
+    type: "publication_record"
+    url: "https://research.tudelft.nl/en/publications/linearized-dynamics-equations-for-the-balance-and-steer-of-a-bicy"
+    accessed: "2026-08-22"
+    supports:
+      - "primary benchmark paper identity and scope"
+    quality: "primary_metadata"
+
+  - id: "BENCH-BICYCLE-001"
+    title: "Benchmark Bicycle"
+    type: "research_project_page"
+    url: "https://arendschwab.com/research/benchmarkbicycle/"
+    accessed: "2026-08-22"
+    supports:
+      - "benchmark background and independent checks"
+    quality: "primary_researcher"
+
+  - id: "BENCH-BP-001"
+    title: "BicycleParameters benchmark example"
+    type: "software_documentation"
+    url: "https://bicycleparameters.readthedocs.io/stable/gallery/examples/plot_benchmark.html"
+    accessed: "2026-08-22"
+    supports:
+      - "public independent implementation and outputs"
+    quality: "primary_software"
+
+  - id: "BENCH-PYDY-001"
+    title: "PyDy Carvallo–Whipple example"
+    type: "software_documentation"
+    url: "https://pydy.readthedocs.io/en/stable/examples/carvallo-whipple.html"
+    accessed: "2026-08-22"
+    supports:
+      - "independent symbolic/numerical implementation"
+    quality: "primary_software"
+
+authorized_account_audit:
+  performed: true
+  publicly_shareable_summary:
+    - "No direct Axiomatic Gmail correspondence found."
+    - "No saved Axiomatic Google Contact found."
+    - "Active direct research relationship with Brian Kulis."
+    - "Warm one-hop research path to Christopher Liao supported by prior correspondence."
+  excluded_from_public_package:
+    - "email addresses"
+    - "verbatim message content"
+    - "unrelated correspondence"
+    - "unsupported LinkedIn degrees"
