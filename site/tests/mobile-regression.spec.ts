@@ -107,6 +107,71 @@ async function visibleTextOverflow(page: Page) {
   });
 }
 
+async function paintedMobileOmissions(page: Page) {
+  return page
+    .locator(
+      '[data-mobile-gallery-media="true"], [data-technical-visual="true"]',
+    )
+    .evaluateAll((elements) =>
+      elements.flatMap((element) => {
+        const bounds = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        const painted =
+          element.getClientRects().length > 0 &&
+          bounds.width > 1 &&
+          bounds.height > 1 &&
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          Number(style.opacity) !== 0;
+
+        return painted
+          ? [
+              `${element.tagName.toLowerCase()}.${
+                element instanceof HTMLElement ? element.className : ""
+              } [${bounds.width.toFixed(1)} x ${bounds.height.toFixed(1)}]`,
+            ]
+          : [];
+      }),
+    );
+}
+
+async function paintedSvgVisuals(page: Page) {
+  return page.locator("main svg, main img").evaluateAll((elements) =>
+    elements.flatMap((element) => {
+      const bounds = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      const painted =
+        element.getClientRects().length > 0 &&
+        bounds.width > 1 &&
+        bounds.height > 1 &&
+        style.display !== "none" &&
+        style.visibility !== "hidden" &&
+        Number(style.opacity) !== 0;
+
+      if (!painted) return [];
+
+      if (element instanceof SVGElement) {
+        return [`inline svg [${bounds.width.toFixed(1)} x ${bounds.height.toFixed(1)}]`];
+      }
+
+      if (element instanceof HTMLImageElement) {
+        let source = element.currentSrc || element.src;
+        try {
+          source = decodeURIComponent(source);
+        } catch {
+          // Keep the original URL when it contains malformed escaping.
+        }
+
+        if (source.toLowerCase().includes(".svg")) {
+          return [`svg image ${source}`];
+        }
+      }
+
+      return [];
+    }),
+  );
+}
+
 async function inspectFullScroll(page: Page) {
   const failures = new Set<string>();
   for (const failure of await visibleTextOverflow(page)) failures.add(failure);
@@ -185,6 +250,8 @@ for (const route of ALL_ROUTES) {
     expect(headerBounds.top).toBe(0);
 
     expect(await inspectFullScroll(page)).toEqual([]);
+    expect(await paintedMobileOmissions(page)).toEqual([]);
+    expect(await paintedSvgVisuals(page)).toEqual([]);
 
     const brokenImages = await page.locator("img").evaluateAll((images) =>
       images
@@ -215,9 +282,7 @@ for (const route of ALL_ROUTES) {
 
 test("mobile archive cards are compact and their titles stay inside each card", async ({
   page,
-}, testInfo) => {
-  test.skip(testInfo.project.name !== "iphone-15");
-
+}) => {
   for (const route of ["/projects", "/research"]) {
     await page.goto(route, { waitUntil: "domcontentloaded" });
     await waitForStablePage(page);
@@ -226,28 +291,65 @@ test("mobile archive cards are compact and their titles stay inside each card", 
     for (let index = 0; index < (await controls.count()); index += 1) {
       await controls.nth(index).click();
       const panel = page.locator('[data-relay-panel][data-active="true"]');
+      await expect(
+        page.locator('[data-relay-panel][data-active="true"]'),
+      ).toHaveCount(1);
       await expect(panel).toBeVisible();
+      await expect(panel.locator('[data-mobile-gallery-media="true"]')).toBeHidden();
+      await expect(
+        panel.locator('[data-technical-visual="true"]:visible'),
+      ).toHaveCount(0);
+
       const geometry = await panel.evaluate((element) => {
         const panelBounds = element.getBoundingClientRect();
         const heading = element.querySelector("h2");
+        const summary = heading?.nextElementSibling;
+        const action = summary?.nextElementSibling;
+        const media = element.querySelector<HTMLElement>(
+          '[data-mobile-gallery-media="true"]',
+        );
         if (!heading) throw new Error("Archive card heading is missing.");
-        const range = document.createRange();
-        range.selectNodeContents(heading);
-        const titleBounds = range.getBoundingClientRect();
+
+        const contentBounds = [heading, summary, action].map((node) => {
+          if (!(node instanceof HTMLElement)) {
+            throw new Error("Archive card content is incomplete.");
+          }
+          const bounds = node.getBoundingClientRect();
+          return {
+            left: bounds.left,
+            right: bounds.right,
+            top: bounds.top,
+            bottom: bounds.bottom,
+          };
+        });
+
         return {
           height: panelBounds.height,
-          titleLeft: titleBounds.left,
-          titleRight: titleBounds.right,
           panelLeft: panelBounds.left,
           panelRight: panelBounds.right,
+          panelTop: panelBounds.top,
+          panelBottom: panelBounds.bottom,
+          clientHeight: element.clientHeight,
+          scrollHeight: element.scrollHeight,
+          mediaHeight: media?.getBoundingClientRect().height ?? -1,
+          contentBounds,
         };
       });
 
       expect(geometry.height).toBeLessThan(
-        (await page.evaluate(() => innerHeight)) * 1.2,
+        await page.evaluate(() => innerHeight * (innerWidth > innerHeight ? 1.35 : 1.05)),
       );
-      expect(geometry.titleLeft).toBeGreaterThanOrEqual(geometry.panelLeft - 1);
-      expect(geometry.titleRight).toBeLessThanOrEqual(geometry.panelRight + 1);
+      expect(geometry.scrollHeight).toBeLessThanOrEqual(
+        geometry.clientHeight + 1,
+      );
+      expect(geometry.mediaHeight).toBe(0);
+
+      for (const bounds of geometry.contentBounds) {
+        expect(bounds.left).toBeGreaterThanOrEqual(geometry.panelLeft - 1);
+        expect(bounds.right).toBeLessThanOrEqual(geometry.panelRight + 1);
+        expect(bounds.top).toBeGreaterThanOrEqual(geometry.panelTop - 1);
+        expect(bounds.bottom).toBeLessThanOrEqual(geometry.panelBottom + 1);
+      }
 
       for (const image of await panel.locator("img:visible").all()) {
         await expect
@@ -261,13 +363,18 @@ test("mobile archive cards are compact and their titles stay inside each card", 
           .toBe(true);
       }
     }
+
+    const documentWidth = await page.evaluate(() => ({
+      client: document.documentElement.clientWidth,
+      scroll: document.documentElement.scrollWidth,
+    }));
+    expect(documentWidth.scroll).toBe(documentWidth.client);
   }
 });
 
 test("homepage experience and gallery cards fit the standard iPhone", async ({
   page,
-}, testInfo) => {
-  test.skip(testInfo.project.name !== "iphone-15");
+}) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await waitForStablePage(page);
 
@@ -282,15 +389,176 @@ test("homepage experience and gallery cards fit the standard iPhone", async ({
   }
 
   for (const rail of ["#featured-work", "#research"]) {
-    const panels = page.locator(`${rail} [data-showcase-panel]`);
+    const section = page.locator(rail);
+    const panels = section.locator("[data-showcase-panel]");
+    const next = section.getByRole("button", { name: /Next/ });
+
     for (let index = 0; index < (await panels.count()); index += 1) {
-      const panelHeight = await panels.nth(index).evaluate(
-        (element) => element.getBoundingClientRect().height,
+      if (index > 0) await next.click();
+
+      const panel = panels.nth(index);
+      await expect(panel).toHaveAttribute("data-active", "true");
+      await expect(panel.locator('[data-mobile-gallery-media="true"]')).toBeHidden();
+      await expect(
+        panel.locator('[data-technical-visual="true"]:visible'),
+      ).toHaveCount(0);
+
+      const geometry = await panel.evaluate((element) => {
+        const panelBounds = element.getBoundingClientRect();
+        const content = [
+          element.querySelector("h3"),
+          element.querySelector("h3")?.nextElementSibling,
+          element.querySelector("h3")?.nextElementSibling?.nextElementSibling,
+        ].map((node) => {
+          if (!(node instanceof HTMLElement)) {
+            throw new Error("Homepage gallery card content is incomplete.");
+          }
+          const bounds = node.getBoundingClientRect();
+          return {
+            left: bounds.left,
+            right: bounds.right,
+            top: bounds.top,
+            bottom: bounds.bottom,
+          };
+        });
+        const media = element.querySelector<HTMLElement>(
+          '[data-mobile-gallery-media="true"]',
+        );
+
+        return {
+          height: panelBounds.height,
+          left: panelBounds.left,
+          right: panelBounds.right,
+          top: panelBounds.top,
+          bottom: panelBounds.bottom,
+          clientHeight: element.clientHeight,
+          scrollHeight: element.scrollHeight,
+          mediaHeight: media?.getBoundingClientRect().height ?? -1,
+          content,
+        };
+      });
+
+      expect(geometry.height).toBeLessThan(
+        await page.evaluate(() =>
+          innerHeight * (innerWidth > innerHeight ? 1.35 : 1.05),
+        ),
       );
-      expect(panelHeight).toBeLessThan(
-        (await page.evaluate(() => innerHeight)) * 1.2,
+      expect(geometry.scrollHeight).toBeLessThanOrEqual(
+        geometry.clientHeight + 1,
       );
+      expect(geometry.mediaHeight).toBe(0);
+      for (const bounds of geometry.content) {
+        expect(bounds.left).toBeGreaterThanOrEqual(geometry.left - 1);
+        expect(bounds.right).toBeLessThanOrEqual(geometry.right + 1);
+        expect(bounds.top).toBeGreaterThanOrEqual(geometry.top - 1);
+        expect(bounds.bottom).toBeLessThanOrEqual(geometry.bottom + 1);
+      }
     }
+  }
+});
+
+test("desktop technical visuals remain intact", async ({ browser }, testInfo) => {
+  test.skip(testInfo.project.name !== "iphone-15");
+
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+    isMobile: false,
+    hasTouch: false,
+    colorScheme: "dark",
+    reducedMotion: "reduce",
+  });
+  const page = await context.newPage();
+
+  try {
+    for (const surface of [
+      { route: "/", galleryMedia: 8 },
+      { route: "/projects", galleryMedia: 5 },
+      { route: "/research", galleryMedia: 3 },
+    ] as const) {
+      const surfaceName = surface.route === "/" ? "home" : surface.route.slice(1);
+      await page.goto(`http://127.0.0.1:3100${surface.route}`, {
+        waitUntil: "domcontentloaded",
+      });
+      await waitForStablePage(page);
+
+      const media = page.locator('[data-mobile-gallery-media="true"]');
+      await expect(media).toHaveCount(surface.galleryMedia);
+      for (const frame of await media.all()) {
+        const geometry = await frame.evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          return {
+            display: getComputedStyle(element).display,
+            width: bounds.width,
+            height: bounds.height,
+          };
+        });
+        expect(geometry.display).not.toBe("none");
+        expect(geometry.width).toBeGreaterThan(300);
+        expect(geometry.height).toBeGreaterThan(250);
+
+        await frame.scrollIntoViewIfNeeded();
+        for (const image of await frame.locator("img").all()) {
+          await expect
+            .poll(() =>
+              image.evaluate((element) =>
+                element instanceof HTMLImageElement
+                  ? element.complete && element.naturalWidth > 0
+                  : false,
+              ),
+            )
+            .toBe(true);
+        }
+      }
+
+      const screenshotPath = join(
+        process.cwd(),
+        "mobile-evidence",
+        "desktop-webkit",
+        `${surfaceName}.png`,
+      );
+      await mkdir(join(process.cwd(), "mobile-evidence", "desktop-webkit"), {
+        recursive: true,
+      });
+      await page.screenshot({
+        animations: "disabled",
+        path: screenshotPath,
+      });
+      await testInfo.attach(`desktop-${surfaceName}`, {
+        path: screenshotPath,
+        contentType: "image/png",
+      });
+    }
+
+    for (const surface of [
+      { route: "/projects/move", technicalVisuals: 2 },
+      { route: "/projects/deskinator", technicalVisuals: 2 },
+      { route: "/projects/inventory-system", technicalVisuals: 2 },
+      { route: "/projects/tickit", technicalVisuals: 2 },
+      { route: "/projects/ai-notes-or-ocr", technicalVisuals: 2 },
+      { route: "/research/contextual-similarity", technicalVisuals: 4 },
+      { route: "/research/biomimetic-ai", technicalVisuals: 1 },
+    ] as const) {
+      await page.goto(`http://127.0.0.1:3100${surface.route}`, {
+        waitUntil: "domcontentloaded",
+      });
+      await waitForStablePage(page);
+      const visuals = page.locator('[data-technical-visual="true"]');
+      await expect(visuals).toHaveCount(surface.technicalVisuals);
+
+      const hidden = await visuals.evaluateAll((elements) =>
+        elements.flatMap((element) => {
+          const bounds = element.getBoundingClientRect();
+          return getComputedStyle(element).display === "none" ||
+            bounds.width <= 100 ||
+            bounds.height <= 100
+            ? [element.className]
+            : [];
+        }),
+      );
+      expect(hidden).toEqual([]);
+    }
+  } finally {
+    await context.close();
   }
 });
 
@@ -356,8 +624,16 @@ test("capture key recruiter surfaces for visual review", async (
 
   const surfaces = [
     { name: "home-experience", route: "/", focus: ".experience-panel" },
-    { name: "projects-gallery", route: "/projects", focus: "[data-relay-panel]" },
-    { name: "research-gallery", route: "/research", focus: "[data-relay-panel]" },
+    {
+      name: "home-project-card",
+      route: "/",
+      focus: "#featured-work [data-showcase-panel]",
+    },
+    {
+      name: "home-research-card",
+      route: "/",
+      focus: "#research [data-showcase-panel]",
+    },
     {
       name: "contextual-research-hero",
       route: "/research/contextual-similarity",
@@ -385,5 +661,42 @@ test("capture key recruiter surfaces for visual review", async (
       path: screenshotPath,
       contentType: "image/png",
     });
+  }
+
+  for (const archive of [
+    {
+      route: "/projects",
+      names: ["move", "deskinator", "inventory", "tickit", "noteworthy"],
+    },
+    {
+      route: "/research",
+      names: ["contextual", "rowing", "biomimetic"],
+    },
+  ] as const) {
+    await page.goto(archive.route, { waitUntil: "domcontentloaded" });
+    await waitForStablePage(page);
+    const controls = page.locator('[data-relay-control]');
+    expect(await controls.count()).toBe(archive.names.length);
+
+    for (let index = 0; index < archive.names.length; index += 1) {
+      await controls.nth(index).click();
+      const activePanel = page.locator(
+        '[data-relay-panel][data-active="true"]',
+      );
+      await activePanel.scrollIntoViewIfNeeded();
+      const name = `${archive.route.slice(1)}-${String(index + 1).padStart(
+        2,
+        "0",
+      )}-${archive.names[index]}`;
+      const screenshotPath = join(evidenceDir, `${name}.png`);
+      await page.screenshot({
+        animations: "disabled",
+        path: screenshotPath,
+      });
+      await testInfo.attach(name, {
+        path: screenshotPath,
+        contentType: "image/png",
+      });
+    }
   }
 });

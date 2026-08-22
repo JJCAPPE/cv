@@ -54,7 +54,7 @@ export function InventoryCaseStudy() {
           </p>
         </header>
 
-        <figure className={styles.systemFigure}>
+        <figure className={styles.systemFigure} data-technical-visual="true">
           <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/inventory-system/inventory-decrement-exploded.svg"
@@ -92,7 +92,7 @@ export function InventoryCaseStudy() {
           </p>
         </header>
 
-        <figure className={styles.systemFigure}>
+        <figure className={styles.systemFigure} data-technical-visual="true">
           <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/inventory-system/inventory-recovery-exploded.svg"

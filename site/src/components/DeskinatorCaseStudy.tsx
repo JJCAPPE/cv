@@ -149,7 +149,7 @@ export function DeskinatorCaseStudy() {
           </p>
         </header>
 
-        <figure className={styles.systemFigure}>
+        <figure className={styles.systemFigure} data-technical-visual="true">
           <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/deskinator/deskinator-software-exploded.svg"
@@ -249,7 +249,7 @@ export function DeskinatorCaseStudy() {
           </p>
         </header>
 
-        <figure className={styles.systemFigure}>
+        <figure className={styles.systemFigure} data-technical-visual="true">
           <div className={styles.systemFigureViewport}>
             <Image
               src="/media/projects/deskinator/deskinator-cover-a-exploded.svg"

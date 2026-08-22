@@ -73,6 +73,7 @@ export function ResearchOverviewAnimation({
     <figure
       ref={overviewRef}
       className={styles.overview}
+      data-technical-visual="true"
       data-paused={paused}
       data-visibility-paused={!isActive || !active}
       data-variant={variant}

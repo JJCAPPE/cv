@@ -1942,6 +1942,13 @@ a {
     }
 }
 
+@media (max-width: 767px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
+    [data-mobile-gallery-media="true"],
+    [data-technical-visual="true"] {
+        display: none !important;
+    }
+}
+
 .home-page:focus {
     outline: none;
 }

@@ -192,7 +192,7 @@ function AdaptabilityAtlas() {
           ))}
         </div>
 
-        <figure className={styles.atlasFigure}>
+        <figure className={styles.atlasFigure} data-technical-visual="true">
           <div
             className={styles.atlasViewport}
             data-focused={Boolean(selected.layer)}

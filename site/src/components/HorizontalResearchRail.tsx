@@ -45,6 +45,13 @@ function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
 }
 
+function isTechnicalVisual(media: HorizontalShowcaseItem["media"]) {
+  return (
+    media.kind === "contextual-overview" ||
+    (media.kind === "image" && media.src.toLowerCase().endsWith(".svg"))
+  );
+}
+
 export function HorizontalResearchRail({
   items,
   sectionId = "research",
@@ -475,7 +482,13 @@ export function HorizontalResearchRail({
                 }
                 data-active={index === 0}
               >
-                <div className={styles.mediaFrame}>
+                <div
+                  className={styles.mediaFrame}
+                  data-mobile-gallery-media="true"
+                  data-technical-visual={
+                    isTechnicalVisual(item.media) ? "true" : undefined
+                  }
+                >
                   <div
                     className={`${styles.mediaMotion} ${
                       item.media.kind === "image" &&

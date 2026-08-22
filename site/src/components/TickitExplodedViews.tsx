@@ -188,6 +188,7 @@ function ExplodedView({ definition }: { definition: ExplodedDefinition }) {
       <div
         id={viewportId}
         className={styles.viewport}
+        data-technical-visual="true"
         role="img"
         aria-label={definition.accessibleName}
         aria-describedby={readoutId}
