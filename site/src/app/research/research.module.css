@@ -674,14 +674,20 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 720px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
+  .heroVisual {
+    display: none;
+  }
+
   .heroCopy {
     min-height: calc(100dvh - var(--header-height));
     padding-top: clamp(3rem, 10vw, 5rem);
   }
 
   .hero h1 {
-    font-size: clamp(4.7rem, 22vw, 8rem);
+    max-width: 100%;
+    font-size: clamp(3.7rem, 18vw, 6rem);
+    overflow-wrap: anywhere;
   }
 
   .heroFacts,

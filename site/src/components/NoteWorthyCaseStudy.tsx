@@ -239,6 +239,7 @@ function AgentMicroscope() {
       <div
         id={viewportId}
         className={styles.technicalViewport}
+        data-technical-visual="true"
         role="img"
         aria-label="Exploded NoteWorthy execution system from image preparation through streamed LaTeX generation, template composition, configurable HTTP compilation, and browser output, with optional persistence, separate historical rails, and a switchable proposed conceptual ML-CV layer."
         aria-describedby={readoutId}
@@ -314,7 +315,7 @@ function ArtifactInspector() {
 
   return (
     <div className={styles.artifactInspector}>
-      <figure className={styles.documentFigure}>
+      <figure className={styles.documentFigure} data-technical-visual="true">
         <div
           className={styles.documentViewport}
           role="img"

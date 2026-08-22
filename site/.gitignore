@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/mobile-evidence
+/test-results
 
 # next.js
 /.next/

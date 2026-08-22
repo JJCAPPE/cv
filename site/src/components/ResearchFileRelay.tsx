@@ -36,6 +36,13 @@ function normalizeDashes(value: string) {
   return value.replace(/[\u2013\u2014]/g, "-");
 }
 
+function isTechnicalVisual(media: FileRelayItem["media"]) {
+  return (
+    media.kind === "contextual-overview" ||
+    (media.kind === "image" && media.src.toLowerCase().endsWith(".svg"))
+  );
+}
+
 export function ResearchFileRelay({
   items,
   sectionId = "research-relay",
@@ -439,7 +446,13 @@ export function ResearchFileRelay({
               </div>
 
               <div className={styles.folioBody}>
-                <div className={styles.mediaFrame}>
+                <div
+                  className={styles.mediaFrame}
+                  data-mobile-gallery-media="true"
+                  data-technical-visual={
+                    isTechnicalVisual(item.media) ? "true" : undefined
+                  }
+                >
                   {item.media.kind === "contextual-overview" ? (
                     <ResearchOverviewAnimation
                       active={index === activeIndex}
@@ -454,8 +467,16 @@ export function ResearchFileRelay({
                       alt={normalizeDashes(item.media.alt)}
                       width={item.media.width}
                       height={item.media.height}
-                      loading={index === 0 ? "eager" : undefined}
-                      fetchPriority={index === 0 ? "high" : undefined}
+                      loading={
+                        index === 0 && !isTechnicalVisual(item.media)
+                          ? "eager"
+                          : undefined
+                      }
+                      fetchPriority={
+                        index === 0 && !isTechnicalVisual(item.media)
+                          ? "high"
+                          : undefined
+                      }
                       sizes="(max-width: 960px) 88vw, 54vw"
                     />
                   )}

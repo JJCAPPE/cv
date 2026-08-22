@@ -1,5 +1,6 @@
 @import "tailwindcss";
 :root {
+    color-scheme: dark;
     --bg: #0b0b0a;
     --fg: #f1efe8;
     --muted: #aaa79f;
@@ -10,7 +11,11 @@
     --accent: #e6d12a;
     --accent-ui: var(--accent);
     --accent-ink: #11110f;
-    --header-height: 4.25rem;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --header-height: calc(4.25rem + var(--safe-top));
     --content-width: 94rem;
     --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -25,19 +30,6 @@
     --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: light) {
-     :root {
-        --bg: #eeece4;
-        --fg: #11110f;
-        --muted: #57554f;
-        --subtle: #6c6962;
-        --line: rgb(17 17 15 / 20%);
-        --panel: #e4e1d8;
-        --surface: #d9d6cc;
-        --accent-ui: #665900;
-    }
-}
-
 * {
     box-sizing: border-box;
 }
@@ -45,6 +37,8 @@
 html {
     overflow-x: clip;
     background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-height) + 1rem);
 }
@@ -52,6 +46,8 @@ html {
 body {
     min-height: 100%;
     margin: 0;
+    padding-right: var(--safe-right);
+    padding-left: var(--safe-left);
     overflow-x: clip;
     background: var(--bg);
     color: var(--fg);
@@ -87,8 +83,8 @@ a {
 .skip-link {
     position: fixed;
     z-index: var(--layer-skip-link);
-    top: 0.75rem;
-    left: 0.75rem;
+    top: calc(var(--safe-top) + 0.75rem);
+    left: calc(var(--safe-left) + 0.75rem);
     min-height: 2.75rem;
     padding: 0.75rem 1rem;
     background: var(--accent);
@@ -111,8 +107,8 @@ a {
     position: fixed;
     z-index: calc(var(--layer-header) + 1);
     top: calc(var(--header-height) - 2px);
-    right: 0;
-    left: 0;
+    right: var(--safe-right);
+    left: var(--safe-left);
     height: 2px;
     background: var(--accent-ui);
     pointer-events: none;
@@ -178,9 +174,10 @@ a {
     position: fixed;
     z-index: var(--layer-header);
     top: 0;
-    right: 0;
-    left: 0;
+    right: var(--safe-right);
+    left: var(--safe-left);
     height: var(--header-height);
+    padding-top: var(--safe-top);
     border-bottom: 1px solid var(--line);
     background: color-mix(in srgb, var(--bg) 98%, var(--fg) 2%);
 }
@@ -301,7 +298,7 @@ a {
     align-items: end;
     gap: clamp(2rem, 5vw, 6rem);
     margin: 0 auto;
-    padding: clamp(4rem, 9vw, 8rem) clamp(1rem, 3vw, 3rem) 2rem;
+    padding: clamp(4rem, 9vw, 8rem) clamp(1rem, 3vw, 3rem) max(2rem, var(--safe-bottom));
     border-top: 1px solid var(--line);
 }
 
@@ -1655,9 +1652,9 @@ a {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
      :root {
-        --header-height: 3.75rem;
+        --header-height: calc(3.75rem + var(--safe-top));
     }
     .site-header {
         background: var(--bg);
@@ -1680,7 +1677,16 @@ a {
         display: none;
     }
     .site-nav {
-        gap: clamp(0.65rem, 3.6vw, 1.1rem);
+        min-width: 0;
+        flex: 1;
+        justify-content: flex-end;
+        gap: clamp(0.55rem, 3vw, 0.9rem);
+    }
+    .site-nav li {
+        min-width: 0;
+    }
+    .site-nav li::before {
+        display: none;
     }
     .site-nav__link {
         font-size: clamp(0.59rem, 2.6vw, 0.68rem);
@@ -1711,11 +1717,12 @@ a {
         inset: calc(var(--header-height) + 0.75rem) 0.75rem 0.75rem;
     }
     .home-hero__title {
-        font-size: clamp(4.35rem, 19.5vw, 6.2rem);
+        font-size: clamp(3.7rem, 18.5vw, 5.8rem);
         line-height: 0.72;
+        overflow-wrap: anywhere;
     }
     .home-hero__footer {
-        width: calc(100% - 36vw);
+        width: min(100%, 36rem);
         grid-template-columns: 1fr;
         gap: 1rem;
     }
@@ -1723,7 +1730,8 @@ a {
         font-size: 0.95rem;
     }
     .current-panel__statement {
-        font-size: clamp(4.2rem, 20.5vw, 7rem);
+        font-size: clamp(3.25rem, 16vw, 5.75rem);
+        overflow-wrap: anywhere;
     }
     .experience-story__intro {
         min-height: 62dvh;
@@ -1731,7 +1739,8 @@ a {
     .experience-story__intro h2,
     .notes-feature__header h2,
     .page-intro h1 {
-        font-size: clamp(5.5rem, 25vw, 9rem);
+        font-size: clamp(3.8rem, 19vw, 6.8rem);
+        overflow-wrap: anywhere;
     }
     .experience-story__intro p {
         margin-left: 0;
@@ -1761,7 +1770,9 @@ a {
         padding: 2rem 1rem;
     }
     .experience-panel__body h3 {
-        font-size: clamp(4.5rem, 21vw, 7rem);
+        max-width: 100%;
+        font-size: clamp(3rem, 15vw, 5.25rem);
+        overflow-wrap: anywhere;
     }
     .notes-feature__header {
         align-items: start;
@@ -1775,11 +1786,12 @@ a {
         font-size: clamp(3rem, 14vw, 5rem);
     }
     .contact-poster h2 {
-        font-size: clamp(5.2rem, 22vw, 8rem);
+        font-size: clamp(3.5rem, 17vw, 6rem);
+        overflow-wrap: anywhere;
     }
     .contact-poster__link {
         align-self: flex-start;
-        font-size: clamp(4rem, 19vw, 6rem);
+        font-size: clamp(3.25rem, 16vw, 5.5rem);
     }
     .project-page__hero {
         display: flex;
@@ -1799,7 +1811,9 @@ a {
     }
     .project-page__hero h1 {
         margin: auto 0;
-        font-size: clamp(4rem, 19vw, 7.5rem);
+        max-width: 100%;
+        font-size: clamp(3.1rem, 15.5vw, 5.75rem);
+        overflow-wrap: anywhere;
     }
     .project-page__actions {
         justify-content: flex-start;
@@ -1819,7 +1833,8 @@ a {
         min-height: 12rem;
     }
     .project-page__metrics dt {
-        font-size: clamp(4rem, 19vw, 6rem);
+        font-size: clamp(3.25rem, 16vw, 5rem);
+        overflow-wrap: anywhere;
     }
     .project-inline-media__image {
         aspect-ratio: 4 / 3;
@@ -1835,10 +1850,14 @@ a {
     }
     .project-chapter h2,
     .project-system h2 {
-        font-size: clamp(2.8rem, 13vw, 4rem);
+        max-width: 100%;
+        font-size: clamp(2.35rem, 11.5vw, 3.7rem);
+        overflow-wrap: anywhere;
     }
     .next-project a {
-        font-size: clamp(4rem, 18vw, 7rem);
+        max-width: 100%;
+        font-size: clamp(3.1rem, 15.5vw, 5.5rem);
+        overflow-wrap: anywhere;
     }
     .notes-intro__meta {
         align-items: flex-start;
@@ -1851,18 +1870,28 @@ a {
         grid-column: 2;
     }
     .note-preview h2 {
-        font-size: clamp(3.2rem, 15vw, 5.5rem);
+        max-width: 100%;
+        font-size: clamp(2.6rem, 13vw, 4.5rem);
+        overflow-wrap: anywhere;
     }
     .note-preview__link {
         justify-self: start;
     }
     .note-page__header h1 {
-        font-size: clamp(4rem, 18vw, 7rem);
+        max-width: 100%;
+        font-size: clamp(3.1rem, 15.5vw, 5.5rem);
+        overflow-wrap: anywhere;
     }
     .resume-section>h2,
     .resume-entry,
     .resume-skill {
         grid-column: 1;
+    }
+    .resume-section>h2 {
+        max-width: 100%;
+        margin-bottom: 2rem;
+        font-size: clamp(2.4rem, 12vw, 3.6rem);
+        overflow-wrap: anywhere;
     }
     .resume-entry {
         grid-template-columns: 1fr;
@@ -1871,12 +1900,22 @@ a {
     .resume-entry>p {
         grid-row: 1;
     }
+    .resume-skill {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.35rem;
+    }
+    .resume-skill p {
+        margin-top: 0;
+        overflow-wrap: anywhere;
+    }
+    .not-found h1 {
+        max-width: 100%;
+        font-size: clamp(3.5rem, 17vw, 6rem);
+        overflow-wrap: anywhere;
+    }
 }
 
 @media (max-width: 390px) {
-    .site-nav li::before {
-        display: none;
-    }
     .site-nav {
         gap: 0.55rem;
     }
@@ -1884,13 +1923,13 @@ a {
         font-size: 0.66rem;
     }
     .home-hero__title {
-        font-size: clamp(3.85rem, 18.5vw, 4.8rem);
+        font-size: clamp(3.35rem, 17vw, 4.4rem);
     }
     .home-hero__media-secondary {
         width: 28vw;
     }
     .home-hero__footer {
-        width: 68%;
+        width: 100%;
     }
     .current-panel__statement {
         font-size: clamp(4.1rem, 20vw, 5.8rem);
@@ -1900,6 +1939,13 @@ a {
 @media (prefers-reduced-transparency: reduce) {
     .site-header {
         background: var(--bg);
+    }
+}
+
+@media (max-width: 767px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
+    [data-mobile-gallery-media="true"],
+    [data-technical-visual="true"] {
+        display: none !important;
     }
 }
 

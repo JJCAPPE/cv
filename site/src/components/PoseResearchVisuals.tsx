@@ -248,6 +248,7 @@ export function PoseCorruptionLab() {
     <div
       ref={motionRef}
       className={`${styles.visual} ${styles.poseLab}`}
+      data-technical-visual="true"
       data-motion-paused={!isActive}
     >
       <div className={styles.visualHeader}>
@@ -577,7 +578,7 @@ export function NeighborhoodExplorer() {
       </div>
 
       <div className={styles.neighborhoodBody}>
-        <div className={styles.embeddingCanvas}>
+        <div className={styles.embeddingCanvas} data-technical-visual="true">
           <svg
             viewBox="0 0 650 430"
             role="img"
@@ -838,7 +839,7 @@ export function ContextualMatrixExplorer() {
       </div>
 
       <div className={styles.matrixBody}>
-        <div className={styles.matrixViewport}>
+        <div className={styles.matrixViewport} data-technical-visual="true">
           <div
             className={styles.matrixGrid}
             role="grid"

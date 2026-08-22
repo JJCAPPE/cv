@@ -10,6 +10,8 @@
     "perf:scroll": "node scripts/probe-scroll-performance.mjs",
     "test:scroll": "playwright test tests/scroll-experience.spec.ts",
     "test:scroll:chromium": "playwright test tests/scroll-experience.spec.ts --project=chromium",
+    "test:mobile": "playwright test --config=playwright.mobile.config.ts",
+    "test:mobile:prod": "npm run build && MOBILE_PRODUCTION=1 playwright test --config=playwright.mobile.config.ts",
     "seo:check": "node scripts/check-seo.mjs",
     "visuals:biomimetic-ai": "node scripts/generate-biomimetic-ai-visuals.mjs public/media/projects/biomimetic-ai/technical",
     "visuals:move": "node scripts/generate-move-visuals.mjs public/media/projects/move",

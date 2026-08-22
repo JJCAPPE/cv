@@ -233,7 +233,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px), (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
   .explorer {
     margin-top: 3rem;
   }
