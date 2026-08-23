@@ -3,12 +3,21 @@
 ## Production setup
 
 - Set `NEXT_PUBLIC_SITE_URL=https://www.giacomocappelletto.com` for the production environment. The value must be an origin without a path; a trailing slash is normalized.
+- The indexability gate accepts the canonical `www` origin and `https://giacomocappelletto.com`, its public redirect alias. Generated canonical, Open Graph, robots, and sitemap URLs always use `www`.
 - Attach `giacomocappelletto.com` and `www.giacomocappelletto.com` to this deployment only. Make `www` primary and configure one permanent redirect from the apex to the matching `www` URL.
-- Protect preview deployments. The application also emits `noindex, nofollow` and a closed robots policy unless it is a production deployment configured with the exact canonical origin.
-- On non-Vercel hosting, `NODE_ENV=production` plus the exact `NEXT_PUBLIC_SITE_URL` is the production/indexability signal.
+- Protect preview deployments. The application emits `noindex, nofollow` and a closed robots policy unless the host reports a production environment configured with one of the two approved public origins.
+- On non-Vercel hosting, `NODE_ENV=production` plus one approved public origin in `NEXT_PUBLIC_SITE_URL` is the production/indexability signal.
 - Do not attach product, API, documentation, wildcard, preview, or staging subdomains to this repository.
 
 After changing domains or redirects, verify HTTP, HTTPS, the apex, and any former host. Each should take at most one permanent redirect to the matching `www` HTTPS URL without a loop.
+
+After every canonical-host, domain, or production-environment change, deploy and run:
+
+```bash
+npm run seo:check -- https://www.giacomocappelletto.com
+```
+
+Do not request indexing until this check passes and the public `/robots.txt` contains `Allow: /` rather than `Disallow: /`.
 
 ## Launch checklist
 

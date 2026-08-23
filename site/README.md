@@ -44,6 +44,16 @@ The performance probe traverses `/` and `/projects` at 1200 × 818 and 390 ×
 then fails on a task of at least 50 ms, a p95 frame interval above 16.7 ms, or
 an eager homepage GSAP request.
 
-Set `NEXT_PUBLIC_SITE_URL=https://www.giacomocappelletto.com` in production. Deployments are indexable only when the exact canonical origin is configured and the host reports a production environment.
+Set `NEXT_PUBLIC_SITE_URL=https://www.giacomocappelletto.com` in production.
+The canonical `www` origin and the apex redirect origin are both accepted by
+the production indexability gate, while generated canonical, Open Graph,
+robots, and sitemap URLs always use `www`. Preview deployments remain
+non-indexable.
+
+After deployment, verify the public indexing policy and rendered metadata:
+
+```bash
+npm run seo:check -- https://www.giacomocappelletto.com
+```
 
 See [SEO operations](docs/seo-operations.md) for domain setup, search-engine launch steps, publishing checks, and the product-subdomain policy.

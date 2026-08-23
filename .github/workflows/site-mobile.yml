@@ -24,6 +24,9 @@ jobs:
   webkit-iphone:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      # Exercise the apex value that predates the canonical www migration.
+      NEXT_PUBLIC_SITE_URL: https://giacomocappelletto.com
     defaults:
       run:
         working-directory: site
@@ -52,6 +55,30 @@ jobs:
 
       - name: Build the production site
         run: npm run build
+
+      - name: Verify production indexing policy
+        run: |
+          npm start -- --hostname 127.0.0.1 --port 3000 > /tmp/cv-site.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          curl --fail --silent --show-error --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:3000/robots.txt > /tmp/robots.txt
+
+          grep -Eq '^Allow:[[:space:]]*/[[:space:]]*$' /tmp/robots.txt
+
+          if grep -Eq '^Disallow:[[:space:]]*/[[:space:]]*$' /tmp/robots.txt; then
+            cat /tmp/robots.txt
+            exit 1
+          fi
+
+          curl --fail --silent --show-error http://127.0.0.1:3000/ > /tmp/home.html
+
+          if grep -Eqi '<meta[^>]+name="robots"[^>]+content="[^"]*noindex' /tmp/home.html; then
+            echo "Production home page unexpectedly contains noindex."
+            exit 1
+          fi
+
+          npm run seo:check -- http://127.0.0.1:3000
 
       - name: Crawl every route on iPhone WebKit
         run: MOBILE_PRODUCTION=1 npm run test:mobile

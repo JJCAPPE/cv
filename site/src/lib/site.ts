@@ -1,4 +1,8 @@
 const productionSiteUrl = "https://www.giacomocappelletto.com";
+const indexableProductionOrigins = new Set([
+  productionSiteUrl,
+  "https://giacomocappelletto.com",
+]);
 const localSiteUrl = "http://localhost:3000";
 
 function normalizeOrigin(value: string) {
@@ -31,8 +35,13 @@ export const siteUrl =
     ? (configuredSiteUrl ?? localSiteUrl)
     : productionSiteUrl;
 
+// The apex is the public redirect alias for the canonical `www` origin. Accept
+// both so a host migration cannot silently disable indexing while generated
+// public URLs continue to use `productionSiteUrl`.
 export const isIndexableDeployment =
-  isProductionDeployment && configuredSiteUrl === productionSiteUrl;
+  isProductionDeployment &&
+  configuredSiteUrl !== undefined &&
+  indexableProductionOrigins.has(configuredSiteUrl);
 
 export function absoluteUrl(pathname = "/") {
   const path = pathname.startsWith("/") ? pathname : `/${pathname}`;
