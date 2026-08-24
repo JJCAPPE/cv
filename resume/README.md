@@ -23,6 +23,7 @@ This directory contains the shared ATS-safe LaTeX template, role-specific conten
 - `reviewer-scorecard.md` operationalizes the ten-second and sixty-second human-review gates that cannot be automated honestly in CI.
 - The root `.tex` files are thin wrappers selecting one content file.
 - `scripts/compile-resumes.sh` compiles all variants, synchronizes the website copy, and invokes `scripts/validate-resumes.py`.
+- Resume feature branches may use either `resume-*` or `resume/**`; CI synchronizes generated PDFs for both naming conventions.
 
 ## Build
 
