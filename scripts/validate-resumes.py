@@ -182,14 +182,26 @@ def validate_sources() -> None:
         if stale in combined:
             fail(f"stale domain remains in resume sources: {stale}")
 
+    obsolete_claims = (
+        "79.2\\% faster",
+        "122.9-second",
+        "1,200+ named agent and interface tests",
+    )
+    for phrase in obsolete_claims:
+        if phrase in combined:
+            fail(f"obsolete MOVE audit wording remains in resume sources: {phrase}")
+
     master = (ROOT / "resume" / "content" / "master.tex").read_text(encoding="utf-8")
     technical_bullets = master.count("\\ResumeItem{") + master.count("\\ProjectEntry")
     if not 12 <= technical_bullets <= 14:
         fail(f"master technical bullet count is {technical_bullets}; expected 12-14")
 
     required_evidence = (
-        "79.2\\% faster",
-        "1,200+ named agent and interface tests",
+        "substantially lower end-to-end latency than Databricks Genie",
+        "multi-step, multi-domain benchmarks",
+        "maintaining identical accuracy",
+        "executive meetings across IT, finance, marketing, and advisory functions",
+        "cross-department data/resource requirements",
         "20 video strokes",
         "1,203 aligned segment rows",
         "11.43 ms drive-duration MAE",

@@ -56,31 +56,33 @@
       "variants": ["all"]
     },
     {
-      "claim_id": "move_sql_audit",
-      "claim": "A representative governed-SQL audit improved from a failed 122.9-second, 14-call run to a successful 25.6-second, 3-call run, a 79.2% latency reduction.",
+      "claim_id": "move_genie_benchmark",
+      "claim": "The MOVE agent delivered substantially lower end-to-end latency than Databricks Genie on multi-step benchmarks spanning multiple business domains while maintaining identical benchmark accuracy.",
       "source_urls": [
-        "https://www.giacomocappelletto.com/projects/move"
+        "https://github.com/JJCAPPE/move-agent/blob/main/artifacts/agent_vs_genie_speed_report.md"
       ],
-      "measurement_context": "Dated representative audit scenario; explicitly not a production service-level claim.",
+      "measurement_context": "End-to-end, multi-step comparison against the legacy Databricks Genie workflow across multiple business domains; compared outputs preserved identical benchmark accuracy.",
       "public_safe": true,
       "allowed_wording": [
-        "representative SQL audit path",
-        "failed 122.9-second, 14-call run",
-        "successful 25.6-second, 3-call run",
-        "79.2% faster"
+        "substantially lower end-to-end latency than Databricks Genie",
+        "multi-step, multi-domain benchmarks",
+        "maintaining identical accuracy"
       ],
       "variants": ["master", "swe-infrastructure", "ai-ml", "quant-finance", "data-systems", "cv-multimodal", "devtools-agents"]
     },
     {
-      "claim_id": "move_test_count",
-      "claim": "The inspected MOVE agent and interface snapshots contain more than 1,200 named tests.",
+      "claim_id": "move_executive_architecture_advisory",
+      "claim": "Participated in executive meetings across IT, finance, marketing, and advisory functions and recommended architectures based on performance, feasibility, system design, operations, and cross-department data and resource requirements.",
       "source_urls": [
-        "https://www.giacomocappelletto.com/projects/move"
+        "https://www.giacomocappelletto.com/projects/move",
+        "https://www.giacomocappelletto.com/resume"
       ],
-      "measurement_context": "Named-test count in the inspected agent and interface source snapshots.",
+      "measurement_context": "First-party, privacy-safe role record; no executive names, confidential decisions, or internal business data are disclosed.",
       "public_safe": true,
       "allowed_wording": [
-        "1,200+ named agent and interface tests"
+        "executive meetings across IT, finance, marketing, and advisory functions",
+        "recommending architectures based on performance, feasibility, system design, operations",
+        "cross-department data/resource requirements"
       ],
       "variants": ["master", "swe-infrastructure", "ai-ml", "quant-finance", "data-systems", "cv-multimodal", "devtools-agents"]
     },
@@ -153,7 +155,7 @@
         "https://rowbook.vercel.app/",
         "https://github.com/JJCAPPE/rowbook"
       ],
-      "measurement_context": "Public repository, deployment, and portfolio résumé evidence.",
+      "measurement_context": "Public repository, deployment, and portfolio resume evidence.",
       "public_safe": true,
       "allowed_wording": [
         "50 BU athletes and coaches",
