@@ -8,7 +8,7 @@
   {Undergraduate Machine Learning Researcher}
   {Boston, MA}
 \begin{ResumeItems}
-  \ResumeItem{Researching metric-learning algorithms for temporal human-motion retrieval, comparing contextual, contrastive, triplet, and classification objectives with Recall@K and mAP under controlled perturbations.}
+  \ResumeItem{Researching metric-learning algorithms for temporal retrieval and comparing contextual, contrastive, triplet, and classification objectives with Recall@K and mAP under controlled perturbations.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -17,9 +17,9 @@
   {Software \& AI Engineering Intern, Customer Knowledge}
   {Milan, Italy}
 \begin{ResumeItems}
-  \ResumeItem{Owned architecture and implementation of an internal AI-agent and data-access platform, translating business requirements into deployed, traceable workflows on Databricks.}
-  \ResumeItem{Built governed dynamic-SQL tools over Unity Catalog and Delta data with typed request contracts, permission-aware retrieval, citation-backed evidence, request-scoped context, and MLflow tracing.}
-  \ResumeItem{Developed prompt-versioning and evaluation infrastructure with append-only Delta tables, side-by-side benchmarks, LLM judging, quality controls, and React/FastAPI interfaces backed by PostgreSQL.}
+  \ResumeItem{Owned architecture and implementation of an internal AI-agent and data-access platform, translating business requirements into deployed, traceable Databricks workflows.}
+  \ResumeItem{Built governed SQL tools over Unity Catalog and Delta data with typed contracts, permission-aware retrieval, citation-backed evidence, request-scoped context, and MLflow tracing.}
+  \ResumeItem{Reduced a representative SQL audit path from a failed 122.9-second, 14-call run to a successful 25.6-second, 3-call run (79.2\% faster), with 1,200+ named agent and interface tests.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -28,8 +28,7 @@
   {Undergraduate Machine Learning Researcher}
   {Boston, MA}
 \begin{ResumeItems}
-  \ResumeItem{Built a 2D-to-3D biomechanics pipeline with MMPose and MotionBERT to derive joint positions, angles, timing, and stroke-level kinematic features from rowing video.}
-  \ResumeItem{Trained sequence-to-sequence regression models to infer force curves from time-aligned 3D kinematics and validated predictions against instrumented on-water and erg telemetry.}
+  \ResumeItem{Built a 2D-to-3D biomechanics pipeline and matched 20 controlled-run strokes into 1,203 aligned rows with 11.43 ms drive-duration MAE for sequence-to-sequence force modeling.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -38,8 +37,7 @@
   {Software Engineer}
   {Treviso, Italy}
 \begin{ResumeItems}
-  \ResumeItem{Rebuilt an Electron inventory application in Tauri, React, and Rust, reducing application size by 70\%, memory use by 80\%, startup time by 60\%, and Shopify search latency by 43\%.}
-  \ResumeItem{Implemented concurrent GraphQL processing, multi-location reconciliation, Firebase audit history, and automated release and update workflows.}
+  \ResumeItem{Rebuilt an Electron inventory application in Tauri, React, and Rust, reducing size by 70\%, memory use by 80\%, startup time by 60\%, and Shopify search latency by 43\%.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -48,13 +46,22 @@
   {Frontend \& Backend Engineer}
   {Remote}
 \begin{ResumeItems}
-  \ResumeItem{Built core Ruby services and Next.js/TypeScript interfaces across a 150,000-line platform as part of a four-engineer remote team.}
-  \ResumeItem{Built spending-tracking pipelines, forecasting dashboards, operational metrics, event-cost planning, and QR-based ticket purchasing and validation workflows.}
+  \ResumeItem{Built Ruby and Next.js systems for spending tracking, forecasting, event-cost planning, operational metrics, payments, and QR ticketing across a 150,000-line platform in a four-engineer team.}
 \end{ResumeItems}
+
+\section{Selected Projects}
+\ProjectEntry
+  {\href{https://github.com/JJCAPPE/arbitrage-model}{Alpha Bot - Residual Alpha and Statistical Arbitrage}}
+  {Python, Parquet, PostgreSQL}
+  {Built a research and paper-trading platform with point-in-time data, cost-adjusted labels, walk-forward and purged validation, neutral portfolio constraints, promotion gates, reconciliation, and structured audit logs.}
+\ProjectEntry
+  {\href{https://www.giacomocappelletto.com/projects/move}{MOVE Enterprise AI Platform}}
+  {Databricks, SQL, MLflow}
+  {Built governed analytical tools and evaluation infrastructure for scoped enterprise data and documents, prioritizing execution correctness, evidence, and business-semantic invariants over raw latency.}
 
 \AthleticsAwards
 
 \section{Skills}
 \SkillsLine{Languages}{Python, C/C++, Rust, SQL, TypeScript/JavaScript, Java, Ruby}
 \SkillsLine{Systems/Data}{PostgreSQL, Databricks, Delta Lake, Unity Catalog, FastAPI, Tauri, GraphQL, Docker, Git}
-\SkillsLine{Modeling}{PyTorch, TensorFlow/Keras, metric learning, sequence modeling, nearest-neighbor retrieval, RANSAC}
+\SkillsLine{Modeling}{PyTorch, TensorFlow/Keras, metric learning, sequence modeling, walk-forward validation, portfolio constraints, RANSAC}

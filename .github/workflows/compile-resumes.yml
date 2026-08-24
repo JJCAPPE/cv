@@ -6,18 +6,23 @@ on:
       - "resume/**"
       - "resume-*.tex"
       - "resume-*.pdf"
+      - "site/public/resume.pdf"
       - "scripts/compile-resumes.sh"
+      - "scripts/validate-resumes.py"
       - "Makefile"
       - ".github/workflows/compile-resumes.yml"
   push:
     branches:
       - main
       - "resume-*"
+      - "resume/**"
     paths:
       - "resume/**"
       - "resume-*.tex"
       - "resume-*.pdf"
+      - "site/public/resume.pdf"
       - "scripts/compile-resumes.sh"
+      - "scripts/validate-resumes.py"
       - "Makefile"
       - ".github/workflows/compile-resumes.yml"
   workflow_dispatch:
@@ -43,10 +48,13 @@ jobs:
             latexmk \
             lmodern \
             poppler-utils \
+            qpdf \
+            python3-pip \
             texlive-fonts-recommended \
             texlive-latex-base \
             texlive-latex-extra \
             texlive-latex-recommended
+          python3 -m pip install --break-system-packages pymupdf
 
       - name: Compile and validate every resume
         run: make resumes
@@ -54,12 +62,12 @@ jobs:
       - name: Commit generated PDFs on resume branches
         if: >-
           github.event_name == 'push' &&
-          startsWith(github.ref_name, 'resume-') &&
+          (startsWith(github.ref_name, 'resume-') || startsWith(github.ref_name, 'resume/')) &&
           github.actor != 'github-actions[bot]'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- resume-*.pdf
+          git add -- resume-*.pdf site/public/resume.pdf
           if git diff --cached --quiet; then
             echo "Committed PDFs already match their sources."
           else
@@ -70,11 +78,11 @@ jobs:
       - name: Verify committed PDFs match their sources
         if: >-
           github.event_name != 'push' ||
-          !startsWith(github.ref_name, 'resume-') ||
+          (!startsWith(github.ref_name, 'resume-') && !startsWith(github.ref_name, 'resume/')) ||
           github.actor == 'github-actions[bot]'
         run: |
-          if [[ -n "$(git status --porcelain -- resume-*.pdf)" ]]; then
-            git status --short -- resume-*.pdf
+          if [[ -n "$(git status --porcelain -- resume-*.pdf site/public/resume.pdf)" ]]; then
+            git status --short -- resume-*.pdf site/public/resume.pdf
             echo "Committed resume PDFs do not match their LaTeX sources." >&2
             exit 1
           fi
@@ -83,5 +91,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compiled-resumes
-          path: resume-*.pdf
+          path: |
+            resume-*.pdf
+            site/public/resume.pdf
           if-no-files-found: error

@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "last_reviewed": "2026-08-24",
+  "policy": {
+    "public_sources_are_accepted": true,
+    "production_claims_require_production_evidence": true,
+    "audit_measurements_must_be_labeled_as_audits": true,
+    "research_plans_must_not_be_presented_as_completed_results": true,
+    "confidential_customer_or_employee_data_is_forbidden": true
+  },
+  "claims": [
+    {
+      "claim_id": "education_bu_ce_2028_gpa",
+      "claim": "B.S. in Computer Engineering, expected May 2028, GPA 3.97/4.00.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/resume"
+      ],
+      "measurement_context": "Current education record published on the portfolio.",
+      "public_safe": true,
+      "allowed_wording": [
+        "B.S. in Computer Engineering; GPA: 3.97/4.00",
+        "Expected May 2028"
+      ],
+      "variants": ["all"]
+    },
+    {
+      "claim_id": "kulis_pose_retrieval",
+      "claim": "Pose-sequence retrieval research using fixed-length 2D/3D embeddings and Recall@K/mAP robustness evaluation.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/research/contextual-similarity",
+        "https://github.com/JJCAPPE/pose-embedding"
+      ],
+      "measurement_context": "Active research objective and evaluation protocol; no completed robustness result is claimed.",
+      "public_safe": true,
+      "allowed_wording": [
+        "Researching robust human-motion retrieval",
+        "comparing metric-learning objectives with Recall@K and mAP"
+      ],
+      "variants": ["all"]
+    },
+    {
+      "claim_id": "move_platform_scope",
+      "claim": "Owned architecture and implementation across the MOVE agent runtime, enterprise interface, evaluation, and deployment paths.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/projects/move"
+      ],
+      "measurement_context": "Public, privacy-safe portfolio case study derived from the inspected July 2026 source snapshots.",
+      "public_safe": true,
+      "allowed_wording": [
+        "Owned architecture and implementation of an internal AI-agent platform",
+        "governed dynamic SQL",
+        "citation-backed retrieval",
+        "typed Pydantic contracts",
+        "end-to-end tracing"
+      ],
+      "variants": ["all"]
+    },
+    {
+      "claim_id": "move_sql_audit",
+      "claim": "A representative governed-SQL audit improved from a failed 122.9-second, 14-call run to a successful 25.6-second, 3-call run, a 79.2% latency reduction.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/projects/move"
+      ],
+      "measurement_context": "Dated representative audit scenario; explicitly not a production service-level claim.",
+      "public_safe": true,
+      "allowed_wording": [
+        "representative SQL audit path",
+        "failed 122.9-second, 14-call run",
+        "successful 25.6-second, 3-call run",
+        "79.2% faster"
+      ],
+      "variants": ["master", "swe-infrastructure", "ai-ml", "quant-finance", "data-systems", "cv-multimodal", "devtools-agents"]
+    },
+    {
+      "claim_id": "move_test_count",
+      "claim": "The inspected MOVE agent and interface snapshots contain more than 1,200 named tests.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/projects/move"
+      ],
+      "measurement_context": "Named-test count in the inspected agent and interface source snapshots.",
+      "public_safe": true,
+      "allowed_wording": [
+        "1,200+ named agent and interface tests"
+      ],
+      "variants": ["master", "swe-infrastructure", "ai-ml", "quant-finance", "data-systems", "cv-multimodal", "devtools-agents"]
+    },
+    {
+      "claim_id": "rowing_controlled_run",
+      "claim": "A controlled synchronized run matched 20 strokes into 1,203 aligned segment rows with 11.43 ms drive-duration MAE and a 64-by-14 feature tensor.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/research/rowing-biomechanics",
+        "https://github.com/JJCAPPE/rowing-dynamics-analysis"
+      ],
+      "measurement_context": "Controlled single-athlete evaluation run; generalization is not claimed.",
+      "public_safe": true,
+      "allowed_wording": [
+        "controlled synchronized run",
+        "20 video strokes",
+        "1,203 aligned segment rows",
+        "11.43 ms drive-duration MAE",
+        "64-by-14 stroke tensor"
+      ],
+      "variants": ["master", "ai-ml", "quant-finance", "data-systems", "cv-multimodal"]
+    },
+    {
+      "claim_id": "rowing_test_count",
+      "claim": "The rowing biomechanics package contains 50 tests across eight modules.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/research/rowing-biomechanics",
+        "https://github.com/JJCAPPE/rowing-dynamics-analysis"
+      ],
+      "measurement_context": "Current public repository and portfolio case-study count.",
+      "public_safe": true,
+      "allowed_wording": [
+        "50 tests across eight modules"
+      ],
+      "variants": ["ai-ml"]
+    },
+    {
+      "claim_id": "inventory_rewrite_metrics",
+      "claim": "The Tauri/React/Rust inventory rewrite reduced size by 70%, memory use by 80%, startup time by 60%, and search latency by 43%.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/projects/inventory-system"
+      ],
+      "measurement_context": "Published comparison against the prior Electron application.",
+      "public_safe": true,
+      "allowed_wording": [
+        "size by 70%",
+        "memory use by 80%",
+        "startup time by 60%",
+        "search latency by 43%"
+      ],
+      "variants": ["all"]
+    },
+    {
+      "claim_id": "tickit_scale",
+      "claim": "Worked on a 150,000-line event-ticketing platform in a four-engineer team.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/projects/tickit"
+      ],
+      "measurement_context": "Published project and experience scope.",
+      "public_safe": true,
+      "allowed_wording": [
+        "150,000-line",
+        "four-engineer"
+      ],
+      "variants": ["master", "swe-infrastructure", "quant-finance", "devtools-agents"]
+    },
+    {
+      "claim_id": "rowbook_users_features",
+      "claim": "Rowbook serves 50 BU athletes and coaches with role-based access, proof review, leaderboards, reporting, and scheduled summaries.",
+      "source_urls": [
+        "https://rowbook.vercel.app/",
+        "https://github.com/JJCAPPE/rowbook"
+      ],
+      "measurement_context": "Public repository, deployment, and portfolio résumé evidence.",
+      "public_safe": true,
+      "allowed_wording": [
+        "50 BU athletes and coaches",
+        "role-based access",
+        "proof-validated workout logs",
+        "automated weekly email summaries"
+      ],
+      "variants": ["master", "swe-infrastructure", "data-systems", "devtools-agents"]
+    },
+    {
+      "claim_id": "noteworthy_architecture",
+      "claim": "NoteWorthy is a deployed multimodal notes-to-LaTeX workflow with OAuth, streamed generation, configurable HTTP compilation, and PDF/source output.",
+      "source_urls": [
+        "https://noteworthy-giacomo-cappellettos-projects.vercel.app/",
+        "https://github.com/JJCAPPE/NoteWorthy",
+        "https://www.giacomocappelletto.com/projects/ai-notes-or-ocr"
+      ],
+      "measurement_context": "Public application, repository, and portfolio case study.",
+      "public_safe": true,
+      "allowed_wording": [
+        "multimodal notes-to-LaTeX workflow",
+        "OAuth",
+        "streamed generation",
+        "configurable HTTP compilation",
+        "PDF/source export"
+      ],
+      "variants": ["master", "swe-infrastructure", "ai-ml", "devtools-agents"]
+    },
+    {
+      "claim_id": "deskinator_architecture",
+      "claim": "Deskinator includes edge sensing, filtering, geometric boundary inference, coverage planning, motor control, telemetry, and simulation tooling.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/projects/deskinator",
+        "https://github.com/JJCAPPE/deskinator"
+      ],
+      "measurement_context": "Public source-led case study and repository.",
+      "public_safe": true,
+      "allowed_wording": [
+        "edge sensing",
+        "RANSAC rectangle fitting",
+        "boustrophedon coverage planning",
+        "telemetry",
+        "simulation-based evaluation"
+      ],
+      "variants": ["swe-infrastructure", "cv-multimodal"]
+    },
+    {
+      "claim_id": "alpha_bot_scope",
+      "claim": "Alpha Bot is a runnable research and paper-trading scaffold with point-in-time data, cost-aware labels, walk-forward and purged validation, portfolio constraints, risk gates, reconciliation, and audit logs.",
+      "source_urls": [
+        "https://github.com/JJCAPPE/arbitrage-model"
+      ],
+      "measurement_context": "Public repository status; no profitable or live-trading result is claimed.",
+      "public_safe": true,
+      "allowed_wording": [
+        "research and paper-trading platform",
+        "point-in-time data",
+        "cost-adjusted labels",
+        "walk-forward and purged validation",
+        "neutral portfolio constraints",
+        "promotion gates"
+      ],
+      "variants": ["quant-finance"]
+    },
+    {
+      "claim_id": "rowing_awards",
+      "claim": "Freshman Student-Athlete of the Year in 2025 and Most Improved Oarsman in 2026.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/resume"
+      ],
+      "measurement_context": "Published athletics awards.",
+      "public_safe": true,
+      "allowed_wording": [
+        "Freshman Student-Athlete of the Year (2025)",
+        "Most Improved Oarsman (2026)"
+      ],
+      "variants": ["all"]
+    }
+  ]
+}

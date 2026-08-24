@@ -8,10 +8,13 @@ RESUME_PDFS := \
 	resume-cv-multimodal.pdf \
 	resume-devtools-agents.pdf
 
-.PHONY: resumes clean list-resumes
+.PHONY: resumes validate-resumes clean list-resumes
 
 resumes:
 	bash ./scripts/compile-resumes.sh
+
+validate-resumes:
+	python3 ./scripts/validate-resumes.py
 
 list-resumes:
 	@printf '%s\n' $(RESUME_PDFS)
