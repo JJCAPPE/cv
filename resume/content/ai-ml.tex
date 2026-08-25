@@ -9,7 +9,7 @@
   {Boston, MA}
 \begin{ResumeItems}
   \ResumeItem{Researching robust human-motion retrieval by learning fixed-length embeddings from temporal 2D/3D pose sequences for nearest-neighbor search across labeled movement classes.}
-  \ResumeItem{Comparing contextual and contrastive objectives with triplet, supervised-contrastive, and classification baselines; evaluating Recall@K and mAP under pose noise, missing joints, jitter, occlusion, and viewpoint shift.}
+  \ResumeItem{Comparing contextual, contrastive, triplet, supervised-contrastive, and classification objectives with Recall@K and mAP under pose noise, missing joints, jitter, occlusion, and viewpoint shift.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -18,9 +18,10 @@
   {Software \& AI Engineering Intern, Customer Knowledge}
   {Milan, Italy}
 \begin{ResumeItems}
-  \ResumeItem{Owned an internal AI-agent platform across architecture, full-stack implementation, evaluation, deployment, and stakeholder iteration on Databricks.}
-  \ResumeItem{Built a LangGraph ReAct agent with MLflow ResponsesAgent, governed SQL tools, citation-backed document retrieval, request-scoped context, typed Pydantic contracts, evidence review, and tracing.}
-  \ResumeItem{Developed versioned prompt-governance and evaluation workflows with Delta tables, permission-aware review, side-by-side benchmarks, LLM judging, MLflow GenAI scoring, and Unity Catalog controls.}
+  \ResumeItem{Owned an internal AI-agent platform across architecture, full-stack implementation, evaluation, Databricks deployment, and stakeholder iteration.}
+  \ResumeItem{Built a LangGraph/MLflow agent with governed SQL tools, citation-backed retrieval, request-scoped context, typed Pydantic contracts, evidence review, tracing, and versioned evaluation workflows.}
+  \ResumeItem{Delivered substantially lower end-to-end latency than Databricks Genie across multi-step, multi-domain benchmarks while maintaining identical accuracy.}
+  \ResumeItem{Participated in executive meetings across IT, finance, marketing, and advisory functions, recommending architectures based on performance, feasibility, system design, operations, and cross-department data/resource requirements.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -29,8 +30,8 @@
   {Undergraduate Machine Learning Researcher}
   {Boston, MA}
 \begin{ResumeItems}
-  \ResumeItem{Built a Python computer-vision pipeline to stabilize rowing video, estimate 2D keypoints with MMPose, lift poses to 3D with MotionBERT, and derive per-frame and stroke-averaged kinematics.}
-  \ResumeItem{Trained sequence-to-sequence regression models mapping time-aligned 3D kinematics to rowing force curves; validated predictions against instrumented on-water and erg telemetry.}
+  \ResumeItem{Built a Python vision pipeline to stabilize rowing video, estimate 2D keypoints with MMPose, lift poses to 3D with MotionBERT, and derive stroke-level kinematics.}
+  \ResumeItem{Matched 20 controlled-run strokes into 1,203 aligned rows with 11.43 ms drive-duration MAE, then trained sequence models over a shared 64-by-14 kinematic tensor for force-curve inference.}
 \end{ResumeItems}
 
 \ResumeEntry
@@ -39,18 +40,18 @@
   {Software Engineer}
   {Treviso, Italy}
 \begin{ResumeItems}
-  \ResumeItem{Rebuilt a production inventory application in Tauri, React, and Rust, reducing application size by 70\%, memory use by 80\%, startup time by 60\%, and search latency by 43\%.}
+  \ResumeItem{Rebuilt a production inventory application in Tauri, React, and Rust, reducing size by 70\%, memory use by 80\%, startup time by 60\%, and search latency by 43\%.}
 \end{ResumeItems}
 
 \section{Selected Projects}
 \ProjectEntry
-  {\href{https://noteworthy-git-main-giacomo-cappellettos-projects.vercel.app/}{NoteWorthy - Automated Note Conversion}}
-  {Next.js, Google AI Studio}
-  {Built an AI application that converts handwritten notes into styled PDFs and LaTeX, with GitHub/Google OAuth and a Dockerized LaTeX compiler deployed on Cloud Run and Vercel.}
+  {\href{https://www.giacomocappelletto.com/research/rowing-biomechanics}{Rowing Biomechanics Pipeline} \enspace\textbar\enspace \href{https://github.com/JJCAPPE/rowing-dynamics-analysis}{GitHub}}
+  {PyTorch, MMPose, MotionBERT}
+  {Built an inspectable video-to-force research system with dynamic-programming stroke alignment, quality-gated datasets, model bundles, video-only inference, reports, and 50 tests across eight modules.}
 \ProjectEntry
-  {CIFAR-10 Neural Architecture Search}
-  {TensorFlow/Keras}
-  {Built a pipeline to generate, train, evaluate, and select CNN candidates with automated metric logging and best-model selection.}
+  {\href{https://noteworthy-giacomo-cappellettos-projects.vercel.app/}{NoteWorthy} \enspace\textbar\enspace \href{https://github.com/JJCAPPE/NoteWorthy}{GitHub}}
+  {Next.js, Gemini, Docker, Cloud Run}
+  {Built a multimodal application that streams handwritten-note conversion into styled LaTeX and PDFs through guarded generation and configurable compilation services.}
 
 \AthleticsAwards
 
