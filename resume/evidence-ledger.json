@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "last_reviewed": "2026-08-24",
+  "last_reviewed": "2026-08-27",
   "policy": {
     "public_sources_are_accepted": true,
     "production_claims_require_production_evidence": true,
@@ -101,6 +101,25 @@
         "1,203 aligned segment rows",
         "11.43 ms drive-duration MAE",
         "64-by-14 stroke tensor"
+      ],
+      "variants": ["master", "ai-ml", "quant-finance", "data-systems", "cv-multimodal"]
+    },
+    {
+      "claim_id": "rowing_alignment_system",
+      "claim": "The rowing biomechanics system uses calibrated video stroke-event detection, dynamic-programming sequence matching, and drift-aware quality controls to produce synchronized pose-force datasets for downstream sequence models.",
+      "source_urls": [
+        "https://www.giacomocappelletto.com/research/rowing-biomechanics",
+        "https://github.com/JJCAPPE/rowing-dynamics-analysis"
+      ],
+      "measurement_context": "Implemented system scope documented in the public repository, research journal, and methods paper; no cross-athlete prediction result is claimed.",
+      "public_safe": true,
+      "allowed_wording": [
+        "video-to-telemetry alignment system",
+        "calibrated stroke-event detection",
+        "dynamic-programming sequence matching",
+        "drift-aware quality controls",
+        "synchronized pose-force datasets",
+        "sequence-model training"
       ],
       "variants": ["master", "ai-ml", "quant-finance", "data-systems", "cv-multimodal"]
     },
