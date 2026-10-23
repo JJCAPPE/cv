@@ -20,9 +20,9 @@ const nextResearch =
   researchShowcase[(contextualSimilarityIndex + 1) % researchShowcase.length];
 
 export const metadata = createPageMetadata({
-  title: "Research: Robust pose-sequence retrieval",
+  title: "Robust Human-Motion Retrieval from Pose Sequences",
   description:
-    "A research proposal testing contextual metric learning for pose-sequence retrieval under joint noise, missing limbs, frame loss, and pose-estimator shift.",
+    "Funded undergraduate research at Boston University comparing frozen MotionBERT training recipes for human-motion retrieval from noisy and incomplete poses.",
   pathname: "/research/contextual-similarity",
   type: "article",
   modifiedTime: contextualSimilarityPage?.updatedAt,
@@ -31,6 +31,7 @@ export const metadata = createPageMetadata({
 const PROPOSAL_URL =
   "/media/research/pose-embedding/robust-pose-sequence-retrieval-prospectus.pdf";
 const CODE_URL = "https://github.com/JJCAPPE/pose-embedding";
+const PLAN_URL = `${CODE_URL}/blob/main/plan/research-plan.v3.md`;
 
 const comparisonRows = [
   {
@@ -46,12 +47,12 @@ const comparisonRows = [
   {
     dimension: "Stressor",
     foundation: "Inconsistent or noisy labels",
-    extension: "Jitter, occlusion, frame loss, pose-source shift",
+    extension: "Query-only jitter, missing joints, and missing frames",
   },
   {
     dimension: "Task",
     foundation: "Supervised image retrieval",
-    extension: "Class-level pose-sequence retrieval",
+    extension: "One-shot retrieval on 20 unseen action classes",
   },
   {
     dimension: "Evidence",
@@ -68,8 +69,8 @@ const equationStages = [
   },
   {
     label: "Embedding",
-    equation: "z = fθ(x) / ‖fθ(x)‖₂",
-    description: "MotionBERT supplies the temporal encoder; the output is normalized.",
+    equation: "z = h(f(x)) / ‖h(f(x))‖₂",
+    description: "Frozen MotionBERT supplies 8,704 features; a learned linear head yields 2,048 normalized values.",
   },
   {
     label: "Geometry",
@@ -97,55 +98,50 @@ const protocol = [
   {
     term: "Dataset",
     detail:
-      "NTU RGB+D 120, using its official cross-subject and cross-setup protocols.",
+      "NTU RGB+D 120: 80 training actions, 20 disjoint development actions, and 20 unseen test actions. Final heads train on all 100 auxiliary actions.",
   },
   {
     term: "Encoder",
     detail:
-      "Pretrained MotionBERT with a normalized projection output; freeze first, fine-tune later.",
+      "Frozen pretrained MotionBERT, with only a biased linear 8,704-to-2,048 head trained. Outputs are L2-normalized for cosine retrieval.",
   },
   {
     term: "Retrieval",
     detail:
-      "A saved, disjoint query/gallery manifest with noisy queries against a fixed clean gallery.",
+      "One clean exemplar per unseen action. Primary queries exclude the exemplar and every synchronized view of that performance; an exact-official secondary query set is also reported.",
   },
   {
     term: "Corruptions",
     detail:
-      "Body-scaled Gaussian joint jitter, joint or limb masking, frame dropout, temporal jitter, and pose-source shift when available.",
+      "Three separate, nested stress tests: jitter at 1%, 2.5%, and 5% of torso scale; 3, 6, or 8 missing joint trajectories; and 10, 25, or 40 masked frames out of 100.",
   },
   {
-    term: "Controls",
+    term: "Matched recipes",
     detail:
-      "The same split, backbone, sampler, embedding dimension, augmentations, tuning budget, evaluator, and seeds for every loss.",
+      "Contrastive, full contextual, and descriptive SupCon; paired seeds 7, 17, and 29; physical batches of 8 actions × 4 examples; exactly 20 epochs per run. Three pilots and 27 clean-development selection runs precede nine fresh final heads.",
   },
   {
-    term: "Metrics",
+    term: "Evaluation",
     detail:
-      "Recall@1/5/10, mAP, mAP@R or R-precision, retention, and clean-to-corrupted degradation.",
+      "Lock all nine heads before novel opening. Nine heads × ten query conditions × two query definitions yield 180 cells, with top-1, mean reciprocal rank, top-5, and clean-to-corrupted top-1 drops.",
   },
 ] as const;
 
 const outcomes = [
   {
-    observation: "Robust gain with similar clean retrieval",
+    observation: "Contextual-minus-contrastive degradation interval entirely below zero",
     interpretation:
-      "Evidence that contextual neighborhoods help under input corruption.",
+      "Supports a smaller clean-to-corrupted top-1 accuracy drop for the full contextual recipe, conditional on the fixed seeds, actions, and gallery exemplars. Different margins and regularization prevent attribution to neighborhoods alone; absolute corrupted accuracy must also be reported.",
   },
   {
-    observation: "Clean gain, no robustness gain",
+    observation: "No resolved contextual advantage",
     interpretation:
-      "Better ranking, but not support for the pose-noise hypothesis.",
+      "A useful null result. Report the uncertainty, every seed and condition, and absolute accuracy without changing the study after opening.",
   },
   {
-    observation: "Gain only with corruption augmentation",
+    observation: "Contextual degrades more",
     interpretation:
-      "Neighborhood learning and robust data exposure are complementary.",
-  },
-  {
-    observation: "No gain over SupCon or MaskCLR",
-    interpretation:
-      "The encoder or corruption-aware training matters more than this objective.",
+      "A valid contrary result that limits the hypothesis. The comparison remains between complete recipes; SupCon is descriptive.",
   },
 ] as const;
 
@@ -155,23 +151,30 @@ const sourceGroups = [
     sources: [
       {
         index: "A1",
-        title: "Robust pose-sequence retrieval prospectus",
+        title: "Experimental plan (v3)",
         description:
-          "The eight-page July 2026 literature review, feasibility assessment, and proposed experiment.",
-        links: [{ label: "Proposal PDF", href: PROPOSAL_URL }],
+          "Training recipes, evaluation rules, and the September-December 2026 schedule.",
+        links: [{ label: "Read plan", href: PLAN_URL, external: true }],
       },
       {
         index: "A2",
-        title: "Pose embedding repository",
+        title: "Original July 2026 prospectus",
         description:
-          "The implementation workspace and study artifacts for the proposed extension.",
-        links: [{ label: "GitHub", href: CODE_URL, external: true }],
+          "The eight-page literature review and original proposal. The current v3 plan narrows its experimental scope.",
+        links: [{ label: "Original proposal PDF", href: PROPOSAL_URL }],
       },
       {
         index: "A3",
+        title: "Pose embedding repository",
+        description:
+          "Code, protocols, and public study files.",
+        links: [{ label: "GitHub", href: CODE_URL, external: true }],
+      },
+      {
+        index: "A4",
         title: "Rowing biomechanics origin",
         description:
-          "The case study where noisy tracking, uncertain 3D lift, and derivative amplification made the robustness question concrete.",
+          "The tracking errors that prompted this study.",
         links: [
           {
             label: "Case study",
@@ -188,7 +191,7 @@ const sourceGroups = [
         index: "F1",
         title: "Contextual similarity optimization",
         description:
-          "Liao, Tsiligkaridis, and Kulis, ICML 2023. The image-retrieval objective and label-noise evidence this proposal transfers.",
+          "Liao, Tsiligkaridis, and Kulis, ICML 2023. The image-retrieval recipe and label-noise evidence this study adapts to poses.",
         links: [
           {
             label: "PMLR paper",
@@ -206,7 +209,7 @@ const sourceGroups = [
         index: "F2",
         title: "MotionBERT",
         description:
-          "The pretrained temporal motion encoder and public one-shot NTU pipeline chosen as the lowest-risk starting point.",
+          "The pretrained motion encoder and one-shot NTU retrieval pipeline used in this study.",
         links: [
           {
             label: "Paper",
@@ -224,7 +227,7 @@ const sourceGroups = [
         index: "F3",
         title: "NTU RGB+D 120",
         description:
-          "A large-scale skeleton action benchmark with standard cross-subject and cross-setup evaluation protocols.",
+          "The skeleton action benchmark used here with its official one-shot novel actions and exemplars.",
         links: [
           {
             label: "Paper",
@@ -236,13 +239,13 @@ const sourceGroups = [
     ],
   },
   {
-    label: "Robustness controls",
+    label: "Related robustness research",
     sources: [
       {
         index: "R1",
         title: "MaskCLR",
         description:
-          "The closest robustness-specific comparator and the source for joint noise, occlusion, frame masking, and pose-estimator-shift tests.",
+          "Related corruption-aware representation learning that informed the original proposal. A MaskCLR arm and pose-estimator shifts are outside the current December study.",
         links: [
           {
             label: "CVPR 2024 paper",
@@ -301,23 +304,23 @@ export default function ContextualSimilarityPage() {
             </p>
           </div>
           <div>
-            <p className={styles.eyebrow}>Research proposal / July 2026</p>
-            <h1>Can motion embeddings survive bad poses?</h1>
+            <p className={styles.eyebrow}>Funded research / August 2026–Present</p>
+            <h1>Robust motion retrieval</h1>
           </div>
           <div className={styles.heroIntro}>
             <p>
-              A retrieval-first study of whether contextual metric learning can
-              keep similar motion sequences near each other when estimated
-              joints jitter, disappear, or arrive in broken frames.
+              I’m conducting funded undergraduate research at Boston University
+              with Prof. Brian Kulis, testing whether contextual training helps
+              recognize an action when its tracked joints jitter or disappear.
             </p>
             <div className={styles.heroActions}>
               <a
                 className="action-link action-link--accent"
-                href={PROPOSAL_URL}
+                href={PLAN_URL}
                 target="_blank"
                 rel="noreferrer"
               >
-                Read proposal
+                Read current study plan
               </a>
               <a
                 className="action-link"
@@ -331,16 +334,16 @@ export default function ContextualSimilarityPage() {
           </div>
           <dl className={styles.heroFacts}>
             <div>
-              <dt>Foundation</dt>
-              <dd>ICML 2023</dd>
+              <dt>Encoder</dt>
+              <dd>Frozen MotionBERT</dd>
             </div>
             <div>
-              <dt>Transfer</dt>
-              <dd>Images → motion</dd>
+              <dt>Study</dt>
+              <dd>3 recipes × 3 seeds</dd>
             </div>
             <div>
               <dt>Status</dt>
-              <dd>Open hypothesis</dd>
+              <dd>Active; final comparison pending</dd>
             </div>
           </dl>
         </div>
@@ -351,13 +354,13 @@ export default function ContextualSimilarityPage() {
 
       <section className={styles.corruption} aria-labelledby="corruption-heading">
         <div className={styles.sectionHeading}>
-          <p className={styles.eyebrow}>01 / Planned corruptions</p>
+          <p className={styles.eyebrow}>01 / Query corruption</p>
           <h2 id="corruption-heading">First, make the pose observation fail.</h2>
           <div>
             <p>
-              The detailed lab separates joint jitter, missing limbs, and frame
-              loss so the planned stress test stays interpretable. The clean
-              sequence remains visible as a fixed reference.
+              Change one kind of damage at a time and compare it with the clean
+              reference. These synthetic examples illustrate the stress tests;
+              they do not model real camera occlusion.
             </p>
           </div>
         </div>
@@ -413,20 +416,21 @@ export default function ContextualSimilarityPage() {
 
       <section className={styles.neighborhood} aria-labelledby="neighborhood-heading">
         <div className={styles.sectionHeading}>
-          <p className={styles.eyebrow}>03 / Retrieval intuition</p>
+          <p className={styles.eyebrow}>03 / Training intuition</p>
           <h2 id="neighborhood-heading">
-            A pair is fragile. A neighborhood adds context.
+            Learning from nearby motions
           </h2>
           <div>
             <p>
-              Cosine retrieval asks whether one query vector is close to one
-              gallery vector. Contextual similarity also asks whether those
-              examples agree about who else belongs nearby.
+              Contextual training compares each pair of motions and their shared
+              neighbors. Explore cosine and contextual scores within a synthetic
+              training batch below. At evaluation, every trained head uses cosine
+              retrieval against a clean gallery.
             </p>
             <p>
-              Shared and reciprocal neighbors create a local-consensus signal.
-              The proposal tests whether that inductive bias degrades more
-              slowly than direct pairwise objectives under pose corruption.
+              The experiment compares complete training recipes. Their margins and
+              regularization differ too, so an improvement could not be attributed
+              to neighborhoods alone.
             </p>
           </div>
         </div>
@@ -439,10 +443,9 @@ export default function ContextualSimilarityPage() {
           <h2 id="theory-heading">Same objective. Different failure.</h2>
           <div>
             <p>
-              The transfer changes the data and the corruption, not the central
-              loss. A temporal encoder replaces the image network; the
-              contextual construction still operates on a balanced batch of
-              normalized embeddings.
+              Frozen MotionBERT supplies motion features for a learned linear
+              head. Contextual training constructs neighborhoods within a balanced
+              batch of normalized embeddings. It uses clean training poses.
             </p>
           </div>
         </div>
@@ -455,8 +458,8 @@ export default function ContextualSimilarityPage() {
           </strong>
           <p>What remains untested</p>
           <strong>
-            Whether the same loss preserves pose-sequence retrieval when input
-            coordinates—not labels—become unreliable.
+            Whether the full contextual training recipe reduces retrieval
+            degradation when pose coordinates become unreliable.
           </strong>
         </div>
 
@@ -509,8 +512,8 @@ export default function ContextualSimilarityPage() {
           </p>
           <p>
             <strong>Bounded cost.</strong> Context construction is cubic in
-            batch size, so the experiment profiles moderate balanced batches
-            before any full-encoder run.
+            batch size. The study uses batches of eight actions × four examples
+            and trains only the linear head.
           </p>
         </div>
 
@@ -519,13 +522,24 @@ export default function ContextualSimilarityPage() {
 
       <section className={styles.experiment} aria-labelledby="experiment-heading">
         <div className={styles.sectionHeading}>
-          <p className={styles.eyebrow}>05 / Proposed experiment</p>
+          <p className={styles.eyebrow}>05 / Current experiment</p>
           <h2 id="experiment-heading">A useful result either way.</h2>
           <div>
             <p>
-              The study isolates the loss before expanding scope. There are no
-              completed robustness results yet; the deliverable is a controlled
-              comparison whose null outcomes remain interpretable.
+              Train contrastive, contextual, and supervised contrastive (SupCon)
+              recipes on clean poses across three paired seeds. Select settings
+              on clean development data, then evaluate all nine heads on unseen
+              actions with identical query damage and a clean gallery.
+            </p>
+            <p>
+              Progress as of 22 October 2026: initial engineering pilots are
+              complete. Runtime revalidation is in progress, and capacity approval
+              remains pending before model selection and final training. The final robustness
+              comparison remains pending. Follow the{" "}
+              <a href="https://pose-embed-tracker.vercel.app/" target="_blank" rel="noreferrer">
+                public research tracker
+              </a>{" "}
+              for dated progress.
             </p>
           </div>
         </div>
@@ -546,26 +560,27 @@ export default function ContextualSimilarityPage() {
               <span>01</span>
               <h4>Protocol validation</h4>
               <p>
-                Reproduce the starting pipeline, save the held-out
-                query/gallery split, and require monotone corruption curves from
-                frozen embeddings.
+                Validate the frozen encoder, exact query/gallery identities,
+                corruption inputs, and numerical runtime. Confirm capacity before
+                beginning clean-development selection.
               </p>
             </li>
             <li>
               <span>02</span>
-              <h4>Loss isolation</h4>
+              <h4>Matched training recipes</h4>
               <p>
-                Train matched projection heads with SupCon, contextual, and
-                hybrid objectives; verify that batch composition,{" "}
-                <code>k</code>, and samples per class agree.
+                Compare contrastive, full contextual, and SupCon recipes with
+                paired seeds, initialization, and physical batches. Train and lock
+                all nine final heads before opening the unseen test actions.
               </p>
             </li>
             <li>
               <span>03</span>
               <h4>Robustness claim</h4>
               <p>
-                Fine-tune only after milestone two is stable, then add the
-                corruption-aware MaskCLR control and the full matched ablation.
+                Evaluate clean and corrupted queries against the fixed clean
+                gallery. Report every seed and condition, absolute accuracy, and
+                clean-to-corrupted drops, including null or negative findings.
               </p>
             </li>
           </ol>
@@ -599,7 +614,7 @@ export default function ContextualSimilarityPage() {
           <div>
             <p>
               Primary papers and canonical repositories, grouped by the role
-              they play in the proposal.
+              they play in the study.
             </p>
           </div>
         </div>
@@ -649,11 +664,11 @@ export default function ContextualSimilarityPage() {
           </h2>
           <a
             className="action-link action-link--accent"
-            href={PROPOSAL_URL}
+            href={PLAN_URL}
             target="_blank"
             rel="noreferrer"
           >
-            Read the full proposal
+            Read the current study plan
           </a>
         </div>
       </section>

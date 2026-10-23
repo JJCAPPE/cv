@@ -14,9 +14,9 @@ export const experience: Experience[] = [
     dates: "Aug 2026 - Present",
     location: "Boston, MA",
     summary: [
-      "Researching robust contextual metric learning for human-motion retrieval, learning fixed-length embeddings from temporal 2D/3D pose sequences for nearest-neighbor search across labeled movement classes.",
-      "Adapting supervised contextual-similarity optimization from image retrieval to motion embeddings and comparing contextual + contrastive objectives against triplet, supervised contrastive, and classification-based retrieval baselines.",
-      "Designing controlled robustness experiments for pose-estimation noise, missing joints, temporal jitter, occlusion, and viewpoint shift, evaluated with Recall@K and mAP on public skeleton and motion benchmarks.",
+      "Conducting funded research on one-shot human-motion retrieval when pose queries contain jitter, missing joints, or missing frames.",
+      "Comparing contrastive, contextual, and SupCon training recipes with a frozen MotionBERT encoder and learned linear heads on NTU RGB+D 120. Robustness results are pending.",
+      "Built reproducible feature extraction, controlled pose-corruption tests, and cosine-retrieval evaluation. Initial engineering pilots are complete; runtime revalidation and capacity checks precede the final comparison.",
     ],
     stack: [
       "Python",

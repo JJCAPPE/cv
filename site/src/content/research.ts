@@ -42,13 +42,13 @@ export const researchShowcase: ResearchShowcaseItem[] = [
   {
     slug: "contextual-similarity",
     href: "/research/contextual-similarity",
-    title: "Contextual Similarity",
+    title: "Robust Human-Motion Retrieval from Pose Sequences",
     summary:
-      "A retrieval-first study of whether contextual metric learning can preserve motion similarity when joints jitter, disappear, or frames drop.",
+      "Funded undergraduate research comparing motion-retrieval training recipes under joint jitter, missing joints, and missing frames.",
     year: "2026",
-    updatedAt: "2026-07-29",
-    type: "Metric Learning / Pose Retrieval",
-    actionLabel: "Read proposal",
+    updatedAt: "2026-10-23",
+    type: "Funded research · Active",
+    actionLabel: "Read study",
     media: {
       kind: "contextual-overview",
     },

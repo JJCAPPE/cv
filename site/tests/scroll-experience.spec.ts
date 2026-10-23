@@ -3,7 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 const HERO_VIDEO_PATTERN = /rowing-signal-loop-(desktop|mobile)-v1\.mp4/;
 const EXPECTED_RESEARCH = [
   {
-    title: "Contextual Similarity",
+    title: "Robust Human-Motion Retrieval from Pose Sequences",
     href: "/research/contextual-similarity",
   },
   {
@@ -544,7 +544,7 @@ test("research relay presents three ordered files with direct navigation", async
       await expect(
         page.getByRole("heading", {
           level: 1,
-          name: "Can motion embeddings survive bad poses?",
+          name: "Robust motion retrieval",
         }),
       ).toBeVisible();
     }
@@ -657,7 +657,7 @@ test("research relay moves focus before hiding an inactive file", async ({
   const firstLink = relay
     .locator("[data-relay-panel]")
     .first()
-    .getByRole("link", { name: "Contextual Similarity", exact: true });
+    .getByRole("link", { name: "Robust Human-Motion Retrieval from Pose Sequences", exact: true });
   await firstLink.focus();
   await expect(firstLink).toBeFocused();
 
@@ -680,7 +680,7 @@ test("research relay moves focus before hiding an inactive file", async ({
   ).toBe(false);
 });
 
-test("rowing redirects into research and the proposal route loads", async ({
+test("rowing redirects into research and the active study route loads", async ({
   page,
 }) => {
   await page.goto("/projects/rowing-biomechanics", {
@@ -695,7 +695,7 @@ test("rowing redirects into research and the proposal route loads", async ({
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Can motion embeddings survive bad poses?",
+      name: "Robust motion retrieval",
     }),
   ).toBeVisible();
   await expect(

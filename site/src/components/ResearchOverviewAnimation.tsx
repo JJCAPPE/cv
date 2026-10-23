@@ -81,7 +81,7 @@ export function ResearchOverviewAnimation({
       <div className={styles.header}>
         <div>
           <p>System view / research question</p>
-          <strong>Pose → context → retrieval</strong>
+          <strong>Pose → embedding → retrieval</strong>
         </div>
         <button
           type="button"
@@ -98,13 +98,13 @@ export function ResearchOverviewAnimation({
         aria-labelledby={`${titleId} ${descriptionId}`}
       >
         <span className={styles.visuallyHidden} id={titleId}>
-          Research pipeline from corrupted pose sequence to contextual motion
-          retrieval
+          Research pipeline from corrupted pose sequence to cosine motion retrieval
         </span>
         <span className={styles.visuallyHidden} id={descriptionId}>
-          A noisy pose query passes through a temporal encoder, joins a
-          contextual neighborhood graph, and is ranked against a clean motion
-          gallery. This is an explanatory animation, not a measured result.
+          A noisy pose query passes through frozen MotionBERT and a trained linear
+          head into an embedding space, then is ranked against a clean motion
+          gallery using cosine similarity. Contextual neighborhoods shape training
+          only. This is an explanatory animation, not a measured result.
         </span>
 
         <div className={styles.stage} data-stage="query" aria-hidden="true">
@@ -138,7 +138,7 @@ export function ResearchOverviewAnimation({
         <div className={styles.stage} data-stage="encoder" aria-hidden="true">
           <div className={styles.stageLabel}>
             <span>02</span>
-            <p>Temporal encoder</p>
+            <p>Frozen encoder + head</p>
           </div>
           <svg className={styles.stageGraphic} viewBox="0 0 210 180">
             <g className={styles.sequenceTokens}>
@@ -163,13 +163,13 @@ export function ResearchOverviewAnimation({
               ‖z‖₂=1
             </text>
           </svg>
-          <p className={styles.stageNote}>sequence → normalized z</p>
+          <p className={styles.stageNote}>MotionBERT → normalized z</p>
         </div>
 
         <div className={styles.stage} data-stage="context" aria-hidden="true">
           <div className={styles.stageLabel}>
             <span>03</span>
-            <p>Local context</p>
+            <p>Learned embedding</p>
           </div>
           <svg className={styles.stageGraphic} viewBox="0 0 210 180">
             <g className={styles.contextEdges}>
@@ -191,10 +191,10 @@ export function ResearchOverviewAnimation({
               q
             </text>
             <text className={styles.svgText} x="18" y="165">
-              shared + reciprocal neighbors
+              normalized embedding space
             </text>
           </svg>
-          <p className={styles.stageNote}>pairwise distance + consensus</p>
+          <p className={styles.stageNote}>geometry shaped during training</p>
         </div>
 
         <div className={styles.stage} data-stage="gallery" aria-hidden="true">
@@ -219,7 +219,7 @@ export function ResearchOverviewAnimation({
               <p>other motion</p>
             </div>
           </div>
-          <p className={styles.stageNote}>ranked by contextual similarity</p>
+          <p className={styles.stageNote}>ranked by cosine similarity</p>
         </div>
       </div>
 
